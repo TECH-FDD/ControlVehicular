@@ -1,7 +1,6 @@
 package domainapp.dom.app.Empleado;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -9,7 +8,6 @@ import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
-import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.Pesona.Documento;
 
@@ -31,8 +29,8 @@ public class RepositorioEmpleado {
         final Empleado empleado = container.newTransientInstance(Empleado.class);
         empleado.setNombre(nombre);
         empleado.setApellido(apellido);
-        empleado.setDoc(tipo_documento);
-        empleado.setNro_doc(nro_documento);
+        empleado.setTipo_documento(tipo_documento);
+        empleado.setNro_documento(nro_documento);
         empleado.setFecha_nacimiento(fecha_nacimiento);
         empleado.setDomicilio(domicilio);
         empleado.setCiudad(ciudad);
@@ -42,7 +40,11 @@ public class RepositorioEmpleado {
         container.persistIfNotAlready(empleado);
         return empleado;
     }
-	
+
+	@MemberOrder(sequence = "3")
+    public List<Empleado> listarTodos(){
+        return container.allInstances(Empleado.class);
+    }
 	@javax.inject.Inject 
     DomainObjectContainer container;
 }

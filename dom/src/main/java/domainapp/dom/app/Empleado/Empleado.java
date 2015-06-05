@@ -38,8 +38,6 @@ import domainapp.dom.app.Pesona.Persona;
 public class Empleado extends Persona{
 	private String legajo;
 
-	
-
 	public Empleado(String nombre, String apellido, Documento doc, int nro_doc,
 			Timestamp fecha_nacimiento, String domicilio, String ciudad,
 			int codigo_postal, Timestamp fecha_alta, String legajo) {
@@ -63,8 +61,6 @@ public class Empleado extends Persona{
 
 	@Override
 	public String toString() {
-		return "Empleado [legajo=" + legajo + "]";
+		return "Empleado [Legajo N°:=" + legajo+"]";
 	}
-	
-	
 }
