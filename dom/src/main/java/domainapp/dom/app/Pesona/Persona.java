@@ -62,11 +62,11 @@ public abstract class Persona {
 	}
 	@MemberOrder(sequence = "3")
 	@javax.jdo.annotations.Column(allowsNull="false")
-	public Documento getDoc() {
+	public Documento getTipo_documento() {
 		return tipo_documento;
 	}
 
-	public void setDoc(Documento doc) {
+	public void setTipo_documento(Documento doc) {
 		this.tipo_documento = doc;
 	}
 	@MemberOrder(sequence = "4")
@@ -116,11 +116,11 @@ public abstract class Persona {
 	}
 	@MemberOrder(sequence = "9")
 	@javax.jdo.annotations.Column(allowsNull="false")
-	public int getNro_doc() {
+	public int getNro_documento() {
 		return nro_documento;
 	}
 
-	public void setNro_doc(int nro_doc) {
+	public void setNro_documento(int nro_doc) {
 		this.nro_documento = nro_doc;
 	}
 
