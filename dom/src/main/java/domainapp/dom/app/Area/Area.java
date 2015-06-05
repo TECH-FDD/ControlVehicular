@@ -22,8 +22,17 @@ import org.apache.isis.applib.annotation.MemberOrder;
     @javax.jdo.annotations.Query(
             name = "ListarTodos", language = "JDOQL",
             value = "SELECT "
-                    + "FROM domainapp.dom.app.Area")
-    
+                    + "FROM domainapp.dom.app.Area"),
+@javax.jdo.annotations.Query(
+        name = "buscarPorNombre", language = "JDOQL",
+        value = "SELECT "
+                + "FROM domainapp.dom.app.Area.Area "
+                + "WHERE nombre.indexOf(:nombre) >= 0 "),
+@javax.jdo.annotations.Query(
+        name = "buscarPorCodigo", language = "JDOQL",
+        value = "SELECT "
+                + "FROM domainapp.dom.app.Area.Area "
+                + "WHERE codigo_area.indexOf(:codigo_area) >= 0 ")
 })
 @DomainObject(
         objectType = "AREA"

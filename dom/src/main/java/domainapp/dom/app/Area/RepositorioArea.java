@@ -8,7 +8,7 @@ import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
-
+import org.apache.isis.applib.query.QueryDefault;
 import domainapp.dom.app.Area.Area;
 
 
@@ -37,7 +37,29 @@ public class RepositorioArea {
         return container.allInstances(Area.class);
     }
 	
+	@MemberOrder(sequence = "3")
+    public List<Area> buscarPorNombre(
+            @ParameterLayout(named="Nombre")
+            final String nombre
+    ) {
+        return container.allMatches(
+                new QueryDefault<>(
+                        Area.class,
+                        "buscarPorNombre",
+                        "nombre", nombre));
+    }
 	
+	@MemberOrder(sequence = "4")
+    public List<Area> buscarPorCodigo(
+            @ParameterLayout(named="Codigo de area")
+            final String codigo_area
+    ) {
+        return container.allMatches(
+                new QueryDefault<>(
+                        Area.class,
+                        "buscarPorCodigo",
+                        "codigo_area", codigo_area));
+    }
 	
 	@javax.inject.Inject 
     DomainObjectContainer container;
