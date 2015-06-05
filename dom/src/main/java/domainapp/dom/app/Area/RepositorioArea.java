@@ -1,7 +1,6 @@
 package domainapp.dom.app.Area;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -9,9 +8,9 @@ import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
-import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.Area.Area;
+
 
 @DomainService(repositoryFor = Area.class)
 @DomainServiceLayout(menuOrder = "30", named="Area")
@@ -33,6 +32,13 @@ public class RepositorioArea {
 
     	}
     	
-    	@javax.inject.Inject 
-        DomainObjectContainer container;
+	@MemberOrder(sequence = "2")
+    public List<Area> ListarTodos() {
+        return container.allInstances(Area.class);
+    }
+	
+	
+	
+	@javax.inject.Inject 
+    DomainObjectContainer container;
 }

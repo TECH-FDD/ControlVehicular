@@ -23,6 +23,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
             name = "ListarTodos", language = "JDOQL",
             value = "SELECT "
                     + "FROM domainapp.dom.app.Area")
+    
 })
 @DomainObject(
         objectType = "AREA"
@@ -90,10 +91,8 @@ public class Area {
 	
 	@Override
 	public String toString() {
-		return "Area [codigo_area=" + codigo_area + ", nombre=" + nombre
-				+ ", descripcion=" + descripcion + ", fecha_alta=" + fecha_alta
-				+ "]";
-	}
+		return "Area " + nombre;
+	} 
 		
 	
 	
