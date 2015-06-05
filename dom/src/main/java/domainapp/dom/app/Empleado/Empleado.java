@@ -25,7 +25,27 @@ import domainapp.dom.app.Pesona.Persona;
     @javax.jdo.annotations.Query(
             name = "ListarTodos", language = "JDOQL",
             value = "SELECT "
-                    + "FROM domainapp.dom.app.Empleado")
+                    + "FROM domainapp.dom.app.Empleado"),
+    @javax.jdo.annotations.Query(
+            name = "Buscar_Documento", language = "JDOQL",
+            value = "SELECT "
+                    + "FROM domainapp.dom.app.Empleado "
+                    + "WHERE nro_documento==:nro_documento "),
+    @javax.jdo.annotations.Query(
+            name = "Buscar_Nombre", language = "JDOQL",
+            value = "SELECT "
+                    + "FROM domainapp.dom.app.Empleado "
+                    + "WHERE nombre.indexOf(:nombre) >= 0 "),
+    @javax.jdo.annotations.Query(
+            name = "Buscar_Apellido", language = "JDOQL",
+            value = "SELECT "
+                    + "FROM domainapp.dom.app.Empleado "
+                    + "WHERE apellido.indexOf(:apellido) >= 0 "),
+    @javax.jdo.annotations.Query(
+            name = "Buscar_Legajo", language = "JDOQL",
+            value = "SELECT "
+                    + "FROM domainapp.dom.app.Empleado "
+                    + "WHERE legajo.indexOf(:legajo) >= 0 ")
 })
 
 @DomainObject(
@@ -45,9 +65,11 @@ public class Empleado extends Persona{
 				ciudad, codigo_postal, fecha_alta);
 		this.legajo = legajo;
 	}
+
 	public Empleado() {
 		super();
 	}
+
 	@Persistent
 	@MemberOrder(sequence = "10")
 	@javax.jdo.annotations.Column(allowsNull = "false")
@@ -61,6 +83,6 @@ public class Empleado extends Persona{
 
 	@Override
 	public String toString() {
-		return "Empleado [Legajo N°:=" + legajo+"]";
+		return "Empleado [Legajo N°=" + legajo+"]";
 	}
 }

@@ -8,6 +8,7 @@ import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.Pesona.Documento;
 
@@ -40,10 +41,36 @@ public class RepositorioEmpleado {
         container.persistIfNotAlready(empleado);
         return empleado;
     }
+	
+	@MemberOrder(sequence = "2")
+    public Empleado BuscarPorDni(
+            @ParameterLayout(named="N° de Documento")
+            final int nro_documento
+    ) {
+        return container.firstMatch(new QueryDefault<>(
+                Empleado.class,
+                "Buscar_Documento",
+                "nro_documento", nro_documento)); 
+    }
+
+	@MemberOrder(sequence = "4")
+    public List<Empleado> buscarPorNombre(@ParameterLayout(named="Nombre")final String nombre){
+        return container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Nombre","nombre", nombre));
+    }
+
+	@MemberOrder(sequence = "5")
+    public List<Empleado> buscarPorApellido(@ParameterLayout(named="Apellido")final String apellido){
+        return container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Apellido","apellido", apellido));
+    }
 
 	@MemberOrder(sequence = "3")
     public List<Empleado> listarTodos(){
         return container.allInstances(Empleado.class);
+    }
+
+	@MemberOrder(sequence = "6")
+    public List<Empleado> buscarPorLegajo(@ParameterLayout(named="N° de Legajo")final String legajo){
+        return container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Legajo","legajo", legajo));
     }
 	@javax.inject.Inject 
     DomainObjectContainer container;
