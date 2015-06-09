@@ -9,6 +9,8 @@ import javax.jdo.annotations.Persistent;
 
 import org.apache.isis.applib.annotation.MemberOrder;
 
+import domainapp.dom.app.Area.Area;
+
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.SUBCLASS_TABLE)
 public abstract class Persona {
@@ -21,20 +23,27 @@ public abstract class Persona {
 	private String ciudad;
 	private int codigo_postal;
 	private Timestamp fecha_alta;
-	
-	public Persona(String nombre, String apellido, Documento doc, int nro_doc,
-			Timestamp fecha_nacimiento, String domicilio, String ciudad,
-			int codigo_postal, Timestamp fecha_alta) {
+	private Sexo sexo;
+	private String telefono;
+	private String email;
+
+	public Persona(String nombre, String apellido, Documento tipo_documento,
+			int nro_documento, Timestamp fecha_nacimiento, String domicilio,
+			String ciudad, int codigo_postal, Timestamp fecha_alta, Sexo sexo,
+			String telefono, String email) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.tipo_documento = doc;
-		this.nro_documento = nro_doc;
+		this.tipo_documento = tipo_documento;
+		this.nro_documento = nro_documento;
 		this.fecha_nacimiento = fecha_nacimiento;
 		this.domicilio = domicilio;
 		this.ciudad = ciudad;
 		this.codigo_postal = codigo_postal;
 		this.fecha_alta = fecha_alta;
+		this.sexo = sexo;
+		this.telefono = telefono;
+		this.email = email;
 	}
 	
 	public Persona() {
@@ -122,6 +131,35 @@ public abstract class Persona {
 
 	public void setNro_documento(int nro_doc) {
 		this.nro_documento = nro_doc;
+	}
+
+	@MemberOrder(sequence = "10")
+	@javax.jdo.annotations.Column(allowsNull="false")
+	public Sexo getSexo() {
+		return sexo;
+	}
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+	
+	@MemberOrder(sequence = "11")
+	@javax.jdo.annotations.Column(allowsNull="false")
+	public String getTelefono() {
+		return telefono;
+	}
+	
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	@MemberOrder(sequence = "12")
+	@javax.jdo.annotations.Column(allowsNull="false")
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override

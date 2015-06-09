@@ -13,6 +13,8 @@ import org.apache.isis.applib.annotation.MemberOrder;
 
 import domainapp.dom.app.Pesona.Documento;
 import domainapp.dom.app.Pesona.Persona;
+import domainapp.dom.app.Pesona.Sexo;
+import domainapp.dom.app.Area.Area;
 
 @javax.jdo.annotations.PersistenceCapable(identityType=IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(
@@ -57,13 +59,17 @@ import domainapp.dom.app.Pesona.Persona;
 )
 public class Empleado extends Persona{
 	private String legajo;
+	private Area area;
 
-	public Empleado(String nombre, String apellido, Documento doc, int nro_doc,
-			Timestamp fecha_nacimiento, String domicilio, String ciudad,
-			int codigo_postal, Timestamp fecha_alta, String legajo) {
-		super(nombre, apellido, doc, nro_doc, fecha_nacimiento, domicilio,
-				ciudad, codigo_postal, fecha_alta);
+	public Empleado(String nombre, String apellido, Documento tipo_documento,
+			int nro_documento, Timestamp fecha_nacimiento, String domicilio,
+			String ciudad, int codigo_postal, Timestamp fecha_alta, Sexo sexo,
+			String telefono, String email, String legajo, Area area) {
+		super(nombre, apellido, tipo_documento, nro_documento,
+				fecha_nacimiento, domicilio, ciudad, codigo_postal, fecha_alta,
+				sexo, telefono, email);
 		this.legajo = legajo;
+		this.area = area;
 	}
 
 	public Empleado() {
@@ -71,7 +77,7 @@ public class Empleado extends Persona{
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "10")
+	@MemberOrder(sequence = "13")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getLegajo() {
 		return legajo;
@@ -79,6 +85,17 @@ public class Empleado extends Persona{
 
 	public void setLegajo(String legajo) {
 		this.legajo = legajo;
+	}
+
+	@Persistent
+	@MemberOrder(sequence = "14")
+	@javax.jdo.annotations.Column(allowsNull = "Area")
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
 	}
 
 	@Override
