@@ -9,4 +9,21 @@ public class Validador {
 		public static final String ADMITIDOS = "[a-z,A-Z,0-9,ñ,Ñ, ]+"; 
 	}
 	
+	public static final class ValidacionNumerica{ 	
+		private ValidacionNumerica() { }
+		public static final String ADMITIDOS = "[0-9]+"; 
+	}
+	
+	public static final class ValidacionTel {
+		private ValidacionTel() {}
+		public static final String ADMITIDOS = "[+]?[0-9 -]*";
+	}
+	
+	public static final class ValidacionEmail {
+		private ValidacionEmail() {}
+		public static final String ADMITIDOS = "(\\w+\\.)*\\w+@(\\w+\\.)+[A-Za-z]+";
+	}
+	
+	
+	
 }

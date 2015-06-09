@@ -24,6 +24,7 @@ public class RepositorioArea {
         final @ParameterLayout(named="Nombre") @Parameter(regexPattern = domainapp.dom.regex.Validador.Validador.ValidacionAlfanumerico.ADMITIDOS,maxLength=30) String nombre, 
         final @ParameterLayout(named="Descripcion") String descripcion)
         /*final @ParameterLayout(named="Fecha de alta") Timestamp fecha_alta)*/{
+		
         final Area area = container.newTransientInstance(Area.class);
         
         Date date= new Date();
