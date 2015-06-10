@@ -35,7 +35,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
                 + "WHERE codigo_area.indexOf(:codigo_area) >= 0 ")
 })
 @DomainObject(
-        objectType = "AREA"
+        objectType = "AREA", bounded=true
 )
 
 @DomainObjectLayout(
