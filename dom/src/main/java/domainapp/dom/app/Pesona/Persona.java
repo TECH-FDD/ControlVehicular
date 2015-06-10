@@ -9,8 +9,6 @@ import javax.jdo.annotations.Persistent;
 
 import org.apache.isis.applib.annotation.MemberOrder;
 
-import domainapp.dom.app.Area.Area;
-
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.SUBCLASS_TABLE)
 public abstract class Persona {
@@ -20,7 +18,8 @@ public abstract class Persona {
 	private int nro_documento;
 	private Timestamp fecha_nacimiento;
 	private String domicilio;
-	private String ciudad;
+	private Provincia provincia;
+	private Ciudad ciudad;
 	private int codigo_postal;
 	private Timestamp fecha_alta;
 	private Sexo sexo;
@@ -29,8 +28,8 @@ public abstract class Persona {
 
 	public Persona(String nombre, String apellido, Documento tipo_documento,
 			int nro_documento, Timestamp fecha_nacimiento, String domicilio,
-			String ciudad, int codigo_postal, Timestamp fecha_alta, Sexo sexo,
-			String telefono, String email) {
+			Provincia provincia, Ciudad ciudad, int codigo_postal,
+			Timestamp fecha_alta, Sexo sexo, String telefono, String email) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -38,6 +37,7 @@ public abstract class Persona {
 		this.nro_documento = nro_documento;
 		this.fecha_nacimiento = fecha_nacimiento;
 		this.domicilio = domicilio;
+		this.provincia = provincia;
 		this.ciudad = ciudad;
 		this.codigo_postal = codigo_postal;
 		this.fecha_alta = fecha_alta;
@@ -46,9 +46,6 @@ public abstract class Persona {
 		this.email = email;
 	}
 	
-	public Persona() {
-		super();
-	}
 	@Persistent
 	@MemberOrder(sequence = "1")
 	@javax.jdo.annotations.Column(allowsNull="false")
@@ -98,11 +95,11 @@ public abstract class Persona {
 	}
 	@MemberOrder(sequence = "6")
 	@javax.jdo.annotations.Column(allowsNull="false")
-	public String getCiudad() {
+	public Ciudad getCiudad() {
 		return ciudad;
 	}
 
-	public void setCiudad(String ciudad) {
+	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
 	@MemberOrder(sequence = "7")
@@ -160,6 +157,16 @@ public abstract class Persona {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	@MemberOrder(sequence = "13")
+	@javax.jdo.annotations.Column(allowsNull="false")
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
 	}
 
 	@Override

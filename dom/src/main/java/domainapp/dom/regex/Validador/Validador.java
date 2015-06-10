@@ -24,6 +24,9 @@ public class Validador {
 		public static final String ADMITIDOS = "(\\w+\\.)*\\w+@(\\w+\\.)+[A-Za-z]+";
 	}
 	
-	
+	public static final class ValidacionLetras {
+		private ValidacionLetras() {}
+		public static final String ADMITIDOS ="[A-Z,a-z,ñ,Ñ,]+";
+	}
 	
 }

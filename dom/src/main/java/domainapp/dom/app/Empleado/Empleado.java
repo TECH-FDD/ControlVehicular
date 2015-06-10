@@ -11,8 +11,10 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 
+import domainapp.dom.app.Pesona.Ciudad;
 import domainapp.dom.app.Pesona.Documento;
 import domainapp.dom.app.Pesona.Persona;
+import domainapp.dom.app.Pesona.Provincia;
 import domainapp.dom.app.Pesona.Sexo;
 import domainapp.dom.app.Area.Area;
 
@@ -63,21 +65,18 @@ public class Empleado extends Persona{
 
 	public Empleado(String nombre, String apellido, Documento tipo_documento,
 			int nro_documento, Timestamp fecha_nacimiento, String domicilio,
-			String ciudad, int codigo_postal, Timestamp fecha_alta, Sexo sexo,
-			String telefono, String email, String legajo, Area area) {
+			Provincia provincia, Ciudad ciudad, int codigo_postal,
+			Timestamp fecha_alta, Sexo sexo, String telefono, String email,
+			String legajo, Area area) {
 		super(nombre, apellido, tipo_documento, nro_documento,
-				fecha_nacimiento, domicilio, ciudad, codigo_postal, fecha_alta,
-				sexo, telefono, email);
+				fecha_nacimiento, domicilio, provincia, ciudad, codigo_postal,
+				fecha_alta, sexo, telefono, email);
 		this.legajo = legajo;
 		this.area = area;
 	}
 
-	public Empleado() {
-		super();
-	}
-
 	@Persistent
-	@MemberOrder(sequence = "13")
+	@MemberOrder(sequence = "20")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getLegajo() {
 		return legajo;
@@ -88,7 +87,7 @@ public class Empleado extends Persona{
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "14")
+	@MemberOrder(sequence = "21")
 	@javax.jdo.annotations.Column(allowsNull = "Area")
 	public Area getArea() {
 		return area;
