@@ -24,13 +24,13 @@ public class RepositorioEmpleado {
     public Empleado crearEmpleado(
         final @ParameterLayout(named="Nombre")@Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) String nombre,
         final @ParameterLayout(named="Apellido") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) String apellido,
-        final @ParameterLayout(named="Tipo de Documento") Documento tipo_documento,
+        final @ParameterLayout(named="Tipo de Documento") Documento tipoDocumento,
         final @ParameterLayout(named="N° de Documento") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int nro_documento,
-        final @ParameterLayout(named="Fecha de Nacimiento") Timestamp fecha_nacimiento,
+        final @ParameterLayout(named="Fecha de Nacimiento") Timestamp fechaNacimiento,
         final @ParameterLayout(named="Sexo") Sexo sexo,
         final @ParameterLayout(named="Provincia") Provincia provincia,
         final @ParameterLayout(named="Ciudad") Ciudad ciudad,
-        final @ParameterLayout(named="Codigo Postal") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int cod_postal,
+        final @ParameterLayout(named="Codigo Postal") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int codigoPostal,
         final @ParameterLayout(named="Domicilio") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String domicilio,
         final @ParameterLayout(named="Telefono") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionTel.ADMITIDOS)String telefono,
         final @ParameterLayout(named="E-mail") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionEmail.ADMITIDOS)String email,
@@ -40,13 +40,13 @@ public class RepositorioEmpleado {
         final Empleado empleado = container.newTransientInstance(Empleado.class);
         empleado.setNombre(nombre);
         empleado.setApellido(apellido);
-        empleado.setTipo_documento(tipo_documento);
-        empleado.setNro_documento(nro_documento);
-        empleado.setFecha_nacimiento(fecha_nacimiento);
+        empleado.setTipoDocumento(tipoDocumento);
+        empleado.setNroDocumento(nro_documento);
+        empleado.setFechaNacimiento(fechaNacimiento);
         empleado.setDomicilio(domicilio);
         empleado.setCiudad(ciudad);
-        empleado.setCodigo_postal(cod_postal);
-        empleado.setFecha_alta(new Timestamp(System.currentTimeMillis()));
+        empleado.setCodigoPostal(codigoPostal);
+        empleado.setFechaAlta(new Timestamp(System.currentTimeMillis()));
         empleado.setLegajo(legajo);
         empleado.setSexo(sexo);
         empleado.setArea(area);
@@ -58,14 +58,14 @@ public class RepositorioEmpleado {
     }
 	
 	// Validar atributos N° Documento y Fecha Nacimiento
-	public String validateCrearEmpleado(String nombre, String apellido,Documento tipo_documento, int nro_documento,
-										Timestamp fecha_nacimiento, Sexo sexo, Provincia provincia,
-										Ciudad ciudad, int codigo_postal, String domicilio,
+	public String validateCrearEmpleado(String nombre, String apellido,Documento tipoDocumento, int nroDocumento,
+										Timestamp fechaNacimiento, Sexo sexo, Provincia provincia,
+										Ciudad ciudad, int codigoPostal, String domicilio,
 										String telefono, String email, String legajo, Area area) {
-		if (!container.allMatches(new QueryDefault<Empleado>(Empleado.class, "Buscar_Documento","nro_documento", nro_documento)).isEmpty()) {
+		if (!container.allMatches(new QueryDefault<Empleado>(Empleado.class, "Buscar_Documento","nroDocumento", nroDocumento)).isEmpty()) {
 			return "El número de Documento ya existe. Por favor vericar los Datos Ingresados.";
 		}
-		if (fecha_nacimiento.after(new Timestamp(System.currentTimeMillis()))) {
+		if (fechaNacimiento.after(new Timestamp(System.currentTimeMillis()))) {
 			return "La fecha de nacimiento debe ser menor al día actual.";
 		}
 		if (!container.allMatches(new QueryDefault<Empleado>(Empleado.class, "Buscar_Legajo","legajo", legajo)).isEmpty()) {
@@ -77,12 +77,12 @@ public class RepositorioEmpleado {
 	@MemberOrder(sequence = "2")
     public Empleado BuscarPorDni(
             @ParameterLayout(named="N° de Documento") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS)
-            final int nro_documento
+            final int nroDocumento
     ) {
         return container.firstMatch(new QueryDefault<>(
                 Empleado.class,
                 "Buscar_Documento",
-                "nro_documento", nro_documento));
+                "nroDocumento", nroDocumento));
     }
 
 	@MemberOrder(sequence = "4")
@@ -105,9 +105,9 @@ public class RepositorioEmpleado {
         return container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Legajo","legajo", legajo));
     }
 
-	public List<Ciudad> choices7CrearEmpleado(String nombre, String apellido, Documento tipo_documento,
-			int nro_documento, Timestamp fecha_nacimiento, Sexo sexo, Provincia provincia,
-			 Ciudad ciudad, int codigo_postal,String domicilio, String telefono, String email,String legajo, Area area) {
+	public List<Ciudad> choices7CrearEmpleado(String nombre, String apellido, Documento tipoDocumento,
+			int nroDocumento, Timestamp fechaNacimiento, Sexo sexo, Provincia provincia,
+			 Ciudad ciudad, int codigoPostal,String domicilio, String telefono, String email,String legajo, Area area) {
         return Ciudad.listarPor(provincia);
     }
 

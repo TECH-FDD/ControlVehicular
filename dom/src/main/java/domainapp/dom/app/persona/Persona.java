@@ -14,33 +14,33 @@ import org.apache.isis.applib.annotation.MemberOrder;
 public abstract class Persona {
 	private String nombre;
 	private String apellido;
-	private Documento tipo_documento;
-	private int nro_documento;
-	private Timestamp fecha_nacimiento;
+	private Documento tipoDocumento;
+	private int nroDocumento;
+	private Timestamp fechaNacimiento;
 	private String domicilio;
 	private Provincia provincia;
 	private Ciudad ciudad;
-	private int codigo_postal;
-	private Timestamp fecha_alta;
+	private int codigoPostal;
+	private Timestamp fechaAlta;
 	private Sexo sexo;
 	private String telefono;
 	private String email;
 
-	public Persona(String nombre, String apellido, Documento tipo_documento,
-			int nro_documento, Timestamp fecha_nacimiento, String domicilio,
-			Provincia provincia, Ciudad ciudad, int codigo_postal,
-			Timestamp fecha_alta, Sexo sexo, String telefono, String email) {
+	public Persona(String nombre, String apellido, Documento tipoDocumento,
+			int nroDocumento, Timestamp fechaNacimiento, String domicilio,
+			Provincia provincia, Ciudad ciudad, int codigoPostal,
+			Timestamp fechaAlta, Sexo sexo, String telefono, String email) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.tipo_documento = tipo_documento;
-		this.nro_documento = nro_documento;
-		this.fecha_nacimiento = fecha_nacimiento;
+		this.tipoDocumento = tipoDocumento;
+		this.nroDocumento = nroDocumento;
+		this.fechaNacimiento = fechaNacimiento;
 		this.domicilio = domicilio;
 		this.provincia = provincia;
 		this.ciudad = ciudad;
-		this.codigo_postal = codigo_postal;
-		this.fecha_alta = fecha_alta;
+		this.codigoPostal = codigoPostal;
+		this.fechaAlta = fechaAlta;
 		this.sexo = sexo;
 		this.telefono = telefono;
 		this.email = email;
@@ -72,21 +72,21 @@ public abstract class Persona {
 	}
 	@MemberOrder(sequence = "3")
 	@javax.jdo.annotations.Column(allowsNull="false")
-	public Documento getTipo_documento() {
-		return tipo_documento;
+	public Documento getTipoDocumento() {
+		return tipoDocumento;
 	}
 
-	public void setTipo_documento(Documento doc) {
-		this.tipo_documento = doc;
+	public void setTipoDocumento(Documento tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
 	}
 	@MemberOrder(sequence = "4")
 	@javax.jdo.annotations.Column(allowsNull="false")
-	public Timestamp getFecha_nacimiento() {
-		return fecha_nacimiento;
+	public Timestamp getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
-	public void setFecha_nacimiento(Timestamp fecha_nacimiento) {
-		this.fecha_nacimiento = fecha_nacimiento;
+	public void setFechaNacimiento(Timestamp fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 	@MemberOrder(sequence = "5")
 	@javax.jdo.annotations.Column(allowsNull="false")
@@ -108,30 +108,30 @@ public abstract class Persona {
 	}
 	@MemberOrder(sequence = "7")
 	@javax.jdo.annotations.Column(allowsNull="false")
-	public int getCodigo_postal() {
-		return codigo_postal;
+	public int getCodigoPostal() {
+		return codigoPostal;
 	}
 
-	public void setCodigo_postal(int codigo_postal) {
-		this.codigo_postal = codigo_postal;
+	public void setCodigoPostal(int codigoPostal) {
+		this.codigoPostal = codigoPostal;
 	}
 	@MemberOrder(sequence = "8")
 	@javax.jdo.annotations.Column(allowsNull="false")
-	public Timestamp getFecha_alta() {
-		return fecha_alta;
+	public Timestamp getFechaAlta() {
+		return fechaAlta;
 	}
 
-	public void setFecha_alta(Timestamp fecha_alta) {
-		this.fecha_alta = fecha_alta;
+	public void setFechaAlta(Timestamp fechaAlta) {
+		this.fechaAlta = fechaAlta;
 	}
 	@MemberOrder(sequence = "9")
 	@javax.jdo.annotations.Column(allowsNull="false")
-	public int getNro_documento() {
-		return nro_documento;
+	public int getNroDocumento() {
+		return nroDocumento;
 	}
 
-	public void setNro_documento(int nro_doc) {
-		this.nro_documento = nro_doc;
+	public void setNroDocumento(int nroDocumento) {
+		this.nroDocumento = nroDocumento;
 	}
 
 	@MemberOrder(sequence = "10")
@@ -176,9 +176,11 @@ public abstract class Persona {
 	@Override
 	public String toString() {
 		return "Persona [nombre=" + nombre + ", apellido=" + apellido
-				+ ", doc=" + tipo_documento + ", fecha_nacimiento=" + fecha_nacimiento
-				+ ", domicilio=" + domicilio + ", ciudad=" + ciudad
-				+ ", codigo_postal=" + codigo_postal + ", fecha_alta="
-				+ fecha_alta + "]";
+				+ ", tipoDocumento=" + tipoDocumento + ", nroDocumento="
+				+ nroDocumento + ", fechaNacimiento=" + fechaNacimiento
+				+ ", domicilio=" + domicilio + ", provincia=" + provincia
+				+ ", ciudad=" + ciudad + ", codigoPostal=" + codigoPostal
+				+ ", fechaAlta=" + fechaAlta + ", sexo=" + sexo + ", telefono="
+				+ telefono + ", email=" + email + "]";
 	}
 }

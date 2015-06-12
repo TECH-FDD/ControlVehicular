@@ -34,7 +34,7 @@ import domainapp.dom.app.persona.Sexo;
             name = "Buscar_Documento", language = "JDOQL",
             value = "SELECT "
                     + "FROM domainapp.dom.app.Empleado "
-                    + "WHERE nro_documento==:nro_documento "),
+                    + "WHERE nroDocumento==:nroDocumento "),
     @javax.jdo.annotations.Query(
             name = "Buscar_Nombre", language = "JDOQL",
             value = "SELECT "
@@ -63,14 +63,14 @@ public class Empleado extends Persona{
 	private String legajo;
 	private Area area;
 
-	public Empleado(String nombre, String apellido, Documento tipo_documento,
-			int nro_documento, Timestamp fecha_nacimiento, String domicilio,
-			Provincia provincia, Ciudad ciudad, int codigo_postal,
-			Timestamp fecha_alta, Sexo sexo, String telefono, String email,
+	public Empleado(String nombre, String apellido, Documento tipoDocumento,
+			int nroDocumento, Timestamp fechaNacimiento, String domicilio,
+			Provincia provincia, Ciudad ciudad, int codigoPostal,
+			Timestamp fechaAlta, Sexo sexo, String telefono, String email,
 			String legajo, Area area) {
-		super(nombre, apellido, tipo_documento, nro_documento,
-				fecha_nacimiento, domicilio, provincia, ciudad, codigo_postal,
-				fecha_alta, sexo, telefono, email);
+		super(nombre, apellido, tipoDocumento, nroDocumento, fechaNacimiento,
+				domicilio, provincia, ciudad, codigoPostal, fechaAlta, sexo,
+				telefono, email);
 		this.legajo = legajo;
 		this.area = area;
 	}
