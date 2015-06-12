@@ -1,0 +1,51 @@
+package domainapp.dom.app.combustible;
+
+import java.math.BigDecimal;
+import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.DomainService;
+import org.apache.isis.applib.annotation.DomainServiceLayout;
+import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Parameter;
+import org.apache.isis.applib.annotation.ParameterLayout;
+import domainapp.dom.app.combustible.Combustible;
+import domainapp.dom.app.combustible.TipoCombustible;
+
+@DomainService(repositoryFor = Combustible.class)
+@DomainServiceLayout(menuOrder = "40", named = "Combustible")
+public class RepositorioCombustible {
+
+	@MemberOrder(sequence = "1")
+	public Combustible crearCombustible(
+
+			final @ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) String nombre,
+			final @ParameterLayout(named = "Empresa") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 30) String empresa,
+			final @ParameterLayout(named = "Inicial") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 20) String codigo,
+			final @ParameterLayout(named = "Descripcion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 100) String descripcion,
+			final @ParameterLayout(named = "Categoria") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 100) String categoria,
+			final @ParameterLayout(named = "Precio/litro") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) BigDecimal precioLitro,
+			final @ParameterLayout(named = "Precio anterior") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) BigDecimal precioAnterior,
+			final @ParameterLayout(named = "Porcentaje de aumento") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) BigDecimal porceAumento,
+			final @ParameterLayout(named = "Octanaje") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) int octanaje,
+			final @ParameterLayout(named = "Tipo de combustible") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) TipoCombustible tipoCombustible) {
+
+		final Combustible combustible = container
+				.newTransientInstance(Combustible.class);
+
+		combustible.setNombre(nombre);
+		combustible.setEmpresa(empresa);
+		combustible.setCodigo(codigo);
+		combustible.setDescripcion(descripcion);
+		combustible.setCategoria(categoria);
+		combustible.setPrecioLitro(precioLitro);
+		combustible.setPrecioAnterior(precioAnterior);
+		combustible.setPorcentajeAumento(porceAumento);
+		combustible.setOctanaje(octanaje);
+		combustible.setTipoCombustible(tipoCombustible);
+
+		container.persistIfNotAlready(combustible);
+		return combustible;
+	}
+
+	@javax.inject.Inject
+	DomainObjectContainer container;
+}
