@@ -1,5 +1,7 @@
 package domainapp.dom.app.combustible;
 
+import java.util.List;
+
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
@@ -24,6 +26,11 @@ public class RepositorioTipoCombustible {
 		tipoCombustible.setDescripcion(descripcion);
 		container.persistIfNotAlready(tipoCombustible);
 		return tipoCombustible;
+	}
+
+	@MemberOrder(sequence = "2")
+	public List<TipoCombustible> ListarTodos() {
+		return container.allInstances(TipoCombustible.class);
 	}
 
 	@javax.inject.Inject
