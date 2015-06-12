@@ -1,4 +1,4 @@
-package domainapp.dom.app.Pesona;
+package domainapp.dom.app.persona;
 
 public enum Sexo {
 	Femenino, Masculino;

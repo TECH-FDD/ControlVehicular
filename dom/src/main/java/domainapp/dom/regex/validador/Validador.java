@@ -1,4 +1,4 @@
-package domainapp.dom.regex.Validador;
+package domainapp.dom.regex.validador;
 
 //import java.util.Calendar;
 

@@ -1,4 +1,4 @@
-package domainapp.dom.app.Area;
+package domainapp.dom.app.area;
 
 import java.sql.Timestamp;
 

@@ -1,4 +1,4 @@
-package domainapp.dom.app.Pesona;
+package domainapp.dom.app.persona;
 
 import java.util.Collections;
 import java.util.List;

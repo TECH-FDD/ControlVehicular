@@ -1,4 +1,4 @@
-package domainapp.dom.app.Empleado;
+package domainapp.dom.app.empleado;
 
 import java.sql.Timestamp;
 
@@ -11,12 +11,12 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 
-import domainapp.dom.app.Pesona.Ciudad;
-import domainapp.dom.app.Pesona.Documento;
-import domainapp.dom.app.Pesona.Persona;
-import domainapp.dom.app.Pesona.Provincia;
-import domainapp.dom.app.Pesona.Sexo;
-import domainapp.dom.app.Area.Area;
+import domainapp.dom.app.area.Area;
+import domainapp.dom.app.persona.Ciudad;
+import domainapp.dom.app.persona.Documento;
+import domainapp.dom.app.persona.Persona;
+import domainapp.dom.app.persona.Provincia;
+import domainapp.dom.app.persona.Sexo;
 
 @javax.jdo.annotations.PersistenceCapable(identityType=IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(
