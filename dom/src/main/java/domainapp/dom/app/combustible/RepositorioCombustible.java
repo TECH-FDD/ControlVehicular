@@ -1,12 +1,16 @@
 package domainapp.dom.app.combustible;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.query.QueryDefault;
+
 import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.combustible.TipoCombustible;
 
@@ -44,6 +48,44 @@ public class RepositorioCombustible {
 
 		container.persistIfNotAlready(combustible);
 		return combustible;
+	}
+
+	// Validacion de nombre de combustible y codigo
+	public String validateCrearCombustible(String nombre, String empresa,
+			String codigo, String descripcion, String categoria,
+			BigDecimal precio_litro, BigDecimal precio_anterior,
+			BigDecimal porce_aumento, int octanaje,
+			TipoCombustible tipo_combustible) {
+		if (!container.allMatches(
+				new QueryDefault<Combustible>(Combustible.class,
+						"buscarPorNombre", "nombre", nombre)).isEmpty()) {
+			return "El nombre ya existe. Por favor verifique datos ingresados.";
+		}
+		if (!container.allMatches(
+				new QueryDefault<Combustible>(Combustible.class,
+						"buscarPorCodigo", "codigo", codigo)).isEmpty()) {
+			return "El codigo ingresado ya exite! Por favor verifique los datos ingresados.";
+		}
+		return null;
+	}
+
+	@MemberOrder(sequence = "2")
+	public List<Combustible> ListarTodos() {
+		return container.allInstances(Combustible.class);
+	}
+
+	@MemberOrder(sequence = "3")
+	public List<Combustible> buscarPorNombre(
+			@ParameterLayout(named = "Nombre") final String nombre) {
+		return container.allMatches(new QueryDefault<>(Combustible.class,
+				"buscarPorNombre", "nombre", nombre));
+	}
+
+	@MemberOrder(sequence = "4")
+	public List<Combustible> buscarPorCodigo(
+			@ParameterLayout(named = "Codigo") final String codigo) {
+		return container.allMatches(new QueryDefault<>(Combustible.class,
+				"buscarPorCodigo", "codigo", codigo));
 	}
 
 	@javax.inject.Inject

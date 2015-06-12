@@ -174,12 +174,7 @@ public class Combustible {
 
 	@Override
 	public String toString() {
-		return "Combustible [nombre=" + nombre + ", empresa=" + empresa
-				+ ", codigo=" + codigo + ", descripcion=" + descripcion
-				+ ", categoria=" + categoria + ", precioLitro=" + precioLitro
-				+ ", precioAnterior=" + precioAnterior + ", porcentajeAumento="
-				+ porcentajeAumento + ", octanaje=" + octanaje
-				+ ", tipoCombustible=" + tipoCombustible + "]";
+		return "Combustible: " + nombre;
 	}
 
 }
