@@ -75,6 +75,10 @@ public class Empleado extends Persona{
 		this.area = area;
 	}
 
+	public Empleado() {
+		super();
+	}
+
 	@Persistent
 	@MemberOrder(sequence = "20")
 	@javax.jdo.annotations.Column(allowsNull = "false")

@@ -45,7 +45,11 @@ public abstract class Persona {
 		this.telefono = telefono;
 		this.email = email;
 	}
-	
+
+	public Persona() {
+		super();
+	}
+
 	@Persistent
 	@MemberOrder(sequence = "1")
 	@javax.jdo.annotations.Column(allowsNull="false")
