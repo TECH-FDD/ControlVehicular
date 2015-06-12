@@ -9,7 +9,9 @@ import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.area.Area;
 import domainapp.dom.app.persona.Ciudad;
@@ -82,6 +84,7 @@ public class Empleado extends Persona{
 	@Persistent
 	@MemberOrder(sequence = "20")
 	@javax.jdo.annotations.Column(allowsNull = "false")
+	@Property(editing=Editing.DISABLED)
 	public String getLegajo() {
 		return legajo;
 	}
