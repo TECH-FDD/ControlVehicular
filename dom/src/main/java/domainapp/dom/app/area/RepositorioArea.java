@@ -15,59 +15,49 @@ import org.apache.isis.applib.query.QueryDefault;
 import domainapp.dom.app.area.Area;
 
 @DomainService(repositoryFor = Area.class)
-@DomainServiceLayout(menuOrder = "30", named="Area")
+@DomainServiceLayout(menuOrder = "30", named = "Area")
 public class RepositorioArea {
 
 	@MemberOrder(sequence = "1")
-    public Area crearArea(
-		final @ParameterLayout(named = "Codigo de Area") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) String codigo_area,
-        final @ParameterLayout(named="Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS,maxLength=30) String nombre,
-        final @ParameterLayout(named="Descripcion") String descripcion)
-        /*final @ParameterLayout(named="Fecha de alta") Timestamp fecha_alta)*/{
+	public Area crearArea(
+			final @ParameterLayout(named = "Codigo de Area") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) String codigoArea,
+			final @ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 30) String nombre,
+			final @ParameterLayout(named = "Descripcion") String descripcion)
+	/* final @ParameterLayout(named="Fecha de alta") Timestamp fecha_alta) */{
 
-        final Area area = container.newTransientInstance(Area.class);
+		final Area area = container.newTransientInstance(Area.class);
 
-        Date date= new Date();
-        Timestamp fecha = new Timestamp(date.getTime());
+		Date date = new Date();
+		Timestamp fecha = new Timestamp(date.getTime());
 
-        area.setCodigo_area(codigo_area);
-        area.setNombre(nombre);
-        area.setDescripcion(descripcion);
-        area.setFecha_alta(fecha);
-        container.persistIfNotAlready(area);
-        return area;
+		area.setCodigoArea(codigoArea);
+		area.setNombre(nombre);
+		area.setDescripcion(descripcion);
+		area.setFechaAlta(fecha);
+		container.persistIfNotAlready(area);
+		return area;
 
-    	}
+	}
 
 	@MemberOrder(sequence = "2")
-    public List<Area> ListarTodos() {
-        return container.allInstances(Area.class);
-    }
+	public List<Area> ListarTodos() {
+		return container.allInstances(Area.class);
+	}
 
 	@MemberOrder(sequence = "3")
-    public List<Area> buscarPorNombre(
-            @ParameterLayout(named="Nombre")
-            final String nombre
-    ) {
-        return container.allMatches(
-                new QueryDefault<>(
-                        Area.class,
-                        "buscarPorNombre",
-                        "nombre", nombre));
-    }
+	public List<Area> buscarPorNombre(
+			@ParameterLayout(named = "Nombre") final String nombre) {
+		return container.allMatches(new QueryDefault<>(Area.class,
+				"buscarPorNombre", "nombre", nombre));
+	}
 
 	@MemberOrder(sequence = "4")
-    public List<Area> buscarPorCodigo(
-            @ParameterLayout(named="Codigo de area")
-            final String codigo_area
-    ) {
-        return container.allMatches(
-                new QueryDefault<>(
-                        Area.class,
-                        "buscarPorCodigo",
-                        "codigo_area", codigo_area));
-    }
+	public List<Area> buscarPorCodigo(
+			@ParameterLayout(named = "Codigo de area") final String codigoArea) {
+		return container.allMatches(new QueryDefault<>(Area.class,
+				"buscarPorCodigo", "codigoArea", codigoArea));
+	}
 
 	@javax.inject.Inject
-    DomainObjectContainer container;
+	DomainObjectContainer container;
 }
