@@ -9,7 +9,9 @@ import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.combustible.TipoCombustible;
 
@@ -62,7 +64,9 @@ public class Combustible {
 		this.tipoCombustible = tipoCombustible;
 	}
 
+	
 	@Persistent
+	@Property(editing=Editing.DISABLED)
 	@MemberOrder(sequence = "10")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getNombre() {
@@ -74,6 +78,7 @@ public class Combustible {
 	}
 
 	@Persistent
+	@Property(editing=Editing.DISABLED)
 	@MemberOrder(sequence = "20")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getEmpresa() {
@@ -85,6 +90,7 @@ public class Combustible {
 	}
 
 	@Persistent
+	@Property(editing=Editing.DISABLED)
 	@MemberOrder(sequence = "30")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getCodigo() {
@@ -129,6 +135,7 @@ public class Combustible {
 	}
 
 	@Persistent
+	@Property(editing=Editing.DISABLED)
 	@MemberOrder(sequence = "70")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public BigDecimal getPrecioAnterior() {
@@ -140,12 +147,13 @@ public class Combustible {
 	}
 
 	@Persistent
+	@Property(editing=Editing.DISABLED)
 	@MemberOrder(sequence = "80")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public BigDecimal getPorcentajeAumento() {
 		return porcentajeAumento;
 	}
-
+	
 	public void setPorcentajeAumento(BigDecimal porcentajeAumento) {
 		this.porcentajeAumento = porcentajeAumento;
 	}
