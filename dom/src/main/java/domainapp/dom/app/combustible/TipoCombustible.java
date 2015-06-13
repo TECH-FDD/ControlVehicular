@@ -7,7 +7,9 @@ import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "TipoCombustible_ID")
@@ -33,6 +35,7 @@ public class TipoCombustible {
 	}
 
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "10")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getTipo() {
@@ -44,6 +47,7 @@ public class TipoCombustible {
 	}
 
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "20")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getDescripcion() {
