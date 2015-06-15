@@ -53,6 +53,7 @@ public class RepositorioEmpleado {
         empleado.setTelefono(telefono);
         empleado.setEmail(email);
         empleado.setProvincia(provincia);
+        empleado.setActivo(true);
         container.persistIfNotAlready(empleado);
         return empleado;
     }
