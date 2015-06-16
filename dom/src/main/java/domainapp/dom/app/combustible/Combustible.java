@@ -6,12 +6,15 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
+import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Property;
+import org.apache.isis.applib.annotation.Where;
 
 import domainapp.dom.app.combustible.TipoCombustible;
 
@@ -20,13 +23,14 @@ import domainapp.dom.app.combustible.TipoCombustible;
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
 @javax.jdo.annotations.Queries({
 		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
-				+ "FROM domainapp.dom.app.combustible"),
+				+ "FROM domainapp.dom.app.combustible.Combustible "
+				+ "WHERE activo == true"),
 		@javax.jdo.annotations.Query(name = "buscarPorNombre", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.combustible.Combustible "
-				+ "WHERE nombre.indexOf(:nombre) >= 0 "),
+				+ "WHERE nombre.indexOf(:nombre) >= 0 && activo == true"),
 		@javax.jdo.annotations.Query(name = "buscarPorCodigo", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.combustible.Combustible "
-				+ "WHERE codigo.indexOf(:codigo) >= 0 ") })
+				+ "WHERE codigo.indexOf(:codigo) >= 0 && activo == true") })
 @DomainObject(objectType = "COMBUSTIBLE")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Combustible {
@@ -41,6 +45,16 @@ public class Combustible {
 	private BigDecimal porcentajeAumento;
 	private int octanaje;
 	private TipoCombustible tipoCombustible;
+	private boolean activo;
+
+	@Property(hidden=Where.EVERYWHERE)
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 
 	public Combustible() {
 		super();
@@ -63,7 +77,11 @@ public class Combustible {
 		this.octanaje = octanaje;
 		this.tipoCombustible = tipoCombustible;
 	}
-
+	@Action 
+	public void eliminar(){
+		this.setActivo(false);
+		this.container.informUser("Empleado ha sido eliminado de manera exitosa");
+	}
 	
 	@Persistent
 	@Property(editing=Editing.DISABLED)
@@ -184,5 +202,8 @@ public class Combustible {
 	public String toString() {
 		return "Combustible: " + nombre;
 	}
+	
+	@javax.inject.Inject 
+	DomainObjectContainer container;
 
 }
