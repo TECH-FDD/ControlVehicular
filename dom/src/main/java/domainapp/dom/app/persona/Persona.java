@@ -7,7 +7,9 @@ import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.SUBCLASS_TABLE)
@@ -53,6 +55,7 @@ public abstract class Persona {
 	@Persistent
 	@MemberOrder(sequence = "1")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public String getNombre() {
 		return nombre;
 	}
@@ -63,6 +66,7 @@ public abstract class Persona {
 	@Persistent
 	@MemberOrder(sequence = "2")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public String getApellido() {
 		return apellido;
 	}
@@ -70,8 +74,10 @@ public abstract class Persona {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+	@Persistent
 	@MemberOrder(sequence = "3")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public Documento getTipoDocumento() {
 		return tipoDocumento;
 	}
@@ -79,8 +85,9 @@ public abstract class Persona {
 	public void setTipoDocumento(Documento tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
-	@MemberOrder(sequence = "4")
+	@MemberOrder(sequence = "5")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public Timestamp getFechaNacimiento() {
 		return fechaNacimiento;
 	}
@@ -88,7 +95,7 @@ public abstract class Persona {
 	public void setFechaNacimiento(Timestamp fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	@MemberOrder(sequence = "5")
+	@MemberOrder(sequence = "10")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	public String getDomicilio() {
 		return domicilio;
@@ -97,7 +104,7 @@ public abstract class Persona {
 	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}
-	@MemberOrder(sequence = "6")
+	@MemberOrder(sequence = "8")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	public Ciudad getCiudad() {
 		return ciudad;
@@ -106,7 +113,7 @@ public abstract class Persona {
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
-	@MemberOrder(sequence = "7")
+	@MemberOrder(sequence = "9")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	public int getCodigoPostal() {
 		return codigoPostal;
@@ -115,8 +122,9 @@ public abstract class Persona {
 	public void setCodigoPostal(int codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
-	@MemberOrder(sequence = "8")
+	@MemberOrder(sequence = "13")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public Timestamp getFechaAlta() {
 		return fechaAlta;
 	}
@@ -124,8 +132,9 @@ public abstract class Persona {
 	public void setFechaAlta(Timestamp fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
-	@MemberOrder(sequence = "9")
+	@MemberOrder(sequence = "4")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public int getNroDocumento() {
 		return nroDocumento;
 	}
@@ -134,8 +143,9 @@ public abstract class Persona {
 		this.nroDocumento = nroDocumento;
 	}
 
-	@MemberOrder(sequence = "10")
+	@MemberOrder(sequence = "6")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public Sexo getSexo() {
 		return sexo;
 	}
@@ -163,7 +173,7 @@ public abstract class Persona {
 		this.email = email;
 	}
 	
-	@MemberOrder(sequence = "13")
+	@MemberOrder(sequence = "7")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	public Provincia getProvincia() {
 		return provincia;
