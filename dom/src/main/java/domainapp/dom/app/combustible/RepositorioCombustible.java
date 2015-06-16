@@ -60,46 +60,53 @@ public class RepositorioCombustible {
 		if (!container.allMatches(
 				new QueryDefault<Combustible>(Combustible.class,
 						"buscarPorNombre", "nombre", nombre)).isEmpty()) {
-			this.container.warnUser("El nombre ya existe. Por favor verifique datos ingresados.");
+			this.container
+					.warnUser("El nombre ya existe. Por favor verifique datos ingresados.");
 		}
 		if (!container.allMatches(
 				new QueryDefault<Combustible>(Combustible.class,
 						"buscarPorCodigo", "codigo", codigo)).isEmpty()) {
-			this.container.warnUser("El codigo ingresado ya exite! Por favor verifique los datos ingresados.");
+			this.container
+					.warnUser("El codigo ingresado ya exite! Por favor verifique los datos ingresados.");
 		}
 		return null;
 	}
 
-	
 	@MemberOrder(sequence = "2")
 	public List<Combustible> ListarTodos() {
 		final List<Combustible> listaCombustible = this.container
-		.allMatches(new QueryDefault<Combustible>(Combustible.class, "ListarTodos"));
+				.allMatches(new QueryDefault<Combustible>(Combustible.class,
+						"ListarTodos"));
 		if (listaCombustible.isEmpty()) {
-			this.container.warnUser("No hay combustibles cargados en el sistema");
+			this.container
+					.warnUser("No hay combustibles cargados en el sistema");
 		}
-			return listaCombustible;
+		return listaCombustible;
 	}
-	
+
 	@MemberOrder(sequence = "3")
-	public List<Combustible> buscarPorNombre(@ParameterLayout(named = "Nombre") final String nombre) {
-		
+	public List<Combustible> buscarPorNombre(
+			@ParameterLayout(named = "Nombre") final String nombre) {
+
 		final List<Combustible> listaCombustible = this.container
-				.allMatches(new QueryDefault<Combustible>(Combustible.class, "buscarPorNombre","nombre",nombre));
-				if (listaCombustible.isEmpty()) {
-					this.container.warnUser("No existe el combustible buscado");
-				}
-					return listaCombustible;
+				.allMatches(new QueryDefault<Combustible>(Combustible.class,
+						"buscarPorNombre", "nombre", nombre));
+		if (listaCombustible.isEmpty()) {
+			this.container.warnUser("No existe el combustible buscado");
+		}
+		return listaCombustible;
 	}
 
 	@MemberOrder(sequence = "4")
-	public List<Combustible> buscarPorCodigo(@ParameterLayout(named = "Codigo") final String codigo) {
+	public List<Combustible> buscarPorCodigo(
+			@ParameterLayout(named = "Codigo") final String codigo) {
 		final List<Combustible> listaCombustible = this.container
-				.allMatches(new QueryDefault<Combustible>(Combustible.class, "buscarPorCodigo","codigo",codigo));
-			if (listaCombustible.isEmpty()) {
-				this.container.warnUser("No existe el combustible buscado");
-			}
-			return listaCombustible;
+				.allMatches(new QueryDefault<Combustible>(Combustible.class,
+						"buscarPorCodigo", "codigo", codigo));
+		if (listaCombustible.isEmpty()) {
+			this.container.warnUser("No existe el combustible buscado");
+		}
+		return listaCombustible;
 	}
 
 	@javax.inject.Inject

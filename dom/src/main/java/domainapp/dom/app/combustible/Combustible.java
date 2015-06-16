@@ -47,7 +47,7 @@ public class Combustible {
 	private TipoCombustible tipoCombustible;
 	private boolean activo;
 
-	@Property(hidden=Where.EVERYWHERE)
+	@Property(hidden = Where.EVERYWHERE)
 	public boolean isActivo() {
 		return activo;
 	}
@@ -77,14 +77,13 @@ public class Combustible {
 		this.octanaje = octanaje;
 		this.tipoCombustible = tipoCombustible;
 	}
-	@Action 
-	public void eliminar(){
+	@Action
+	public void eliminar() {
 		this.setActivo(false);
-		this.container.informUser("Empleado ha sido eliminado de manera exitosa");
+		this.container.informUser("El combustible ha sido eliminado de manera exitosa");
 	}
-	
 	@Persistent
-	@Property(editing=Editing.DISABLED)
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "10")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getNombre() {
@@ -96,7 +95,7 @@ public class Combustible {
 	}
 
 	@Persistent
-	@Property(editing=Editing.DISABLED)
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "20")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getEmpresa() {
@@ -108,7 +107,7 @@ public class Combustible {
 	}
 
 	@Persistent
-	@Property(editing=Editing.DISABLED)
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "30")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getCodigo() {
@@ -153,7 +152,7 @@ public class Combustible {
 	}
 
 	@Persistent
-	@Property(editing=Editing.DISABLED)
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "70")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public BigDecimal getPrecioAnterior() {
@@ -165,13 +164,13 @@ public class Combustible {
 	}
 
 	@Persistent
-	@Property(editing=Editing.DISABLED)
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "80")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public BigDecimal getPorcentajeAumento() {
 		return porcentajeAumento;
 	}
-	
+
 	public void setPorcentajeAumento(BigDecimal porcentajeAumento) {
 		this.porcentajeAumento = porcentajeAumento;
 	}
@@ -202,8 +201,8 @@ public class Combustible {
 	public String toString() {
 		return "Combustible: " + nombre;
 	}
-	
-	@javax.inject.Inject 
+
+	@javax.inject.Inject
 	DomainObjectContainer container;
 
 }
