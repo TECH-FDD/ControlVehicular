@@ -18,7 +18,16 @@ import org.apache.isis.applib.annotation.MemberOrder;
 
 @javax.jdo.annotations.Queries({
 	@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
-			+ "FROM domainapp.dom.app.gps.Gps")})
+			+ "FROM domainapp.dom.app.gps.Gps"),
+	@javax.jdo.annotations.Query(name = "buscarPorMarca", language = "JDOQL", value = "SELECT "
+			+ "FROM domainapp.dom.app.gps.Gps "
+			+ "WHERE marca.indexOf(:marca)>= 0"),
+	@javax.jdo.annotations.Query(name = "buscarPorModelo", language = "JDOQL", value = "SELECT "
+			+ "FROM domainapp.dom.app.gps.Gps "
+			+ "WHERE modelo.indexOf(:modelo)>= 0"),
+	@javax.jdo.annotations.Query(name = "buscarPorCodigoIdentificacion", language = "JDOQL", value = "SELECT "
+			+ "FROM domainapp.dom.app.gps.Gps "
+			+ "WHERE codIdentificacion.indexOf(:codIdentificacion)>= 0")})
 
 
 @DomainObject(objectType = "GPS")
