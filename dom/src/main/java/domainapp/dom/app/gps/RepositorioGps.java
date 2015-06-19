@@ -1,6 +1,7 @@
 package domainapp.dom.app.gps;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.DomainService;
@@ -36,7 +37,13 @@ public class RepositorioGps {
 		container.persistIfNotAlready(gps);
 		return gps;
 	}
+	@MemberOrder(sequence = "2")
+    public List<Gps> listarTodos(){
+        return container.allInstances(Gps.class);
+    }
 
 	@javax.inject.Inject
 	DomainObjectContainer container;
+	
+	
 }

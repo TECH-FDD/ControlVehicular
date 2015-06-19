@@ -15,6 +15,12 @@ import org.apache.isis.applib.annotation.MemberOrder;
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Gps_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
+
+@javax.jdo.annotations.Queries({
+	@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
+			+ "FROM domainapp.dom.app.gps.Gps")})
+
+
 @DomainObject(objectType = "GPS")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Gps {
