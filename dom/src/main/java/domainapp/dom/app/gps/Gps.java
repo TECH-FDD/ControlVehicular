@@ -10,7 +10,9 @@ import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Gps_ID")
@@ -43,6 +45,7 @@ public class Gps {
 	private String obsEstadoDispositivo;
 
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "1")
 	@Column(allowsNull = "false")
 	public String getCodIdentificacion() {
@@ -54,6 +57,7 @@ public class Gps {
 	}
 
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "2")
 	@Column(allowsNull = "false")
 	public String getMarca() {
@@ -65,6 +69,7 @@ public class Gps {
 	}
 
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "3")
 	@Column(allowsNull = "false")
 	public String getModelo() {
@@ -87,6 +92,7 @@ public class Gps {
 	}
 
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "5")
 	@Column(allowsNull = "false")
 	public Timestamp getFechaAlta() {
@@ -121,7 +127,7 @@ public class Gps {
 
 	@Override
 	public String toString() {
-		return "Gps [marca=" + marca + ", modelo=" + modelo + "]";
+		return "Gps marca=" + marca + ", modelo=" + modelo ;
 	}
 
 	public Gps(String codIdentificacion, String marca, String modelo,
