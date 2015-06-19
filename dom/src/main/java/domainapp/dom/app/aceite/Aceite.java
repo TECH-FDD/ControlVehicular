@@ -19,6 +19,14 @@ import org.apache.isis.applib.annotation.Where;
 @javax.jdo.annotations.Version(
         strategy=VersionStrategy.VERSION_NUMBER,
         column="version")
+@javax.jdo.annotations.Queries({
+    @javax.jdo.annotations.Query(
+            name = "ListarTodos", language = "JDOQL",
+            value = "SELECT "
+                    + "FROM domainapp.dom.app.aceite.Aceite "
+                    + "WHERE activo == true")
+})
+
 @DomainObject(objectType = "ACEITE")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Aceite {

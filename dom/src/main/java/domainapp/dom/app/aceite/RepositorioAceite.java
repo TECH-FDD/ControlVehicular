@@ -1,6 +1,7 @@
 package domainapp.dom.app.aceite;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.ActionLayout;
@@ -10,6 +11,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.query.QueryDefault;
 
 @DomainService(repositoryFor = Aceite.class)
 @DomainServiceLayout(menuOrder = "60", named="Aceites")
@@ -33,6 +35,11 @@ public class RepositorioAceite {
 		aceite.setTipoAceite(tipoAceite);
 		aceite.setActivo(true);
 		return aceite;
+	}
+
+	@ActionLayout(named="Listar Todos")
+	public List<Aceite> listAll(){
+		return container.allMatches(new QueryDefault<Aceite>(Aceite.class, "ListarTodos"));
 	}
 	@javax.inject.Inject
     DomainObjectContainer container;
