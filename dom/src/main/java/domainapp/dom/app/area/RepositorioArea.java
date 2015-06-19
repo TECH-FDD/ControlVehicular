@@ -34,6 +34,7 @@ public class RepositorioArea {
 		area.setNombre(nombre);
 		area.setDescripcion(descripcion);
 		area.setFechaAlta(fecha);
+		area.setActivo(true);
 		container.persistIfNotAlready(area);
 		return area;
 
@@ -41,7 +42,12 @@ public class RepositorioArea {
 
 	@MemberOrder(sequence = "2")
 	public List<Area> ListarTodos() {
-		return container.allInstances(Area.class);
+		final List<Area> listaArea = this.container.allMatches(new QueryDefault<Area>(Area.class, 
+				"ListarTodos"));
+		if(listaArea.isEmpty()){
+			this.container.warnUser("No hay areas cargadas en el sistema");
+		}
+		return listaArea;
 	}
 
 	@MemberOrder(sequence = "3")
