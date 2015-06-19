@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
@@ -77,7 +78,8 @@ public class RepositorioEmpleado {
 	}
 
 	@MemberOrder(sequence = "5")
-    public List<Empleado> BuscarPorDocumento(
+	@ActionLayout(named="Buscar por N° de Documento")
+    public List<Empleado> findByDocumento(
             @ParameterLayout(named="N° de Documento") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS)
             final int nroDocumento) {
         return filtrarPorActivos(container.allMatches(new QueryDefault<>(
@@ -87,12 +89,14 @@ public class RepositorioEmpleado {
     }
 
 	@MemberOrder(sequence = "3")
-    public List<Empleado> buscarPorNombre(@ParameterLayout(named="Nombre") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre){
+	@ActionLayout(named="Buscar por Nombre")
+    public List<Empleado> findByNombre(@ParameterLayout(named="Nombre") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre){
         return filtrarPorActivos(container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Nombre","nombre", nombre)));
     }
 
 	@MemberOrder(sequence = "4")
-    public List<Empleado> buscarPorApellido(@ParameterLayout(named="Apellido") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String apellido){
+	@ActionLayout(named="Buscar por Apellido")
+    public List<Empleado> findByApellido(@ParameterLayout(named="Apellido") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String apellido){
         return filtrarPorActivos(container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Apellido","apellido", apellido)));
     }
 
@@ -102,7 +106,8 @@ public class RepositorioEmpleado {
     }
 
 	@MemberOrder(sequence = "6")
-    public List<Empleado> buscarPorLegajo(@ParameterLayout(named="N° de Legajo")final String legajo){
+	@ActionLayout(named="Buscar por Legajo")
+    public List<Empleado> findByLegajo(@ParameterLayout(named="N° de Legajo")final String legajo){
         return filtrarPorActivos(container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Legajo","legajo", legajo)));
     }
 
