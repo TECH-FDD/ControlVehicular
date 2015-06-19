@@ -20,11 +20,31 @@ import org.apache.isis.applib.annotation.Where;
         strategy=VersionStrategy.VERSION_NUMBER,
         column="version")
 @javax.jdo.annotations.Queries({
-    @javax.jdo.annotations.Query(
-            name = "ListarTodos", language = "JDOQL",
-            value = "SELECT "
-                    + "FROM domainapp.dom.app.aceite.Aceite "
-                    + "WHERE activo == true")
+		@javax.jdo.annotations.Query(
+				name = "ListarTodos", language = "JDOQL",
+				value = "SELECT "
+				+ "FROM domainapp.dom.app.aceite.Aceite "
+				+ "WHERE activo == true"),
+		@javax.jdo.annotations.Query(
+				name = "Buscar_Nombre", language = "JDOQL",
+				value = "SELECT "
+				+ "FROM domainapp.dom.app.Aceite "
+				+ "WHERE nombre.indexOf(:nombre) >= 0 && activo == true"),
+		@javax.jdo.annotations.Query(
+				name = "Buscar_Marca", language = "JDOQL",
+				value = "SELECT "
+				+ "FROM domainapp.dom.app.Aceite "
+				+ "WHERE marca.indexOf(:marca) >= 0 && activo == true"),
+		@javax.jdo.annotations.Query(
+				name = "Buscar_Codigo", language = "JDOQL",
+				value = "SELECT "
+				+ "FROM domainapp.dom.app.Aceite "
+				+ "WHERE codigo.indexOf(:codigo) >= 0 && activo == true"),
+		@javax.jdo.annotations.Query(
+				name = "Buscar_Tipo", language = "JDOQL",
+				value = "SELECT "
+				+ "FROM domainapp.dom.app.Aceite "
+				+ "WHERE tipoAceite.indexOf(:tipoAceite) >= 0 && activo == true")
 })
 
 @DomainObject(objectType = "ACEITE")

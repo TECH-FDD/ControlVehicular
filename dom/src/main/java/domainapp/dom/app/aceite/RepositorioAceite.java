@@ -37,9 +37,38 @@ public class RepositorioAceite {
 		return aceite;
 	}
 
+	@MemberOrder(sequence ="2")
 	@ActionLayout(named="Listar Todos")
 	public List<Aceite> listAll(){
 		return container.allMatches(new QueryDefault<Aceite>(Aceite.class, "ListarTodos"));
+	}
+
+	@ActionLayout(named="Buscar por Marca")
+	@MemberOrder(sequence ="3")
+	public List<Aceite> findByMarca(
+			@ParameterLayout(named="Marca") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS)String marca){
+		return container.allMatches(new QueryDefault<Aceite>(Aceite.class, "Buscar_Marca", "marca",marca));
+	}
+
+	@ActionLayout(named="Buscar por Nombre")
+	@MemberOrder(sequence="4")
+	public List<Aceite> findByNombre(
+			@ParameterLayout(named="Nombre") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) String nombre){
+		return container.allMatches(new QueryDefault<Aceite>(Aceite.class, "Buscar_Nombre","nombre",nombre));
+	}
+
+	@ActionLayout(named="Buscar por Codigo")
+	@MemberOrder(sequence="5")
+	public List<Aceite> findByCodigo(
+			@ParameterLayout(named="Codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo){
+		return container.allMatches(new QueryDefault<Aceite>(Aceite.class,"Buscar_Codigo","codigo",codigo));
+	}
+
+	@ActionLayout(named="Listar por Tipo de Aceite")
+	@MemberOrder(sequence="6")
+	public List<Aceite> listTipoAceite(
+			@ParameterLayout(named="Tipo de Aceite") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) TipoAceite tipoAceite){
+		return container.allMatches(new QueryDefault<Aceite>(Aceite.class,"Buscar_Tipo","tipoAceite",tipoAceite));
 	}
 	@javax.inject.Inject
     DomainObjectContainer container;
