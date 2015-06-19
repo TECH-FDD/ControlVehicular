@@ -106,6 +106,7 @@ public abstract class Persona {
 	}
 	@MemberOrder(sequence = "8")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public Ciudad getCiudad() {
 		return ciudad;
 	}
@@ -113,8 +114,10 @@ public abstract class Persona {
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
+
 	@MemberOrder(sequence = "9")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public int getCodigoPostal() {
 		return codigoPostal;
 	}
@@ -175,6 +178,7 @@ public abstract class Persona {
 	
 	@MemberOrder(sequence = "7")
 	@javax.jdo.annotations.Column(allowsNull="false")
+	@Property(editing=Editing.DISABLED)
 	public Provincia getProvincia() {
 		return provincia;
 	}
