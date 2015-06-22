@@ -7,14 +7,12 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
 import org.apache.isis.applib.DomainObjectContainer;
-import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Property;
-import org.apache.isis.applib.annotation.Where;
 
 import domainapp.dom.app.combustible.TipoCombustible;
 
@@ -47,15 +45,6 @@ public class Combustible {
 	private TipoCombustible tipoCombustible;
 	private boolean activo;
 
-	@Property(hidden = Where.EVERYWHERE)
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-
 	public Combustible() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -77,11 +66,7 @@ public class Combustible {
 		this.octanaje = octanaje;
 		this.tipoCombustible = tipoCombustible;
 	}
-	@Action
-	public void eliminar() {
-		this.setActivo(false);
-		this.container.informUser("El combustible ha sido eliminado de manera exitosa");
-	}
+	
 	@Persistent
 	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "10")
@@ -197,6 +182,20 @@ public class Combustible {
 		this.tipoCombustible = tipoCombustible;
 	}
 
+	@Property(editing=Editing.DISABLED)
+	@MemberOrder(sequence="110")
+	public boolean isActivo() {
+		return activo;
+	}
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+	public Combustible deleteCombustible() {
+		this.setActivo(false);
+		this.container.informUser("El combustible ha sido eliminado de manera exitosa");
+		return this;
+	}
 	@Override
 	public String toString() {
 		return "Combustible: " + nombre;
