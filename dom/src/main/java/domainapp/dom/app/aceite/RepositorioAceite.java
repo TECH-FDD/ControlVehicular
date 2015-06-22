@@ -19,12 +19,12 @@ public class RepositorioAceite {
 	@MemberOrder(sequence = "1")
 	@ActionLayout(named="Crear nuevo Aceite")
 	public Aceite createAceite(
-			@ParameterLayout(named="Marca")String marca,
-			@ParameterLayout(named="Nombre")String nombre,
-			@ParameterLayout(named="Codigo") @Parameter(optionality=Optionality.OPTIONAL)String codigo,
+			@ParameterLayout(named="Marca") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS)String marca,
+			@ParameterLayout(named="Nombre")@Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS)String nombre,
+			@ParameterLayout(named="Codigo")@Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS,optionality=Optionality.OPTIONAL)String codigo,
 			@ParameterLayout(named="Descripción")@Parameter(optionality=Optionality.OPTIONAL)String descripcion,
 			@ParameterLayout(named="Tipo de Aceite")TipoAceite tipoAceite,
-			@ParameterLayout(named="Duración (km)")int duracion){
+			@ParameterLayout(named="Duración (km)")@Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS)int duracion){
 		final Aceite aceite = container.newTransientInstance(Aceite.class);
 		aceite.setCodigo(codigo);
 		aceite.setDescripcion(descripcion);
@@ -34,7 +34,29 @@ public class RepositorioAceite {
 		aceite.setNombre(nombre);
 		aceite.setTipoAceite(tipoAceite);
 		aceite.setActivo(true);
+		container.persistIfNotAlready(aceite);
 		return aceite;
+	}
+
+	public String validateCreateAceite(final String marca, final String nombre, final String codigo,
+										final String descripcion, final TipoAceite tipoAceite,
+										final int duracion){
+		List<Aceite> listaAceite=container.allInstances(Aceite.class);
+		for (Aceite aceite : listaAceite){
+			//Paso el nombre y la marca a mayusculas y lo comparo con los parametros ingresados tambien convertidos a mayusculas.
+			String aceiteNombre=aceite.getNombre().toUpperCase();
+			String aceiteMarca=aceite.getMarca().toUpperCase();
+			if(aceiteNombre.equals(nombre.toUpperCase()) && aceiteMarca.equals(marca.toUpperCase()))
+				return "El aceite ingresado ya existe. De no poder visualizarlo, verifique si se encuentra inactivo alctualmente y activelo.";
+			if(codigo!=null)
+				if(aceite.getCodigo()!=null){
+					//Solo si el codigo ingresado, y el codigo de este aceite son distintos de null, los comparo transformados en mayusculas.
+					String aceiteCodigo= aceite.getCodigo().toUpperCase();
+					if (aceiteCodigo.equals(codigo.toUpperCase()))
+						return "El Codigo ingresado, ya ha sido asignado a otro Aceite. Por favor, ingresar un codigo diferente.";
+				}
+		}
+		return null;
 	}
 
 	@MemberOrder(sequence ="2")
