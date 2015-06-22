@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
@@ -22,7 +23,8 @@ import domainapp.dom.app.persona.Sexo;
 @DomainServiceLayout(menuOrder = "20", named="Empleado")
 public class RepositorioEmpleado {
 	@MemberOrder(sequence = "1")
-    public Empleado crearEmpleado(
+	@ActionLayout(named="Crear nuevo Empleado")
+    public Empleado createEmpleado(
         final @ParameterLayout(named="Nombre")@Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) String nombre,
         final @ParameterLayout(named="Apellido") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) String apellido,
         final @ParameterLayout(named="Tipo de Documento") Documento tipoDocumento,
@@ -60,7 +62,7 @@ public class RepositorioEmpleado {
     }
 	
 	// Validar atributos N° Documento y Fecha Nacimiento
-	public String validateCrearEmpleado(String nombre, String apellido,Documento tipoDocumento, int nroDocumento,
+	public String validateCreateEmpleado(String nombre, String apellido,Documento tipoDocumento, int nroDocumento,
 										Timestamp fechaNacimiento, Sexo sexo, Provincia provincia,
 										Ciudad ciudad, int codigoPostal, String domicilio,
 										String telefono, String email, String legajo, Area area) {
@@ -77,7 +79,8 @@ public class RepositorioEmpleado {
 	}
 
 	@MemberOrder(sequence = "5")
-    public List<Empleado> BuscarPorDocumento(
+	@ActionLayout(named="Buscar por N° de Documento")
+    public List<Empleado> findByDocumento(
             @ParameterLayout(named="N° de Documento") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS)
             final int nroDocumento) {
         return filtrarPorActivos(container.allMatches(new QueryDefault<>(
@@ -87,12 +90,14 @@ public class RepositorioEmpleado {
     }
 
 	@MemberOrder(sequence = "3")
-    public List<Empleado> buscarPorNombre(@ParameterLayout(named="Nombre") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre){
+	@ActionLayout(named="Buscar por Nombre")
+    public List<Empleado> findByNombre(@ParameterLayout(named="Nombre") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre){
         return filtrarPorActivos(container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Nombre","nombre", nombre)));
     }
 
 	@MemberOrder(sequence = "4")
-    public List<Empleado> buscarPorApellido(@ParameterLayout(named="Apellido") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String apellido){
+	@ActionLayout(named="Buscar por Apellido")
+    public List<Empleado> findByApellido(@ParameterLayout(named="Apellido") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String apellido){
         return filtrarPorActivos(container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Apellido","apellido", apellido)));
     }
 
@@ -102,11 +107,16 @@ public class RepositorioEmpleado {
     }
 
 	@MemberOrder(sequence = "6")
-    public List<Empleado> buscarPorLegajo(@ParameterLayout(named="N° de Legajo")final String legajo){
+	@ActionLayout(named="Buscar por Legajo")
+    public List<Empleado> findByLegajo(@ParameterLayout(named="N° de Legajo")final String legajo){
         return filtrarPorActivos(container.allMatches(new QueryDefault<>(Empleado.class,"Buscar_Legajo","legajo", legajo)));
     }
 
-	public List<Ciudad> choices7CrearEmpleado(String nombre, String apellido, Documento tipoDocumento,
+	/**
+	 * Cambia el listado de Ciudad a mostrar, según la Provincia seleccionada.
+	 * @return List<Ciudad>
+	 */
+	public List<Ciudad> choices7CreateEmpleado(String nombre, String apellido, Documento tipoDocumento,
 			int nroDocumento, Timestamp fechaNacimiento, Sexo sexo, Provincia provincia,
 			 Ciudad ciudad, int codigoPostal,String domicilio, String telefono, String email,String legajo, Area area) {
         return Ciudad.listarPor(provincia);

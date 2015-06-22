@@ -1,16 +1,22 @@
 package domainapp.dom.app.empleado;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
+import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
+import org.apache.isis.applib.annotation.ActionLayout.Position;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Parameter;
+import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.Where;
 
@@ -117,13 +123,55 @@ public class Empleado extends Persona{
 		this.activo = activo;
 	}
 
+	/**
+	 * Desactivar un Empleado, de manera que no pueda realizar acciones en el sistema.
+	 * @return mensaje de confirmacion.
+	 */
 	public String eliminarEmpleado(){
 		this.setActivo(false);
 		return "El Empleado ha sido eliminado de manera exitosa!";
+	}
+
+	/**
+	 * Modificar la Ciudad actual del Empleado, lo cual puede implicar o no, un cambio de Provincia,
+	 * pero si o si, debe implicar un cambio de Codigo Postal y Direccion.
+	 * @param provincia
+	 * @param ciudad
+	 * @param codigoPostal
+	 * @param domicilio
+	 * @return
+	 */
+	@MemberOrder(sequence="1", name="CodigoPostal")
+	@ActionLayout(named="Cambiar Ciudad",position=Position.BELOW)
+	public Empleado updateCodigoPostal(
+			final @ParameterLayout(named="Provincia") Provincia provincia,
+	        final @ParameterLayout(named="Ciudad") Ciudad ciudad,
+	        final @ParameterLayout(named="Codigo Postal") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int codigoPostal,
+	        final @ParameterLayout(named="Domicilio") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String domicilio){
+		this.setCiudad(ciudad);
+		this.setProvincia(provincia);
+		this.setCodigoPostal(codigoPostal);
+		this.setDomicilio(domicilio);
+		return this;
+	}
+
+	/**
+	 * Mostrar lista de Ciudades según la Provincia seleccionada.
+	 * @param provincia
+	 * @param ciudad
+	 * @param codigoPostal
+	 * @param Domicilio
+	 * @return List<Ciudad>
+	 */
+	public List<Ciudad> choices1UpdateCodigoPostal(final Provincia provincia,final Ciudad ciudad,
+												   final int codigoPostal,final String Domicilio){
+		return Ciudad.listarPor(provincia);
 	}
 
 	@Override
 	public String toString() {
 		return "Empleado [Legajo N°=" + legajo+"]";
 	}
+	@javax.inject.Inject
+    DomainObjectContainer container;
 }
