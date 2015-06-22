@@ -13,6 +13,7 @@ import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Property;
+import org.apache.isis.applib.annotation.Where;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Gps_ID")
@@ -43,6 +44,7 @@ public class Gps {
 	private Timestamp fechaAlta;
 	private Timestamp fechaAsigVehiculo;
 	private String obsEstadoDispositivo;
+	private boolean activo;
 
 	@Persistent
 	@Property(editing = Editing.DISABLED)
@@ -124,7 +126,15 @@ public class Gps {
 	public void setObsEstadoDispositivo(String obsEstadoDispositivo) {
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
 	}
+	@Property(hidden=Where.EVERYWHERE)
+	public boolean isActivo() {
+		return activo;
+	}
 
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+	
 	@Override
 	public String toString() {
 		return "Gps marca=" + marca + ", modelo=" + modelo ;
@@ -132,7 +142,7 @@ public class Gps {
 
 	public Gps(String codIdentificacion, String marca, String modelo,
 			String descripcion, Timestamp fechaAlta,
-			Timestamp fechaAsigVehiculo, String obsEstadoDispositivo) {
+			Timestamp fechaAsigVehiculo, String obsEstadoDispositivo,boolean activo) {
 		super();
 		this.codIdentificacion = codIdentificacion;
 		this.marca = marca;
@@ -141,6 +151,7 @@ public class Gps {
 		this.fechaAlta = fechaAlta;
 		this.fechaAsigVehiculo = fechaAsigVehiculo;
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
+		this.activo= activo;
 	}
 
 	public Gps() {
