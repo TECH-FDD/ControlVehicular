@@ -21,7 +21,8 @@ import domainapp.dom.app.combustible.TipoCombustible;
 public class RepositorioCombustible {
 
 	@MemberOrder(sequence = "1")
-	public Combustible crearCombustible(
+	@ActionLayout(named="Crear combustible")
+	public Combustible createCombustible(
 
 			final @ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) String nombre,
 			final @ParameterLayout(named = "Empresa") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 30) String empresa,
@@ -54,7 +55,7 @@ public class RepositorioCombustible {
 	}
 
 	// Validacion de nombre de combustible y codigo
-	public String validateCrearCombustible(String nombre, String empresa,
+	public String validateCreateCombustible(String nombre, String empresa,
 			String codigo, String descripcion, String categoria,
 			BigDecimal precio_litro, BigDecimal precio_anterior,
 			BigDecimal porce_aumento, int octanaje,
