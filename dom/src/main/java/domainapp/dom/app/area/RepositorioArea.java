@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
@@ -19,7 +20,8 @@ import domainapp.dom.app.area.Area;
 public class RepositorioArea {
 
 	@MemberOrder(sequence = "1")
-	public Area crearArea(
+	@ActionLayout(named="Crear area")
+	public Area createArea(
 			final @ParameterLayout(named = "Codigo de Area") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) String codigoArea,
 			final @ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 30) String nombre,
 			final @ParameterLayout(named = "Descripcion") String descripcion)
@@ -39,9 +41,10 @@ public class RepositorioArea {
 		return area;
 
 	}
-
+	
 	@MemberOrder(sequence = "2")
-	public List<Area> ListarTodos() {
+	@ActionLayout(named="Listar todos")
+	public List<Area> listAll() {
 		final List<Area> listaArea = this.container.allMatches(new QueryDefault<Area>(Area.class, 
 				"ListarTodos"));
 		if(listaArea.isEmpty()){
@@ -51,17 +54,28 @@ public class RepositorioArea {
 	}
 
 	@MemberOrder(sequence = "3")
-	public List<Area> buscarPorNombre(
+	@ActionLayout(named="Buscar por nombre")
+	public List<Area> findByNombre(
 			@ParameterLayout(named = "Nombre") final String nombre) {
-		return container.allMatches(new QueryDefault<>(Area.class,
-				"buscarPorNombre", "nombre", nombre));
+		final List<Area> listaArea = this.container.allMatches(new QueryDefault<Area>(Area.class,
+				"buscaPorNombre", "nombre", nombre));
+			if(listaArea.isEmpty()){
+				this.container.warnUser("No existe el Area buscada");
+			}
+			return listaArea;
 	}
 
 	@MemberOrder(sequence = "4")
-	public List<Area> buscarPorCodigo(
+	@ActionLayout(named="Buscar por codigo")
+	public List<Area> findByCodigo(
 			@ParameterLayout(named = "Codigo de area") final String codigoArea) {
-		return container.allMatches(new QueryDefault<>(Area.class,
-				"buscarPorCodigo", "codigoArea", codigoArea));
+		List<Area> listaAreaCod = this.container.allMatches(new QueryDefault<Area>(Area.class,
+				"buscarPorCodigo", "codigo", codigoArea));
+		if(listaAreaCod.isEmpty()){
+			this.container.warnUser("No existe el Area buscada");
+		}
+
+		return listaAreaCod;
 	}
 
 	@javax.inject.Inject

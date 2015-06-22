@@ -112,7 +112,7 @@ public class Area {
 		this.activo = activo;
 	}
 
-	public Area eliminarArea(){
+	public Area deleteArea(){
 		
 		boolean band = true;
 		List<Empleado> lista = this.container.allMatches(new QueryDefault<Empleado>(Empleado.class,
