@@ -7,32 +7,33 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
+import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Optionality;
+import org.apache.isis.applib.annotation.Parameter;
+import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.Where;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Gps_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
-
 @javax.jdo.annotations.Queries({
-	@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
-			+ "FROM domainapp.dom.app.gps.Gps"),
-	@javax.jdo.annotations.Query(name = "buscarPorMarca", language = "JDOQL", value = "SELECT "
-			+ "FROM domainapp.dom.app.gps.Gps "
-			+ "WHERE marca.indexOf(:marca)>= 0"),
-	@javax.jdo.annotations.Query(name = "buscarPorModelo", language = "JDOQL", value = "SELECT "
-			+ "FROM domainapp.dom.app.gps.Gps "
-			+ "WHERE modelo.indexOf(:modelo)>= 0"),
-	@javax.jdo.annotations.Query(name = "buscarPorCodigoIdentificacion", language = "JDOQL", value = "SELECT "
-			+ "FROM domainapp.dom.app.gps.Gps "
-			+ "WHERE codIdentificacion.indexOf(:codIdentificacion)>= 0")})
-
-
+		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.gps.Gps"),
+		@javax.jdo.annotations.Query(name = "buscarPorMarca", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.gps.Gps "
+				+ "WHERE marca.indexOf(:marca)>= 0"),
+		@javax.jdo.annotations.Query(name = "buscarPorModelo", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.gps.Gps "
+				+ "WHERE modelo.indexOf(:modelo)>= 0"),
+		@javax.jdo.annotations.Query(name = "buscarPorCodigoIdentificacion", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.gps.Gps "
+				+ "WHERE codIdentificacion.indexOf(:codIdentificacion)>= 0") })
 @DomainObject(objectType = "GPS")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Gps {
@@ -126,7 +127,8 @@ public class Gps {
 	public void setObsEstadoDispositivo(String obsEstadoDispositivo) {
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
 	}
-	@Property(hidden=Where.EVERYWHERE)
+
+	@Property(hidden = Where.EVERYWHERE)
 	public boolean isActivo() {
 		return activo;
 	}
@@ -134,15 +136,16 @@ public class Gps {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Gps marca=" + marca + ", modelo=" + modelo ;
+		return "Gps marca=" + marca + ", modelo=" + modelo;
 	}
 
 	public Gps(String codIdentificacion, String marca, String modelo,
 			String descripcion, Timestamp fechaAlta,
-			Timestamp fechaAsigVehiculo, String obsEstadoDispositivo,boolean activo) {
+			Timestamp fechaAsigVehiculo, String obsEstadoDispositivo,
+			boolean activo) {
 		super();
 		this.codIdentificacion = codIdentificacion;
 		this.marca = marca;
@@ -151,11 +154,32 @@ public class Gps {
 		this.fechaAlta = fechaAlta;
 		this.fechaAsigVehiculo = fechaAsigVehiculo;
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
-		this.activo= activo;
+		this.activo = activo;
 	}
 
 	public Gps() {
 		super();
 	}
 
+	/**
+	 * Desactivar un Gps, para que el mismo no pueda usarse en un vehiculo.
+	 * 
+	 * @return mensaje de confirmacion.
+	 */
+
+	public String eliminarGps(
+			final @ParameterLayout(named = "Razon baja") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String razonBaja) {
+
+		BajaGps baja = new BajaGps();
+		this.setActivo(false);
+		baja.setFechaBaja(new Timestamp(System.currentTimeMillis()));
+		baja.setRazonBaja(razonBaja);
+		baja.setGps(this);
+
+		container.persistIfNotAlready(baja);
+		return "El Gps ha sido eliminado de manera exitosa!";
+	}
+
+	@javax.inject.Inject
+	DomainObjectContainer container;
 }

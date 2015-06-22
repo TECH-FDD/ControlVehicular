@@ -42,21 +42,24 @@ public class RepositorioGps {
 		gps.setFechaAlta(new Timestamp(System.currentTimeMillis()));
 		gps.setFechaAsigVehiculo(fechaAsigVehiculo);
 		gps.setObsEstadoDispositivo(obsEstadoDisp);
-        gps.setActivo(true);
+		gps.setActivo(true);
 
 		container.persistIfNotAlready(gps);
 		return gps;
 	}
-	
-	// Validar atributos Codigo Identificación 
-	public String validateCreateGps(String codIdentificacion, String modelo,String marca, String descripcionString,
-											Timestamp fechaAsigVehiculo, String ObsEstadoDispositivo) {
-			if (!container.allMatches(new QueryDefault<Gps>(Gps.class, "buscarPorCodigoIdentificacion","codIdentificacion", codIdentificacion)).isEmpty()) {
-				return "El código de Identificación ya existe. Por favor verificar los Datos Ingresados.";
-			}
-			return null;
+
+	// Validar atributos Codigo Identificación
+	public String validateCreateGps(String codIdentificacion, String modelo,
+			String marca, String descripcionString,
+			Timestamp fechaAsigVehiculo, String ObsEstadoDispositivo) {
+		if (!container.allMatches(
+				new QueryDefault<Gps>(Gps.class,
+						"buscarPorCodigoIdentificacion", "codIdentificacion",
+						codIdentificacion)).isEmpty()) {
+			return "El código de Identificación ya existe. Por favor verificar los Datos Ingresados.";
 		}
-	
+		return null;
+	}
 
 	@MemberOrder(sequence = "2")
 	public List<Gps> listarTodos() {
