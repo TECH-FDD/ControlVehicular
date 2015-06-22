@@ -8,6 +8,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
@@ -111,7 +112,8 @@ public class Area {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-
+	
+	@ActionLayout(named="Eliminar area")
 	public Area deleteArea(){
 		
 		boolean band = true;
