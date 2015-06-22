@@ -8,6 +8,7 @@ import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.Where;
@@ -78,6 +79,7 @@ public class Aceite {
 
 	@MemberOrder(sequence="20")
 	@javax.jdo.annotations.Column(allowsNull = "false")
+	@Property(editing=Editing.DISABLED)
 	public String getNombre() {
 		return nombre;
 	}
@@ -88,6 +90,7 @@ public class Aceite {
 
 	@MemberOrder(sequence="10")
 	@javax.jdo.annotations.Column(allowsNull = "false")
+	@Property(editing=Editing.DISABLED)
 	public String getMarca() {
 		return marca;
 	}
@@ -118,6 +121,7 @@ public class Aceite {
 
 	@MemberOrder(sequence="50")
 	@javax.jdo.annotations.Column(allowsNull = "false")
+	@Property(editing=Editing.DISABLED)
 	public TipoAceite getTipoAceite() {
 		return tipoAceite;
 	}
@@ -138,6 +142,7 @@ public class Aceite {
 
 	@MemberOrder(sequence="70")
 	@javax.jdo.annotations.Column(allowsNull = "false")
+	@Property(editing=Editing.DISABLED)
 	public Timestamp getFechaAlta() {
 		return fechaAlta;
 	}
