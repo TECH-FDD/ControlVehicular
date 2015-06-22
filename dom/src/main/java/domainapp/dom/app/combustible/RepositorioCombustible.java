@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
+import org.apache.isis.applib.annotation.DomainServiceLayout.MenuBar;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
@@ -15,7 +17,7 @@ import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.combustible.TipoCombustible;
 
 @DomainService(repositoryFor = Combustible.class)
-@DomainServiceLayout(menuOrder = "40", named = "Combustible")
+@DomainServiceLayout(menuOrder = "40", named = "Combustible",menuBar=MenuBar.PRIMARY)
 public class RepositorioCombustible {
 
 	@MemberOrder(sequence = "1")
@@ -73,7 +75,8 @@ public class RepositorioCombustible {
 	}
 
 	@MemberOrder(sequence = "2")
-	public List<Combustible> ListarTodos() {
+	@ActionLayout(named="Listar todos")
+	public List<Combustible> listAll() {
 		final List<Combustible> listaCombustible = this.container
 				.allMatches(new QueryDefault<Combustible>(Combustible.class,
 						"ListarTodos"));
@@ -84,8 +87,10 @@ public class RepositorioCombustible {
 		return listaCombustible;
 	}
 
+
 	@MemberOrder(sequence = "3")
-	public List<Combustible> buscarPorNombre(
+	@ActionLayout(named="Buscar por nombre")
+	public List<Combustible> findByNombre(
 			@ParameterLayout(named = "Nombre") final String nombre) {
 
 		final List<Combustible> listaCombustible = this.container
@@ -98,7 +103,8 @@ public class RepositorioCombustible {
 	}
 
 	@MemberOrder(sequence = "4")
-	public List<Combustible> buscarPorCodigo(
+	@ActionLayout(named="Buscar por codigo")
+	public List<Combustible> findByCodigo(
 			@ParameterLayout(named = "Codigo") final String codigo) {
 		final List<Combustible> listaCombustible = this.container
 				.allMatches(new QueryDefault<Combustible>(Combustible.class,
@@ -108,6 +114,8 @@ public class RepositorioCombustible {
 		}
 		return listaCombustible;
 	}
+	
+	
 
 	@javax.inject.Inject
 	DomainObjectContainer container;
