@@ -7,6 +7,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
@@ -190,7 +191,8 @@ public class Combustible {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-
+	
+	@ActionLayout(named="Eliminar combustible")
 	public Combustible deleteCombustible() {
 		this.setActivo(false);
 		this.container.informUser("El combustible ha sido eliminado de manera exitosa");
