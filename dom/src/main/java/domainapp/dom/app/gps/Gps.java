@@ -13,6 +13,8 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Parameter;
+import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
@@ -159,6 +161,24 @@ public class Gps {
 
 	public Gps() {
 		super();
+	}
+
+	/**
+	 * Desactivar un Gps, para que el mismo no pueda usarse en un vehiculo.
+	 *
+	 * @return mensaje de confirmacion.
+	 */
+
+	public String eliminarGps(
+			final @ParameterLayout(named = "Razon baja") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String razonBaja) {
+
+		BajaGps baja = new BajaGps();
+		baja.setFechaBaja(new Timestamp(System.currentTimeMillis()));
+		baja.setRazonBaja(razonBaja);
+		baja.setGps(this);
+		this.setBajaGps(baja);
+		container.persistIfNotAlready(baja);
+		return "El Gps ha sido eliminado de manera exitosa!";
 	}
 
 	@javax.inject.Inject
