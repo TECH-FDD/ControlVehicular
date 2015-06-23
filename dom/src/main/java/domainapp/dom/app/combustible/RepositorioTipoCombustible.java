@@ -31,7 +31,8 @@ public class RepositorioTipoCombustible {
 	}
 
 	@MemberOrder(sequence = "2")
-	public List<TipoCombustible> ListarTodos() {
+	@ActionLayout(named="Lista todos")
+	public List<TipoCombustible> listAll() {
 		return container.allInstances(TipoCombustible.class);
 	}
 
