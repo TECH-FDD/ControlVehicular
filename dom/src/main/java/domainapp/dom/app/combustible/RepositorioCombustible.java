@@ -17,11 +17,11 @@ import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.combustible.TipoCombustible;
 
 @DomainService(repositoryFor = Combustible.class)
-@DomainServiceLayout(menuOrder = "40", named = "Combustible",menuBar=MenuBar.PRIMARY)
+@DomainServiceLayout(menuOrder = "40", named = "Combustible", menuBar = MenuBar.PRIMARY)
 public class RepositorioCombustible {
 
 	@MemberOrder(sequence = "1")
-	@ActionLayout(named="Crear combustible")
+	@ActionLayout(named = "Crear combustible")
 	public Combustible createCombustible(
 
 			final @ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) String nombre,
@@ -76,7 +76,7 @@ public class RepositorioCombustible {
 	}
 
 	@MemberOrder(sequence = "2")
-	@ActionLayout(named="Listar todos")
+	@ActionLayout(named = "Listar todos")
 	public List<Combustible> listAll() {
 		final List<Combustible> listaCombustible = this.container
 				.allMatches(new QueryDefault<Combustible>(Combustible.class,
@@ -88,9 +88,8 @@ public class RepositorioCombustible {
 		return listaCombustible;
 	}
 
-
 	@MemberOrder(sequence = "3")
-	@ActionLayout(named="Buscar por nombre")
+	@ActionLayout(named = "Buscar por nombre")
 	public List<Combustible> findByNombre(
 			@ParameterLayout(named = "Nombre") final String nombre) {
 
@@ -104,7 +103,7 @@ public class RepositorioCombustible {
 	}
 
 	@MemberOrder(sequence = "4")
-	@ActionLayout(named="Buscar por codigo")
+	@ActionLayout(named = "Buscar por codigo")
 	public List<Combustible> findByCodigo(
 			@ParameterLayout(named = "Codigo") final String codigo) {
 		final List<Combustible> listaCombustible = this.container
@@ -115,8 +114,15 @@ public class RepositorioCombustible {
 		}
 		return listaCombustible;
 	}
-	
-	
+
+	@MemberOrder(sequence = "2", name = "Elementos Inactivos")
+	@ActionLayout(named = "Combustibles")
+	public List<Combustible> listAllCombustibles() {
+		List<Combustible> lista = this.container
+				.allMatches(new QueryDefault<Combustible>(Combustible.class,
+						"ListarInactivos"));
+		return lista;
+	}
 
 	@javax.inject.Inject
 	DomainObjectContainer container;

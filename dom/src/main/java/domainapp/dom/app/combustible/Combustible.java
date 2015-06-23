@@ -24,6 +24,9 @@ import domainapp.dom.app.combustible.TipoCombustible;
 		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.combustible.Combustible "
 				+ "WHERE activo == true"),
+		@javax.jdo.annotations.Query(name = "ListarInactivos", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.combustible.Combustible "
+				+ "WHERE activo == false"),
 		@javax.jdo.annotations.Query(name = "buscarPorNombre", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.combustible.Combustible "
 				+ "WHERE nombre.indexOf(:nombre) >= 0 && activo == true"),
