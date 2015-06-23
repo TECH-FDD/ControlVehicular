@@ -25,7 +25,7 @@ import domainapp.dom.app.empleado.Empleado;
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
 @javax.jdo.annotations.Queries({
 		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
-				+ "FROM domainapp.dom.app.area.Area "
+				+ "FROM domainapp.dom.app.area.Area " 
 				+ "WHERE activo == true"),
 		@javax.jdo.annotations.Query(name = "buscarPorNombre", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.area.Area "
@@ -57,7 +57,7 @@ public class Area {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Persistent
 	@MemberOrder(sequence = "10")
 	@javax.jdo.annotations.Column(allowsNull = "false")
@@ -103,38 +103,43 @@ public class Area {
 	public void setFechaAlta(Timestamp fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
-	
-	@Property(hidden=Where.EVERYWHERE)
+
+	@Property(hidden = Where.EVERYWHERE)
 	@MemberOrder(sequence = "50")
 	public boolean isActivo() {
 		return activo;
 	}
+
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
-	@ActionLayout(named="Eliminar area")
-	public Area deleteArea(){
-		
+
+	@ActionLayout(named = "Eliminar area")
+	public Area deleteArea() {
+
 		boolean band = true;
-		List<Empleado> lista = this.container.allMatches(new QueryDefault<Empleado>(Empleado.class,
-				"ListarTodos"));
-		for(Empleado e:lista){
-			if(e.getArea().equals(this)){
-				band =false;
+		List<Empleado> lista = this.container
+				.allMatches(new QueryDefault<Empleado>(Empleado.class,
+						"ListarTodos"));
+		for (Empleado e : lista) {
+			if (e.getArea().equals(this)) {
+				band = false;
 			}
 		}
-		if(band == true){
+		if (band == true) {
 			this.setActivo(false);
-			this.container.informUser("El area ha sido eliminado de manera exitosa");
-		}else{
-			this.container.warnUser("No se pudo realizar esta acción. El objeto que intenta eliminar esta asignado");
+			this.container
+					.informUser("El area ha sido eliminado de manera exitosa");
+		} else {
+			this.container
+					.warnUser("No se pudo realizar esta acción. El objeto que intenta eliminar esta asignado");
 		}
 		return this;
 	}
+
 	@javax.inject.Inject
-    DomainObjectContainer container;
-	
+	DomainObjectContainer container;
+
 	@Override
 	public String toString() {
 		return "Area " + nombre;
