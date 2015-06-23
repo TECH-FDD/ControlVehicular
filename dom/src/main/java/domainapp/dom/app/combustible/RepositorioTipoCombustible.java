@@ -3,6 +3,7 @@ package domainapp.dom.app.combustible;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
@@ -16,7 +17,8 @@ import domainapp.dom.app.combustible.TipoCombustible;
 public class RepositorioTipoCombustible {
 
 	@MemberOrder(sequence = "1")
-	public TipoCombustible crearTipoCombustible(
+	@ActionLayout(named="Crear tipo combustible")
+	public TipoCombustible createTipoCombustible(
 			final @ParameterLayout(named = "Tipo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 20) String tipo,
 			final @ParameterLayout(named = "Descripcion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 100) String descripcion) {
 
