@@ -1,6 +1,7 @@
 package domainapp.dom.app.gps;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -12,13 +13,6 @@ import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
-
-import domainapp.dom.app.area.Area;
-import domainapp.dom.app.empleado.Empleado;
-import domainapp.dom.app.persona.Ciudad;
-import domainapp.dom.app.persona.Documento;
-import domainapp.dom.app.persona.Provincia;
-import domainapp.dom.app.persona.Sexo;
 
 @DomainService(repositoryFor = Gps.class)
 @DomainServiceLayout(menuOrder = "50", named = "Gps")
@@ -42,7 +36,6 @@ public class RepositorioGps {
 		gps.setFechaAlta(new Timestamp(System.currentTimeMillis()));
 		gps.setFechaAsigVehiculo(fechaAsigVehiculo);
 		gps.setObsEstadoDispositivo(obsEstadoDisp);
-		gps.setActivo(true);
 
 		container.persistIfNotAlready(gps);
 		return gps;
@@ -63,7 +56,7 @@ public class RepositorioGps {
 
 	@MemberOrder(sequence = "2")
 	public List<Gps> listarTodos() {
-		return container.allInstances(Gps.class);
+		return GpsActivos(container.allInstances(Gps.class));
 	}
 
 	@MemberOrder(sequence = "3")
@@ -91,7 +84,23 @@ public class RepositorioGps {
 				codIdentificacion));
 	}
 
+	@MemberOrder(sequence = "3", name="Elementos Inactivos")
+	@ActionLayout(named = "Gps")
+	public List<Gps> listGpsInactivos(){
+		List<Gps> lista=container.allMatches(new QueryDefault<Gps>(Gps.class,"ListarInactivos"));
+		
+		return lista;
+	}
+
+	private List<Gps> GpsActivos(final List<Gps> lista){
+		List<Gps> activos= new ArrayList<Gps>();
+		for (Gps gps : lista){
+			if (gps.getBajaGps()==null)
+				activos.add(gps);
+		}
+		return activos;
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
-
 }

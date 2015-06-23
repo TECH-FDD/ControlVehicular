@@ -3,22 +3,17 @@ package domainapp.dom.app.gps;
 import java.sql.Timestamp;
 
 import javax.jdo.annotations.Column;
-import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-
-import org.apache.isis.applib.annotation.BookmarkPolicy;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.MemberOrder;
 
-
-@PersistenceCapable
+@javax.jdo.annotations.PersistenceCapable
 public class BajaGps {
 
 	private Gps gps;
 	private Timestamp fechaBaja;
 	private String razonBaja;
-	
+
 	@Persistent
 	@MemberOrder(sequence = "1")
 	@Column(allowsNull = "true")
@@ -41,14 +36,13 @@ public class BajaGps {
 		this.razonBaja = razonBaja;
 	}
 
-	
+	@Persistent
+	@MemberOrder(sequence = "3")
+	@Column(allowsNull = "Gps")
 	public Gps getGps() {
 		return gps;
 	}
 
-	@Persistent
-	@MemberOrder(sequence = "3")
-	@Column(allowsNull = "Gps")
 	public void setGps(Gps gps) {
 		this.gps = gps;
 	}
@@ -62,12 +56,13 @@ public class BajaGps {
 
 	@Override
 	public String toString() {
-		return "BajaGps: gps=" + gps + ", fechaBaja=" + fechaBaja
-				+ ", razonBaja=" + razonBaja + "";
+		return razonBaja;
 	}
 
 	public BajaGps() {
 		super();
 	}
-	
+
+	@javax.inject.Inject
+	DomainObjectContainer container;
 }
