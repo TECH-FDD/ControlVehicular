@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
+import org.apache.isis.applib.annotation.DomainServiceLayout.MenuBar;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
@@ -15,11 +17,12 @@ import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.combustible.TipoCombustible;
 
 @DomainService(repositoryFor = Combustible.class)
-@DomainServiceLayout(menuOrder = "40", named = "Combustible")
+@DomainServiceLayout(menuOrder = "40", named = "Combustible", menuBar = MenuBar.PRIMARY)
 public class RepositorioCombustible {
 
 	@MemberOrder(sequence = "1")
-	public Combustible crearCombustible(
+	@ActionLayout(named = "Crear combustible")
+	public Combustible createCombustible(
 
 			final @ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) String nombre,
 			final @ParameterLayout(named = "Empresa") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 30) String empresa,
@@ -52,7 +55,7 @@ public class RepositorioCombustible {
 	}
 
 	// Validacion de nombre de combustible y codigo
-	public String validateCrearCombustible(String nombre, String empresa,
+	public String validateCreateCombustible(String nombre, String empresa,
 			String codigo, String descripcion, String categoria,
 			BigDecimal precio_litro, BigDecimal precio_anterior,
 			BigDecimal porce_aumento, int octanaje,
@@ -73,7 +76,8 @@ public class RepositorioCombustible {
 	}
 
 	@MemberOrder(sequence = "2")
-	public List<Combustible> ListarTodos() {
+	@ActionLayout(named = "Listar todos")
+	public List<Combustible> listAll() {
 		final List<Combustible> listaCombustible = this.container
 				.allMatches(new QueryDefault<Combustible>(Combustible.class,
 						"ListarTodos"));
@@ -85,7 +89,8 @@ public class RepositorioCombustible {
 	}
 
 	@MemberOrder(sequence = "3")
-	public List<Combustible> buscarPorNombre(
+	@ActionLayout(named = "Buscar por nombre")
+	public List<Combustible> findByNombre(
 			@ParameterLayout(named = "Nombre") final String nombre) {
 
 		final List<Combustible> listaCombustible = this.container
@@ -98,7 +103,8 @@ public class RepositorioCombustible {
 	}
 
 	@MemberOrder(sequence = "4")
-	public List<Combustible> buscarPorCodigo(
+	@ActionLayout(named = "Buscar por codigo")
+	public List<Combustible> findByCodigo(
 			@ParameterLayout(named = "Codigo") final String codigo) {
 		final List<Combustible> listaCombustible = this.container
 				.allMatches(new QueryDefault<Combustible>(Combustible.class,
@@ -107,6 +113,15 @@ public class RepositorioCombustible {
 			this.container.warnUser("No existe el combustible buscado");
 		}
 		return listaCombustible;
+	}
+
+	@MemberOrder(sequence = "2", name = "Elementos Inactivos")
+	@ActionLayout(named = "Combustibles")
+	public List<Combustible> listAllCombustibles() {
+		List<Combustible> lista = this.container
+				.allMatches(new QueryDefault<Combustible>(Combustible.class,
+						"ListarInactivos"));
+		return lista;
 	}
 
 	@javax.inject.Inject

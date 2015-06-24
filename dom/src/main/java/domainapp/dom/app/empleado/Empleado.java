@@ -38,7 +38,8 @@ import domainapp.dom.app.persona.Sexo;
     @javax.jdo.annotations.Query(
             name = "ListarTodos", language = "JDOQL",
             value = "SELECT "
-                    + "FROM domainapp.dom.app.Empleado"),
+                    + "FROM domainapp.dom.app.empleado.Empleado "
+            		+ "WHERE activo == true"),
     @javax.jdo.annotations.Query(
             name = "Buscar_Documento", language = "JDOQL",
             value = "SELECT "
