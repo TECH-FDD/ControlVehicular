@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 
+import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
@@ -164,4 +166,14 @@ public class Aceite {
 	public String toString() {
 		return marca + " "+ nombre;
 	}
+
+	@ActionLayout(named="Desactivar")
+	public Aceite delete(){
+		this.container.warnUser("El Aceite, ha sido desactivado con exito.");
+		this.setActivo(false);
+		return this;
+	}
+
+	@javax.inject.Inject
+    DomainObjectContainer container;
 }
