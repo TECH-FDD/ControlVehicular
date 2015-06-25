@@ -86,7 +86,7 @@ public class Matafuego {
 		this.descripcion = descripcion;
 	}
 	@Persistent
-	@Property(editing = Editing.DISABLED)
+	@Property(editing = Editing.DISABLED )
 	@MemberOrder(sequence="40")
 	@Column(allowsNull="false")
 	public int getCapacidad() {

@@ -21,7 +21,7 @@ public class RepositorioMatafuego {
 	public Matafuego createMatafuego(
 		final @ParameterLayout(named="Nombre") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String nombre,
 		final @ParameterLayout(named="codigo") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo,
-		final @ParameterLayout(named="Descripcion") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) StringBuffer descripcion,
+		final @ParameterLayout(named="Descripcion") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String descripcion,
 		final @ParameterLayout(named="Capacidad") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int capacidad,
 		final @ParameterLayout(named="Fecha de alta") Timestamp fechaAlta,
 		final @ParameterLayout(named="Fecha de recarga") Timestamp fechaRecarga,
