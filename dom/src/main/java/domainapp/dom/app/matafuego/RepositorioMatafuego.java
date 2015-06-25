@@ -1,6 +1,6 @@
 package domainapp.dom.app.matafuego;
 import java.sql.Timestamp;
-
+import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.ActionLayout;
@@ -9,6 +9,7 @@ import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.query.QueryDefault;
 
 
 @DomainService(repositoryFor=Matafuego.class)
@@ -43,7 +44,16 @@ public class RepositorioMatafuego {
 		container.persistIfNotAlready(matafuego);
 		return matafuego; 
 	}  
-	
+	@MemberOrder(sequence="2")
+	@ActionLayout(named="Listar todos")
+	public List<Matafuego> listAll(){
+		List<Matafuego> lista = this.container.allMatches(new QueryDefault<Matafuego>(Matafuego.class,
+				"ListarTodos"));
+		if(lista.isEmpty()){
+			this.container.warnUser("No hay areas cargadas en el sistema");
+		}
+		return lista;
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
