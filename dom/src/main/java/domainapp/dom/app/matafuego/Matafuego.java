@@ -143,6 +143,7 @@ public class Matafuego {
 		this.mantenimiento = mantenimiento;
 	}
 	@Persistent
+	@Property(editing = Editing.DISABLED )
 	@MemberOrder(sequence="100")
 	@Column(allowsNull="false")
 	public String getReparacion() {
@@ -153,12 +154,7 @@ public class Matafuego {
 	}
 	@Override
 	public String toString() {
-		return "Matafuego [nombre=" + nombre + ", codigo=" + codigo
-				+ ", descripcion=" + descripcion + ", capacidad=" + capacidad
-				+ ", fechaAlta=" + fechaAlta + ", fechaRecarga=" + fechaRecarga
-				+ ", fechaCadRecarga=" + fechaCadRecarga + ", vehiculo="
-				+ vehiculo + ", mantenimiento=" + mantenimiento
-				+ ", reparacion=" + reparacion + "]";
+		return "Matafuego " + nombre;
 	}
 	
 	
