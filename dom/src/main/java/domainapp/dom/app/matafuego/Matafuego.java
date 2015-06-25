@@ -10,7 +10,9 @@ import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Matafuego_ID")
@@ -23,7 +25,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 public class Matafuego {
 	private String nombre;
 	private String codigo;
-	private StringBuffer descripcion;
+	private String descripcion;
 	private int capacidad;
 	private Timestamp fechaAlta;
 	private Timestamp fechaRecarga;
@@ -33,7 +35,7 @@ public class Matafuego {
 	private String reparacion;
 	
 	
-	public Matafuego(String nombre, String codigo, StringBuffer descripcion,
+	public Matafuego(String nombre, String codigo, String descripcion,
 			int capacidad, Timestamp fechaAlta, Timestamp fechaRecarga,
 			Timestamp fechaCadRecarga, String vehiculo, String mantenimiento,
 			String reparacion) {
@@ -54,6 +56,7 @@ public class Matafuego {
 		// TODO Auto-generated constructor stub
 	}
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence="10")
 	@Column(allowsNull="false")
 	public String getNombre() {
@@ -63,6 +66,7 @@ public class Matafuego {
 		this.nombre = nombre;
 	}
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence="20")
 	@Column(allowsNull="false")
 	public String getCodigo() {
@@ -72,15 +76,17 @@ public class Matafuego {
 		this.codigo = codigo;
 	}
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence="30")
 	@Column(allowsNull="false")
-	public StringBuffer getDescripcion() {
+	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setDescripcion(StringBuffer descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence="40")
 	@Column(allowsNull="false")
 	public int getCapacidad() {
@@ -90,6 +96,7 @@ public class Matafuego {
 		this.capacidad = capacidad;
 	}
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence="50")
 	@Column(allowsNull="false")
 	public Timestamp getFechaAlta() {
@@ -126,6 +133,7 @@ public class Matafuego {
 		this.vehiculo = vehiculo;
 	}
 	@Persistent
+	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence="90")
 	@Column(allowsNull="false")
 	public String getMantenimiento() {
