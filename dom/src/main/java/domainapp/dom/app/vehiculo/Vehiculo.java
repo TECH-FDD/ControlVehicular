@@ -15,6 +15,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.gps.Gps;
+import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.aceite.Aceite;
 import domainapp.dom.app.combustible.Combustible;
 
@@ -48,6 +49,7 @@ public class Vehiculo {
 	private Integer polizaSeguro;
 	private Gps gps;
 	private Combustible combustible;
+	private Matafuego matafuego;
 	private Integer capacTanqueCombustible;
 	private Aceite aceite;
 	private String cnsCombustibleRuta;
@@ -216,6 +218,16 @@ public class Vehiculo {
 
 	public void setKilometros(String kilometros) {
 		this.kilometros = kilometros;
+	}
+	@Persistent
+	@MemberOrder(sequence = "15")
+	@Column(allowsNull = "true")
+	public Matafuego getMatafuego() {
+		return matafuego;
+	}
+
+	public void setMatafuego(Matafuego matafuego) {
+		this.matafuego = matafuego;
 	}
 
 	@Override

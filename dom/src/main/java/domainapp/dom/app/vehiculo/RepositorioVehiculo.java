@@ -16,6 +16,7 @@ import org.apache.isis.applib.query.QueryDefault;
 import domainapp.dom.app.aceite.Aceite;
 import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.gps.Gps;
+import domainapp.dom.app.matafuego.Matafuego;
 
 @DomainService(repositoryFor = Vehiculo.class)
 @DomainServiceLayout(menuOrder = "80", named = "Vehiculo")
@@ -37,8 +38,9 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "Aceite") Aceite aceite,
 			final @ParameterLayout(named = "cns Combustible Ruta") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String cnsCombustibleRuta,
 			final @ParameterLayout(named = "cns Combustible Ciudad") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String cnsCombustibleCiudad,
+			final @ParameterLayout(named = "Matafuego") Matafuego matafuego,
 			final @ParameterLayout(named = "Kilometros") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String kilometros) {
-
+		
 		final Vehiculo vehiculo = container
 				.newTransientInstance(Vehiculo.class);
 		vehiculo.setMarca(marca);
@@ -54,6 +56,7 @@ public class RepositorioVehiculo {
 		vehiculo.setAceite(aceite);
 		vehiculo.setCnsCombustibleRuta(cnsCombustibleRuta);
 		vehiculo.setCnsCombuestibleCiudad(cnsCombustibleCiudad);
+		vehiculo.setMatafuego(matafuego);
 		vehiculo.setKilometros(kilometros);
 
 		container.persistIfNotAlready(vehiculo);
