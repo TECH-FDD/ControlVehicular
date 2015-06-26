@@ -33,7 +33,7 @@ import domainapp.dom.app.combustible.TipoCombustible;
 		@javax.jdo.annotations.Query(name = "buscarPorCodigo", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.combustible.Combustible "
 				+ "WHERE codigo.indexOf(:codigo) >= 0 && activo == true") })
-@DomainObject(objectType = "COMBUSTIBLE")
+@DomainObject(objectType = "COMBUSTIBLE",bounded=true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Combustible {
 
