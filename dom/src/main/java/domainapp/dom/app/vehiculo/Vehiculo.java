@@ -10,7 +10,9 @@ import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.aceite.Aceite;
@@ -54,6 +56,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "1")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "false")
 	public String getMarca() {
 		return marca;
@@ -65,6 +68,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "2")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "false")
 	public String getNombre() {
 		return nombre;
@@ -76,6 +80,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "3")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "false")
 	public Integer getModelo() {
 		return modelo;
@@ -87,6 +92,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "4")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "false")
 	public Timestamp getFechaCompra() {
 		return fechaCompra;
@@ -98,6 +104,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "5")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "false")
 	public String getPatente() {
 		return patente;
@@ -109,6 +116,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "6")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "false")
 	public String getNumeroChasis() {
 		return numeroChasis;
@@ -153,6 +161,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "10")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "true")
 	public Integer getCapacTanqueCombustible() {
 		return capacTanqueCombustible;
@@ -175,6 +184,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "12")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "true")
 	public String getCnsCombustibleRuta() {
 		return cnsCombustibleRuta;
@@ -186,6 +196,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "13")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "true")
 	public String getCnsCombuestibleCiudad() {
 		return cnsCombuestibleCiudad;
@@ -197,6 +208,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "14")
+	@Property(editing=Editing.DISABLED)
 	@Column(allowsNull = "true")
 	public String getKilometros() {
 		return kilometros;
