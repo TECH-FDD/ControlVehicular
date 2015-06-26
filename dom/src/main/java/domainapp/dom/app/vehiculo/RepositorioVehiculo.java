@@ -40,7 +40,7 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "cns Combustible Ciudad") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String cnsCombustibleCiudad,
 			final @ParameterLayout(named = "Matafuego") Matafuego matafuego,
 			final @ParameterLayout(named = "Kilometros") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String kilometros) {
-		
+
 		final Vehiculo vehiculo = container
 				.newTransientInstance(Vehiculo.class);
 		vehiculo.setMarca(marca);
@@ -62,6 +62,13 @@ public class RepositorioVehiculo {
 		container.persistIfNotAlready(vehiculo);
 		return vehiculo;
 	}
+
+	@MemberOrder(sequence = "2")
+	@ActionLayout(named = "Listar Todos")
+	public List<Vehiculo> listAll() {
+		return container.allInstances(Vehiculo.class);
+	}
+
 	@MemberOrder(sequence = "3")
 	@ActionLayout(named = "Buscar por Marca")
 	public List<Vehiculo> findByMarca(
@@ -85,6 +92,7 @@ public class RepositorioVehiculo {
 		return container.allMatches(new QueryDefault<>(Vehiculo.class,
 				"BuscarModelo", "modelo", modelo));
 	}
+
 	@MemberOrder(sequence = "6")
 	@ActionLayout(named = "Buscar por Patente")
 	public List<Vehiculo> findByPatente(
@@ -92,6 +100,7 @@ public class RepositorioVehiculo {
 		return container.allMatches(new QueryDefault<>(Vehiculo.class,
 				"BuscarPatente", "patente", patente));
 	}
+
 	@MemberOrder(sequence = "7")
 	@ActionLayout(named = "Buscar por N° Chasis")
 	public List<Vehiculo> findByNumeroChasis(
@@ -99,6 +108,7 @@ public class RepositorioVehiculo {
 		return container.allMatches(new QueryDefault<>(Vehiculo.class,
 				"BuscarNumeroChasis", "numeroChasis", numeroChasis));
 	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
