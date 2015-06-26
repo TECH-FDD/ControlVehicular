@@ -19,6 +19,21 @@ import domainapp.dom.app.combustible.Combustible;
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Vehiculo_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
+@javax.jdo.annotations.Queries({
+		@javax.jdo.annotations.Query(name = "BuscarMarca", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.vehiculo "
+				+ "WHERE marca.indexOf(:marca) >= 0"),
+		@javax.jdo.annotations.Query(name = "BuscarNombre", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.vehiculo "
+				+ "WHERE nombre.indexOf(:nombre) >= 0 "),
+		@javax.jdo.annotations.Query(name = "BuscarModelo", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.vehiculo " + "WHERE modelo==:modelo"),
+		@javax.jdo.annotations.Query(name = "BuscarPatente", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.vehiculo "
+				+ "WHERE patente.indexOf(:patente) >= 0 "),
+		@javax.jdo.annotations.Query(name = "BuscarNumeroChasis", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.vehiculo "
+				+ "WHERE numeroChasis.indexOf(:numeroChasis) >= 0 ") })
 @DomainObject(objectType = "VEHICULO", bounded = true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Vehiculo {

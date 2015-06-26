@@ -1,6 +1,7 @@
 package domainapp.dom.app.vehiculo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.ActionLayout;
@@ -10,6 +11,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.aceite.Aceite;
 import domainapp.dom.app.combustible.Combustible;
@@ -28,7 +30,7 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "Fecha Compra") Timestamp fechaCompra,
 			final @ParameterLayout(named = "Patente") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String patente,
 			final @ParameterLayout(named = "Numero de Chasis") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String numeroChasis,
-			final @ParameterLayout(named = "Poliza del Seguro") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) Integer polizaSeguro,
+			final @ParameterLayout(named = "Poliza/Seguro") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) Integer polizaSeguro,
 			final @ParameterLayout(named = "Gps") Gps gps,
 			final @ParameterLayout(named = "Combustible") Combustible combustible,
 			final @ParameterLayout(named = "Capacidad Tanque de comb.") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS, optionality = Optionality.OPTIONAL) Integer capTanqueCombustible,
@@ -57,7 +59,43 @@ public class RepositorioVehiculo {
 		container.persistIfNotAlready(vehiculo);
 		return vehiculo;
 	}
+	@MemberOrder(sequence = "3")
+	@ActionLayout(named = "Buscar por Marca")
+	public List<Vehiculo> findByMarca(
+			@ParameterLayout(named = "Marca") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String marca) {
+		return container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarMarca", "marca", marca));
+	}
 
+	@MemberOrder(sequence = "4")
+	@ActionLayout(named = "Buscar por Nombre")
+	public List<Vehiculo> findByNombre(
+			@ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre) {
+		return container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarNombre", "nombre", nombre));
+	}
+
+	@MemberOrder(sequence = "5")
+	@ActionLayout(named = "Buscar por Modelo")
+	public List<Vehiculo> findByModelo(
+			@ParameterLayout(named = "Modelo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) final Integer modelo) {
+		return container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarModelo", "modelo", modelo));
+	}
+	@MemberOrder(sequence = "6")
+	@ActionLayout(named = "Buscar por Patente")
+	public List<Vehiculo> findByPatente(
+			@ParameterLayout(named = "Patente") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String patente) {
+		return container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarPatente", "patente", patente));
+	}
+	@MemberOrder(sequence = "7")
+	@ActionLayout(named = "Buscar por N° Chasis")
+	public List<Vehiculo> findByNumeroChasis(
+			@ParameterLayout(named = "Numero Chasis") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String numeroChasis) {
+		return container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarNumeroChasis", "numeroChasis", numeroChasis));
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
