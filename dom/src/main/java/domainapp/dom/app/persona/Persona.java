@@ -10,6 +10,7 @@ import javax.jdo.annotations.Persistent;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Property;
+import org.joda.time.LocalDate;
 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.SUBCLASS_TABLE)
@@ -18,7 +19,7 @@ public abstract class Persona {
 	private String apellido;
 	private Documento tipoDocumento;
 	private int nroDocumento;
-	private Timestamp fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	private String domicilio;
 	private Provincia provincia;
 	private Ciudad ciudad;
@@ -29,7 +30,7 @@ public abstract class Persona {
 	private String email;
 
 	public Persona(String nombre, String apellido, Documento tipoDocumento,
-			int nroDocumento, Timestamp fechaNacimiento, String domicilio,
+			int nroDocumento, LocalDate fechaNacimiento, String domicilio,
 			Provincia provincia, Ciudad ciudad, int codigoPostal,
 			Timestamp fechaAlta, Sexo sexo, String telefono, String email) {
 		super();
@@ -88,11 +89,11 @@ public abstract class Persona {
 	@MemberOrder(sequence = "5")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
-	public Timestamp getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Timestamp fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	@MemberOrder(sequence = "10")

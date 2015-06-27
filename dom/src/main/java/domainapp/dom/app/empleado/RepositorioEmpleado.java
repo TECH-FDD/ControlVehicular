@@ -12,6 +12,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
+import org.joda.time.LocalDate;
 
 import domainapp.dom.app.area.Area;
 import domainapp.dom.app.persona.Ciudad;
@@ -29,7 +30,7 @@ public class RepositorioEmpleado {
         final @ParameterLayout(named="Apellido") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) String apellido,
         final @ParameterLayout(named="Tipo de Documento") Documento tipoDocumento,
         final @ParameterLayout(named="N° de Documento") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int nro_documento,
-        final @ParameterLayout(named="Fecha de Nacimiento") Timestamp fechaNacimiento,
+        final @ParameterLayout(named="Fecha de Nacimiento") LocalDate fechaNacimiento,
         final @ParameterLayout(named="Sexo") Sexo sexo,
         final @ParameterLayout(named="Provincia") Provincia provincia,
         final @ParameterLayout(named="Ciudad") Ciudad ciudad,
@@ -63,13 +64,13 @@ public class RepositorioEmpleado {
 	
 	// Validar atributos N° Documento y Fecha Nacimiento
 	public String validateCreateEmpleado(String nombre, String apellido,Documento tipoDocumento, int nroDocumento,
-										Timestamp fechaNacimiento, Sexo sexo, Provincia provincia,
+										LocalDate fechaNacimiento, Sexo sexo, Provincia provincia,
 										Ciudad ciudad, int codigoPostal, String domicilio,
 										String telefono, String email, String legajo, Area area) {
 		if (!container.allMatches(new QueryDefault<Empleado>(Empleado.class, "Buscar_Documento","nroDocumento", nroDocumento)).isEmpty()) {
 			return "El número de Documento ya existe. Por favor vericar los Datos Ingresados.";
 		}
-		if (fechaNacimiento.after(new Timestamp(System.currentTimeMillis()))) {
+		if (fechaNacimiento.isAfter(LocalDate.now())) {
 			return "La fecha de nacimiento debe ser menor al día actual.";
 		}
 		if (!container.allMatches(new QueryDefault<Empleado>(Empleado.class, "Buscar_Legajo","legajo", legajo)).isEmpty()) {
@@ -117,7 +118,7 @@ public class RepositorioEmpleado {
 	 * @return List<Ciudad>
 	 */
 	public List<Ciudad> choices7CreateEmpleado(String nombre, String apellido, Documento tipoDocumento,
-			int nroDocumento, Timestamp fechaNacimiento, Sexo sexo, Provincia provincia,
+			int nroDocumento, LocalDate fechaNacimiento, Sexo sexo, Provincia provincia,
 			 Ciudad ciudad, int codigoPostal,String domicilio, String telefono, String email,String legajo, Area area) {
         return Ciudad.listarPor(provincia);
     }

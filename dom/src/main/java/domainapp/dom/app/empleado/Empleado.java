@@ -19,6 +19,7 @@ import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.Where;
+import org.joda.time.LocalDate;
 
 import domainapp.dom.app.area.Area;
 import domainapp.dom.app.persona.Ciudad;
@@ -75,7 +76,7 @@ public class Empleado extends Persona{
 	private boolean activo;
 
 	public Empleado(String nombre, String apellido, Documento tipoDocumento,
-			int nroDocumento, Timestamp fechaNacimiento, String domicilio,
+			int nroDocumento, LocalDate fechaNacimiento, String domicilio,
 			Provincia provincia, Ciudad ciudad, int codigoPostal,
 			Timestamp fechaAlta, Sexo sexo, String telefono, String email,
 			String legajo, Area area, boolean activo) {
