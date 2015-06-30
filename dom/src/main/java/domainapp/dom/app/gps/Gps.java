@@ -34,7 +34,7 @@ import org.apache.isis.applib.annotation.Property;
 		@javax.jdo.annotations.Query(name = "buscarPorCodigoIdentificacion", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.gps.Gps "
 				+ "WHERE codIdentificacion.indexOf(:codIdentificacion)>= 0") })
-@DomainObject(objectType = "GPS")
+@DomainObject(objectType = "GPS",bounded=true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Gps {
 

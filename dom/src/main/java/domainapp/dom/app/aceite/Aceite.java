@@ -50,7 +50,7 @@ import org.apache.isis.applib.annotation.Where;
 				+ "WHERE tipoAceite.indexOf(:tipoAceite) >= 0 && activo == true")
 })
 
-@DomainObject(objectType = "ACEITE")
+@DomainObject(objectType = "ACEITE",bounded=true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Aceite {
 	private String nombre;
