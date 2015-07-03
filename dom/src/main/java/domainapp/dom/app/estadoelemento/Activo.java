@@ -16,7 +16,6 @@ public class Activo extends Estado {
 	DomainObjectContainer container;
 
 	@Override
-	public void desactivar(Object elemento) {
-		
+	public void desactivar(Object elemento, Timestamp fecha, Motivo motivo) {
 	}
 }

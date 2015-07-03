@@ -11,7 +11,7 @@ public class Baja extends Estado {
 	}
 
 	@Override
-	public void desactivar(Object elemento) {
+	public void desactivar(Object elemento,Timestamp fecha, Motivo motivo) {
 		this.container.informUser("El elemento a cambiado de estado");
 	}
 

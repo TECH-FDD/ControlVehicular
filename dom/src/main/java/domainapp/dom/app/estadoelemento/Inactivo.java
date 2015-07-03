@@ -14,8 +14,8 @@ public class Inactivo extends Estado {
 	DomainObjectContainer container;
 
 	@Override
-	public void desactivar(Object elemento) {
+	public void desactivar(Object elemento, Timestamp fecha, Motivo motivo) {
 		// TODO Auto-generated method stub
-
+		
 	}
 }
