@@ -6,7 +6,7 @@ import org.apache.isis.applib.DomainObjectContainer;
 
 public class Reparacion extends Estado {
 
-	public Reparacion(Timestamp fechaCambio, String motivo) {
+	public Reparacion(Timestamp fechaCambio, Motivo motivo) {
 		super(fechaCambio, motivo);
 	}
 

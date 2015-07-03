@@ -6,7 +6,7 @@ import org.apache.isis.applib.DomainObjectContainer;
 
 public class Baja extends Estado {
 
-	public Baja(Timestamp fechaCambio, String motivo) {
+	public Baja(Timestamp fechaCambio, Motivo motivo) {
 		super(fechaCambio, motivo);
 	}
 

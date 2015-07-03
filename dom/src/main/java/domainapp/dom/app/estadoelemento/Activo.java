@@ -8,7 +8,7 @@ import domainapp.dom.app.matafuego.Matafuego;
 
 public class Activo extends Estado {
 
-	public Activo(Timestamp fechaCambio, String motivo) {
+	public Activo(Timestamp fechaCambio, Motivo motivo) {
 		super(fechaCambio, motivo);
 	}
 
@@ -17,5 +17,6 @@ public class Activo extends Estado {
 
 	@Override
 	public void desactivar(Object elemento) {
+		
 	}
 }

@@ -8,12 +8,12 @@ import domainapp.dom.app.vehiculo.Vehiculo;
 
 public abstract class Estado implements IEstado {
 	private Timestamp fechaCambio;
-	private String motivo;
+	private Motivo motivo;
 	protected Gps gps;
 	protected Matafuego matafuego;
 	protected Vehiculo vehiculo;
 	
-	public Estado(Timestamp fechaCambio, String motivo) {
+	public Estado(Timestamp fechaCambio, Motivo motivo) {
 		super();
 		this.fechaCambio = fechaCambio;
 		this.motivo = motivo;
@@ -27,11 +27,11 @@ public abstract class Estado implements IEstado {
 		this.fechaCambio = fechaCambio;
 	}
 
-	public String getMotivo() {
+	public Motivo getMotivo() {
 		return motivo;
 	}
 
-	public void setMotivo(String motivo) {
+	public void setMotivo(Motivo motivo) {
 		this.motivo = motivo;
 	}
 

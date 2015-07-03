@@ -6,7 +6,7 @@ import org.apache.isis.applib.DomainObjectContainer;
 
 public class Inactivo extends Estado {
 
-	public Inactivo(Timestamp fechaCambio, String motivo) {
+	public Inactivo(Timestamp fechaCambio, Motivo motivo) {
 		super(fechaCambio, motivo);
 	}
 
