@@ -6,14 +6,12 @@ import org.apache.isis.applib.DomainObjectContainer;
 
 public class Baja extends Estado {
 
-	public Baja(Timestamp fechaCambio, String motivo,
-			DomainObjectContainer container) {
+	public Baja(Timestamp fechaCambio, String motivo) {
 		super(fechaCambio, motivo);
-		this.container = container;
 	}
 
 	@Override
-	public void desactivar() {
+	public void desactivar(Object elemento) {
 		this.container.informUser("El elemento a cambiado de estado");
 	}
 

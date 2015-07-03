@@ -10,7 +10,7 @@ public class NecesitaReparacion extends Estado {
 	}
 
 	@Override
-	public void desactivar() {
+	public void desactivar(Object elemento) {
 		// TODO Auto-generated method stub
 
 	}

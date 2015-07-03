@@ -6,17 +6,15 @@ import org.apache.isis.applib.DomainObjectContainer;
 
 public class Inactivo extends Estado {
 
-	public Inactivo(Timestamp fechaCambio, String motivo,
-			DomainObjectContainer container) {
+	public Inactivo(Timestamp fechaCambio, String motivo) {
 		super(fechaCambio, motivo);
-		this.container = container;
 	}
 
 	@javax.inject.Inject
 	DomainObjectContainer container;
 
 	@Override
-	public void desactivar() {
+	public void desactivar(Object elemento) {
 		// TODO Auto-generated method stub
 
 	}
