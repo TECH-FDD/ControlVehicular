@@ -12,8 +12,6 @@ import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
 
-import domainapp.dom.app.vehiculo.Vehiculo;
-
 @DomainService(repositoryFor = Matafuego.class)
 @DomainServiceLayout(menuOrder = "80", named = "Matafuego")
 public class RepositorioMatafuego {
@@ -25,20 +23,13 @@ public class RepositorioMatafuego {
 			final @ParameterLayout(named = "codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo,
 			final @ParameterLayout(named = "Descripcion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String descripcion,
 			final @ParameterLayout(named = "Capacidad") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int capacidad,
-			final @ParameterLayout(named = "Fecha de alta") Timestamp fechaAlta,
+			// final @ParameterLayout(named = "Fecha de alta") Timestamp fechaAlta,
 			final @ParameterLayout(named = "Fecha de recarga") Timestamp fechaRecarga,
-			final @ParameterLayout(named = "Fecha de caducidad") Timestamp fechaCadRecarga,
-			final @ParameterLayout(named = "Vehiculo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) Vehiculo vehiculo) {
+			final @ParameterLayout(named = "Fecha de caducidad") Timestamp fechaCadRecarga) {
 
-		Matafuego matafuego = container.newTransientInstance(Matafuego.class);
-		matafuego.setNombre(nombre);
-		matafuego.setCodigo(codigo);
-		matafuego.setDescripcion(descripcion);
-		matafuego.setCapacidad(capacidad);
-		matafuego.setFechaAlta(fechaAlta);
-		matafuego.setFechaRecarga(fechaRecarga);
-		matafuego.setFechaCadRecarga(fechaCadRecarga);
-		matafuego.setVehiculo(vehiculo);
+		Matafuego matafuego = new Matafuego(nombre, codigo, descripcion,
+				capacidad, new Timestamp(System.currentTimeMillis()),
+				fechaRecarga, fechaCadRecarga);
 		container.persistIfNotAlready(matafuego);
 		return matafuego;
 	}

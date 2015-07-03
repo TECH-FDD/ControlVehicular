@@ -16,7 +16,6 @@ import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Estado;
-import domainapp.dom.app.vehiculo.Vehiculo;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Matafuego_ID")
@@ -33,12 +32,11 @@ public class Matafuego {
 	private Timestamp fechaAlta;
 	private Timestamp fechaRecarga;
 	private Timestamp fechaCadRecarga;
-	private Vehiculo vehiculo;
 	private Estado estado;
 
 	public Matafuego(String nombre, String codigo, String descripcion,
 			int capacidad, Timestamp fechaAlta, Timestamp fechaRecarga,
-			Timestamp fechaCadRecarga, Vehiculo vehiculo) {
+			Timestamp fechaCadRecarga) {
 		super();
 		this.nombre = nombre;
 		this.codigo = codigo;
@@ -47,7 +45,6 @@ public class Matafuego {
 		this.fechaAlta = fechaAlta;
 		this.fechaRecarga = fechaRecarga;
 		this.fechaCadRecarga = fechaCadRecarga;
-		this.vehiculo = vehiculo;
 		this.estado=new Activo(new Timestamp(System.currentTimeMillis()),null);
 	}
 
@@ -136,17 +133,6 @@ public class Matafuego {
 
 	public void setFechaCadRecarga(Timestamp fechaCadRecarga) {
 		this.fechaCadRecarga = fechaCadRecarga;
-	}
-
-	@Persistent
-	@MemberOrder(sequence = "80")
-	@Column(allowsNull = "false")
-	public Vehiculo getVehiculo() {
-		return vehiculo;
-	}
-
-	public void setVehiculo(Vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
 	}
 
 	@Persistent
