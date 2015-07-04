@@ -14,6 +14,8 @@ import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Property;
 
+import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Estado;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.aceite.Aceite;
@@ -57,6 +59,7 @@ public class Vehiculo {
 	private String cnsCombustibleRuta;
 	private String cnsCombuestibleCiudad;
 	private String kilometros;
+	private Estado estado;
 
 	@Persistent
 	@MemberOrder(sequence = "1")
@@ -233,6 +236,17 @@ public class Vehiculo {
 		this.matafuego = matafuego;
 	}
 
+	@Persistent
+	@MemberOrder(sequence = "16")
+	@Column(allowsNull = "false")
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
 	@Override
 	public String toString() {
 		return marca + ", " + modelo;
@@ -259,6 +273,7 @@ public class Vehiculo {
 		this.cnsCombustibleRuta = cnsCombustibleRuta;
 		this.cnsCombuestibleCiudad = cnsCombuestibleCiudad;
 		this.kilometros = kilometros;
+		this.estado=new Activo(new Timestamp(System.currentTimeMillis()),null);
 	}
 
 	public Vehiculo() {
