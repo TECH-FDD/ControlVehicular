@@ -21,11 +21,14 @@ import domainapp.dom.app.estadoelemento.Estado;
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Matafuego_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
 @javax.jdo.annotations.Queries({ @javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
-		+ "FROM domainapp.dom.app.matafuego.Matafuego ") })
+		+ "FROM domainapp.dom.app.matafuego.Matafuego "),
+		@javax.jdo.annotations.Query(name = "buscarPorMarca", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.matafuego.Matafuego "
+				+ "WHERE marca.indexOf(:marca) >= 0 ") })
 @DomainObject(objectType = "MATAFUEGO", bounded = true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Matafuego {
-	private String nombre;
+	private String marca;
 	private String codigo;
 	private String descripcion;
 	private int capacidad;
@@ -34,11 +37,11 @@ public class Matafuego {
 	private Timestamp fechaCadRecarga;
 	private Estado estado;
 
-	public Matafuego(String nombre, String codigo, String descripcion,
+	public Matafuego(String marca, String codigo, String descripcion,
 			int capacidad, Timestamp fechaAlta, Timestamp fechaRecarga,
 			Timestamp fechaCadRecarga) {
 		super();
-		this.nombre = nombre;
+		this.marca = marca;
 		this.codigo = codigo;
 		this.descripcion = descripcion;
 		this.capacidad = capacidad;
@@ -57,12 +60,12 @@ public class Matafuego {
 	@Property(editing = Editing.DISABLED)
 	@MemberOrder(sequence = "10")
 	@Column(allowsNull = "false")
-	public String getNombre() {
-		return nombre;
+	public String getMarca() {
+		return marca;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setMarca(String marca) {
+		this.marca = marca;
 	}
 
 	@Persistent
@@ -148,7 +151,7 @@ public class Matafuego {
 
 	@Override
 	public String toString() {
-		return "Matafuego " + nombre;
+		return "Matafuego " + marca;
 	}
 
 }

@@ -45,7 +45,20 @@ public class RepositorioMatafuego {
 		}
 		return lista;
 	}
+	
+	@MemberOrder(sequence = "3")
+	@ActionLayout(named = "Buscar por marca")
+	public List<Matafuego> findByMarca(
+			@ParameterLayout(named = "Marca") final String marca) {
 
+		final List<Matafuego> listaMatafuego = this.container
+				.allMatches(new QueryDefault<Matafuego>(Matafuego.class,
+						"buscarPorMarca", "marca", marca));
+		if (listaMatafuego.isEmpty()) {
+			this.container.warnUser("No existe el matafuego buscado");
+		}
+		return listaMatafuego;
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
