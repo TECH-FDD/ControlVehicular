@@ -95,8 +95,8 @@ public class RepositorioGps {
 	private List<Gps> GpsActivos(final List<Gps> lista){
 		List<Gps> activos= new ArrayList<Gps>();
 		for (Gps gps : lista){
-			if (gps.getBajaGps()==null)
-				activos.add(gps);
+//			if (gps.getBajaGps()==null)
+//				activos.add(gps);
 		}
 		return activos;
 	}
