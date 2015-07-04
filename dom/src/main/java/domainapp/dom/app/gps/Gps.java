@@ -17,6 +17,9 @@ import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;
 
+import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Estado;
+
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Gps_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
@@ -45,7 +48,7 @@ public class Gps {
 	private Timestamp fechaAlta;
 	private Timestamp fechaAsigVehiculo;
 	private String obsEstadoDispositivo;
-	private BajaGps bajaGps;
+	private Estado estado;
 
 	@Persistent
 	@Property(editing = Editing.DISABLED)
@@ -130,13 +133,13 @@ public class Gps {
 
 	@Persistent
 	@MemberOrder(sequence = "8")
-	@Column(allowsNull = "true")
-	public BajaGps getBajaGps() {
-		return bajaGps;
+	@Column(allowsNull = "false")
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setBajaGps(BajaGps bajaGps) {
-		this.bajaGps = bajaGps;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -156,7 +159,7 @@ public class Gps {
 		this.fechaAlta = fechaAlta;
 		this.fechaAsigVehiculo = fechaAsigVehiculo;
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
-		this.bajaGps = baja;
+		this.estado= new Activo(new Timestamp(System.currentTimeMillis()),null);
 	}
 
 	public Gps() {
@@ -168,18 +171,6 @@ public class Gps {
 	 *
 	 * @return mensaje de confirmacion.
 	 */
-
-	public String eliminarGps(
-			final @ParameterLayout(named = "Razon baja") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String razonBaja) {
-
-		BajaGps baja = new BajaGps();
-		baja.setFechaBaja(new Timestamp(System.currentTimeMillis()));
-		baja.setRazonBaja(razonBaja);
-		baja.setGps(this);
-		this.setBajaGps(baja);
-		container.persistIfNotAlready(baja);
-		return "El Gps ha sido eliminado de manera exitosa!";
-	}
 
 	@javax.inject.Inject
 	DomainObjectContainer container;
