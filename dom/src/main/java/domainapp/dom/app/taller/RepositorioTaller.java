@@ -1,7 +1,6 @@
 package domainapp.dom.app.taller;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.ActionLayout;
@@ -11,14 +10,6 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
-import org.joda.time.LocalDate;
-
-import domainapp.dom.app.area.Area;
-import domainapp.dom.app.empleado.Empleado;
-import domainapp.dom.app.persona.Ciudad;
-import domainapp.dom.app.persona.Documento;
-import domainapp.dom.app.persona.Provincia;
-import domainapp.dom.app.persona.Sexo;
 
 @DomainService(repositoryFor = Taller.class)
 @DomainServiceLayout(menuOrder = "100", named = "Taller")
@@ -47,7 +38,18 @@ public class RepositorioTaller {
 
 	}
 
-	
+	@MemberOrder(sequence = "2")
+	@ActionLayout(named = "Listar todos")
+	public List<Taller> listAll() {
+		List<Taller> lista = this.container
+				.allMatches(new QueryDefault<Taller>(Taller.class,
+						"ListarTodos"));
+		if (lista.isEmpty()) {
+			this.container.warnUser("No hay talleres cargados en el sistema");
+		}
+		return lista;
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
