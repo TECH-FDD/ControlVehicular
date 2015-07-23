@@ -7,7 +7,9 @@ import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Taller_ID")
@@ -45,6 +47,7 @@ public class Taller {
 
 	@Persistent
 	@MemberOrder(sequence = "1")
+	@Property(editing = Editing.DISABLED)
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public String getNombreComercial() {
 		return nombreComercial;
