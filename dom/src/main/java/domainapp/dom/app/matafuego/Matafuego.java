@@ -7,15 +7,20 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
+import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Motivo;
+import domainapp.dom.app.estadoelemento.ServicioEstado;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Matafuego_ID")
@@ -33,6 +38,7 @@ public class Matafuego {
 	private Timestamp fechaRecarga;
 	private Timestamp fechaCadRecarga;
 	private Estado estado;
+	private ServicioEstado servicioEstado;
 
 	public Matafuego(String nombre, String codigo, String descripcion,
 			int capacidad, Timestamp fechaAlta, Timestamp fechaRecarga,
@@ -146,9 +152,50 @@ public class Matafuego {
 		this.estado = estado;
 	}
 
+	@Programmatic
+	public ServicioEstado getServicioEstado() {
+		return servicioEstado;
+	}
+
+	public void setServicioEstado(ServicioEstado servicioEstado) {
+		this.servicioEstado = servicioEstado;
+	}
+
 	@Override
 	public String toString() {
 		return "Matafuego " + nombre;
 	}
 
+	/**
+	 * Desactivar un Matafuego, para que el mismo no pueda usarse en un vehiculo.
+	 *
+	 * @return Matafuego con estado Actualizado.
+	 */
+	public Matafuego desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
+		//Obtengo el nuevo Estado.
+		Estado e= this.getServicioEstado().desactivar(this.getEstado(), new Timestamp(System.currentTimeMillis()), motivo);
+
+		//Si el nuevo estado es nulo, quiere decir que no se puede cambiar de estado.
+		if (e==null){
+			container.informUser("Por algúna razón, el Matafuego seleccionado, ya se encuentra Inactivo. "
+					+ "Por favor, revisar el listado de Elementos Inactivos del Sistema.");
+			return this;
+		}
+
+		//Guardo el anterior estado temporalmente, para eliminarlo de Base de Datos.
+		Estado old= this.getEstado();
+		this.setEstado(e);
+
+		//Actualizo el Matafuego con el nuevo estado.
+		container.persistIfNotAlready(this);
+
+		//Elimino el estado anterior.
+		container.removeIfNotAlready(old);
+
+		container.informUser("El Matafuego, ha sido desactivado con exito.");
+		return this;
+	}
+
+	@javax.inject.Inject
+	DomainObjectContainer container;
 }
