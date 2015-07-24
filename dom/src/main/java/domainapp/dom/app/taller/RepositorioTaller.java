@@ -49,6 +49,31 @@ public class RepositorioTaller {
 		}
 		return lista;
 	}
+	@MemberOrder(sequence = "3")
+	@ActionLayout(named = "Buscar por Nombre Comercial")
+	public List<Taller> findByNombreComercial(
+			@ParameterLayout(named = "Nombre Comercial") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String nombreComercial) {
+		return container.allMatches(new QueryDefault<>(Taller.class,
+				"buscarPorNombreComercial", "nombreComercial", nombreComercial));
+	}
+
+	@MemberOrder(sequence = "4")
+	@ActionLayout(named = "Buscar por Direccion")
+	public List<Taller> findByDireccion(
+			@ParameterLayout(named = "Direccion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String direccion) {
+		return container.allMatches(new QueryDefault<>(Taller.class,
+				"buscarPorDireccion", "direccion", direccion));
+	}
+
+	@MemberOrder(sequence = "5")
+	@ActionLayout(named = "Buscar por Codigo")
+	public List<Taller> findByCodigo(
+			@ParameterLayout(named = "Codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String codigo) {
+		return container.allMatches(new QueryDefault<>(Taller.class,
+				"buscarPorCodigo", "codigo",
+				codigo));
+	}
+
 
 	@javax.inject.Inject
 	DomainObjectContainer container;

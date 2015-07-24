@@ -14,6 +14,18 @@ import org.apache.isis.applib.annotation.Property;
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Taller_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
+@javax.jdo.annotations.Queries({
+	@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
+			+ "FROM domainapp.dom.app.taller.Taller" ),
+@javax.jdo.annotations.Query(name = "buscarPorNombreComercial", language = "JDOQL", value = "SELECT "
+		+ "FROM domainapp.dom.app.taller.Taller "
+		+ "WHERE nombreComercial.indexOf(:nombreComercial)>= 0"),
+@javax.jdo.annotations.Query(name = "buscarPorDireccion", language = "JDOQL", value = "SELECT "
+		+ "FROM domainapp.dom.app.taller.Taller "
+		+ "WHERE direccion.indexOf(:direccion)>= 0"),
+@javax.jdo.annotations.Query(name = "buscarPorCodigo", language = "JDOQL", value = "SELECT "
+		+ "FROM domainapp.dom.app.taller.Taller "
+		+ "WHERE codigo.indexOf(:codigo)>= 0") })
 
 @DomainObject(objectType = "TALLER")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
