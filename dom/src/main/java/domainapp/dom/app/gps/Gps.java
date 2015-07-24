@@ -13,12 +13,14 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Motivo;
+import domainapp.dom.app.estadoelemento.ServicioEstado;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Gps_ID")
@@ -26,8 +28,6 @@ import domainapp.dom.app.estadoelemento.Estado;
 @javax.jdo.annotations.Queries({
 		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.gps"),
-		@javax.jdo.annotations.Query(name = "ListarInactivos", language = "JDOQL", value = "SELECT "
-				+ "FROM domainapp.dom.app.gps " + "WHERE bajaGps!=null"),
 		@javax.jdo.annotations.Query(name = "buscarPorMarca", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.gps.Gps "
 				+ "WHERE marca.indexOf(:marca)>= 0"),
@@ -37,7 +37,7 @@ import domainapp.dom.app.estadoelemento.Estado;
 		@javax.jdo.annotations.Query(name = "buscarPorCodigoIdentificacion", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.gps.Gps "
 				+ "WHERE codIdentificacion.indexOf(:codIdentificacion)>= 0") })
-@DomainObject(objectType = "GPS",bounded=true)
+@DomainObject(objectType = "GPS")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Gps {
 
@@ -49,6 +49,7 @@ public class Gps {
 	private Timestamp fechaAsigVehiculo;
 	private String obsEstadoDispositivo;
 	private Estado estado;
+	private ServicioEstado servicioEstado;
 
 	@Persistent
 	@Property(editing = Editing.DISABLED)
@@ -142,6 +143,15 @@ public class Gps {
 		this.estado = estado;
 	}
 
+	@Programmatic
+	public ServicioEstado getServicioEstado() {
+		return servicioEstado;
+	}
+
+	public void setServicioEstado(ServicioEstado servicioEstado) {
+		this.servicioEstado = servicioEstado;
+	}
+
 	@Override
 	public String toString() {
 		return marca + " " + modelo;
@@ -149,8 +159,7 @@ public class Gps {
 
 	public Gps(String codIdentificacion, String marca, String modelo,
 			String descripcion, Timestamp fechaAlta,
-			Timestamp fechaAsigVehiculo, String obsEstadoDispositivo,
-			boolean activo, BajaGps baja) {
+			Timestamp fechaAsigVehiculo, String obsEstadoDispositivo) {
 		super();
 		this.codIdentificacion = codIdentificacion;
 		this.marca = marca;
@@ -171,6 +180,28 @@ public class Gps {
 	 *
 	 * @return mensaje de confirmacion.
 	 */
+	public Gps desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
+		//Obtengo el nuevo Estado.
+		Estado e= this.getServicioEstado().desactivar(this.getEstado(), new Timestamp(System.currentTimeMillis()), motivo);
+
+		//Si el nuevo estado es nulo, quiere decir que no se puede cambiar de estado.
+		if (e==null){
+			container.informUser("Por algúna razón, el Gps seleccionado, ya se encuentra Inactivo. "
+					+ "Por favor, revisar el listado de Elementos Inactivos del Sistema.");
+			return this;
+		}
+
+		//Guardo el anterior estado temporalmente, para eliminarlo de Base de Datos.
+		Estado old= this.getEstado();
+		this.setEstado(e);
+
+		//Actualizo el gps con el nuevo estado.
+		container.persistIfNotAlready(this);
+
+		//Elimino el estado anterior.
+		container.removeIfNotAlready(old);
+		return this;
+	}
 
 	@javax.inject.Inject
 	DomainObjectContainer container;
