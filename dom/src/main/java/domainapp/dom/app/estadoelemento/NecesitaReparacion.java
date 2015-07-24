@@ -3,11 +3,8 @@ package domainapp.dom.app.estadoelemento;
 import java.sql.Timestamp;
 
 import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.Inheritance;
-import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.VersionStrategy;
 
-import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
@@ -27,19 +24,18 @@ import org.apache.isis.applib.annotation.DomainObjectLayout;
 @DomainObjectLayout(
         bookmarking = BookmarkPolicy.AS_CHILD
 )
-@Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
 public class NecesitaReparacion extends Estado {
+
+	public NecesitaReparacion() {
+		super();
+	}
 
 	public NecesitaReparacion(Timestamp fechaCambio, Motivo motivo) {
 		super(fechaCambio, motivo);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void desactivar(Object elemento,Timestamp fecha, Motivo motivo) {
-		container.warnUser("El elemento necesita ser reparado para poder ser Reactivado.");
+	public String toString() {
+		return "Necesita Reparacion";
 	}
-
-	@javax.inject.Inject
-	DomainObjectContainer container;
 }
