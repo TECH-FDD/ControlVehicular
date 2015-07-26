@@ -176,8 +176,10 @@ public class Matafuego {
 	 */
 	public Matafuego desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
 		//Obtengo el nuevo Estado.
-		Estado e= this.getServicioEstado().desactivar(this.getEstado(), new Timestamp(System.currentTimeMillis()), motivo);
+//		Estado e= this.getServicioEstado().desactivar(this.getEstado(), new Timestamp(System.currentTimeMillis()), motivo);
 
+		this.setServicioEstado(this.getServicioEstado().obtenerServicio(this.getEstado()));
+		Estado e= this.getServicioEstado().desactivar(new Timestamp(System.currentTimeMillis()), motivo);
 		//Si el nuevo estado es nulo, quiere decir que no se puede cambiar de estado.
 		if (e==null){
 			container.informUser("Por algúna razón, el Matafuego seleccionado, ya se encuentra Inactivo. "
