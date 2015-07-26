@@ -181,9 +181,12 @@ public class Gps {
 	 * @return mensaje de confirmacion.
 	 */
 	public Gps desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
-		//Obtengo el nuevo Estado.
-		Estado e= this.getServicioEstado().desactivar(this.getEstado(), new Timestamp(System.currentTimeMillis()), motivo);
+//		Estado e= this.getServicioEstado().desactivar(this.getEstado(), new Timestamp(System.currentTimeMillis()), motivo);
 
+		//Obtengo el servicio correspondiente al estado actual.
+		this.setServicioEstado(this.getServicioEstado().obtenerServicio(this.getEstado()));
+		//Obtengo el nuevo estado.
+		Estado e= this.getServicioEstado().desactivar(new Timestamp(System.currentTimeMillis()), motivo);
 		//Si el nuevo estado es nulo, quiere decir que no se puede cambiar de estado.
 		if (e==null){
 			container.informUser("Por algúna razón, el Gps seleccionado, ya se encuentra Inactivo. "
