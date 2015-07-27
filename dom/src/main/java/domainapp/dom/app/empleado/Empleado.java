@@ -128,9 +128,9 @@ public class Empleado extends Persona{
 	 * Desactivar un Empleado, de manera que no pueda realizar acciones en el sistema.
 	 * @return mensaje de confirmacion.
 	 */
-	public String eliminarEmpleado(){
+	public String desactivarEmpleado(){
 		this.setActivo(false);
-		return "El Empleado ha sido eliminado de manera exitosa!";
+		return "El Empleado ha sido desactivado de manera exitosa!";
 	}
 
 	/**
