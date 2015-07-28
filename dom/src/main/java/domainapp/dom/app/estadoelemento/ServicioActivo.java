@@ -20,7 +20,7 @@ public class ServicioActivo extends ServicioEstado{
 		case DESUSO:
 			e = new Inactivo(new Timestamp(System.currentTimeMillis()),motivo);
 			return e;
-		case RUPTURA:
+		case ROTURA:
 			e = new NecesitaReparacion(new Timestamp(System.currentTimeMillis()), motivo);
 			return e;
 		case INUTILIZBLE:
