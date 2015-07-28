@@ -1,6 +1,7 @@
 package domainapp.dom.app.gps;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
@@ -204,6 +205,15 @@ public class Gps {
 		//Elimino el estado anterior.
 		container.removeIfNotAlready(old);
 		return this;
+	}
+
+	/**
+	 * Validar la lista de motivos a mostrar al momento de desactivar un Gps.
+	 * @param motivo
+	 * @return lista de motivos.
+	 */
+	public List<Motivo> choices0Desactivar(Motivo motivo){
+		return Motivo.listar("desactivar");
 	}
 
 	@javax.inject.Inject
