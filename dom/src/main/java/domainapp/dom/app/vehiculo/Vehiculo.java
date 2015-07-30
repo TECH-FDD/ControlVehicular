@@ -344,6 +344,33 @@ public class Vehiculo {
 		return servicioEstado.ocultarDesactivar(this.getEstado());
 	}
 
+	/**
+	 * Reactivar un Vehiculo para poder ser utilizado en el sistema.
+	 *
+	 * @return this
+	 */
+	public Vehiculo activar(){
+		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
+		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
+		if (o[0] != null){
+			Estado oldEstado = this.getEstado();
+			this.setEstado((Estado) o[0]);
+			container.persistIfNotAlready(this);
+			container.removeIfNotAlready(oldEstado);
+		}
+		container.warnUser((String) o[1]);
+		return this;
+	}
+
+	/**
+	 * Verificar si se debe mosrar el boton.
+	 *
+	 * @return Confirmacion de si se debe mostrar el Boton.
+	 */
+	public boolean hideActivar(){
+		return this.servicioEstado.ocultarActivar(this.getEstado());
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
