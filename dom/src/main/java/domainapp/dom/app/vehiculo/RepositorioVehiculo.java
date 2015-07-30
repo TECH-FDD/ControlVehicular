@@ -43,23 +43,24 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "Matafuego") Matafuego matafuego,
 			final @ParameterLayout(named = "Kilometros") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String kilometros) {
 
-		final Vehiculo vehiculo = container
-				.newTransientInstance(Vehiculo.class);
-		vehiculo.setMarca(marca);
-		vehiculo.setModelo(modelo);
-		vehiculo.setNombre(nombre);
-		vehiculo.setFechaCompra(fechaCompra);
-		vehiculo.setPatente(patente);
-		vehiculo.setNumeroChasis(numeroChasis);
-		vehiculo.setPolizaSeguro(polizaSeguro);
-		vehiculo.setGps(gps);
-		vehiculo.setCombustible(combustible);
-		vehiculo.setCapacTanqueCombustible(capTanqueCombustible);
-		vehiculo.setAceite(aceite);
-		vehiculo.setCnsCombustibleRuta(cnsCombustibleRuta);
-		vehiculo.setCnsCombuestibleCiudad(cnsCombustibleCiudad);
-		vehiculo.setMatafuego(matafuego);
-		vehiculo.setKilometros(kilometros);
+		final Vehiculo vehiculo = new Vehiculo(marca, nombre, modelo, fechaCompra,
+				patente, numeroChasis, polizaSeguro, gps, combustible, capTanqueCombustible,
+				aceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros);
+//		vehiculo.setMarca(marca);
+//		vehiculo.setModelo(modelo);
+//		vehiculo.setNombre(nombre);
+//		vehiculo.setFechaCompra(fechaCompra);
+//		vehiculo.setPatente(patente);
+//		vehiculo.setNumeroChasis(numeroChasis);
+//		vehiculo.setPolizaSeguro(polizaSeguro);
+//		vehiculo.setGps(gps);
+//		vehiculo.setCombustible(combustible);
+//		vehiculo.setCapacTanqueCombustible(capTanqueCombustible);
+//		vehiculo.setAceite(aceite);
+//		vehiculo.setCnsCombustibleRuta(cnsCombustibleRuta);
+//		vehiculo.setCnsCombuestibleCiudad(cnsCombustibleCiudad);
+//		vehiculo.setMatafuego(matafuego);
+//		vehiculo.setKilometros(kilometros);
 
 		container.persistIfNotAlready(vehiculo);
 		return vehiculo;
@@ -91,6 +92,7 @@ public class RepositorioVehiculo {
 											Matafuego matafuego, String kilometro){
 		return repoMatafuego.listAll();
 	}
+
 	@MemberOrder(sequence = "2")
 	@ActionLayout(named = "Listar Todos")
 	public List<Vehiculo> listAll() {
