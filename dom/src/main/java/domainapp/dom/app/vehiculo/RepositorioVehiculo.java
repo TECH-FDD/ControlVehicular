@@ -16,6 +16,7 @@ import org.apache.isis.applib.query.QueryDefault;
 import domainapp.dom.app.aceite.Aceite;
 import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.gps.Gps;
+import domainapp.dom.app.gps.RepositorioGps;
 import domainapp.dom.app.matafuego.Matafuego;
 
 @DomainService(repositoryFor = Vehiculo.class)
@@ -61,6 +62,15 @@ public class RepositorioVehiculo {
 
 		container.persistIfNotAlready(vehiculo);
 		return vehiculo;
+	}
+
+	public List<Gps> choices7CreateVehiculo(String marca, String nombre, Integer modelo,
+											Timestamp fechaCompra, String patente, String nroChasis,
+											Integer poliza, Gps gps, Combustible combustible, Integer tanque,
+											Aceite aceite, String consumoRuta, String consumoCiudad,
+											Matafuego matafuego, String kilometro){
+		List<Gps> lista=repoGps.listarTodos();
+		return lista;
 	}
 
 	@MemberOrder(sequence = "2")
@@ -111,4 +121,6 @@ public class RepositorioVehiculo {
 
 	@javax.inject.Inject
 	DomainObjectContainer container;
+	@javax.inject.Inject
+	RepositorioGps repoGps;
 }
