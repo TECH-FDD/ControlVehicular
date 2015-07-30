@@ -216,6 +216,30 @@ public class Gps {
 		return Motivo.listar("desactivar");
 	}
 
+	public Gps activar(){
+		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
+		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
+		if (o[0] != null){
+			Estado oldEstado = this.getEstado();
+			this.setEstado((Estado) o[0]);
+			container.persistIfNotAlready(this);
+			container.removeIfNotAlready(oldEstado);
+		}
+		container.warnUser((String) o[1]);
+		return this;
+	}
+
+	/**
+	 * Verificar si se debe mosrar el boton.
+	 *
+	 * @return Confirmacion de si se debe mostrar el Boton.
+	 */
+	public boolean hideActivar(){
+		if (this.getEstado() instanceof Activo)
+			return true;
+		return false;
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
