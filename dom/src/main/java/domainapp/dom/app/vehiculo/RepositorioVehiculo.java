@@ -1,6 +1,7 @@
 package domainapp.dom.app.vehiculo;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -15,6 +16,7 @@ import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.aceite.Aceite;
 import domainapp.dom.app.combustible.Combustible;
+import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.gps.RepositorioGps;
 import domainapp.dom.app.matafuego.Matafuego;
@@ -96,47 +98,61 @@ public class RepositorioVehiculo {
 	@MemberOrder(sequence = "2")
 	@ActionLayout(named = "Listar Todos")
 	public List<Vehiculo> listAll() {
-		return container.allInstances(Vehiculo.class);
+		return activos(container.allInstances(Vehiculo.class));
 	}
 
 	@MemberOrder(sequence = "3")
 	@ActionLayout(named = "Buscar por Marca")
 	public List<Vehiculo> findByMarca(
 			@ParameterLayout(named = "Marca") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String marca) {
-		return container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarMarca", "marca", marca));
+		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarMarca", "marca", marca)));
 	}
 
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por Nombre")
 	public List<Vehiculo> findByNombre(
 			@ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre) {
-		return container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarNombre", "nombre", nombre));
+		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarNombre", "nombre", nombre)));
 	}
 
 	@MemberOrder(sequence = "5")
 	@ActionLayout(named = "Buscar por Modelo")
 	public List<Vehiculo> findByModelo(
 			@ParameterLayout(named = "Modelo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) final Integer modelo) {
-		return container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarModelo", "modelo", modelo));
+		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarModelo", "modelo", modelo)));
 	}
 
 	@MemberOrder(sequence = "6")
 	@ActionLayout(named = "Buscar por Patente")
 	public List<Vehiculo> findByPatente(
 			@ParameterLayout(named = "Patente") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String patente) {
-		return container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarPatente", "patente", patente));
+		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarPatente", "patente", patente)));
 	}
 
 	@MemberOrder(sequence = "7")
 	@ActionLayout(named = "Buscar por N° Chasis")
 	public List<Vehiculo> findByNumeroChasis(
 			@ParameterLayout(named = "Numero Chasis") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String numeroChasis) {
-		return container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarNumeroChasis", "numeroChasis", numeroChasis));
+		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
+				"BuscarNumeroChasis", "numeroChasis", numeroChasis)));
+	}
+
+	/**
+	 * Filtrar lista de Vehiculo, por estado Activo.
+	 * @param lista
+	 * @return lista de Vehiculo Activos.
+	 */
+	private List<Vehiculo> activos(List<Vehiculo> lista){
+		List<Vehiculo> activos = new ArrayList<Vehiculo>();
+		for (Vehiculo v : lista){
+			if (v.getEstado() instanceof Activo)
+				activos.add(v);
+		}
+		return activos;
 	}
 
 	@javax.inject.Inject
