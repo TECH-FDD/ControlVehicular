@@ -17,6 +17,7 @@ import org.apache.isis.applib.query.QueryDefault;
 import domainapp.dom.app.aceite.Aceite;
 import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Baja;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.NecesitaReparacion;
 import domainapp.dom.app.estadoelemento.Reparacion;
@@ -170,6 +171,18 @@ public class RepositorioVehiculo {
 				inactivos.add(vehiculo);
 		}
 		return inactivos;
+	}
+
+	@MemberOrder(sequence = "3", name="Elementos Desestimados")
+	@ActionLayout(named = "Vehiculo")
+	public List<Vehiculo> listBaja(){
+		List<Vehiculo> lista = container.allInstances(Vehiculo.class);
+		List<Vehiculo> bajas= new ArrayList<Vehiculo>();
+		for (Vehiculo vehiculo : lista){
+			if (vehiculo.getEstado() instanceof Baja)
+				bajas.add(vehiculo);
+		}
+		return bajas;
 	}
 
 	@javax.inject.Inject
