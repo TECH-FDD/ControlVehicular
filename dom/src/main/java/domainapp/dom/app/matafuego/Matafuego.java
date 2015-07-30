@@ -21,6 +21,7 @@ import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Estado;
 import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.estadoelemento.ServicioEstado;
+import domainapp.dom.app.gps.Gps;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Matafuego_ID")
@@ -199,6 +200,33 @@ public class Matafuego {
 
 		container.informUser("El Matafuego, ha sido desactivado con exito.");
 		return this;
+	}
+
+	/**
+	 * Reactivar un Matafuego para poder ser utilizado en el sistema.
+	 *
+	 * @return this
+	 */
+	public Matafuego activar(){
+		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
+		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
+		if (o[0] != null){
+			Estado oldEstado = this.getEstado();
+			this.setEstado((Estado) o[0]);
+			container.persistIfNotAlready(this);
+			container.removeIfNotAlready(oldEstado);
+		}
+		container.warnUser((String) o[1]);
+		return this;
+	}
+
+	/**
+	 * Verificar si se debe mosrar el boton.
+	 *
+	 * @return Confirmacion de si se debe mostrar el Boton.
+	 */
+	public boolean hideActivar(){
+		return this.servicioEstado.ocultarActivar(this.getEstado());
 	}
 
 	@javax.inject.Inject
