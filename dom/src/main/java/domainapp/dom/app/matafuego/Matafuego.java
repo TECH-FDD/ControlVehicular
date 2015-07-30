@@ -1,6 +1,7 @@
 package domainapp.dom.app.matafuego;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
@@ -199,6 +200,15 @@ public class Matafuego {
 
 		container.informUser("El Matafuego, ha sido desactivado con exito.");
 		return this;
+	}
+
+	/**
+	 * Validar la lista de motivos a mostrar al momento de desactivar un Matafuego.
+	 * @param motivo
+	 * @return lista de motivos.
+	 */
+	public List<Motivo> choices0Desactivar(Motivo motivo){
+		return Motivo.listar("desactivar");
 	}
 
 	/**
