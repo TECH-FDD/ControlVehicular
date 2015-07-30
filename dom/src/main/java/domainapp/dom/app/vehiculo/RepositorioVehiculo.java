@@ -17,6 +17,9 @@ import org.apache.isis.applib.query.QueryDefault;
 import domainapp.dom.app.aceite.Aceite;
 import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Inactivo;
+import domainapp.dom.app.estadoelemento.NecesitaReparacion;
+import domainapp.dom.app.estadoelemento.Reparacion;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.gps.RepositorioGps;
 import domainapp.dom.app.matafuego.Matafuego;
@@ -153,6 +156,20 @@ public class RepositorioVehiculo {
 				activos.add(v);
 		}
 		return activos;
+	}
+
+	@MemberOrder(sequence = "5", name="Elementos Inactivos")
+	@ActionLayout(named = "Vehiculo")
+	public List<Vehiculo> listInactivos(){
+		List<Vehiculo> lista=container.allInstances(Vehiculo.class);
+		List<Vehiculo> inactivos= new ArrayList<Vehiculo>();
+		for (Vehiculo vehiculo : lista){
+			if ((vehiculo.getEstado() instanceof Inactivo ||
+				vehiculo.getEstado() instanceof NecesitaReparacion ||
+				vehiculo.getEstado() instanceof Reparacion))
+				inactivos.add(vehiculo);
+		}
+		return inactivos;
 	}
 
 	@javax.inject.Inject
