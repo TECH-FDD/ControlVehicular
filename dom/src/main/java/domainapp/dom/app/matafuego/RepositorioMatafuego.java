@@ -78,7 +78,7 @@ public class RepositorioMatafuego {
 				Matafuego.getEstado() instanceof Reparacion))
 				inactivos.add(Matafuego);
 		}
-		return lista;
+		return inactivos;
 	}
 
 	@MemberOrder(sequence = "2", name="Elementos Desestimados")
