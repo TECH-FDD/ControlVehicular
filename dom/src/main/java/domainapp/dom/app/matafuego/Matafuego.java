@@ -212,6 +212,15 @@ public class Matafuego {
 	}
 
 	/**
+	 * Verificar si se debe mostrar el boton Desactivar.
+	 *
+	 * @return Confirmacion
+	 */
+	public boolean hideDesactivar(){
+		return servicioEstado.ocultarDesactivar(this.getEstado());
+	}
+
+	/**
 	 * Reactivar un Matafuego para poder ser utilizado en el sistema.
 	 *
 	 * @return this
