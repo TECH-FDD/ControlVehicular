@@ -18,6 +18,7 @@ import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.gps.RepositorioGps;
 import domainapp.dom.app.matafuego.Matafuego;
+import domainapp.dom.app.matafuego.RepositorioMatafuego;
 
 @DomainService(repositoryFor = Vehiculo.class)
 @DomainServiceLayout(menuOrder = "80", named = "Vehiculo")
@@ -64,6 +65,11 @@ public class RepositorioVehiculo {
 		return vehiculo;
 	}
 
+	/**
+	 * Mostrar solo Gps Activos.
+	 *
+	 * @return List<Gps> activos
+	 */
 	public List<Gps> choices7CreateVehiculo(String marca, String nombre, Integer modelo,
 											Timestamp fechaCompra, String patente, String nroChasis,
 											Integer poliza, Gps gps, Combustible combustible, Integer tanque,
@@ -73,6 +79,18 @@ public class RepositorioVehiculo {
 		return lista;
 	}
 
+	/**
+	 *Mostrar solo Matafuegos Activos
+	 *
+	 * @return List<Matafuego> activos.
+	 */
+	public List<Matafuego> choices13CreateVehiculo(String marca, String nombre, Integer modelo,
+											Timestamp fechaCompra, String patente, String nroChasis,
+											Integer poliza, Gps gps, Combustible combustible, Integer tanque,
+											Aceite aceite, String consumoRuta, String consumoCiudad,
+											Matafuego matafuego, String kilometro){
+		return repoMatafuego.listAll();
+	}
 	@MemberOrder(sequence = "2")
 	@ActionLayout(named = "Listar Todos")
 	public List<Vehiculo> listAll() {
@@ -123,4 +141,6 @@ public class RepositorioVehiculo {
 	DomainObjectContainer container;
 	@javax.inject.Inject
 	RepositorioGps repoGps;
+	@javax.inject.Inject
+	RepositorioMatafuego repoMatafuego;
 }
