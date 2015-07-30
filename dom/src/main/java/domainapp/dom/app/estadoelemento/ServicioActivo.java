@@ -29,4 +29,13 @@ public class ServicioActivo extends ServicioEstado{
 		}
 		return null;
 	}
+
+	@Override
+	@Programmatic
+	public Object[] activar(Timestamp fecha, Motivo motivo){
+		Object[] arreglo = new Object[2];
+		arreglo[0]= null;
+		arreglo[1]= "El Elemento seleccionado, ya se encuentra en estado Activo.";
+		return arreglo;
+	}
 }

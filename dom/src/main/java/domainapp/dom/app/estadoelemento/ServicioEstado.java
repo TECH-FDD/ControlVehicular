@@ -2,8 +2,11 @@ package domainapp.dom.app.estadoelemento;
 
 import java.sql.Timestamp;
 
+import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.Programmatic;
+
+import domainapp.dom.app.gps.Gps;
 
 @DomainService(repositoryFor = Estado.class)
 public class ServicioEstado {
@@ -40,7 +43,7 @@ public class ServicioEstado {
 	}
 
 	@Programmatic
-	public Estado activar(Timestamp fecha, Motivo motivo) {
+	public Object[] activar(Timestamp fecha, Motivo motivo) {
 		return null;
 	}
 }
