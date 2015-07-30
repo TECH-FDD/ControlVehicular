@@ -21,7 +21,6 @@ import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Estado;
 import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.estadoelemento.ServicioEstado;
-import domainapp.dom.app.gps.Gps;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Matafuego_ID")
@@ -55,7 +54,7 @@ public class Matafuego {
 		this.fechaAlta = fechaAlta;
 		this.fechaRecarga = fechaRecarga;
 		this.fechaCadRecarga = fechaCadRecarga;
-		this.estado=new Activo(new Timestamp(System.currentTimeMillis()),null);
+		this.estado=new Activo(new Timestamp(System.currentTimeMillis()), Motivo.ALTA);
 	}
 
 	public Matafuego() {
