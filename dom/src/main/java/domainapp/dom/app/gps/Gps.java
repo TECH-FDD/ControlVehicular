@@ -169,7 +169,7 @@ public class Gps {
 		this.fechaAlta = fechaAlta;
 		this.fechaAsigVehiculo = fechaAsigVehiculo;
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
-		this.estado= new Activo(new Timestamp(System.currentTimeMillis()),null);
+		this.estado= new Activo(new Timestamp(System.currentTimeMillis()),Motivo.ALTA);
 	}
 
 	public Gps() {
@@ -216,6 +216,11 @@ public class Gps {
 		return Motivo.listar("desactivar");
 	}
 
+	/**
+	 * Reactivar un Gps para poder ser utilizado en el sistema.
+	 *
+	 * @return this
+	 */
 	public Gps activar(){
 		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
 		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
