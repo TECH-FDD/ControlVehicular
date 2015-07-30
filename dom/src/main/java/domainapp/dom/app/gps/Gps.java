@@ -208,6 +208,15 @@ public class Gps {
 	}
 
 	/**
+	 * Verificar si se debe mostrar el boton Desactivar.
+	 *
+	 * @return Confirmacion
+	 */
+	public boolean hideDesactivar(){
+		return servicioEstado.ocultarDesactivar(this.getEstado());
+	}
+
+	/**
 	 * Validar la lista de motivos a mostrar al momento de desactivar un Gps.
 	 * @param motivo
 	 * @return lista de motivos.
@@ -240,9 +249,7 @@ public class Gps {
 	 * @return Confirmacion de si se debe mostrar el Boton.
 	 */
 	public boolean hideActivar(){
-		if (this.getEstado() instanceof Activo)
-			return true;
-		return false;
+		return this.servicioEstado.ocultarActivar(this.getEstado());
 	}
 
 	@javax.inject.Inject
