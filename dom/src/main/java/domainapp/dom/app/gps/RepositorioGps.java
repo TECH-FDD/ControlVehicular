@@ -104,7 +104,7 @@ public class RepositorioGps {
 				gps.getEstado() instanceof Reparacion))
 				inactivos.add(gps);
 		}
-		return lista;
+		return inactivos;
 	}
 
 	/**
