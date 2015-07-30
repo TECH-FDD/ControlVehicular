@@ -16,6 +16,7 @@ import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.aceite.Aceite;
@@ -273,7 +274,7 @@ public class Vehiculo {
 		this.cnsCombustibleRuta = cnsCombustibleRuta;
 		this.cnsCombuestibleCiudad = cnsCombuestibleCiudad;
 		this.kilometros = kilometros;
-		this.estado=new Activo(new Timestamp(System.currentTimeMillis()),null);
+		this.estado=new Activo(new Timestamp(System.currentTimeMillis()),Motivo.ALTA);
 	}
 
 	public Vehiculo() {
