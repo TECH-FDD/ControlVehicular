@@ -25,7 +25,7 @@ import domainapp.dom.app.estadoelemento.ServicioEstado;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.aceite.Aceite;
-import domainapp.dom.app.combustible.Combustible;
+import domainapp.dom.app.combustible.TipoCombustible;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Vehiculo_ID")
@@ -58,7 +58,7 @@ public class Vehiculo {
 	private String numeroChasis;
 	private Integer polizaSeguro;
 	private Gps gps;
-	private Combustible combustible;
+	private TipoCombustible TipoCombustible;
 	private Matafuego matafuego;
 	private Integer capacTanqueCombustible;
 	private Aceite aceite;
@@ -164,13 +164,13 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "9")
-	@Column(allowsNull = "Combustible")
-	public Combustible getCombustible() {
-		return combustible;
+	@Column(allowsNull = "Tipo Combustible")
+	public TipoCombustible getTipoCombustible() {
+		return TipoCombustible;
 	}
 
-	public void setCombustible(Combustible combustible) {
-		this.combustible = combustible;
+	public void setTipoCombustible(TipoCombustible tipoCombustible) {
+		this.TipoCombustible = tipoCombustible;
 	}
 
 	@Persistent
@@ -270,7 +270,7 @@ public class Vehiculo {
 
 	public Vehiculo(String marca, String nombre, Integer modelo,
 			Timestamp fechaCompra, String patente, String numeroChasis,
-			Integer polizaSeguro, Gps gps, Combustible combustible,
+			Integer polizaSeguro, Gps gps, TipoCombustible tipoCombustible,
 			Integer capacTanqueCombustible, Aceite aceite,
 			String cnsCombustibleRuta, String cnsCombuestibleCiudad,
 			String kilometros) {
@@ -283,7 +283,7 @@ public class Vehiculo {
 		this.numeroChasis = numeroChasis;
 		this.polizaSeguro = polizaSeguro;
 		this.gps = gps;
-		this.combustible = combustible;
+		this.TipoCombustible = tipoCombustible;
 		this.capacTanqueCombustible = capacTanqueCombustible;
 		this.aceite = aceite;
 		this.cnsCombustibleRuta = cnsCombustibleRuta;

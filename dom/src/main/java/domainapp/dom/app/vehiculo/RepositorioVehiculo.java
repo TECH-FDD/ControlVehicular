@@ -15,7 +15,7 @@ import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.aceite.Aceite;
-import domainapp.dom.app.combustible.Combustible;
+import domainapp.dom.app.combustible.TipoCombustible;
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Baja;
 import domainapp.dom.app.estadoelemento.Inactivo;
@@ -41,7 +41,7 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "Numero de Chasis") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String numeroChasis,
 			final @ParameterLayout(named = "Poliza/Seguro") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) Integer polizaSeguro,
 			final @ParameterLayout(named = "Gps") Gps gps,
-			final @ParameterLayout(named = "Combustible") Combustible combustible,
+			final @ParameterLayout(named = "Tipo de Combustible") TipoCombustible tipoCombustible,
 			final @ParameterLayout(named = "Capacidad Tanque de comb.") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS, optionality = Optionality.OPTIONAL) Integer capTanqueCombustible,
 			final @ParameterLayout(named = "Aceite") Aceite aceite,
 			final @ParameterLayout(named = "cns Combustible Ruta") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String cnsCombustibleRuta,
@@ -50,7 +50,7 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "Kilometros") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String kilometros) {
 
 		final Vehiculo vehiculo = new Vehiculo(marca, nombre, modelo, fechaCompra,
-				patente, numeroChasis, polizaSeguro, gps, combustible, capTanqueCombustible,
+				patente, numeroChasis, polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
 				aceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros);
 //		vehiculo.setMarca(marca);
 //		vehiculo.setModelo(modelo);
@@ -79,7 +79,7 @@ public class RepositorioVehiculo {
 	 */
 	public List<Gps> choices7CreateVehiculo(String marca, String nombre, Integer modelo,
 											Timestamp fechaCompra, String patente, String nroChasis,
-											Integer poliza, Gps gps, Combustible combustible, Integer tanque,
+											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
 											Aceite aceite, String consumoRuta, String consumoCiudad,
 											Matafuego matafuego, String kilometro){
 		List<Gps> lista=repoGps.listarTodos();
@@ -93,7 +93,7 @@ public class RepositorioVehiculo {
 	 */
 	public List<Matafuego> choices13CreateVehiculo(String marca, String nombre, Integer modelo,
 											Timestamp fechaCompra, String patente, String nroChasis,
-											Integer poliza, Gps gps, Combustible combustible, Integer tanque,
+											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
 											Aceite aceite, String consumoRuta, String consumoCiudad,
 											Matafuego matafuego, String kilometro){
 		return repoMatafuego.listAll();
