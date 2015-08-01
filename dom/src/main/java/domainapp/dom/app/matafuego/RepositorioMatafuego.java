@@ -27,11 +27,11 @@ public class RepositorioMatafuego {
 	@ActionLayout(named = "Crear matafuego")
 	public Matafuego createMatafuego(
 			final @ParameterLayout(named = "Marca") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String Marca,
-			final @ParameterLayout(named = "codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo,
-			final @ParameterLayout(named = "Descripcion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String descripcion,
+			final @ParameterLayout(named = "Codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo,
+			final @ParameterLayout(named = "Descripción") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String descripcion,
 			final @ParameterLayout(named = "Capacidad") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int capacidad,
 			// final @ParameterLayout(named = "Fecha de alta") Timestamp fechaAlta,
-			final @ParameterLayout(named = "Fecha de recarga") Timestamp fechaRecarga,
+			final @ParameterLayout(named = "Fecha de última Recarga") Timestamp fechaRecarga,
 			final @ParameterLayout(named = "Fecha de caducidad") Timestamp fechaCadRecarga) {
 
 		Matafuego matafuego = new Matafuego(Marca, codigo, descripcion,
@@ -39,6 +39,22 @@ public class RepositorioMatafuego {
 				fechaRecarga, fechaCadRecarga);
 		container.persistIfNotAlready(matafuego);
 		return matafuego;
+	}
+
+	/**
+	 * Validar campos al cargar un nuevo Matafuego.
+	 *
+	 * @return mensaje de error.
+	 */
+	public String validateCreateMatafuego(String marca, String codigo, String Descripcion,
+										int capacidad, Timestamp fechaRecarga, Timestamp fechaCaducidad){
+
+		if (fechaRecarga.after(new Timestamp(System.currentTimeMillis())))
+			return "La Fecha de Ultima Recarga no puede ser posterior al dia de hoy.";
+
+		if (fechaCaducidad.before(new Timestamp(System.currentTimeMillis())))
+			return "La Fecha de Caducidad de Carga, no puede ser anterior al dia hoy.";
+		return null;
 	}
 
 	@MemberOrder(sequence = "2")
