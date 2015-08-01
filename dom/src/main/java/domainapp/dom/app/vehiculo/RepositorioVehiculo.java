@@ -14,7 +14,7 @@ import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
 
-import domainapp.dom.app.aceite.Aceite;
+import domainapp.dom.app.aceite.TipoAceite;
 import domainapp.dom.app.combustible.TipoCombustible;
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Baja;
@@ -43,7 +43,7 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "Gps") Gps gps,
 			final @ParameterLayout(named = "Tipo de Combustible") TipoCombustible tipoCombustible,
 			final @ParameterLayout(named = "Capacidad Tanque de comb.") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS, optionality = Optionality.OPTIONAL) Integer capTanqueCombustible,
-			final @ParameterLayout(named = "Aceite") Aceite aceite,
+			final @ParameterLayout(named = "Tipo de Aceite") TipoAceite tipoAceite,
 			final @ParameterLayout(named = "cns Combustible Ruta") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String cnsCombustibleRuta,
 			final @ParameterLayout(named = "cns Combustible Ciudad") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String cnsCombustibleCiudad,
 			final @ParameterLayout(named = "Matafuego") Matafuego matafuego,
@@ -51,7 +51,7 @@ public class RepositorioVehiculo {
 
 		final Vehiculo vehiculo = new Vehiculo(marca, nombre, modelo, fechaCompra,
 				patente, numeroChasis, polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
-				aceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros);
+				tipoAceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros);
 //		vehiculo.setMarca(marca);
 //		vehiculo.setModelo(modelo);
 //		vehiculo.setNombre(nombre);
@@ -80,7 +80,7 @@ public class RepositorioVehiculo {
 	public List<Gps> choices7CreateVehiculo(String marca, String nombre, Integer modelo,
 											Timestamp fechaCompra, String patente, String nroChasis,
 											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
-											Aceite aceite, String consumoRuta, String consumoCiudad,
+											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
 											Matafuego matafuego, String kilometro){
 		List<Gps> lista=repoGps.listarTodos();
 		return lista;
@@ -94,7 +94,7 @@ public class RepositorioVehiculo {
 	public List<Matafuego> choices13CreateVehiculo(String marca, String nombre, Integer modelo,
 											Timestamp fechaCompra, String patente, String nroChasis,
 											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
-											Aceite aceite, String consumoRuta, String consumoCiudad,
+											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
 											Matafuego matafuego, String kilometro){
 		return repoMatafuego.listAll();
 	}

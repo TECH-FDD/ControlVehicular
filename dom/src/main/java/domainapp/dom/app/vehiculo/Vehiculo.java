@@ -24,7 +24,7 @@ import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.estadoelemento.ServicioEstado;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.matafuego.Matafuego;
-import domainapp.dom.app.aceite.Aceite;
+import domainapp.dom.app.aceite.TipoAceite;
 import domainapp.dom.app.combustible.TipoCombustible;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
@@ -61,7 +61,7 @@ public class Vehiculo {
 	private TipoCombustible TipoCombustible;
 	private Matafuego matafuego;
 	private Integer capacTanqueCombustible;
-	private Aceite aceite;
+	private TipoAceite tipoAceite;
 	private String cnsCombustibleRuta;
 	private String cnsCombuestibleCiudad;
 	private String kilometros;
@@ -188,12 +188,12 @@ public class Vehiculo {
 	@Persistent
 	@MemberOrder(sequence = "11")
 	@Column(allowsNull = "Aceite")
-	public Aceite getAceite() {
-		return aceite;
+	public TipoAceite getTipoAceite() {
+		return tipoAceite;
 	}
 
-	public void setAceite(Aceite aceite) {
-		this.aceite = aceite;
+	public void setTipoAceite(TipoAceite tipoAceite) {
+		this.tipoAceite = tipoAceite;
 	}
 
 	@Persistent
@@ -271,7 +271,7 @@ public class Vehiculo {
 	public Vehiculo(String marca, String nombre, Integer modelo,
 			Timestamp fechaCompra, String patente, String numeroChasis,
 			Integer polizaSeguro, Gps gps, TipoCombustible tipoCombustible,
-			Integer capacTanqueCombustible, Aceite aceite,
+			Integer capacTanqueCombustible, TipoAceite tipoAceite,
 			String cnsCombustibleRuta, String cnsCombuestibleCiudad,
 			String kilometros) {
 		super();
@@ -285,7 +285,7 @@ public class Vehiculo {
 		this.gps = gps;
 		this.TipoCombustible = tipoCombustible;
 		this.capacTanqueCombustible = capacTanqueCombustible;
-		this.aceite = aceite;
+		this.tipoAceite = tipoAceite;
 		this.cnsCombustibleRuta = cnsCombustibleRuta;
 		this.cnsCombuestibleCiudad = cnsCombuestibleCiudad;
 		this.kilometros = kilometros;
