@@ -73,6 +73,31 @@ public class RepositorioVehiculo {
 	}
 
 	/**
+	 * Validar el ingreso de los campos unicos, al dar de alta un Vehiculo.
+	 *
+	 * @return Mensaje de error.
+	 */
+	public String validateCreateVehiculo(String marca, String nombre, Integer modelo,
+			Timestamp fechaCompra, String patente, String nroChasis,
+			Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
+			TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
+			Matafuego matafuego, String kilometro){
+
+		List<Vehiculo> lista = listAll();
+		for (Vehiculo v : lista){
+			if (v.getGps().equals(gps))
+				return "El Gps ingresado, ya se encuetra asignado al Vehiculo:" + v.toString();
+			if (v.getMatafuego().equals(matafuego))
+				return "El Matafuego ingresado, ya se encuentra asignado al Vehiculo:" + v.toString();
+			if (v.getNumeroChasis()==nroChasis)
+				return "El Número de Chasis ingresado, pertenece al Vehiculo:" + v.toString();
+			if (v.getPatente()==patente)
+				return "La Patente Ingresada, pertenece al Vehiculo:" + v.toString();
+		}
+		return null;
+	}
+
+	/**
 	 * Mostrar solo Gps Activos.
 	 *
 	 * @return List<Gps> activos
