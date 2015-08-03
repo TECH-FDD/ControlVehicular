@@ -17,6 +17,7 @@ import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.Where;
 import org.joda.time.LocalDate;
@@ -28,49 +29,28 @@ import domainapp.dom.app.persona.Persona;
 import domainapp.dom.app.persona.Provincia;
 import domainapp.dom.app.persona.Sexo;
 
-@javax.jdo.annotations.PersistenceCapable(identityType=IdentityType.DATASTORE)
-@javax.jdo.annotations.DatastoreIdentity(
-        strategy=javax.jdo.annotations.IdGeneratorStrategy.IDENTITY,
-         column="Empleado_ID")
-@javax.jdo.annotations.Version(
-        strategy=VersionStrategy.VERSION_NUMBER, 
-        column="version")
+@javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
+@javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Empleado_ID")
+@javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
 @javax.jdo.annotations.Queries({
-    @javax.jdo.annotations.Query(
-            name = "ListarTodos", language = "JDOQL",
-            value = "SELECT "
-                    + "FROM domainapp.dom.app.empleado.Empleado "
-            		+ "WHERE activo == true"),
-    @javax.jdo.annotations.Query(
-            name = "Buscar_Documento", language = "JDOQL",
-            value = "SELECT "
-                    + "FROM domainapp.dom.app.Empleado "
-                    + "WHERE nroDocumento==:nroDocumento"),
-    @javax.jdo.annotations.Query(
-            name = "Buscar_Nombre", language = "JDOQL",
-            value = "SELECT "
-                    + "FROM domainapp.dom.app.Empleado "
-                    + "WHERE nombre.indexOf(:nombre) >= 0 "),
-    @javax.jdo.annotations.Query(
-            name = "Buscar_Apellido", language = "JDOQL",
-            value = "SELECT "
-                    + "FROM domainapp.dom.app.Empleado "
-                    + "WHERE apellido.indexOf(:apellido) >= 0 "),
-    @javax.jdo.annotations.Query(
-            name = "Buscar_Legajo", language = "JDOQL",
-            value = "SELECT "
-                    + "FROM domainapp.dom.app.Empleado "
-                    + "WHERE legajo.indexOf(:legajo) >= 0 ")
-})
-
-@DomainObject(
-        objectType = "EMPLEADO"
-)
-
-@DomainObjectLayout(
-        bookmarking = BookmarkPolicy.AS_CHILD
-)
-public class Empleado extends Persona{
+		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.empleado.Empleado "
+				+ "WHERE activo == true"),
+		@javax.jdo.annotations.Query(name = "Buscar_Documento", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.Empleado "
+				+ "WHERE nroDocumento==:nroDocumento"),
+		@javax.jdo.annotations.Query(name = "Buscar_Nombre", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.Empleado "
+				+ "WHERE nombre.indexOf(:nombre) >= 0 "),
+		@javax.jdo.annotations.Query(name = "Buscar_Apellido", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.Empleado "
+				+ "WHERE apellido.indexOf(:apellido) >= 0 "),
+		@javax.jdo.annotations.Query(name = "Buscar_Legajo", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.Empleado "
+				+ "WHERE legajo.indexOf(:legajo) >= 0 ") })
+@DomainObject(objectType = "EMPLEADO")
+@DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
+public class Empleado extends Persona {
 	private String legajo;
 	private Area area;
 	private boolean activo;
@@ -85,7 +65,7 @@ public class Empleado extends Persona{
 				telefono, email);
 		this.legajo = legajo;
 		this.area = area;
-		this.activo= activo;
+		this.activo = activo;
 	}
 
 	public Empleado() {
@@ -95,7 +75,7 @@ public class Empleado extends Persona{
 	@Persistent
 	@MemberOrder(sequence = "20")
 	@javax.jdo.annotations.Column(allowsNull = "false")
-	@Property(editing=Editing.DISABLED)
+	@Property(editing = Editing.DISABLED)
 	public String getLegajo() {
 		return legajo;
 	}
@@ -115,7 +95,7 @@ public class Empleado extends Persona{
 		this.area = area;
 	}
 
-	@Property(hidden=Where.EVERYWHERE)
+	@Property(hidden = Where.EVERYWHERE)
 	public boolean isActivo() {
 		return activo;
 	}
@@ -125,54 +105,119 @@ public class Empleado extends Persona{
 	}
 
 	/**
-	 * Desactivar un Empleado, de manera que no pueda realizar acciones en el sistema.
+	 * Desactivar un Empleado, de manera que no pueda realizar acciones en el
+	 * sistema.
+	 *
 	 * @return mensaje de confirmacion.
 	 */
 	public String desactivarEmpleado(){
 		this.setActivo(false);
 		return "El Empleado ha sido desactivado de manera exitosa!";
+
 	}
 
 	/**
-	 * Modificar la Ciudad actual del Empleado, lo cual puede implicar o no, un cambio de Provincia,
-	 * pero si o si, debe implicar un cambio de Codigo Postal y Direccion.
+	 * Modificar la Ciudad actual del Empleado, lo cual puede implicar o no, un
+	 * cambio de Provincia, pero si o si, debe implicar un cambio de Codigo
+	 * Postal y Direccion.
+	 *
 	 * @param provincia
 	 * @param ciudad
 	 * @param codigoPostal
 	 * @param domicilio
 	 * @return
 	 */
-	@MemberOrder(sequence="1", name="CodigoPostal")
-	@ActionLayout(named="Cambiar Ciudad",position=Position.BELOW)
+	@MemberOrder(sequence = "1", name = "CodigoPostal")
+	@ActionLayout(named = "Cambiar Ciudad", position = Position.BELOW)
 	public Empleado updateCodigoPostal(
-			final @ParameterLayout(named="Provincia") Provincia provincia,
-	        final @ParameterLayout(named="Ciudad") Ciudad ciudad,
-	        final @ParameterLayout(named="Codigo Postal") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int codigoPostal,
-	        final @ParameterLayout(named="Domicilio") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String domicilio){
+			final @ParameterLayout(named = "Provincia") Provincia provincia,
+			final @ParameterLayout(named = "Ciudad") Ciudad ciudad,
+			final @ParameterLayout(named = "Codigo Postal") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int codigoPostal,
+			final @ParameterLayout(named = "Domicilio") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String domicilio) {
 		this.setCiudad(ciudad);
 		this.setProvincia(provincia);
 		this.setCodigoPostal(codigoPostal);
 		this.setDomicilio(domicilio);
 		return this;
+
+	}
+
+	/**
+	 * Reactivar un Empleado, permitiendo su reincorporación al sistema.
+	 *
+	 * @return mensaje de confirmacion.
+	 */
+
+	public Empleado activarEmpleado() {
+		if (getArea().isActivo() == true) {
+			this.setActivo(true);
+			container.informUser("El Empleado ha sido activado");
+			return this;
+		} else {
+			container
+					.informUser("El Area se encuentra inactiva, Ingrese otra Area");
+			return this;
+		}
+	}
+
+	@ActionLayout(named = "Cambiar Area")
+	public Empleado updateArea(final @ParameterLayout(named = "Area") Area are) {
+		this.setArea(are);
+		// container.persistIfNotAlready(this);
+		return this;
+	}
+
+	public String validateUpdateArea(Area ar) {
+		if (ar.isActivo() == false) {
+			return "El area esta inactiva. Por favor ingrese otra area.";
+		}
+		return null;
+	}
+
+	/**
+	 * Se desactiva la opcion desactivar Empleado , cuando el empleado ya este
+	 * Activado
+	 */
+	@Programmatic
+	public boolean hideActivarEmpleado() {
+		if (isActivo() == true)
+			return true;
+		else
+			return false;
+	}
+
+
+	/**
+	 * Se desactiva el UpdateArea, cuando no sea necesario su actualización
+	 */
+
+	@Programmatic
+	public boolean hideUpdateArea() {
+		if (getArea().isActivo() == false)
+			return false;
+		else
+			return true;
 	}
 
 	/**
 	 * Mostrar lista de Ciudades según la Provincia seleccionada.
+	 *
 	 * @param provincia
 	 * @param ciudad
 	 * @param codigoPostal
 	 * @param Domicilio
 	 * @return List<Ciudad>
 	 */
-	public List<Ciudad> choices1UpdateCodigoPostal(final Provincia provincia,final Ciudad ciudad,
-												   final int codigoPostal,final String Domicilio){
+	public List<Ciudad> choices1UpdateCodigoPostal(final Provincia provincia,
+			final Ciudad ciudad, final int codigoPostal, final String Domicilio) {
 		return Ciudad.listarPor(provincia);
 	}
 
 	@Override
 	public String toString() {
-		return "Empleado [Legajo N°=" + legajo+"]";
+		return "Empleado [Legajo N°=" + legajo + "]";
 	}
+
 	@javax.inject.Inject
-    DomainObjectContainer container;
+	DomainObjectContainer container;
 }
