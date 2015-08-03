@@ -4,7 +4,7 @@ import domainapp.dom.app.taller.RepositorioTaller;
 import domainapp.dom.app.taller.Taller;
 
 public class TallerFixture extends Fixture{
-	private static String nombreComercial="El Basco,Gatty, Taller Alberto, Cofre Neu";
+	private static String nombreComercial="El Basco,Gatty,Taller Alberto,Cofre Neu";
 	private static String descripcion="S/Descripcion";
 	private static String direccion="Alcorta 450, San Martin 285, Avenida del Trabajador 2564";
 	private static String telefono="456585,785465,874554";
@@ -25,8 +25,9 @@ public class TallerFixture extends Fixture{
 	}
 	
 	private static String getEmail(int x) {
-		String apellido=getnombreComercial(x);
-		String newEmail=apellido+email;
+		String nombreComercial = getnombreComercial(x);
+		nombreComercial = nombreComercial.replace(' ', '_');
+		String newEmail = nombreComercial + email;
 		return newEmail;
 	}
 	public TallerFixture (){
