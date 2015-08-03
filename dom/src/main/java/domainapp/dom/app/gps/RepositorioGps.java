@@ -33,18 +33,9 @@ public class RepositorioGps {
 			final @ParameterLayout(named = "Fecha Asignacion Vehiculo") Timestamp fechaAsigVehiculo,
 			final @ParameterLayout(named = "observacion Estado Dispositivo ") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String obsEstadoDisp) {
 
-		final Gps gps = new Gps(codIdentificacion, marca, modelo,
-				descripcion, new Timestamp(System.currentTimeMillis()),
+		final Gps gps = new Gps(codIdentificacion.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(),
+				descripcion.toUpperCase(), new Timestamp(System.currentTimeMillis()),
 				fechaAsigVehiculo, obsEstadoDisp);
-
-//				container.newTransientInstance(Gps.class);
-//		gps.setCodIdentificacion(codIdentificacion);
-//		gps.setModelo(modelo);
-//		gps.setMarca(marca);
-//		gps.setDescripcion(descripcion);
-//		gps.setFechaAlta(new Timestamp(System.currentTimeMillis()));
-//		gps.setFechaAsigVehiculo(fechaAsigVehiculo);
-//		gps.setObsEstadoDispositivo(obsEstadoDisp);
 
 		container.persistIfNotAlready(gps);
 		return gps;
@@ -57,7 +48,7 @@ public class RepositorioGps {
 		if (!container.allMatches(
 				new QueryDefault<Gps>(Gps.class,
 						"buscarPorCodigoIdentificacion", "codIdentificacion",
-						codIdentificacion)).isEmpty()) {
+						codIdentificacion.toUpperCase())).isEmpty()) {
 			return "El código de Identificación ya existe. Por favor verificar los Datos Ingresados.";
 		}
 		return null;
