@@ -9,6 +9,7 @@ import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.combustible.TipoCombustible;
 
@@ -24,11 +25,18 @@ public class RepositorioTipoCombustible {
 
 		TipoCombustible tipoCombustible = container
 				.newTransientInstance(TipoCombustible.class);
-		tipoCombustible.setTipo(tipo);
-		tipoCombustible.setDescripcion(descripcion);
+		tipoCombustible.setTipo(tipo.toUpperCase());
+		tipoCombustible.setDescripcion(descripcion.toUpperCase());
 		container.persistIfNotAlready(tipoCombustible);
 		return tipoCombustible;
 	}
+	// Validacion de tipo de combustible
+	public String validateCreateTipoCombustible(String tipo,String descripcion) {
+		if (!container.allMatches(new QueryDefault<TipoCombustible>(TipoCombustible.class,"buscarPorTipo", "tipo", tipo.toUpperCase())).isEmpty()) {
+				return "El tipo de combustible ingresado ya existe. Por favor verifique datos ingresados.";
+			}
+		return null;
+		}
 
 	@MemberOrder(sequence = "2")
 	@ActionLayout(named="Lista todos")
