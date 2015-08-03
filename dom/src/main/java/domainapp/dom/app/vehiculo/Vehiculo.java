@@ -1,23 +1,31 @@
 package domainapp.dom.app.vehiculo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
+import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
+import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Motivo;
+import domainapp.dom.app.estadoelemento.ServicioEstado;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.matafuego.Matafuego;
-import domainapp.dom.app.aceite.Aceite;
-import domainapp.dom.app.combustible.Combustible;
+import domainapp.dom.app.aceite.TipoAceite;
+import domainapp.dom.app.combustible.TipoCombustible;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Vehiculo_ID")
@@ -50,13 +58,15 @@ public class Vehiculo {
 	private String numeroChasis;
 	private Integer polizaSeguro;
 	private Gps gps;
-	private Combustible combustible;
+	private TipoCombustible TipoCombustible;
 	private Matafuego matafuego;
 	private Integer capacTanqueCombustible;
-	private Aceite aceite;
+	private TipoAceite tipoAceite;
 	private String cnsCombustibleRuta;
 	private String cnsCombuestibleCiudad;
 	private String kilometros;
+	private Estado estado;
+	private ServicioEstado servicioEstado;
 
 	@Persistent
 	@MemberOrder(sequence = "1")
@@ -154,13 +164,13 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "9")
-	@Column(allowsNull = "Combustible")
-	public Combustible getCombustible() {
-		return combustible;
+	@Column(allowsNull = "Tipo Combustible")
+	public TipoCombustible getTipoCombustible() {
+		return TipoCombustible;
 	}
 
-	public void setCombustible(Combustible combustible) {
-		this.combustible = combustible;
+	public void setTipoCombustible(TipoCombustible tipoCombustible) {
+		this.TipoCombustible = tipoCombustible;
 	}
 
 	@Persistent
@@ -178,12 +188,12 @@ public class Vehiculo {
 	@Persistent
 	@MemberOrder(sequence = "11")
 	@Column(allowsNull = "Aceite")
-	public Aceite getAceite() {
-		return aceite;
+	public TipoAceite getTipoAceite() {
+		return tipoAceite;
 	}
 
-	public void setAceite(Aceite aceite) {
-		this.aceite = aceite;
+	public void setTipoAceite(TipoAceite tipoAceite) {
+		this.tipoAceite = tipoAceite;
 	}
 
 	@Persistent
@@ -233,6 +243,26 @@ public class Vehiculo {
 		this.matafuego = matafuego;
 	}
 
+	@Persistent
+	@MemberOrder(sequence = "16")
+	@Column(allowsNull = "false")
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	@Programmatic
+	public ServicioEstado getServicioEstado() {
+		return servicioEstado;
+	}
+
+	public void setServicioEstado(ServicioEstado servicioEstado) {
+		this.servicioEstado = servicioEstado;
+	}
+
 	@Override
 	public String toString() {
 		return marca + ", " + modelo;
@@ -240,8 +270,8 @@ public class Vehiculo {
 
 	public Vehiculo(String marca, String nombre, Integer modelo,
 			Timestamp fechaCompra, String patente, String numeroChasis,
-			Integer polizaSeguro, Gps gps, Combustible combustible,
-			Integer capacTanqueCombustible, Aceite aceite,
+			Integer polizaSeguro, Gps gps, TipoCombustible tipoCombustible,
+			Integer capacTanqueCombustible, TipoAceite tipoAceite,
 			String cnsCombustibleRuta, String cnsCombuestibleCiudad,
 			String kilometros) {
 		super();
@@ -253,16 +283,94 @@ public class Vehiculo {
 		this.numeroChasis = numeroChasis;
 		this.polizaSeguro = polizaSeguro;
 		this.gps = gps;
-		this.combustible = combustible;
+		this.TipoCombustible = tipoCombustible;
 		this.capacTanqueCombustible = capacTanqueCombustible;
-		this.aceite = aceite;
+		this.tipoAceite = tipoAceite;
 		this.cnsCombustibleRuta = cnsCombustibleRuta;
 		this.cnsCombuestibleCiudad = cnsCombuestibleCiudad;
 		this.kilometros = kilometros;
+		this.estado=new Activo(new Timestamp(System.currentTimeMillis()),Motivo.ALTA);
 	}
 
 	public Vehiculo() {
 		super();
 	}
 
+	/**
+	 * Desactivar un Vehiculo, para que el mismo no pueda usarse en un vehiculo.
+	 *
+	 * @return Matafuego con estado Actualizado.
+	 */
+	public Vehiculo desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
+		//Obtengo el nuevo Estado.
+		this.setServicioEstado(this.getServicioEstado().obtenerServicio(this.getEstado()));
+		Estado e= this.getServicioEstado().desactivar(new Timestamp(System.currentTimeMillis()), motivo);
+		//Si el nuevo estado es nulo, quiere decir que no se puede cambiar de estado.
+		if (e==null){
+			container.informUser("Por algúna razón, el Vehiculo seleccionado, ya se encuentra Inactivo. "
+					+ "Por favor, revisar el listado de Elementos Inactivos del Sistema.");
+			return this;
+		}
+
+		//Guardo el anterior estado temporalmente, para eliminarlo de Base de Datos.
+		Estado old= this.getEstado();
+		this.setEstado(e);
+
+		//Actualizo el Matafuego con el nuevo estado.
+		container.persistIfNotAlready(this);
+
+		//Elimino el estado anterior.
+		container.removeIfNotAlready(old);
+
+		container.informUser("El Vehiculo, ha sido desactivado con exito.");
+		return this;
+	}
+
+	/**
+	 * Validar la lista de motivos a mostrar al momento de desactivar un Vehiculo.
+	 * @param motivo
+	 * @return lista de motivos.
+	 */
+	public List<Motivo> choices0Desactivar(Motivo motivo){
+		return Motivo.listar("desactivar");
+	}
+
+	/**
+	 * Verificar si se debe mostrar el boton Desactivar.
+	 *
+	 * @return Confirmacion
+	 */
+	public boolean hideDesactivar(){
+		return servicioEstado.ocultarDesactivar(this.getEstado());
+	}
+
+	/**
+	 * Reactivar un Vehiculo para poder ser utilizado en el sistema.
+	 *
+	 * @return this
+	 */
+	public Vehiculo activar(){
+		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
+		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
+		if (o[0] != null){
+			Estado oldEstado = this.getEstado();
+			this.setEstado((Estado) o[0]);
+			container.persistIfNotAlready(this);
+			container.removeIfNotAlready(oldEstado);
+		}
+		container.warnUser((String) o[1]);
+		return this;
+	}
+
+	/**
+	 * Verificar si se debe mosrar el boton.
+	 *
+	 * @return Confirmacion de si se debe mostrar el Boton.
+	 */
+	public boolean hideActivar(){
+		return this.servicioEstado.ocultarActivar(this.getEstado());
+	}
+
+	@javax.inject.Inject
+	DomainObjectContainer container;
 }

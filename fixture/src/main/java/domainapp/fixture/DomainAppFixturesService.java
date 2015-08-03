@@ -18,16 +18,14 @@
  */
 package domainapp.fixture;
 
-import domainapp.fixture.scenarios.RecreateSimpleObjects;
-
 import java.util.List;
+
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.RestrictTo;
-import org.apache.isis.applib.fixturescripts.FixtureResult;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 import org.apache.isis.applib.fixturescripts.FixtureScripts;
 import org.apache.isis.applib.fixturescripts.SimpleFixtureScript;
@@ -64,13 +62,19 @@ public class DomainAppFixturesService extends FixtureScripts {
             restrictTo = RestrictTo.PROTOTYPING
     )
     @ActionLayout(
-            cssClassFa="fa fa-refresh"
+            cssClassFa="fa fa-refresh", named="Actualizar Base de Datos"
     )
-    @MemberOrder(sequence="20")
-    public Object recreateObjectsAndReturnFirst() {
-        final List<FixtureResult> run = findFixtureScriptFor(RecreateSimpleObjects.class).run(null);
-        return run.get(0).getObject();
-    }
-
-
+	@MemberOrder(sequence = "20")
+	public String actualizarBaseDatos() {
+		findFixtureScriptFor(AreaFixture.class).run(null);
+		findFixtureScriptFor(EmpleadoFixture.class).run(null);
+		findFixtureScriptFor(AceiteFixture.class).run(null);
+		findFixtureScriptFor(TipoCombustibleFixture.class).run(null);
+		findFixtureScriptFor(CombustibleFixture.class).run(null);
+		findFixtureScriptFor(GpsFixture.class).run(null);
+		findFixtureScriptFor(TallerFixture.class).run(null);
+		findFixtureScriptFor(MatafuegoFixture.class).run(null);
+		findFixtureScriptFor(VehiculoFixture.class).run(null);
+		return "La Base de Datos, se ha actualizado con exito!";
+	}
 }

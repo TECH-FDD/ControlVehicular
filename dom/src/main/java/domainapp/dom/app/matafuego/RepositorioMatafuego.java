@@ -1,5 +1,7 @@
 package domainapp.dom.app.matafuego;
+
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -11,49 +13,116 @@ import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
 
+import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Baja;
+import domainapp.dom.app.estadoelemento.Inactivo;
+import domainapp.dom.app.estadoelemento.NecesitaReparacion;
+import domainapp.dom.app.estadoelemento.Reparacion;
 
-@DomainService(repositoryFor=Matafuego.class)
-@DomainServiceLayout(menuOrder="80",named="Matafuego")
+@DomainService(repositoryFor = Matafuego.class)
+@DomainServiceLayout(menuOrder = "80", named = "Matafuego")
 public class RepositorioMatafuego {
-	
-	@MemberOrder(sequence="1")
-	@ActionLayout(named="Crear matafuego")
+
+	@MemberOrder(sequence = "1")
+	@ActionLayout(named = "Crear matafuego")
 	public Matafuego createMatafuego(
-		final @ParameterLayout(named="Nombre") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String nombre,
-		final @ParameterLayout(named="codigo") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo,
-		final @ParameterLayout(named="Descripcion") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String descripcion,
-		final @ParameterLayout(named="Capacidad") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int capacidad,
-		final @ParameterLayout(named="Fecha de alta") Timestamp fechaAlta,
-		final @ParameterLayout(named="Fecha de recarga") Timestamp fechaRecarga,
-		final @ParameterLayout(named="Fecha de caducidad") Timestamp fechaCadRecarga,
-		final @ParameterLayout(named="Vehiculo") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String vehiculo,
-		final @ParameterLayout(named="Mantenimiento") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String mantenimiento,
-		final @ParameterLayout(named="Reparacion") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String reparacion){
-		
-		Matafuego matafuego = container.newTransientInstance(Matafuego.class);
-		matafuego.setNombre(nombre);
-		matafuego.setCodigo(codigo);
-		matafuego.setDescripcion(descripcion);
-		matafuego.setCapacidad(capacidad);
-		matafuego.setFechaAlta(fechaAlta);
-		matafuego.setFechaRecarga(fechaRecarga);
-		matafuego.setFechaCadRecarga(fechaCadRecarga);
-		matafuego.setVehiculo(vehiculo);
-		matafuego.setMantenimiento(mantenimiento);
-		matafuego.setReparacion(reparacion);
+			final @ParameterLayout(named = "Marca") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String Marca,
+			final @ParameterLayout(named = "Codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo,
+			final @ParameterLayout(named = "Descripción") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String descripcion,
+			final @ParameterLayout(named = "Capacidad") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int capacidad,
+			// final @ParameterLayout(named = "Fecha de alta") Timestamp fechaAlta,
+			final @ParameterLayout(named = "Fecha de última Recarga") Timestamp fechaRecarga,
+			final @ParameterLayout(named = "Fecha de caducidad") Timestamp fechaCadRecarga) {
+
+		Matafuego matafuego = new Matafuego(Marca, codigo, descripcion,
+				capacidad, new Timestamp(System.currentTimeMillis()),
+				fechaRecarga, fechaCadRecarga);
 		container.persistIfNotAlready(matafuego);
-		return matafuego; 
-	}  
-	@MemberOrder(sequence="2")
-	@ActionLayout(named="Listar todos")
-	public List<Matafuego> listAll(){
-		List<Matafuego> lista = this.container.allMatches(new QueryDefault<Matafuego>(Matafuego.class,
-				"ListarTodos"));
-		if(lista.isEmpty()){
-			this.container.warnUser("No hay areas cargadas en el sistema");
+		return matafuego;
+	}
+
+	/**
+	 * Validar campos al cargar un nuevo Matafuego.
+	 *
+	 * @return mensaje de error.
+	 */
+	public String validateCreateMatafuego(String marca, String codigo, String Descripcion,
+										int capacidad, Timestamp fechaRecarga, Timestamp fechaCaducidad){
+
+		if (fechaRecarga.after(new Timestamp(System.currentTimeMillis())))
+			return "La Fecha de Ultima Recarga no puede ser posterior al dia de hoy.";
+
+		if (fechaCaducidad.before(new Timestamp(System.currentTimeMillis())))
+			return "La Fecha de Caducidad de Carga, no puede ser anterior al dia hoy.";
+		return null;
+	}
+
+	@MemberOrder(sequence = "2")
+	@ActionLayout(named = "Listar todos")
+	public List<Matafuego> listAll() {
+		List<Matafuego> lista = activos(this.container
+				.allMatches(new QueryDefault<Matafuego>(Matafuego.class,
+						"ListarTodos")));
+		if (lista.isEmpty()) {
+			this.container.warnUser("No hay Matafuegos cargados en el sistema");
 		}
 		return lista;
 	}
+	
+	@MemberOrder(sequence = "3")
+	@ActionLayout(named = "Buscar por Marca")
+	public List<Matafuego> findByMarca(
+			@ParameterLayout(named = "Marca") final String marca) {
+
+		final List<Matafuego> listaMatafuego = activos (this.container
+				.allMatches(new QueryDefault<Matafuego>(Matafuego.class,
+						"buscarPorMarca", "marca", marca)));
+		if (listaMatafuego.isEmpty()) {
+			this.container.warnUser("No existe el matafuego buscado");
+		}
+		return listaMatafuego;
+	}
+
+	@MemberOrder(sequence = "4", name="Elementos Inactivos")
+	@ActionLayout(named = "Matafuego")
+	public List<Matafuego> listInactivos(){
+		List<Matafuego> lista=container.allInstances(Matafuego.class);
+		List<Matafuego> inactivos= new ArrayList<Matafuego>();
+		for (Matafuego Matafuego : lista){
+			if ((Matafuego.getEstado() instanceof Inactivo ||
+				Matafuego.getEstado() instanceof NecesitaReparacion ||
+				Matafuego.getEstado() instanceof Reparacion))
+				inactivos.add(Matafuego);
+		}
+		return inactivos;
+	}
+
+	@MemberOrder(sequence = "2", name="Elementos Desestimados")
+	@ActionLayout(named = "Matafuego")
+	public List<Matafuego> listBaja(){
+		List<Matafuego> lista = container.allInstances(Matafuego.class);
+		List<Matafuego> bajas= new ArrayList<Matafuego>();
+		for (Matafuego matafuego : lista){
+			if (matafuego.getEstado() instanceof Baja)
+				bajas.add(matafuego);
+		}
+		return bajas;
+	}
+
+	/**
+	 * Filtrar lista de Matafuegos, por estado Activo.
+	 * @param lista
+	 * @return lista de Matafuegos Activos.
+	 */
+	private List<Matafuego> activos(List<Matafuego> lista){
+		List<Matafuego> activos = new ArrayList<Matafuego>();
+		for (Matafuego m : lista){
+			if (m.getEstado() instanceof Activo)
+				activos.add(m);
+		}
+		return activos;
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

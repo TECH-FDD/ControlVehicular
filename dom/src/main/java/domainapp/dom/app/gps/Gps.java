@@ -1,6 +1,7 @@
 package domainapp.dom.app.gps;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
@@ -13,9 +14,14 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
+
+import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Motivo;
+import domainapp.dom.app.estadoelemento.ServicioEstado;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Gps_ID")
@@ -23,8 +29,6 @@ import org.apache.isis.applib.annotation.Property;
 @javax.jdo.annotations.Queries({
 		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.gps"),
-		@javax.jdo.annotations.Query(name = "ListarInactivos", language = "JDOQL", value = "SELECT "
-				+ "FROM domainapp.dom.app.gps " + "WHERE bajaGps!=null"),
 		@javax.jdo.annotations.Query(name = "buscarPorMarca", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.gps.Gps "
 				+ "WHERE marca.indexOf(:marca)>= 0"),
@@ -34,7 +38,7 @@ import org.apache.isis.applib.annotation.Property;
 		@javax.jdo.annotations.Query(name = "buscarPorCodigoIdentificacion", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.gps.Gps "
 				+ "WHERE codIdentificacion.indexOf(:codIdentificacion)>= 0") })
-@DomainObject(objectType = "GPS",bounded=true)
+@DomainObject(objectType = "GPS")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Gps {
 
@@ -45,7 +49,8 @@ public class Gps {
 	private Timestamp fechaAlta;
 	private Timestamp fechaAsigVehiculo;
 	private String obsEstadoDispositivo;
-	private BajaGps bajaGps;
+	private Estado estado;
+	private ServicioEstado servicioEstado;
 
 	@Persistent
 	@Property(editing = Editing.DISABLED)
@@ -130,13 +135,22 @@ public class Gps {
 
 	@Persistent
 	@MemberOrder(sequence = "8")
-	@Column(allowsNull = "true")
-	public BajaGps getBajaGps() {
-		return bajaGps;
+	@Column(allowsNull = "false")
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setBajaGps(BajaGps bajaGps) {
-		this.bajaGps = bajaGps;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	@Programmatic
+	public ServicioEstado getServicioEstado() {
+		return servicioEstado;
+	}
+
+	public void setServicioEstado(ServicioEstado servicioEstado) {
+		this.servicioEstado = servicioEstado;
 	}
 
 	@Override
@@ -146,8 +160,7 @@ public class Gps {
 
 	public Gps(String codIdentificacion, String marca, String modelo,
 			String descripcion, Timestamp fechaAlta,
-			Timestamp fechaAsigVehiculo, String obsEstadoDispositivo,
-			boolean activo, BajaGps baja) {
+			Timestamp fechaAsigVehiculo, String obsEstadoDispositivo) {
 		super();
 		this.codIdentificacion = codIdentificacion;
 		this.marca = marca;
@@ -156,7 +169,7 @@ public class Gps {
 		this.fechaAlta = fechaAlta;
 		this.fechaAsigVehiculo = fechaAsigVehiculo;
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
-		this.bajaGps = baja;
+		this.estado= new Activo(new Timestamp(System.currentTimeMillis()),Motivo.ALTA);
 	}
 
 	public Gps() {
@@ -168,17 +181,75 @@ public class Gps {
 	 *
 	 * @return mensaje de confirmacion.
 	 */
+	public Gps desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
+//		Estado e= this.getServicioEstado().desactivar(this.getEstado(), new Timestamp(System.currentTimeMillis()), motivo);
 
-	public String eliminarGps(
-			final @ParameterLayout(named = "Razon baja") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String razonBaja) {
+		//Obtengo el servicio correspondiente al estado actual.
+		this.setServicioEstado(this.getServicioEstado().obtenerServicio(this.getEstado()));
+		//Obtengo el nuevo estado.
+		Estado e= this.getServicioEstado().desactivar(new Timestamp(System.currentTimeMillis()), motivo);
+		//Si el nuevo estado es nulo, quiere decir que no se puede cambiar de estado.
+		if (e==null){
+			container.informUser("Por algúna razón, el Gps seleccionado, ya se encuentra Inactivo. "
+					+ "Por favor, revisar el listado de Elementos Inactivos del Sistema.");
+			return this;
+		}
 
-		BajaGps baja = new BajaGps();
-		baja.setFechaBaja(new Timestamp(System.currentTimeMillis()));
-		baja.setRazonBaja(razonBaja);
-		baja.setGps(this);
-		this.setBajaGps(baja);
-		container.persistIfNotAlready(baja);
-		return "El Gps ha sido eliminado de manera exitosa!";
+		//Guardo el anterior estado temporalmente, para eliminarlo de Base de Datos.
+		Estado old= this.getEstado();
+		this.setEstado(e);
+
+		//Actualizo el gps con el nuevo estado.
+		container.persistIfNotAlready(this);
+
+		//Elimino el estado anterior.
+		container.removeIfNotAlready(old);
+		return this;
+	}
+
+	/**
+	 * Verificar si se debe mostrar el boton Desactivar.
+	 *
+	 * @return Confirmacion
+	 */
+	public boolean hideDesactivar(){
+		return servicioEstado.ocultarDesactivar(this.getEstado());
+	}
+
+	/**
+	 * Validar la lista de motivos a mostrar al momento de desactivar un Gps.
+	 * @param motivo
+	 * @return lista de motivos.
+	 */
+	public List<Motivo> choices0Desactivar(Motivo motivo){
+		return Motivo.listar("desactivar");
+	}
+
+	/**
+	 * Reactivar un Gps para poder ser utilizado en el sistema.
+	 *
+	 * @return this
+	 */
+	public Gps activar(){
+		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
+		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
+		if (o[0] != null){
+			Estado oldEstado = this.getEstado();
+			this.setEstado((Estado) o[0]);
+			container.persistIfNotAlready(this);
+			container.removeIfNotAlready(oldEstado);
+		}
+		container.warnUser((String) o[1]);
+		return this;
+	}
+
+	/**
+	 * Verificar si se debe mosrar el boton.
+	 *
+	 * @return Confirmacion de si se debe mostrar el Boton.
+	 */
+	public boolean hideActivar(){
+		return this.servicioEstado.ocultarActivar(this.getEstado());
 	}
 
 	@javax.inject.Inject

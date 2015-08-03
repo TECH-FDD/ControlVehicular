@@ -14,6 +14,12 @@ import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
 
+import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Baja;
+import domainapp.dom.app.estadoelemento.Inactivo;
+import domainapp.dom.app.estadoelemento.NecesitaReparacion;
+import domainapp.dom.app.estadoelemento.Reparacion;
+
 @DomainService(repositoryFor = Gps.class)
 @DomainServiceLayout(menuOrder = "50", named = "Gps")
 public class RepositorioGps {
@@ -27,15 +33,18 @@ public class RepositorioGps {
 			final @ParameterLayout(named = "Fecha Asignacion Vehiculo") Timestamp fechaAsigVehiculo,
 			final @ParameterLayout(named = "observacion Estado Dispositivo ") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String obsEstadoDisp) {
 
-		final Gps gps = container.newTransientInstance(Gps.class);
+		final Gps gps = new Gps(codIdentificacion, marca, modelo,
+				descripcion, new Timestamp(System.currentTimeMillis()),
+				fechaAsigVehiculo, obsEstadoDisp);
 
-		gps.setCodIdentificacion(codIdentificacion);
-		gps.setModelo(modelo);
-		gps.setMarca(marca);
-		gps.setDescripcion(descripcion);
-		gps.setFechaAlta(new Timestamp(System.currentTimeMillis()));
-		gps.setFechaAsigVehiculo(fechaAsigVehiculo);
-		gps.setObsEstadoDispositivo(obsEstadoDisp);
+//				container.newTransientInstance(Gps.class);
+//		gps.setCodIdentificacion(codIdentificacion);
+//		gps.setModelo(modelo);
+//		gps.setMarca(marca);
+//		gps.setDescripcion(descripcion);
+//		gps.setFechaAlta(new Timestamp(System.currentTimeMillis()));
+//		gps.setFechaAsigVehiculo(fechaAsigVehiculo);
+//		gps.setObsEstadoDispositivo(obsEstadoDisp);
 
 		container.persistIfNotAlready(gps);
 		return gps;
@@ -56,49 +65,72 @@ public class RepositorioGps {
 
 	@MemberOrder(sequence = "2")
 	public List<Gps> listarTodos() {
-		return GpsActivos(container.allInstances(Gps.class));
+		return gpsActivos(container.allInstances(Gps.class));
 	}
 
 	@MemberOrder(sequence = "3")
 	@ActionLayout(named = "Buscar por Modelo")
 	public List<Gps> findByModelo(
 			@ParameterLayout(named = "Modelo Gps") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String modelo) {
-		return container.allMatches(new QueryDefault<>(Gps.class,
-				"buscarPorModelo", "modelo", modelo));
+		return gpsActivos(container.allMatches(new QueryDefault<>(Gps.class,
+				"buscarPorModelo", "modelo", modelo)));
 	}
 
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por Marca")
 	public List<Gps> findByMarca(
 			@ParameterLayout(named = "Marca Gps") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String marca) {
-		return container.allMatches(new QueryDefault<>(Gps.class,
-				"buscarPorMarca", "marca", marca));
+		return gpsActivos(container.allMatches(new QueryDefault<>(Gps.class,
+				"buscarPorMarca", "marca", marca)));
 	}
 
 	@MemberOrder(sequence = "5")
 	@ActionLayout(named = "Buscar por Codigo Identificacion")
 	public List<Gps> findByCodIdentificacion(
 			@ParameterLayout(named = "Codigo Identificacacion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String codIdentificacion) {
-		return container.allMatches(new QueryDefault<>(Gps.class,
+		return gpsActivos(container.allMatches(new QueryDefault<>(Gps.class,
 				"buscarPorCodigoIdentificacion", "codIdentificacion",
-				codIdentificacion));
+				codIdentificacion)));
 	}
 
 	@MemberOrder(sequence = "3", name="Elementos Inactivos")
 	@ActionLayout(named = "Gps")
 	public List<Gps> listGpsInactivos(){
-		List<Gps> lista=container.allMatches(new QueryDefault<Gps>(Gps.class,"ListarInactivos"));
-		
-		return lista;
+		List<Gps> lista=container.allInstances(Gps.class);
+		List<Gps> inactivos= new ArrayList<Gps>();
+		for (Gps gps : lista){
+			if ((gps.getEstado() instanceof Inactivo ||
+				gps.getEstado() instanceof NecesitaReparacion ||
+				gps.getEstado() instanceof Reparacion))
+				inactivos.add(gps);
+		}
+		return inactivos;
 	}
 
-	private List<Gps> GpsActivos(final List<Gps> lista){
+	/**
+	 * Filtrar lista de Gps, por activos.
+	 * @param lista
+	 * @return lista de Gps en estado Activo.
+	 */
+	private List<Gps> gpsActivos(final List<Gps> lista){
 		List<Gps> activos= new ArrayList<Gps>();
 		for (Gps gps : lista){
-			if (gps.getBajaGps()==null)
+			if (gps.getEstado() instanceof Activo)
 				activos.add(gps);
 		}
 		return activos;
+	}
+
+	@MemberOrder(sequence = "1", name="Elementos Desestimados")
+	@ActionLayout(named = "Gps")
+	public List<Gps> listBaja(){
+		List<Gps> lista = container.allInstances(Gps.class);
+		List<Gps> bajas= new ArrayList<Gps>();
+		for (Gps gps : lista){
+			if (gps.getEstado() instanceof Baja)
+				bajas.add(gps);
+		}
+		return bajas;
 	}
 
 	@javax.inject.Inject
