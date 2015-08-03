@@ -20,17 +20,17 @@ public class RepositorioTaller {
 	public Taller createTaller(
 			final @ParameterLayout(named = "Nombre Comercial") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String nombreComercial,
 			final @ParameterLayout(named = "Descripcion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String descripcion,
-			final @ParameterLayout(named = "Direccion")  @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String direccion,
-			final @ParameterLayout(named = "telefono")  @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionTel.ADMITIDOS) String telefono,
-			final @ParameterLayout(named = "Codigo")  @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo,
-			final @ParameterLayout(named = "Email")  @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionEmail.ADMITIDOS) String email){
+			final @ParameterLayout(named = "Direccion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String direccion,
+			final @ParameterLayout(named = "telefono") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionTel.ADMITIDOS) String telefono,
+			final @ParameterLayout(named = "Codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo,
+			final @ParameterLayout(named = "Email") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionEmail.ADMITIDOS) String email) {
 
 		final Taller taller = container.newTransientInstance(Taller.class);
 
-		taller.setNombreComercial(nombreComercial);
+		taller.setNombreComercial(nombreComercial.toUpperCase());
 		taller.setTelefono(telefono);
-		taller.setDescripcion(descripcion);
-		taller.setDireccion(direccion);
+		taller.setDescripcion(descripcion.toUpperCase());
+		taller.setDireccion(direccion.toUpperCase());
 		taller.setEmail(email);
 		taller.setCodigo(codigo);
 		container.persistIfNotAlready(taller);
@@ -38,6 +38,23 @@ public class RepositorioTaller {
 
 	}
 
+	// Validar nombre comercial y codigo del taller
+	public String validateCreateTaller(String nombreComercial, String telefono,
+			String descripcion, String codigo, String direccion, String email) {
+		if (!container.allMatches(
+				new QueryDefault<Taller>(Taller.class,
+						"buscarPorNombreComercial", "nombreComercial",
+						nombreComercial.toUpperCase())).isEmpty()) {
+			return "El nombre comercial ya existe. Por favor verificar los Datos Ingresados.";
+		}
+		if (!container.allMatches(
+				new QueryDefault<Taller>(Taller.class, "buscarPorCodigo",
+						"codigo", codigo.toUpperCase())).isEmpty()) {
+			return "El Codigo ya existe. Por favor verificar los Datos Ingresados.";
+		}
+
+		return null;
+	}
 	@MemberOrder(sequence = "2")
 	@ActionLayout(named = "Listar todos")
 	public List<Taller> listAll() {
