@@ -71,7 +71,7 @@ public class RepositorioTaller {
 	public List<Taller> findByNombreComercial(
 			@ParameterLayout(named = "Nombre Comercial") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String nombreComercial) {
 		return container.allMatches(new QueryDefault<>(Taller.class,
-				"buscarPorNombreComercial", "nombreComercial", nombreComercial));
+				"buscarPorNombreComercial", "nombreComercial", nombreComercial.toUpperCase()));
 	}
 
 	@MemberOrder(sequence = "4")
@@ -79,7 +79,7 @@ public class RepositorioTaller {
 	public List<Taller> findByDireccion(
 			@ParameterLayout(named = "Direccion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String direccion) {
 		return container.allMatches(new QueryDefault<>(Taller.class,
-				"buscarPorDireccion", "direccion", direccion));
+				"buscarPorDireccion", "direccion", direccion.toUpperCase()));
 	}
 
 	@MemberOrder(sequence = "5")
@@ -88,7 +88,7 @@ public class RepositorioTaller {
 			@ParameterLayout(named = "Codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String codigo) {
 		return container.allMatches(new QueryDefault<>(Taller.class,
 				"buscarPorCodigo", "codigo",
-				codigo));
+				codigo.toUpperCase()));
 	}
 
 
