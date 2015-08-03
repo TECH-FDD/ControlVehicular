@@ -62,15 +62,16 @@ public class RepositorioCombustible {
 			TipoCombustible tipo_combustible) {
 		if (!container.allMatches(
 				new QueryDefault<Combustible>(Combustible.class,
-						"buscarPorNombre", "nombre", nombre.toUpperCase())).isEmpty()) {
-			this.container
-					.warnUser("El nombre ya existe. Por favor verifique datos ingresados.");
+						"buscarPorNombre", "nombre", nombre.toUpperCase()))
+				.isEmpty()) {
+
+			return "El nombre ya existe. Por favor verifique datos ingresados.";
 		}
 		if (!container.allMatches(
 				new QueryDefault<Combustible>(Combustible.class,
-						"buscarPorCodigo", "codigo", codigo.toUpperCase())).isEmpty()) {
-			this.container
-					.warnUser("El codigo ingresado ya exite! Por favor verifique los datos ingresados.");
+						"buscarPorCodigo", "codigo", codigo.toUpperCase()))
+				.isEmpty()) {
+			return "El codigo ingresado ya exite! Por favor verifique los datos ingresados.";
 		}
 		return null;
 	}
