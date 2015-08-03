@@ -38,11 +38,11 @@ public class RepositorioCombustible {
 		final Combustible combustible = container
 				.newTransientInstance(Combustible.class);
 
-		combustible.setNombre(nombre);
-		combustible.setEmpresa(empresa);
-		combustible.setCodigo(codigo);
-		combustible.setDescripcion(descripcion);
-		combustible.setCategoria(categoria);
+		combustible.setNombre(nombre.toUpperCase());
+		combustible.setEmpresa(empresa.toUpperCase());
+		combustible.setCodigo(codigo.toUpperCase());
+		combustible.setDescripcion(descripcion.toUpperCase());
+		combustible.setCategoria(categoria.toUpperCase());
 		combustible.setPrecioLitro(precioLitro);
 		combustible.setPrecioAnterior(precioAnterior);
 		combustible.setPorcentajeAumento(porceAumento);
