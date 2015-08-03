@@ -62,13 +62,13 @@ public class RepositorioCombustible {
 			TipoCombustible tipo_combustible) {
 		if (!container.allMatches(
 				new QueryDefault<Combustible>(Combustible.class,
-						"buscarPorNombre", "nombre", nombre)).isEmpty()) {
+						"buscarPorNombre", "nombre", nombre.toUpperCase())).isEmpty()) {
 			this.container
 					.warnUser("El nombre ya existe. Por favor verifique datos ingresados.");
 		}
 		if (!container.allMatches(
 				new QueryDefault<Combustible>(Combustible.class,
-						"buscarPorCodigo", "codigo", codigo)).isEmpty()) {
+						"buscarPorCodigo", "codigo", codigo.toUpperCase())).isEmpty()) {
 			this.container
 					.warnUser("El codigo ingresado ya exite! Por favor verifique los datos ingresados.");
 		}
@@ -95,7 +95,7 @@ public class RepositorioCombustible {
 
 		final List<Combustible> listaCombustible = this.container
 				.allMatches(new QueryDefault<Combustible>(Combustible.class,
-						"buscarPorNombre", "nombre", nombre));
+						"buscarPorNombre", "nombre", nombre.toUpperCase()));
 		if (listaCombustible.isEmpty()) {
 			this.container.warnUser("No existe el combustible buscado");
 		}
@@ -108,7 +108,7 @@ public class RepositorioCombustible {
 			@ParameterLayout(named = "Codigo") final String codigo) {
 		final List<Combustible> listaCombustible = this.container
 				.allMatches(new QueryDefault<Combustible>(Combustible.class,
-						"buscarPorCodigo", "codigo", codigo));
+						"buscarPorCodigo", "codigo", codigo.toUpperCase()));
 		if (listaCombustible.isEmpty()) {
 			this.container.warnUser("No existe el combustible buscado");
 		}
