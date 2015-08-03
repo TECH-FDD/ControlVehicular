@@ -119,7 +119,7 @@ public class RepositorioVehiculo {
 	public List<Vehiculo> findByMarca(
 			@ParameterLayout(named = "Marca") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String marca) {
 		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarMarca", "marca", marca)));
+				"BuscarMarca", "marca", marca.toUpperCase())));
 	}
 
 	@MemberOrder(sequence = "4")
@@ -127,7 +127,7 @@ public class RepositorioVehiculo {
 	public List<Vehiculo> findByNombre(
 			@ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre) {
 		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarNombre", "nombre", nombre)));
+				"BuscarNombre", "nombre", nombre.toUpperCase())));
 	}
 
 	@MemberOrder(sequence = "5")
@@ -143,7 +143,7 @@ public class RepositorioVehiculo {
 	public List<Vehiculo> findByPatente(
 			@ParameterLayout(named = "Patente") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String patente) {
 		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarPatente", "patente", patente)));
+				"BuscarPatente", "patente", patente.toUpperCase())));
 	}
 
 	@MemberOrder(sequence = "7")
@@ -151,7 +151,7 @@ public class RepositorioVehiculo {
 	public List<Vehiculo> findByNumeroChasis(
 			@ParameterLayout(named = "Numero Chasis") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String numeroChasis) {
 		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarNumeroChasis", "numeroChasis", numeroChasis)));
+				"BuscarNumeroChasis", "numeroChasis", numeroChasis.toUpperCase())));
 	}
 
 	/**
