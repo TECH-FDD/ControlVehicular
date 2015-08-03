@@ -64,7 +64,7 @@ public class RepositorioGps {
 	public List<Gps> findByModelo(
 			@ParameterLayout(named = "Modelo Gps") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String modelo) {
 		return gpsActivos(container.allMatches(new QueryDefault<>(Gps.class,
-				"buscarPorModelo", "modelo", modelo)));
+				"buscarPorModelo", "modelo", modelo.toUpperCase())));
 	}
 
 	@MemberOrder(sequence = "4")
@@ -72,7 +72,7 @@ public class RepositorioGps {
 	public List<Gps> findByMarca(
 			@ParameterLayout(named = "Marca Gps") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String marca) {
 		return gpsActivos(container.allMatches(new QueryDefault<>(Gps.class,
-				"buscarPorMarca", "marca", marca)));
+				"buscarPorMarca", "marca", marca.toUpperCase())));
 	}
 
 	@MemberOrder(sequence = "5")
@@ -81,7 +81,7 @@ public class RepositorioGps {
 			@ParameterLayout(named = "Codigo Identificacacion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String codIdentificacion) {
 		return gpsActivos(container.allMatches(new QueryDefault<>(Gps.class,
 				"buscarPorCodigoIdentificacion", "codIdentificacion",
-				codIdentificacion)));
+				codIdentificacion.toUpperCase())));
 	}
 
 	@MemberOrder(sequence = "3", name="Elementos Inactivos")
