@@ -73,7 +73,7 @@ public class RepositorioArea {
 			@ParameterLayout(named = "Nombre") final String nombre) {
 		final List<Area> listaArea = this.container
 				.allMatches(new QueryDefault<Area>(Area.class,
-						"buscarPorNombre", "nombre", nombre));
+						"buscarPorNombre", "nombre", nombre.toUpperCase()));
 		if (listaArea.isEmpty()) {
 			this.container.warnUser("No existe el Area buscada");
 		}
@@ -86,7 +86,7 @@ public class RepositorioArea {
 			@ParameterLayout(named = "Codigo de area") final String codigoArea) {
 		List<Area> listaAreaCod = this.container
 				.allMatches(new QueryDefault<Area>(Area.class,
-						"buscarPorCodigo", "codigoArea", codigoArea));
+						"buscarPorCodigo", "codigoArea", codigoArea.toUpperCase()));
 		if (listaAreaCod.isEmpty()) {
 			this.container.warnUser("No existe el Area buscada");
 		}
