@@ -100,16 +100,18 @@ public class RepositorioEmpleado {
 	@ActionLayout(named = "Buscar por Nombre")
 	public List<Empleado> findByNombre(
 			@ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre) {
+		String name= nombre.toUpperCase();
 		return filtrarPorActivos(container.allMatches(new QueryDefault<>(
-				Empleado.class, "Buscar_Nombre", "nombre", nombre)));
+				Empleado.class, "Buscar_Nombre", "nombre", name)));
 	}
 
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por Apellido")
 	public List<Empleado> findByApellido(
 			@ParameterLayout(named = "Apellido") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String apellido) {
+		String apellid= apellido.toUpperCase();
 		return filtrarPorActivos(container.allMatches(new QueryDefault<>(
-				Empleado.class, "Buscar_Apellido", "apellido", apellido)));
+				Empleado.class, "Buscar_Apellido", "apellido", apellid)));
 	}
 
 	@MemberOrder(sequence = "2")
