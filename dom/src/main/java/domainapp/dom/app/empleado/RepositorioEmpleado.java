@@ -141,7 +141,8 @@ public class RepositorioEmpleado {
 	}
 
 	@MemberOrder(sequence = "1", name = "Elementos Inactivos")
-	public List<Empleado> Empleados() {
+	@ActionLayout(named="Empleados")
+	public List<Empleado> listAllEmpleados() {
 		List<Empleado> lista = container.allInstances(Empleado.class);
 		List<Empleado> inactivos = new ArrayList<Empleado>();
 		for (Empleado empleado : lista) {
