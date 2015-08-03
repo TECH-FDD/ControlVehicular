@@ -26,12 +26,12 @@ public class RepositorioAceite {
 			@ParameterLayout(named="Tipo de Aceite")TipoAceite tipoAceite,
 			@ParameterLayout(named="Duración (km)")@Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS)int duracion){
 		final Aceite aceite = container.newTransientInstance(Aceite.class);
-		aceite.setCodigo(codigo);
-		aceite.setDescripcion(descripcion);
+		aceite.setCodigo(codigo.toUpperCase());
+		aceite.setDescripcion(descripcion.toUpperCase());
 		aceite.setDuracion(duracion);
 		aceite.setFechaAlta(new Timestamp(System.currentTimeMillis()));
-		aceite.setMarca(marca);
-		aceite.setNombre(nombre);
+		aceite.setMarca(marca.toUpperCase());
+		aceite.setNombre(nombre.toUpperCase());
 		aceite.setTipoAceite(tipoAceite);
 		aceite.setActivo(true);
 		container.persistIfNotAlready(aceite);
