@@ -49,25 +49,9 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "Matafuego") Matafuego matafuego,
 			final @ParameterLayout(named = "Kilometros") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String kilometros) {
 
-		final Vehiculo vehiculo = new Vehiculo(marca, nombre, modelo, fechaCompra,
-				patente, numeroChasis, polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
+		final Vehiculo vehiculo = new Vehiculo(marca.toUpperCase(), nombre.toUpperCase(), modelo, fechaCompra,
+				patente.toUpperCase(), numeroChasis.toUpperCase(), polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
 				tipoAceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros);
-//		vehiculo.setMarca(marca);
-//		vehiculo.setModelo(modelo);
-//		vehiculo.setNombre(nombre);
-//		vehiculo.setFechaCompra(fechaCompra);
-//		vehiculo.setPatente(patente);
-//		vehiculo.setNumeroChasis(numeroChasis);
-//		vehiculo.setPolizaSeguro(polizaSeguro);
-//		vehiculo.setGps(gps);
-//		vehiculo.setCombustible(combustible);
-//		vehiculo.setCapacTanqueCombustible(capTanqueCombustible);
-//		vehiculo.setAceite(aceite);
-//		vehiculo.setCnsCombustibleRuta(cnsCombustibleRuta);
-//		vehiculo.setCnsCombuestibleCiudad(cnsCombustibleCiudad);
-//		vehiculo.setMatafuego(matafuego);
-//		vehiculo.setKilometros(kilometros);
-
 		container.persistIfNotAlready(vehiculo);
 		return vehiculo;
 	}
@@ -89,9 +73,9 @@ public class RepositorioVehiculo {
 				return "El Gps ingresado, ya se encuetra asignado al Vehiculo:" + v.toString();
 			if (v.getMatafuego().equals(matafuego))
 				return "El Matafuego ingresado, ya se encuentra asignado al Vehiculo:" + v.toString();
-			if (v.getNumeroChasis()==nroChasis)
+			if (v.getNumeroChasis()==nroChasis.toUpperCase())
 				return "El Número de Chasis ingresado, pertenece al Vehiculo:" + v.toString();
-			if (v.getPatente()==patente)
+			if (v.getPatente()==patente.toUpperCase())
 				return "La Patente Ingresada, pertenece al Vehiculo:" + v.toString();
 		}
 		return null;
