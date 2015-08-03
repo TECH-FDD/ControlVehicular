@@ -110,12 +110,24 @@ public class Empleado extends Persona {
 	 *
 	 * @return mensaje de confirmacion.
 	 */
-	public String desactivarEmpleado(){
+	public Empleado desactivarEmpleado() {
 		this.setActivo(false);
-		return "El Empleado ha sido desactivado de manera exitosa!";
+		container
+				.informUser("El Empleado ha sido desactivado de manera exitosa!");
+		return this;
 
 	}
-
+	/**
+	 * Se desactiva la opcion desactivar Empleado , cuando el empleado ya este
+	 * Desactivado
+	 */
+	@Programmatic
+	public boolean hideDesactivarEmpleado() {
+		if (isActivo() == false)
+			return true;
+		else
+			return false;
+	}
 	/**
 	 * Modificar la Ciudad actual del Empleado, lo cual puede implicar o no, un
 	 * cambio de Provincia, pero si o si, debe implicar un cambio de Codigo
