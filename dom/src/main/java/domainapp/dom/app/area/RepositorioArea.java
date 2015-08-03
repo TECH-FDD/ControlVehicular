@@ -24,23 +24,37 @@ public class RepositorioArea {
 	public Area createArea(
 			final @ParameterLayout(named = "Codigo de Area") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 10) String codigoArea,
 			final @ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, maxLength = 30) String nombre,
-			final @ParameterLayout(named = "Descripcion") String descripcion)
-	/* final @ParameterLayout(named="Fecha de alta") Timestamp fecha_alta) */{
+			final @ParameterLayout(named = "Descripcion") String descripcion){
 
 		final Area area = container.newTransientInstance(Area.class);
 
 		Date date = new Date();
 		Timestamp fecha = new Timestamp(date.getTime());
 
-		area.setCodigoArea(codigoArea);
-		area.setNombre(nombre);
-		area.setDescripcion(descripcion);
+		area.setCodigoArea(codigoArea.toUpperCase());
+		area.setNombre(nombre.toUpperCase());
+		area.setDescripcion(descripcion.toUpperCase());
 		area.setFechaAlta(fecha);
 		area.setActivo(true);
 		container.persistIfNotAlready(area);
 		return area;
 
 	}
+
+	// Validar Codigo de Area y Nombre
+		public String validateCreateArea(String codigoArea, String nombre,String descripcion) {
+			if (!container.allMatches(
+					new QueryDefault<Area>(Area.class, "buscarPorNombre",
+							"nombre", nombre.toUpperCase())).isEmpty()) {
+				return "El nombre ya Existe. Por favor vericar los datos ingresados.";
+			}
+			if (!container.allMatches(
+					new QueryDefault<Area>(Area.class, "buscarPorCodigo",
+							"codigoArea", codigoArea.toUpperCase())).isEmpty()) {
+				return "El Codigo de Area ya Existe. Por favor vericar los datos ingresados.";
+			}
+			return null;
+		}
 
 	@MemberOrder(sequence = "2")
 	@ActionLayout(named = "Listar todos")
