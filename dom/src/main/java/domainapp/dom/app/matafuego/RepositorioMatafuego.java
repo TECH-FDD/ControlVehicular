@@ -34,7 +34,7 @@ public class RepositorioMatafuego {
 			final @ParameterLayout(named = "Fecha de última Recarga") Timestamp fechaRecarga,
 			final @ParameterLayout(named = "Fecha de caducidad") Timestamp fechaCadRecarga) {
 
-		Matafuego matafuego = new Matafuego(Marca, codigo, descripcion,
+		Matafuego matafuego = new Matafuego(Marca.toUpperCase(), codigo.toUpperCase(), descripcion.toUpperCase(),
 				capacidad, new Timestamp(System.currentTimeMillis()),
 				fechaRecarga, fechaCadRecarga);
 		container.persistIfNotAlready(matafuego);
@@ -76,7 +76,7 @@ public class RepositorioMatafuego {
 
 		final List<Matafuego> listaMatafuego = activos (this.container
 				.allMatches(new QueryDefault<Matafuego>(Matafuego.class,
-						"buscarPorMarca", "marca", marca)));
+						"buscarPorMarca", "marca", marca.toUpperCase())));
 		if (listaMatafuego.isEmpty()) {
 			this.container.warnUser("No existe el matafuego buscado");
 		}
