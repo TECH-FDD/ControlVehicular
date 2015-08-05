@@ -1,6 +1,7 @@
 package domainapp.dom.app.alerta;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.ActionLayout;
@@ -9,6 +10,7 @@ import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.vehiculo.Vehiculo;
@@ -32,6 +34,19 @@ public class RepositorioAlertaVehiculo {
 
 		container.persistIfNotAlready(alertaVehiculo);
 		return alertaVehiculo;
+	}
+
+	@MemberOrder(sequence = "2")
+	@ActionLayout(named = "Listar todos")
+	public List<AlertaVehiculo> listAll() {
+		List<AlertaVehiculo> lista = this.container
+				.allMatches(new QueryDefault<AlertaVehiculo>(
+						AlertaVehiculo.class, "ListarTodos"));
+		if (lista.isEmpty()) {
+			this.container
+					.warnUser("No hay alertas de vehiculos cargadas en el sistema");
+		}
+		return lista;
 	}
 
 	@javax.inject.Inject
