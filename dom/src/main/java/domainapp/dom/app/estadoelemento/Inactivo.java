@@ -76,6 +76,7 @@ public class Inactivo extends Estado {
 	public void reactivarGps(Gps gps) {
 		Estado estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.REACTIVADO);
 		actualizarGps(gps, estado);
+		container.informUser("El Gps seleccionado, ha sido reacivado exitosamente.");
 	}
 
 	@Override
@@ -83,6 +84,7 @@ public class Inactivo extends Estado {
 	public void reactivarMatafuego(Matafuego matafuego) {
 		Estado estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.REACTIVADO);
 		actualizarMatafuego(matafuego, estado);
+		container.informUser("El Matafuego seleccionado, ha sido reacivado exitosamente.");
 	}
 
 	@Override
@@ -90,6 +92,7 @@ public class Inactivo extends Estado {
 	public void reactivarVehiculo(Vehiculo vehiculo) {
 		Estado estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.REACTIVADO);
 		actualizarVehiculo(vehiculo, estado);
+		container.informUser("El Vehiculo seleccionado, ha sido reacivado exitosamente.");
 	}
 
 	@javax.inject.Inject
