@@ -20,6 +20,7 @@ import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.estadoelemento.ServicioEstado;
 
@@ -209,16 +210,8 @@ public class Gps {
 	 *
 	 * @return this
 	 */
-	public Gps activar(){
-		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
-		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
-		if (o[0] != null){
-			Estado oldEstado = this.getEstado();
-			this.setEstado((Estado) o[0]);
-			container.persistIfNotAlready(this);
-			container.removeIfNotAlready(oldEstado);
-		}
-		container.warnUser((String) o[1]);
+	public Gps reactivar(){
+		this.getEstado().reactivarGps(this);
 		return this;
 	}
 
@@ -227,8 +220,11 @@ public class Gps {
 	 *
 	 * @return Confirmacion de si se debe mostrar el Boton.
 	 */
-	public boolean hideActivar(){
-		return this.servicioEstado.ocultarActivar(this.getEstado());
+	public boolean hideReactivar(){
+		if (!(this.getEstado() instanceof Inactivo))
+			return true;
+		else
+			return false;
 	}
 
 	@javax.inject.Inject
