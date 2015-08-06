@@ -28,6 +28,7 @@ import domainapp.dom.app.persona.Documento;
 import domainapp.dom.app.persona.Persona;
 import domainapp.dom.app.persona.Provincia;
 import domainapp.dom.app.persona.Sexo;
+import domainapp.dom.app.vehiculo.Vehiculo;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Empleado_ID")
@@ -54,6 +55,7 @@ public class Empleado extends Persona {
 	private String legajo;
 	private Area area;
 	private boolean activo;
+	private Vehiculo vehiculo;
 
 	public Empleado(String nombre, String apellido, Documento tipoDocumento,
 			int nroDocumento, LocalDate fechaNacimiento, String domicilio,
@@ -86,7 +88,7 @@ public class Empleado extends Persona {
 
 	@Persistent
 	@MemberOrder(sequence = "21")
-	@javax.jdo.annotations.Column(allowsNull = "Area")
+	@javax.jdo.annotations.Column(allowsNull = "false")
 	public Area getArea() {
 		return area;
 	}
@@ -102,6 +104,17 @@ public class Empleado extends Persona {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	@Persistent
+	@MemberOrder(sequence = "22")
+	@javax.jdo.annotations.Column(allowsNull = "true")
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
 	}
 
 	/**
