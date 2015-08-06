@@ -67,6 +67,31 @@ public class Reparacion extends Estado {
 		container.warnUser("El Vehiculo seleccionado, ya se encuentra en estado Inactivo.");
 	}
 
+	/*********************************
+	 * Reactivacion de los elementos.*
+	 *********************************/
+
+	@Override
+	@Programmatic
+	public void reactivarGps(Gps gps) {
+		container.warnUser("El Gps seleccionado se encuentra en Reparación, "
+				+ "por lo que no puede ser Reactivado.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarMatafuego(Matafuego matafuego) {
+		container.warnUser("El Matafuego seleccionado se encuentra en Reparación, "
+				+ "por lo que no puede ser Reactivado.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarVehiculo(Vehiculo vehiculo) {
+		container.warnUser("El Vehiculo seleccionado se encuentra en Reparación, "
+				+ "por lo que no puede ser Reactivado.");
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

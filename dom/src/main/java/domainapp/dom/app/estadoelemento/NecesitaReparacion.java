@@ -67,6 +67,28 @@ public class NecesitaReparacion extends Estado {
 		container.warnUser("El Matafuego seleccionado, ya se encuentra en estado Inactivo.");
 	}
 
+	/*********************************
+	 * Reactivacion de los elementos.*
+	 *********************************/
+
+	@Override
+	@Programmatic
+	public void reactivarGps(Gps gps) {
+		container.warnUser("Para ser reactivado, se necesita confirmación de que el Gps fue reparado.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarMatafuego(Matafuego matafuego) {
+		container.warnUser("Para ser reactivado, se necesita confirmación de que el Matafuego fue reparado.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarVehiculo(Vehiculo vehiculo) {
+		container.warnUser("Para ser reactivado, se necesita confirmación de que el Vehiculo fue reparado.");
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

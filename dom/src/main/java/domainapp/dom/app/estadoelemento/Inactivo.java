@@ -67,6 +67,31 @@ public class Inactivo extends Estado {
 		container.warnUser("El Vehiculo seleccionado, ya se encuentra en estado Inactivo.");
 	}
 
+	/*********************************
+	 * Reactivacion de los elementos.*
+	 *********************************/
+
+	@Override
+	@Programmatic
+	public void reactivarGps(Gps gps) {
+		Estado estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.REACTIVADO);
+		actualizarGps(gps, estado);
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarMatafuego(Matafuego matafuego) {
+		Estado estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.REACTIVADO);
+		actualizarMatafuego(matafuego, estado);
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarVehiculo(Vehiculo vehiculo) {
+		Estado estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.REACTIVADO);
+		actualizarVehiculo(vehiculo, estado);
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

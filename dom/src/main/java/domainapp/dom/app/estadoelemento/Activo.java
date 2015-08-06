@@ -74,6 +74,28 @@ public class Activo extends Estado {
 		container.informUser("Se desactivo el Vehiculo de manera exitosa.");
 	}
 
+	/*********************************
+	 * Reactivacion de los elementos.*
+	 *********************************/
+
+	@Override
+	@Programmatic
+	public void reactivarGps(Gps gps) {
+		container.warnUser("El Gps seleccionado, ya se encuentra en estado Activo.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarMatafuego(Matafuego matafuego) {
+		container.warnUser("El Matafuego seleccionado, ya se encuentra en estado Activo.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarVehiculo(Vehiculo vehiculo) {
+		container.warnUser("El Vehiculo seleccionado, ya se encuentra en estado Activo.");
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

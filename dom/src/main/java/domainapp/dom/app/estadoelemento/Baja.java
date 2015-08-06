@@ -70,6 +70,31 @@ public class Baja extends Estado {
 				+ " por lo tanto no puede ser desactivado");
 	}
 
+	/*********************************
+	 * Reactivacion de los elementos.*
+	 *********************************/
+
+	@Override
+	@Programmatic
+	public void reactivarGps(Gps gps) {
+		container.warnUser("El Gps seleccionado, ha sido dado de Baja, "
+				+ "por lo que no puede ser reactivado.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarMatafuego(Matafuego matafuego) {
+		container.warnUser("El Matafuego seleccionado, ha sido dado de Baja, "
+				+ "por lo que no puede ser reactivado.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarVehiculo(Vehiculo vehiculo) {
+		container.warnUser("El Vehiculo seleccionado, ha sido dado de Baja, "
+				+ "por lo que no puede ser reactivado.");
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

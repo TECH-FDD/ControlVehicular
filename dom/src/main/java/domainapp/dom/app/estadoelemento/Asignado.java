@@ -145,6 +145,28 @@ public class Asignado extends Estado {
 		container.persistIfNotAlready(empleado);
 	}
 
+	/*********************************
+	 * Reactivacion de los elementos.*
+	 *********************************/
+
+	@Override
+	@Programmatic
+	public void reactivarGps(Gps gps) {
+		container.warnUser("El Gps seleccionado, se encuentra en estado Asignado y Activo.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarMatafuego(Matafuego matafuego) {
+		container.warnUser("El Matafuego seleccionado, se encuentra en estado Asignado y Activo.");
+	}
+
+	@Override
+	@Programmatic
+	public void reactivarVehiculo(Vehiculo vehiculo) {
+		container.warnUser("El Vehiculo seleccionado, se encuentra en estado Asignado y Activo.");
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
