@@ -15,14 +15,13 @@ import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
-import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Asignado;
 import domainapp.dom.app.estadoelemento.Estado;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
-import domainapp.dom.app.estadoelemento.ServicioEstado;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Gps_ID")
@@ -51,7 +50,6 @@ public class Gps {
 	private Timestamp fechaAsigVehiculo;
 	private String obsEstadoDispositivo;
 	private Estado estado;
-	private ServicioEstado servicioEstado;
 
 	@Persistent
 	@Property(editing = Editing.DISABLED)
@@ -145,15 +143,6 @@ public class Gps {
 		this.estado = estado;
 	}
 
-	@Programmatic
-	public ServicioEstado getServicioEstado() {
-		return servicioEstado;
-	}
-
-	public void setServicioEstado(ServicioEstado servicioEstado) {
-		this.servicioEstado = servicioEstado;
-	}
-
 	@Override
 	public String toString() {
 		return marca + " " + modelo;
@@ -193,7 +182,11 @@ public class Gps {
 	 * @return Confirmacion
 	 */
 	public boolean hideDesactivar(){
-		return servicioEstado.ocultarDesactivar(this.getEstado());
+		if (this.getEstado() instanceof Activo ||
+				this.getEstado() instanceof Asignado)
+			return false;
+		else
+			return true;
 	}
 
 	/**
