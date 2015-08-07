@@ -12,6 +12,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.estadoelemento.Activo;
@@ -104,13 +105,14 @@ public class RepositorioGps {
 	 * @param lista
 	 * @return lista de Gps en estado Activo.
 	 */
+	@Programmatic
 	public List<Gps> gpsNoAsignados(final List<Gps> lista){
-		List<Gps> activos= new ArrayList<Gps>();
+		List<Gps> noAsignados= new ArrayList<Gps>();
 		for (Gps gps : lista){
 			if (gps.getEstado() instanceof Activo)
-				activos.add(gps);
+				noAsignados.add(gps);
 		}
-		return activos;
+		return noAsignados;
 	}
 
 	/**
