@@ -12,6 +12,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.aceite.TipoAceite;
@@ -182,6 +183,7 @@ public class RepositorioVehiculo {
 	 * @param lista
 	 * @return lista de Vehiculo no Asignados.
 	 */
+	@Programmatic
 	public List<Vehiculo> noAsignados(List<Vehiculo> lista){
 		List<Vehiculo> noAsignados = new ArrayList<Vehiculo>();
 		for (Vehiculo v : lista){
