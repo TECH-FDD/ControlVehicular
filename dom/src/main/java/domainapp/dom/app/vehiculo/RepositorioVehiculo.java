@@ -112,7 +112,7 @@ public class RepositorioVehiculo {
 											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
 											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
 											Matafuego matafuego, String kilometro){
-		return repoMatafuego.listAll();
+		return repoMatafuego.noAsignados(container.allInstances(Matafuego.class));
 	}
 
 	@MemberOrder(sequence = "2")
