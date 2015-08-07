@@ -334,7 +334,7 @@ public class Vehiculo {
 	 *
 	 * @return Confirmacion de si se debe mostrar el Boton.
 	 */
-	public boolean hideActivar(){
+	public boolean hideReactivar(){
 		if (this.getEstado() instanceof Inactivo)
 			return false;
 		else
