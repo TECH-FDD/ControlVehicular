@@ -77,6 +77,16 @@ public abstract class Estado {
 
 	public abstract void reactivarVehiculo(Vehiculo vehiculo);
 
+	/*******************************
+	 * Asignacion de los elementos.*
+	 *******************************/
+
+	public abstract void asignarGps(Gps gps);
+
+	public abstract void asignarMatafuego(Matafuego matafuego);
+
+	public abstract void asignarVehiculo(Vehiculo vehiculo);
+
 	@SuppressWarnings("incomplete-switch")
 	protected Estado nuevoEstadoInactivo(Timestamp fecha, Motivo motivo){
 		Estado e= null;

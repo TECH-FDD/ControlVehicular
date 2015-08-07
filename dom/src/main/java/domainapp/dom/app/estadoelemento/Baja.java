@@ -95,6 +95,28 @@ public class Baja extends Estado {
 				+ "por lo que no puede ser reactivado.");
 	}
 
+	/*******************************
+	 * Asignacion de los elementos.*
+	 *******************************/
+
+	@Override
+	@Programmatic
+	public void asignarGps(Gps gps) {
+		container.warnUser("El Gps fue dado de Baja, por lo que no puede ser asignado.");
+	}
+
+	@Override
+	@Programmatic
+	public void asignarMatafuego(Matafuego matafuego) {
+		container.warnUser("El Matafuego fue dado de Baja, por lo que no puede ser asignado.");
+	}
+
+	@Override
+	@Programmatic
+	public void asignarVehiculo(Vehiculo vehiculo) {
+		container.warnUser("El Vehiculo fue dado de Baja, por lo que no puede ser asignado.");
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

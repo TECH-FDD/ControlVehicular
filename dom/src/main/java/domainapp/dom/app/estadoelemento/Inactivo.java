@@ -95,6 +95,28 @@ public class Inactivo extends Estado {
 		container.informUser("El Vehiculo seleccionado, ha sido reacivado exitosamente.");
 	}
 
+	/*******************************
+	 * Asignacion de los elementos.*
+	 *******************************/
+
+	@Override
+	@Programmatic
+	public void asignarGps(Gps gps) {
+		container.warnUser("Para ser asignado, previamente, el Gps debe ser Reactivado");
+	}
+
+	@Override
+	@Programmatic
+	public void asignarMatafuego(Matafuego matafuego) {
+		container.warnUser("Para ser asignado, previamente, el Matafuego debe ser Reactivado");
+	}
+
+	@Override
+	@Programmatic
+	public void asignarVehiculo(Vehiculo vehiculo) {
+		container.warnUser("Para ser asignado, previamente, el Vehiculo debe ser Reactivado");
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

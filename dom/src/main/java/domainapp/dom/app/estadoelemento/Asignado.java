@@ -167,6 +167,28 @@ public class Asignado extends Estado {
 		container.warnUser("El Vehiculo seleccionado, se encuentra en estado Asignado y Activo.");
 	}
 
+	/*******************************
+	 * Asignacion de los elementos.*
+	 *******************************/
+
+	@Override
+	@Programmatic
+	public void asignarGps(Gps gps) {
+		container.warnUser("El Gps ya fue asignado a otro Vehiculo.");
+	}
+
+	@Override
+	@Programmatic
+	public void asignarMatafuego(Matafuego matafuego) {
+		container.warnUser("El Matafuego ya fue asignado a otro Vehiculo.");
+	}
+
+	@Override
+	@Programmatic
+	public void asignarVehiculo(Vehiculo vehiculo) {
+		container.warnUser("El Vehiculo ya fue asignado a otro Empleado.");
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

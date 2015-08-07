@@ -96,6 +96,31 @@ public class Activo extends Estado {
 		container.warnUser("El Vehiculo seleccionado, ya se encuentra en estado Activo.");
 	}
 
+	/*******************************
+	 * Asignacion de los elementos.*
+	 *******************************/
+
+	@Override
+	@Programmatic
+	public void asignarGps(Gps gps) {
+		Estado estado = new Asignado(gps.getEstado().getFechaCambio(), gps.getEstado().getMotivo());
+		actualizarGps(gps, estado);
+	}
+
+	@Override
+	@Programmatic
+	public void asignarMatafuego(Matafuego matafuego) {
+		Estado estado = new Asignado(matafuego.getEstado().getFechaCambio(), matafuego.getEstado().getMotivo());
+		actualizarMatafuego(matafuego, estado);
+	}
+
+	@Override
+	@Programmatic
+	public void asignarVehiculo(Vehiculo vehiculo) {
+		Estado estado = new Asignado(vehiculo.getEstado().getFechaCambio(), vehiculo.getEstado().getMotivo());
+		actualizarVehiculo(vehiculo, estado);
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

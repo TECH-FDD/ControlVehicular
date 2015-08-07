@@ -89,6 +89,28 @@ public class NecesitaReparacion extends Estado {
 		container.warnUser("Para ser reactivado, se necesita confirmación de que el Vehiculo fue reparado.");
 	}
 
+	/*******************************
+	 * Asignacion de los elementos.*
+	 *******************************/
+
+	@Override
+	@Programmatic
+	public void asignarGps(Gps gps) {
+		container.warnUser("El Gps no puede ser asignado al vehiculo, porque necesita reparación.");
+	}
+
+	@Override
+	@Programmatic
+	public void asignarMatafuego(Matafuego matafuego) {
+		container.warnUser("El Matafuego no puede ser asignado al vehiculo, porque necesita reparación.");
+	}
+
+	@Override
+	@Programmatic
+	public void asignarVehiculo(Vehiculo vehiculo) {
+		container.warnUser("El Vehiculo no puede ser asignado, porque necesita reparación.");
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
