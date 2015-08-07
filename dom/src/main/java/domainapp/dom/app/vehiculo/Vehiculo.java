@@ -15,14 +15,13 @@ import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
-import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Asignado;
 import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
-import domainapp.dom.app.estadoelemento.ServicioEstado;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.aceite.TipoAceite;
@@ -67,7 +66,6 @@ public class Vehiculo {
 	private String cnsCombuestibleCiudad;
 	private String kilometros;
 	private Estado estado;
-	private ServicioEstado servicioEstado;
 
 	@Persistent
 	@MemberOrder(sequence = "1")
@@ -255,15 +253,6 @@ public class Vehiculo {
 		this.estado = estado;
 	}
 
-	@Programmatic
-	public ServicioEstado getServicioEstado() {
-		return servicioEstado;
-	}
-
-	public void setServicioEstado(ServicioEstado servicioEstado) {
-		this.servicioEstado = servicioEstado;
-	}
-
 	@Override
 	public String toString() {
 		return marca + ", " + modelo;
@@ -335,16 +324,8 @@ public class Vehiculo {
 	 *
 	 * @return this
 	 */
-	public Vehiculo activar(){
-		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
-		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
-		if (o[0] != null){
-			Estado oldEstado = this.getEstado();
-			this.setEstado((Estado) o[0]);
-			container.persistIfNotAlready(this);
-			container.removeIfNotAlready(oldEstado);
-		}
-		container.warnUser((String) o[1]);
+	public Vehiculo reactivar(){
+		this.getEstado().reactivarVehiculo(this);
 		return this;
 	}
 
@@ -354,7 +335,10 @@ public class Vehiculo {
 	 * @return Confirmacion de si se debe mostrar el Boton.
 	 */
 	public boolean hideActivar(){
-		return this.servicioEstado.ocultarActivar(this.getEstado());
+		if (this.getEstado() instanceof Inactivo)
+			return false;
+		else
+			return true;
 	}
 
 	@javax.inject.Inject
