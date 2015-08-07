@@ -17,6 +17,7 @@ import org.apache.isis.applib.query.QueryDefault;
 import domainapp.dom.app.aceite.TipoAceite;
 import domainapp.dom.app.combustible.TipoCombustible;
 import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Asignado;
 import domainapp.dom.app.estadoelemento.Baja;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.NecesitaReparacion;
@@ -169,10 +170,25 @@ public class RepositorioVehiculo {
 	private List<Vehiculo> activos(List<Vehiculo> lista){
 		List<Vehiculo> activos = new ArrayList<Vehiculo>();
 		for (Vehiculo v : lista){
-			if (v.getEstado() instanceof Activo)
+			if (v.getEstado() instanceof Activo ||
+					v.getEstado() instanceof Asignado)
 				activos.add(v);
 		}
 		return activos;
+	}
+
+	/**
+	 * Filtrar lista de Vehiculo, por no Asignados.
+	 * @param lista
+	 * @return lista de Vehiculo no Asignados.
+	 */
+	public List<Vehiculo> noAsignados(List<Vehiculo> lista){
+		List<Vehiculo> noAsignados = new ArrayList<Vehiculo>();
+		for (Vehiculo v : lista){
+			if (v.getEstado() instanceof Activo)
+				noAsignados.add(v);
+		}
+		return noAsignados;
 	}
 
 	@MemberOrder(sequence = "5", name="Elementos Inactivos")
