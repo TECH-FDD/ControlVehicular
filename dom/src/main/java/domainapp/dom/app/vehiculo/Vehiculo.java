@@ -273,7 +273,7 @@ public class Vehiculo {
 			Integer polizaSeguro, Gps gps, TipoCombustible tipoCombustible,
 			Integer capacTanqueCombustible, TipoAceite tipoAceite,
 			String cnsCombustibleRuta, String cnsCombuestibleCiudad,
-			String kilometros) {
+			String kilometros, Matafuego matafuego) {
 		super();
 		this.marca = marca;
 		this.nombre = nombre;
@@ -290,6 +290,7 @@ public class Vehiculo {
 		this.cnsCombuestibleCiudad = cnsCombuestibleCiudad;
 		this.kilometros = kilometros;
 		this.estado=new Activo(new Timestamp(System.currentTimeMillis()),Motivo.ALTA);
+		this.matafuego = matafuego;
 	}
 
 	public Vehiculo() {
