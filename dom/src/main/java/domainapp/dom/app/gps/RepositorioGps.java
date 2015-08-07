@@ -15,6 +15,7 @@ import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Asignado;
 import domainapp.dom.app.estadoelemento.Baja;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.NecesitaReparacion;
@@ -103,13 +104,28 @@ public class RepositorioGps {
 	 * @param lista
 	 * @return lista de Gps en estado Activo.
 	 */
-	private List<Gps> gpsActivos(final List<Gps> lista){
+	public List<Gps> gpsNoAsignados(final List<Gps> lista){
 		List<Gps> activos= new ArrayList<Gps>();
 		for (Gps gps : lista){
 			if (gps.getEstado() instanceof Activo)
 				activos.add(gps);
 		}
 		return activos;
+	}
+
+	/**
+	 * Filtrar lista de Gps, por activos y asignados.
+	 * @param lista
+	 * @return lista de Gps en estado Activo y asignados.
+	 */
+	private List<Gps> gpsActivos(final List<Gps> lista){
+		List<Gps> aa= new ArrayList<Gps>();
+		for (Gps gps : lista){
+			if (gps.getEstado() instanceof Activo ||
+					gps.getEstado() instanceof Asignado)
+				aa.add(gps);
+		}
+		return aa;
 	}
 
 	@MemberOrder(sequence = "1", name="Elementos Desestimados")
