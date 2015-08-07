@@ -130,7 +130,7 @@ public class RepositorioMatafuego {
 	 * @param lista
 	 * @return lista de Matafuegos No Asignados.
 	 */
-	private List<Matafuego> noAsignados(List<Matafuego> lista){
+	public List<Matafuego> noAsignados(List<Matafuego> lista){
 		List<Matafuego> noAsignados = new ArrayList<Matafuego>();
 		for (Matafuego m : lista){
 			if (m.getEstado() instanceof Activo)
