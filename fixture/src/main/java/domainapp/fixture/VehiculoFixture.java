@@ -52,8 +52,8 @@ public class VehiculoFixture extends Fixture {
 
 		for (int x=0; x<5; x++){
 			create(new Timestamp(System.currentTimeMillis()),getPatente(x),
-					getNumeroChasis(x),getPolizaSeguro(x),gps.get(0),tipoCombustibles.get(0),
-					matafuegos.get(0),TipoAceite.SemiSintetico,executionContext);
+					getNumeroChasis(x),getPolizaSeguro(x),gps.get(x),tipoCombustibles.get(0),
+					matafuegos.get(x),TipoAceite.SemiSintetico,executionContext);
 		}
 	}
 
