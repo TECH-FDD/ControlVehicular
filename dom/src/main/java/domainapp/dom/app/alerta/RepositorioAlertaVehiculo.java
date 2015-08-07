@@ -1,6 +1,6 @@
 package domainapp.dom.app.alerta;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -29,8 +29,8 @@ public class RepositorioAlertaVehiculo {
 			final @ParameterLayout(named = "kilometros Alarma") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int kilometrosAlarma) {
 
 		final AlertaVehiculo alertaVehiculo = new AlertaVehiculo(nombre,
-				descripcion, new Timestamp(System.currentTimeMillis()),
-				empleado, vehiculo, kilometrosAlarma);
+				descripcion, new Date(System.currentTimeMillis()), empleado,
+				vehiculo, kilometrosAlarma);
 
 		container.persistIfNotAlready(alertaVehiculo);
 		return alertaVehiculo;

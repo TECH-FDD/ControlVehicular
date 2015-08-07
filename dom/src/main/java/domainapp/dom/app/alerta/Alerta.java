@@ -1,6 +1,6 @@
 package domainapp.dom.app.alerta;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
@@ -17,7 +17,7 @@ public abstract class Alerta {
 
 	private String nombre;
 	private String descripcion;
-	private Timestamp fechaAlta;
+	private Date fechaAlta;
 	private Empleado empleado;
 
 	@Persistent
@@ -45,11 +45,11 @@ public abstract class Alerta {
 	@Persistent
 	@MemberOrder(sequence = "3")
 	@javax.jdo.annotations.Column(allowsNull = "false")
-	public Timestamp getFechaAlta() {
+	public Date getFechaAlta() {
 		return fechaAlta;
 	}
 
-	public void setFechaAlta(Timestamp fechaAlta) {
+	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
 
@@ -64,7 +64,7 @@ public abstract class Alerta {
 		this.empleado = empleado;
 	}
 
-	public Alerta(String nombre, String descripcion, Timestamp fechaAlta,
+	public Alerta(String nombre, String descripcion, Date fechaAlta,
 			Empleado empleado) {
 		super();
 		this.nombre = nombre;
