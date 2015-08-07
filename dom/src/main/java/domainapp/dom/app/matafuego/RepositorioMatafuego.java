@@ -11,6 +11,7 @@ import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.estadoelemento.Activo;
@@ -130,6 +131,7 @@ public class RepositorioMatafuego {
 	 * @param lista
 	 * @return lista de Matafuegos No Asignados.
 	 */
+	@Programmatic
 	public List<Matafuego> noAsignados(List<Matafuego> lista){
 		List<Matafuego> noAsignados = new ArrayList<Matafuego>();
 		for (Matafuego m : lista){
