@@ -51,7 +51,14 @@ public class RepositorioVehiculo {
 
 		final Vehiculo vehiculo = new Vehiculo(marca.toUpperCase(), nombre.toUpperCase(), modelo, fechaCompra,
 				patente.toUpperCase(), numeroChasis.toUpperCase(), polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
-				tipoAceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros);
+				tipoAceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros, matafuego);
+
+		//Pasar el Gps al estado Asignado
+		gps.getEstado().asignarGps(gps);
+
+		//Pasar el Matafuego al estado Asignado
+		matafuego.getEstado().asignarMatafuego(matafuego);
+
 		container.persistIfNotAlready(vehiculo);
 		return vehiculo;
 	}
