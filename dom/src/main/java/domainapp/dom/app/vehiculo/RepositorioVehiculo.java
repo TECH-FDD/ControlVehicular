@@ -98,7 +98,7 @@ public class RepositorioVehiculo {
 											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
 											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
 											Matafuego matafuego, String kilometro){
-		List<Gps> lista=repoGps.listarTodos();
+		List<Gps> lista=repoGps.gpsNoAsignados(container.allInstances(Gps.class));
 		return lista;
 	}
 
