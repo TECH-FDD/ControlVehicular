@@ -12,6 +12,7 @@ import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Property;
 
+import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.vehiculo.Vehiculo;
@@ -87,6 +88,27 @@ public abstract class Estado {
 
 	public abstract void asignarVehiculo(Vehiculo vehiculo);
 
+	/**********************************
+	 * Desasignacion de los elementos.*
+	 **********************************/
+
+	public abstract void desasignarGps(Vehiculo vehiculo);
+
+	public abstract void desasignarMatafuego(Vehiculo vehiculo);
+
+	public abstract void desasignarVehiculo(Empleado empleado);
+
+
+	/***************************************
+	 * Operaciones privadas de los estados.*
+	 ***************************************/
+
+	/**
+	 * Obtener nuevo estado, según el motivo ingresado.
+	 * @param fecha
+	 * @param motivo
+	 * @return Nuevo estado.
+	 */
 	@SuppressWarnings("incomplete-switch")
 	protected Estado nuevoEstadoInactivo(Timestamp fecha, Motivo motivo){
 		Estado e= null;
@@ -104,6 +126,11 @@ public abstract class Estado {
 		return e;
 	}
 
+	/**
+	 * Actualizar el Gps con el nuevo estado y eliminar el estado anterior de la BD.
+	 * @param gps
+	 * @param estado
+	 */
 	protected void actualizarGps(Gps gps, Estado estado){
 		//Obtengo el estado anterior del Gps
 		Estado old= gps.getEstado();
@@ -113,6 +140,11 @@ public abstract class Estado {
 		container.removeIfNotAlready(old);
 	}
 
+	/**
+	 * Actualizar el Matafuego con el nuevo estado y eliminar el estado anterior de la BD.
+	 * @param gps
+	 * @param estado
+	 */
 	protected void actualizarMatafuego(Matafuego matafuego, Estado estado){
 		//Obtengo el estado anterior del Matafuego
 		Estado old= matafuego.getEstado();
@@ -122,6 +154,11 @@ public abstract class Estado {
 		container.removeIfNotAlready(old);
 	}
 
+	/**
+	 * Actualizar el Vehiculo con el nuevo estado y eliminar el estado anterior de la BD.
+	 * @param gps
+	 * @param estado
+	 */
 	protected void actualizarVehiculo(Vehiculo vehiculo, Estado estado){
 		//Obtengo el estado anterior del Vehiculo
 		Estado old= vehiculo.getEstado();

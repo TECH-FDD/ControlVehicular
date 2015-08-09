@@ -11,6 +11,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 
+import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.vehiculo.Vehiculo;
@@ -115,6 +116,25 @@ public class Baja extends Estado {
 	@Programmatic
 	public void asignarVehiculo(Vehiculo vehiculo) {
 		container.warnUser("El Vehiculo fue dado de Baja, por lo que no puede ser asignado.");
+	}
+
+	/**********************************
+	 * Desasignacion de los elementos.*
+	 **********************************/
+
+	@Override
+	public void desasignarGps(Vehiculo vehiculo) {
+		container.warnUser("El Gps, debe encontrarse en estado Asignado para poder ser Desasignado.");
+	}
+
+	@Override
+	public void desasignarMatafuego(Vehiculo vehiculo) {
+		container.warnUser("El Matafuego, debe encontrarse en estado Asignado para poder ser Desasignado.");
+	}
+
+	@Override
+	public void desasignarVehiculo(Empleado empleado) {
+		container.warnUser("El Vehiculo, debe encontrarse en estado Asignado para poder ser Desasignado.");
 	}
 
 	@javax.inject.Inject
