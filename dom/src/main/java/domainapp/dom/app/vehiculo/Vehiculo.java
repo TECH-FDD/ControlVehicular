@@ -9,6 +9,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
@@ -16,6 +17,7 @@ import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;
+import org.apache.isis.applib.annotation.ActionLayout.Position;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Asignado;
@@ -23,6 +25,7 @@ import domainapp.dom.app.estadoelemento.Estado;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.gps.Gps;
+import domainapp.dom.app.gps.RepositorioGps;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.aceite.TipoAceite;
 import domainapp.dom.app.combustible.TipoCombustible;
@@ -152,7 +155,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "8")
-	@Column(allowsNull = "Gps")
+	@Column(allowsNull = "true")
 	public Gps getGps() {
 		return gps;
 	}
@@ -341,6 +344,35 @@ public class Vehiculo {
 			return true;
 	}
 
+	/**
+	 * Cambiar el Gps del Vehiculo seleccionado.
+	 * @param gps
+	 * @return Vehiculo seleccionado.
+	 */
+	@MemberOrder(sequence = "1", name = "Gps")
+	@ActionLayout(named = "Cambiar Gps", position = Position.BELOW)
+	public Vehiculo updateGps(@ParameterLayout(named = "Gps") Gps gps){
+		//Desasigno el Gps anterior.
+		if(this.getGps() != null)
+			this.getGps().getEstado().desasignarGps(this);
+		//Cambio el estado del nuevo Gps a Asginado
+		gps.getEstado().asignarGps(gps);
+		//Actualizo el vehiculo con el nuevo Gps
+		this.setGps(gps);
+		container.persistIfNotAlready(this);
+		return this;
+	}
+
+	/**
+	 * Mostrar lista de Gps
+	 * @return Lista de Gps disponibles.
+	 */
+	public List<Gps> choices0UpdateGps(){
+		return repoGps.gpsNoAsignados(container.allInstances(Gps.class));
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
+	@javax.inject.Inject
+	RepositorioGps repoGps;
 }
