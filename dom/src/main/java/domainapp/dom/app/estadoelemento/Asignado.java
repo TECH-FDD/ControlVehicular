@@ -78,7 +78,7 @@ public class Asignado extends Estado {
 		List<Vehiculo> lv = container.allInstances(Vehiculo.class);
 		Vehiculo vehiculo = new Vehiculo();
 		for (Vehiculo v : lv) {
-			if (matafuego.equals(v.getGps()))
+			if (matafuego.equals(v.getMatafuego()))
 				vehiculo = v;
 		}
 
@@ -114,6 +114,7 @@ public class Asignado extends Estado {
 	 * Desasignacion de los elementos.*
 	 **********************************/
 
+	@Override
 	@Programmatic
 	public void desasignarGps(Vehiculo vehiculo){
 		//Actualizo el Gps.
@@ -125,6 +126,7 @@ public class Asignado extends Estado {
 		container.persistIfNotAlready(vehiculo);
 	}
 
+	@Override
 	@Programmatic
 	public void desasignarMatafuego(Vehiculo vehiculo){
 		//Actualizo el Matafuego.
@@ -132,10 +134,11 @@ public class Asignado extends Estado {
 		actualizarMatafuego(matafuego, new Activo(matafuego.getEstado().getFechaCambio(),matafuego.getEstado().getMotivo()));
 
 		//Guardo el vehiculo sin Matafuego Asignado.
-		vehiculo.setGps(null);
+		vehiculo.setMatafuego(null);
 		container.persistIfNotAlready(vehiculo);
 	}
 
+	@Override
 	@Programmatic
 	public void desasignarVehiculo(Empleado empleado){
 		Vehiculo vehiculo = empleado.getVehiculo();

@@ -142,7 +142,7 @@ public abstract class Estado {
 
 	/**
 	 * Actualizar el Matafuego con el nuevo estado y eliminar el estado anterior de la BD.
-	 * @param gps
+	 * @param matafuego
 	 * @param estado
 	 */
 	protected void actualizarMatafuego(Matafuego matafuego, Estado estado){
@@ -156,7 +156,7 @@ public abstract class Estado {
 
 	/**
 	 * Actualizar el Vehiculo con el nuevo estado y eliminar el estado anterior de la BD.
-	 * @param gps
+	 * @param vehiculo
 	 * @param estado
 	 */
 	protected void actualizarVehiculo(Vehiculo vehiculo, Estado estado){
