@@ -53,7 +53,17 @@ public class RepositorioAlertaMatafuego {
 	
 		return null;
 	}
-
+	@MemberOrder(sequence = "2")
+	@ActionLayout(named = "Listar todos")
+	public List<AlertaMatafuego> listAll() {
+		List<AlertaMatafuego> lista = this.container
+				.allMatches(new QueryDefault<AlertaMatafuego>(AlertaMatafuego.class,
+						"ListarTodos"));
+		if (lista.isEmpty()) {
+			this.container.warnUser("No hay alertas de matafuegos cargadas en el sistema");
+		}
+		return lista;
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

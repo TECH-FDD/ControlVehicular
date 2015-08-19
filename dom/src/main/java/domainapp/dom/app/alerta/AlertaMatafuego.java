@@ -25,6 +25,12 @@ import domainapp.dom.app.matafuego.Matafuego;
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "AlertaMatafuego_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
+@javax.jdo.annotations.Queries({
+	@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
+			+ "FROM domainapp.dom.app.alerta.AlertaMatafuego"),
+	@javax.jdo.annotations.Query(name = "Buscar_matafuego", language = "JDOQL", value = "SELECT "
+			+ "FROM domainapp.dom.app.alerta.AlertaMatafuego "
+			+ "WHERE matafuego.indexOf(:matafuego)>= 0") })
 
 @DomainObject(objectType = "ALERTAMATAFUEGO")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
