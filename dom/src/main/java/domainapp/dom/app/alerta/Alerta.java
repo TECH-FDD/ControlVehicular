@@ -7,7 +7,9 @@ import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.empleado.Empleado;
 
@@ -23,6 +25,7 @@ public abstract class Alerta {
 	@Persistent
 	@MemberOrder(sequence = "1")
 	@javax.jdo.annotations.Column(allowsNull = "false")
+	@Property(editing = Editing.DISABLED)
 	public String getNombre() {
 		return nombre;
 	}
@@ -34,6 +37,7 @@ public abstract class Alerta {
 	@Persistent
 	@MemberOrder(sequence = "2")
 	@javax.jdo.annotations.Column(allowsNull = "true")
+	@Property(editing = Editing.DISABLED)
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -45,6 +49,7 @@ public abstract class Alerta {
 	@Persistent
 	@MemberOrder(sequence = "3")
 	@javax.jdo.annotations.Column(allowsNull = "false")
+	@Property(editing = Editing.DISABLED)
 	public Date getFechaAlta() {
 		return fechaAlta;
 	}
@@ -56,6 +61,7 @@ public abstract class Alerta {
 	@Persistent
 	@MemberOrder(sequence = "5")
 	@javax.jdo.annotations.Column(allowsNull = "Empleado")
+	@Property(editing = Editing.DISABLED)
 	public Empleado getEmpleado() {
 		return empleado;
 	}
@@ -82,5 +88,4 @@ public abstract class Alerta {
 		return "Alerta [nombre=" + nombre + ", descripcion=" + descripcion
 				+ ", fechaAlta=" + fechaAlta + ", empleado=" + empleado;
 	}
-
 }

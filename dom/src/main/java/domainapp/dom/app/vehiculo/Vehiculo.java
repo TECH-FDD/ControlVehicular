@@ -265,7 +265,7 @@ public class Vehiculo {
 
 	@Override
 	public String toString() {
-		return marca + ", " + modelo;
+		return marca + ", " + nombre;
 	}
 
 	public Vehiculo(String marca, String nombre, Integer modelo,
