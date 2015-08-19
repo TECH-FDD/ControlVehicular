@@ -120,6 +120,24 @@ public class AlertaVehiculo extends Alerta {
 		return null;
 	}
 
+	@MemberOrder(sequence = "2")
+	@ActionLayout(named = "Lista de Modificaciones", position = Position.BELOW)
+	public List<ModificacionAlertaVehiculo> listAllVehiculo() {
+		final List<ModificacionAlertaVehiculo> listaModificacionesVehiculo = container
+				.allMatches(new QueryDefault<ModificacionAlertaVehiculo>(
+						ModificacionAlertaVehiculo.class, "ListarTodos"));
+		final List<ModificacionAlertaVehiculo> lista = new ArrayList<ModificacionAlertaVehiculo>();
+		for (ModificacionAlertaVehiculo aV : listaModificacionesVehiculo) {
+			if (aV.getAlertaModificacion().equals(this)) {
+				lista.add(aV);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existen Modificaciones en esta alerta");
+		}
+		return lista;
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 
