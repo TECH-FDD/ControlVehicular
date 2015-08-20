@@ -16,6 +16,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.ActionLayout.Position;
 
@@ -26,12 +27,11 @@ import domainapp.dom.app.matafuego.Matafuego;
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "AlertaMatafuego_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
 @javax.jdo.annotations.Queries({
-	@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
-			+ "FROM domainapp.dom.app.alerta.AlertaMatafuego"),
-	@javax.jdo.annotations.Query(name = "Buscar_matafuego", language = "JDOQL", value = "SELECT "
-			+ "FROM domainapp.dom.app.alerta.AlertaMatafuego "
-			+ "WHERE matafuego.indexOf(:matafuego)>= 0") })
-
+		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.alerta.AlertaMatafuego"),
+		@javax.jdo.annotations.Query(name = "Buscar_matafuego", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.alerta.AlertaMatafuego "
+				+ "WHERE matafuego.indexOf(:matafuego)>= 0") })
 @DomainObject(objectType = "ALERTAMATAFUEGO")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class AlertaMatafuego extends Alerta {
@@ -79,6 +79,49 @@ public class AlertaMatafuego extends Alerta {
 		super(nombre, descripcion, fechaAlta, empleado);
 		this.matafuego = matafuego;
 		this.contadorAlerta = contadorAlerta;
+	}
+
+	@MemberOrder(sequence = "1")
+	@ActionLayout(named = "Edit", position = Position.BELOW)
+	public ModificacionAlertaMatafuego updateEdit(
+			final @ParameterLayout(named = "Empleado Involucrado") Empleado empleado,
+			final @ParameterLayout(named = "Nombre") @Parameter(optionality = Optionality.OPTIONAL) String nombre,
+			final @ParameterLayout(named = "Descripcion") @Parameter(optionality = Optionality.OPTIONAL) String descripcion,
+			final @ParameterLayout(named = "Fecha Alerta") @Parameter(optionality = Optionality.OPTIONAL) Date contadorAlerta) {
+		String datosModificados = "";
+
+		if (nombre != null) {
+			datosModificados = datosModificados + "nombre: " + this.getNombre();
+			this.setNombre(nombre);
+		}
+		if (descripcion != null) {
+			datosModificados = datosModificados + "descripcion: "
+					+ this.getDescripcion();
+			this.setDescripcion(descripcion);
+		}
+		if (contadorAlerta != null) {
+			datosModificados = datosModificados + "contador Alarma: "
+					+ this.getDescripcion();
+			this.setContadorAlerta(contadorAlerta);
+		}
+		ModificacionAlertaMatafuego modificacionAlerta = new ModificacionAlertaMatafuego();
+		modificacionAlerta.setAlertaModificacion(this);
+		modificacionAlerta.setFechaModificacion(new Date(System
+				.currentTimeMillis()));
+		modificacionAlerta.setModificacionEmpleado(empleado);
+		modificacionAlerta.setDatosModificados(datosModificados);
+
+		container.persistIfNotAlready(modificacionAlerta);
+		return modificacionAlerta;
+	}
+
+	@Programmatic
+	public String validateUpdateEdit(Empleado empleado, String nombre,
+			String descripcion, Date fechaAlerta) {
+		if (nombre == null && descripcion == null && fechaAlerta == null) {
+			return "No se ha ingresado ninguna modificacion, por favor ingrese alguna modificación";
+		}
+		return null;
 	}
 
 	@javax.inject.Inject
