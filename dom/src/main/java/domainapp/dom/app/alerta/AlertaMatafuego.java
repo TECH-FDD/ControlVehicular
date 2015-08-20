@@ -1,6 +1,8 @@
 package domainapp.dom.app.alerta;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Persistent;
@@ -19,6 +21,7 @@ import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.ActionLayout.Position;
+import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.matafuego.Matafuego;
@@ -124,6 +127,24 @@ public class AlertaMatafuego extends Alerta {
 		return null;
 	}
 
+	@MemberOrder(sequence = "2")
+	@ActionLayout(named = "Lista de Modificaciones", position = Position.BELOW)
+	public List<ModificacionAlertaMatafuego> listAllMatafuego() {
+		final List<ModificacionAlertaMatafuego> listaModificacionAlertaMatafuego = container
+				.allMatches(new QueryDefault<ModificacionAlertaMatafuego>(
+						ModificacionAlertaMatafuego.class, "ListarTodos"));
+		final List<ModificacionAlertaMatafuego> lista = new ArrayList<ModificacionAlertaMatafuego>();
+		for (ModificacionAlertaMatafuego aV : listaModificacionAlertaMatafuego) {
+			if (aV.getAlertaModificacion().equals(this)) {
+				lista.add(aV);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existen Modificaciones en esta alerta");
+		}
+		return lista;
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 
