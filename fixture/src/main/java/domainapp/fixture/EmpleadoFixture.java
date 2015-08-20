@@ -12,6 +12,7 @@ import domainapp.dom.app.persona.Ciudad;
 import domainapp.dom.app.persona.Documento;
 import domainapp.dom.app.persona.Provincia;
 import domainapp.dom.app.persona.Sexo;
+import domainapp.dom.app.vehiculo.Vehiculo;
 
 public class EmpleadoFixture extends Fixture{
 
@@ -72,7 +73,7 @@ public class EmpleadoFixture extends Fixture{
 						getNroDocumento(x), LocalDate.now(), Sexo.Masculino,
 						Provincia.RioNegro, Ciudad.General_Roca, 8332,
 						getDireccion(x), getTelefono(x), getEmail(x),
-						getLegajo(x), areas.get(0), executionContext);
+						getLegajo(x), null, areas.get(0), executionContext);
 			}
 		}
 	}
@@ -81,12 +82,12 @@ public class EmpleadoFixture extends Fixture{
 			Documento tipoDocumento, int numeroDocumento,
 			LocalDate fechaNacimiento, Sexo sexo, Provincia provincia,
 			Ciudad ciudad, int codigoPostal, String domicilio, String telefono,
-			String email, String legajo, Area area,
+			String email, String legajo, Vehiculo vehiculo, Area area,
 			ExecutionContext executionContext) {
 		return executionContext.addResult(this, repoEmpleado.createEmpleado(
 				nombre, apellido, tipoDocumento, numeroDocumento,
 				fechaNacimiento, sexo, provincia, ciudad, codigoPostal,
-				domicilio, telefono, email, legajo, area));
+				domicilio, telefono, email, legajo, vehiculo, area));
 	}
 
 	@javax.inject.Inject

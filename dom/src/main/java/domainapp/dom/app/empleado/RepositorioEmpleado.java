@@ -9,6 +9,7 @@ import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
@@ -19,6 +20,7 @@ import domainapp.dom.app.persona.Ciudad;
 import domainapp.dom.app.persona.Documento;
 import domainapp.dom.app.persona.Provincia;
 import domainapp.dom.app.persona.Sexo;
+import domainapp.dom.app.vehiculo.Vehiculo;
 
 @DomainService(repositoryFor = Empleado.class)
 @DomainServiceLayout(menuOrder = "20", named = "Empleado")
@@ -39,6 +41,7 @@ public class RepositorioEmpleado {
 			final @ParameterLayout(named = "Telefono") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionTel.ADMITIDOS) String telefono,
 			final @ParameterLayout(named = "E-mail") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionEmail.ADMITIDOS) String email,
 			final @ParameterLayout(named = "Nro de Legajo") String legajo,
+			final @ParameterLayout(named = "Vehiculo") @Parameter(optionality=Optionality.OPTIONAL) Vehiculo vehiculo,
 			final @ParameterLayout(named = "Area") Area area) {
 
 		final Empleado empleado = container
@@ -59,7 +62,14 @@ public class RepositorioEmpleado {
 		empleado.setEmail(email);
 		empleado.setProvincia(provincia);
 		empleado.setActivo(true);
+		empleado.setVehiculo(vehiculo);
 		container.persistIfNotAlready(empleado);
+
+		//Cambio el estado del vehiculo seleccionado a Asignado.
+		if(vehiculo != null){
+			vehiculo.getEstado().asignarVehiculo(vehiculo);
+		}
+
 		return empleado;
 	}
 
@@ -68,7 +78,7 @@ public class RepositorioEmpleado {
 			Documento tipoDocumento, int nroDocumento,
 			LocalDate fechaNacimiento, Sexo sexo, Provincia provincia,
 			Ciudad ciudad, int codigoPostal, String domicilio, String telefono,
-			String email, String legajo, Area area) {
+			String email, String legajo, Vehiculo vehiculo, Area area) {
 		if (!container.allMatches(
 				new QueryDefault<Empleado>(Empleado.class, "Buscar_Documento",
 						"nroDocumento", nroDocumento)).isEmpty()) {
@@ -136,7 +146,7 @@ public class RepositorioEmpleado {
 			Documento tipoDocumento, int nroDocumento,
 			LocalDate fechaNacimiento, Sexo sexo, Provincia provincia,
 			Ciudad ciudad, int codigoPostal, String domicilio, String telefono,
-			String email, String legajo, Area area) {
+			String email, String legajo, Vehiculo vehiculo, Area area) {
 		return Ciudad.listarPor(provincia);
 	}
 

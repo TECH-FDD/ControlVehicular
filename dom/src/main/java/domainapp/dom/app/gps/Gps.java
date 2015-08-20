@@ -15,13 +15,13 @@ import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
-import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Asignado;
 import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
-import domainapp.dom.app.estadoelemento.ServicioEstado;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Gps_ID")
@@ -50,7 +50,6 @@ public class Gps {
 	private Timestamp fechaAsigVehiculo;
 	private String obsEstadoDispositivo;
 	private Estado estado;
-	private ServicioEstado servicioEstado;
 
 	@Persistent
 	@Property(editing = Editing.DISABLED)
@@ -144,15 +143,6 @@ public class Gps {
 		this.estado = estado;
 	}
 
-	@Programmatic
-	public ServicioEstado getServicioEstado() {
-		return servicioEstado;
-	}
-
-	public void setServicioEstado(ServicioEstado servicioEstado) {
-		this.servicioEstado = servicioEstado;
-	}
-
 	@Override
 	public String toString() {
 		return marca + " " + modelo;
@@ -182,28 +172,7 @@ public class Gps {
 	 * @return mensaje de confirmacion.
 	 */
 	public Gps desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
-//		Estado e= this.getServicioEstado().desactivar(this.getEstado(), new Timestamp(System.currentTimeMillis()), motivo);
-
-		//Obtengo el servicio correspondiente al estado actual.
-		this.setServicioEstado(this.getServicioEstado().obtenerServicio(this.getEstado()));
-		//Obtengo el nuevo estado.
-		Estado e= this.getServicioEstado().desactivar(new Timestamp(System.currentTimeMillis()), motivo);
-		//Si el nuevo estado es nulo, quiere decir que no se puede cambiar de estado.
-		if (e==null){
-			container.informUser("Por algúna razón, el Gps seleccionado, ya se encuentra Inactivo. "
-					+ "Por favor, revisar el listado de Elementos Inactivos del Sistema.");
-			return this;
-		}
-
-		//Guardo el anterior estado temporalmente, para eliminarlo de Base de Datos.
-		Estado old= this.getEstado();
-		this.setEstado(e);
-
-		//Actualizo el gps con el nuevo estado.
-		container.persistIfNotAlready(this);
-
-		//Elimino el estado anterior.
-		container.removeIfNotAlready(old);
+		this.getEstado().desactivarGps(this, motivo, new Timestamp(System.currentTimeMillis()));
 		return this;
 	}
 
@@ -213,7 +182,11 @@ public class Gps {
 	 * @return Confirmacion
 	 */
 	public boolean hideDesactivar(){
-		return servicioEstado.ocultarDesactivar(this.getEstado());
+		if (this.getEstado() instanceof Activo ||
+				this.getEstado() instanceof Asignado)
+			return false;
+		else
+			return true;
 	}
 
 	/**
@@ -230,16 +203,8 @@ public class Gps {
 	 *
 	 * @return this
 	 */
-	public Gps activar(){
-		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
-		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
-		if (o[0] != null){
-			Estado oldEstado = this.getEstado();
-			this.setEstado((Estado) o[0]);
-			container.persistIfNotAlready(this);
-			container.removeIfNotAlready(oldEstado);
-		}
-		container.warnUser((String) o[1]);
+	public Gps reactivar(){
+		this.getEstado().reactivarGps(this);
 		return this;
 	}
 
@@ -248,8 +213,11 @@ public class Gps {
 	 *
 	 * @return Confirmacion de si se debe mostrar el Boton.
 	 */
-	public boolean hideActivar(){
-		return this.servicioEstado.ocultarActivar(this.getEstado());
+	public boolean hideReactivar(){
+		if (!(this.getEstado() instanceof Inactivo))
+			return true;
+		else
+			return false;
 	}
 
 	@javax.inject.Inject

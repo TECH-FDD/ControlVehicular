@@ -12,11 +12,13 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.aceite.TipoAceite;
 import domainapp.dom.app.combustible.TipoCombustible;
 import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Asignado;
 import domainapp.dom.app.estadoelemento.Baja;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.NecesitaReparacion;
@@ -51,7 +53,14 @@ public class RepositorioVehiculo {
 
 		final Vehiculo vehiculo = new Vehiculo(marca.toUpperCase(), nombre.toUpperCase(), modelo, fechaCompra,
 				patente.toUpperCase(), numeroChasis.toUpperCase(), polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
-				tipoAceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros);
+				tipoAceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros, matafuego);
+
+		//Pasar el Gps al estado Asignado
+		gps.getEstado().asignarGps(gps);
+
+		//Pasar el Matafuego al estado Asignado
+		matafuego.getEstado().asignarMatafuego(matafuego);
+
 		container.persistIfNotAlready(vehiculo);
 		return vehiculo;
 	}
@@ -91,7 +100,7 @@ public class RepositorioVehiculo {
 											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
 											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
 											Matafuego matafuego, String kilometro){
-		List<Gps> lista=repoGps.listarTodos();
+		List<Gps> lista=repoGps.gpsNoAsignados(container.allInstances(Gps.class));
 		return lista;
 	}
 
@@ -105,7 +114,7 @@ public class RepositorioVehiculo {
 											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
 											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
 											Matafuego matafuego, String kilometro){
-		return repoMatafuego.listAll();
+		return repoMatafuego.noAsignados(container.allInstances(Matafuego.class));
 	}
 
 	@MemberOrder(sequence = "2")
@@ -162,10 +171,26 @@ public class RepositorioVehiculo {
 	private List<Vehiculo> activos(List<Vehiculo> lista){
 		List<Vehiculo> activos = new ArrayList<Vehiculo>();
 		for (Vehiculo v : lista){
-			if (v.getEstado() instanceof Activo)
+			if (v.getEstado() instanceof Activo ||
+					v.getEstado() instanceof Asignado)
 				activos.add(v);
 		}
 		return activos;
+	}
+
+	/**
+	 * Filtrar lista de Vehiculo, por no Asignados.
+	 * @param lista
+	 * @return lista de Vehiculo no Asignados.
+	 */
+	@Programmatic
+	public List<Vehiculo> noAsignados(List<Vehiculo> lista){
+		List<Vehiculo> noAsignados = new ArrayList<Vehiculo>();
+		for (Vehiculo v : lista){
+			if (v.getEstado() instanceof Activo)
+				noAsignados.add(v);
+		}
+		return noAsignados;
 	}
 
 	@MemberOrder(sequence = "5", name="Elementos Inactivos")

@@ -9,21 +9,25 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
-import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
+import org.apache.isis.applib.annotation.ActionLayout.Position;
 
 import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Asignado;
 import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
-import domainapp.dom.app.estadoelemento.ServicioEstado;
 import domainapp.dom.app.gps.Gps;
+import domainapp.dom.app.gps.RepositorioGps;
 import domainapp.dom.app.matafuego.Matafuego;
+import domainapp.dom.app.matafuego.RepositorioMatafuego;
 import domainapp.dom.app.aceite.TipoAceite;
 import domainapp.dom.app.combustible.TipoCombustible;
 
@@ -66,7 +70,6 @@ public class Vehiculo {
 	private String cnsCombuestibleCiudad;
 	private String kilometros;
 	private Estado estado;
-	private ServicioEstado servicioEstado;
 
 	@Persistent
 	@MemberOrder(sequence = "1")
@@ -153,7 +156,7 @@ public class Vehiculo {
 
 	@Persistent
 	@MemberOrder(sequence = "8")
-	@Column(allowsNull = "Gps")
+	@Column(allowsNull = "true")
 	public Gps getGps() {
 		return gps;
 	}
@@ -254,15 +257,6 @@ public class Vehiculo {
 		this.estado = estado;
 	}
 
-	@Programmatic
-	public ServicioEstado getServicioEstado() {
-		return servicioEstado;
-	}
-
-	public void setServicioEstado(ServicioEstado servicioEstado) {
-		this.servicioEstado = servicioEstado;
-	}
-
 	@Override
 	public String toString() {
 		return marca + ", " + nombre;
@@ -273,7 +267,7 @@ public class Vehiculo {
 			Integer polizaSeguro, Gps gps, TipoCombustible tipoCombustible,
 			Integer capacTanqueCombustible, TipoAceite tipoAceite,
 			String cnsCombustibleRuta, String cnsCombuestibleCiudad,
-			String kilometros) {
+			String kilometros, Matafuego matafuego) {
 		super();
 		this.marca = marca;
 		this.nombre = nombre;
@@ -290,6 +284,7 @@ public class Vehiculo {
 		this.cnsCombuestibleCiudad = cnsCombuestibleCiudad;
 		this.kilometros = kilometros;
 		this.estado=new Activo(new Timestamp(System.currentTimeMillis()),Motivo.ALTA);
+		this.matafuego = matafuego;
 	}
 
 	public Vehiculo() {
@@ -302,27 +297,7 @@ public class Vehiculo {
 	 * @return Matafuego con estado Actualizado.
 	 */
 	public Vehiculo desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
-		//Obtengo el nuevo Estado.
-		this.setServicioEstado(this.getServicioEstado().obtenerServicio(this.getEstado()));
-		Estado e= this.getServicioEstado().desactivar(new Timestamp(System.currentTimeMillis()), motivo);
-		//Si el nuevo estado es nulo, quiere decir que no se puede cambiar de estado.
-		if (e==null){
-			container.informUser("Por algúna razón, el Vehiculo seleccionado, ya se encuentra Inactivo. "
-					+ "Por favor, revisar el listado de Elementos Inactivos del Sistema.");
-			return this;
-		}
-
-		//Guardo el anterior estado temporalmente, para eliminarlo de Base de Datos.
-		Estado old= this.getEstado();
-		this.setEstado(e);
-
-		//Actualizo el Matafuego con el nuevo estado.
-		container.persistIfNotAlready(this);
-
-		//Elimino el estado anterior.
-		container.removeIfNotAlready(old);
-
-		container.informUser("El Vehiculo, ha sido desactivado con exito.");
+		this.getEstado().desactivarVehiculo(this, motivo, new Timestamp(System.currentTimeMillis()));
 		return this;
 	}
 
@@ -341,7 +316,11 @@ public class Vehiculo {
 	 * @return Confirmacion
 	 */
 	public boolean hideDesactivar(){
-		return servicioEstado.ocultarDesactivar(this.getEstado());
+		if (this.getEstado() instanceof Activo ||
+				this.getEstado() instanceof Asignado)
+			return false;
+		else
+			return true;
 	}
 
 	/**
@@ -349,16 +328,8 @@ public class Vehiculo {
 	 *
 	 * @return this
 	 */
-	public Vehiculo activar(){
-		this.setServicioEstado(servicioEstado.obtenerServicio(this.getEstado()));
-		Object[] o = servicioEstado.activar(new Timestamp(System.currentTimeMillis()),null);
-		if (o[0] != null){
-			Estado oldEstado = this.getEstado();
-			this.setEstado((Estado) o[0]);
-			container.persistIfNotAlready(this);
-			container.removeIfNotAlready(oldEstado);
-		}
-		container.warnUser((String) o[1]);
+	public Vehiculo reactivar(){
+		this.getEstado().reactivarVehiculo(this);
 		return this;
 	}
 
@@ -367,10 +338,68 @@ public class Vehiculo {
 	 *
 	 * @return Confirmacion de si se debe mostrar el Boton.
 	 */
-	public boolean hideActivar(){
-		return this.servicioEstado.ocultarActivar(this.getEstado());
+	public boolean hideReactivar(){
+		if (this.getEstado() instanceof Inactivo)
+			return false;
+		else
+			return true;
+	}
+
+	/**
+	 * Cambiar el Gps del Vehiculo seleccionado.
+	 * @param gps
+	 * @return Vehiculo seleccionado.
+	 */
+	@MemberOrder(sequence = "1", name = "Gps")
+	@ActionLayout(named = "Cambiar Gps", position = Position.BELOW)
+	public Vehiculo updateGps(@ParameterLayout(named = "Gps") Gps gps){
+		//Desasigno el Gps anterior.
+		if(this.getGps() != null)
+			this.getGps().getEstado().desasignarGps(this);
+		//Cambio el estado del nuevo Gps a Asginado
+		gps.getEstado().asignarGps(gps);
+		//Actualizo el vehiculo con el nuevo Gps
+		this.setGps(gps);
+		container.persistIfNotAlready(this);
+		return this;
+	}
+
+	/**
+	 * Mostrar lista de Gps
+	 * @return Lista de Gps disponibles.
+	 */
+	public List<Gps> choices0UpdateGps(){
+		return repoGps.gpsNoAsignados(container.allInstances(Gps.class));
+	}
+
+	/**
+	 * Cambiar el Matafuego del Vehiculo seleccionado.
+	 * @param gps
+	 * @return Vehiculo seleccionado.
+	 */
+	@MemberOrder(sequence = "1", name = "Matafuego")
+	@ActionLayout(named = "Cambiar Matafuego", position = Position.BELOW)
+	public Vehiculo updateMatafuego(@ParameterLayout(named = "Matafuego") Matafuego matafuego){
+		if (this.getMatafuego() != null)
+			this.getMatafuego().getEstado().desasignarMatafuego(this);
+		matafuego.getEstado().asignarMatafuego(matafuego);
+		this.setMatafuego(matafuego);
+		container.persistIfNotAlready(this);
+		return this;
+	}
+
+	/**
+	 * Mostrar lista de Matafuegos
+	 * @return Lista de Matafuegos disponibles.
+	 */
+	public List<Matafuego> choices0UpdateMatafuego(){
+		return repoMatafuego.noAsignados(container.allInstances(Matafuego.class));
 	}
 
 	@javax.inject.Inject
 	DomainObjectContainer container;
+	@javax.inject.Inject
+	RepositorioGps repoGps;
+	@javax.inject.Inject
+	RepositorioMatafuego repoMatafuego;
 }

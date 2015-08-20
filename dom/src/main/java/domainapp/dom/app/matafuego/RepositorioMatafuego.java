@@ -11,9 +11,11 @@ import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Asignado;
 import domainapp.dom.app.estadoelemento.Baja;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.NecesitaReparacion;
@@ -117,10 +119,26 @@ public class RepositorioMatafuego {
 	private List<Matafuego> activos(List<Matafuego> lista){
 		List<Matafuego> activos = new ArrayList<Matafuego>();
 		for (Matafuego m : lista){
-			if (m.getEstado() instanceof Activo)
+			if (m.getEstado() instanceof Activo ||
+					m.getEstado() instanceof Asignado)
 				activos.add(m);
 		}
 		return activos;
+	}
+
+	/**
+	 * Filtrar lista de Matafuegos, por No asignados.
+	 * @param lista
+	 * @return lista de Matafuegos No Asignados.
+	 */
+	@Programmatic
+	public List<Matafuego> noAsignados(List<Matafuego> lista){
+		List<Matafuego> noAsignados = new ArrayList<Matafuego>();
+		for (Matafuego m : lista){
+			if (m.getEstado() instanceof Activo)
+				noAsignados.add(m);
+		}
+		return noAsignados;
 	}
 
 	@javax.inject.Inject
