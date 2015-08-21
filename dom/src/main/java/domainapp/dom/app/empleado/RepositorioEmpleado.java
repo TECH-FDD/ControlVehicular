@@ -46,16 +46,16 @@ public class RepositorioEmpleado {
 
 		final Empleado empleado = container
 				.newTransientInstance(Empleado.class);
-		empleado.setNombre(nombre.toUpperCase());
-		empleado.setApellido(apellido.toUpperCase());
+		empleado.setNombre(nombre);
+		empleado.setApellido(apellido);
 		empleado.setTipoDocumento(tipoDocumento);
 		empleado.setNroDocumento(nro_documento);
 		empleado.setFechaNacimiento(fechaNacimiento);
-		empleado.setDomicilio(domicilio.toUpperCase());
+		empleado.setDomicilio(domicilio);
 		empleado.setCiudad(ciudad);
 		empleado.setCodigoPostal(codigoPostal);
 		empleado.setFechaAlta(new Timestamp(System.currentTimeMillis()));
-		empleado.setLegajo(legajo.toUpperCase());
+		empleado.setLegajo(legajo);
 		empleado.setSexo(sexo);
 		empleado.setArea(area);
 		empleado.setTelefono(telefono);
@@ -110,18 +110,36 @@ public class RepositorioEmpleado {
 	@ActionLayout(named = "Buscar por Nombre")
 	public List<Empleado> findByNombre(
 			@ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre) {
-		String name= nombre.toUpperCase();
-		return filtrarPorActivos(container.allMatches(new QueryDefault<>(
-				Empleado.class, "Buscar_Nombre", "nombre", name)));
+		final List<Empleado> listaEmpleado = listAllEmpleados();
+		final List<Empleado> lista = new ArrayList<Empleado>();
+		for (Empleado e : listaEmpleado) {
+			if (e.getNombre().toUpperCase().equals(nombre.toUpperCase())) {
+				lista.add(e);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Nombre buscado");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por Apellido")
 	public List<Empleado> findByApellido(
 			@ParameterLayout(named = "Apellido") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String apellido) {
-		String apellid= apellido.toUpperCase();
-		return filtrarPorActivos(container.allMatches(new QueryDefault<>(
-				Empleado.class, "Buscar_Apellido", "apellido", apellid)));
+		final List<Empleado> listaEmpleado = listAllEmpleados();
+		final List<Empleado> lista = new ArrayList<Empleado>();
+		for (Empleado e : listaEmpleado) {
+			if (e.getApellido().toUpperCase().equals(apellido.toUpperCase())) {
+				lista.add(e);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Apellido buscado");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "2")
@@ -133,8 +151,18 @@ public class RepositorioEmpleado {
 	@ActionLayout(named = "Buscar por Legajo")
 	public List<Empleado> findByLegajo(
 			@ParameterLayout(named = "N° de Legajo") final String legajo) {
-		return filtrarPorActivos(container.allMatches(new QueryDefault<>(
-				Empleado.class, "Buscar_Legajo", "legajo", legajo)));
+		final List<Empleado> listaEmpleado = listAllEmpleados();
+		final List<Empleado> lista = new ArrayList<Empleado>();
+		for (Empleado e : listaEmpleado) {
+			if (e.getLegajo().toUpperCase().equals(legajo.toUpperCase())) {
+				lista.add(e);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Legajo buscado");
+		}
+		return lista;
 	}
 
 	/**
