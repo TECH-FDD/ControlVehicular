@@ -1,6 +1,7 @@
 package domainapp.dom.app.area;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class RepositorioArea {
 		Date date = new Date();
 		Timestamp fecha = new Timestamp(date.getTime());
 
-		area.setCodigoArea(codigoArea.toUpperCase());
-		area.setNombre(nombre.toUpperCase());
-		area.setDescripcion(descripcion.toUpperCase());
+		area.setCodigoArea(codigoArea);
+		area.setNombre(nombre);
+		area.setDescripcion(descripcion);
 		area.setFechaAlta(fecha);
 		area.setActivo(true);
 		container.persistIfNotAlready(area);
@@ -71,27 +72,36 @@ public class RepositorioArea {
 	@ActionLayout(named = "Buscar por nombre")
 	public List<Area> findByNombre(
 			@ParameterLayout(named = "Nombre") final String nombre) {
-		final List<Area> listaArea = this.container
-				.allMatches(new QueryDefault<Area>(Area.class,
-						"buscarPorNombre", "nombre", nombre.toUpperCase()));
-		if (listaArea.isEmpty()) {
-			this.container.warnUser("No existe el Area buscada");
+		final List<Area> listaArea = listAll();
+		final List<Area> lista = new ArrayList<Area>();
+		for (Area a : listaArea) {
+			if (a.getNombre().toUpperCase().equals(nombre.toUpperCase())) {
+				lista.add(a);
+			}
 		}
-		return listaArea;
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Nombre buscado");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por codigo")
 	public List<Area> findByCodigo(
 			@ParameterLayout(named = "Codigo de area") final String codigoArea) {
-		List<Area> listaAreaCod = this.container
-				.allMatches(new QueryDefault<Area>(Area.class,
-						"buscarPorCodigo", "codigoArea", codigoArea.toUpperCase()));
-		if (listaAreaCod.isEmpty()) {
-			this.container.warnUser("No existe el Area buscada");
+		final List<Area> listaArea = listAll();
+		final List<Area> lista = new ArrayList<Area>();
+		for (Area a : listaArea) {
+			if (a.getCodigoArea().toUpperCase().equals(codigoArea.toUpperCase())) {
+				lista.add(a);
+			}
 		}
 
-		return listaAreaCod;
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Codigo buscado");
+		}
+		return lista;
 	}
 
 	@javax.inject.Inject
