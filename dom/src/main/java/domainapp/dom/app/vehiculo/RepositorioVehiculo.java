@@ -51,8 +51,8 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "Matafuego") Matafuego matafuego,
 			final @ParameterLayout(named = "Kilometros") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String kilometros) {
 
-		final Vehiculo vehiculo = new Vehiculo(marca.toUpperCase(), nombre.toUpperCase(), modelo, fechaCompra,
-				patente.toUpperCase(), numeroChasis.toUpperCase(), polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
+		final Vehiculo vehiculo = new Vehiculo(marca, nombre, modelo, fechaCompra,
+				patente, numeroChasis, polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
 				tipoAceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros, matafuego);
 
 		//Pasar el Gps al estado Asignado
@@ -127,16 +127,36 @@ public class RepositorioVehiculo {
 	@ActionLayout(named = "Buscar por Marca")
 	public List<Vehiculo> findByMarca(
 			@ParameterLayout(named = "Marca") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String marca) {
-		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarMarca", "marca", marca.toUpperCase())));
+		final List<Vehiculo> listaVehiculo = listAll();
+		final List<Vehiculo> lista = new ArrayList<Vehiculo>();
+		for (Vehiculo v : listaVehiculo) {
+			if (v.getMarca().toUpperCase().equals(marca.toUpperCase())) {
+				lista.add(v);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe la Marca");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por Nombre")
 	public List<Vehiculo> findByNombre(
 			@ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String nombre) {
-		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarNombre", "nombre", nombre.toUpperCase())));
+		final List<Vehiculo> listaVehiculo = listAll();
+		final List<Vehiculo> lista = new ArrayList<Vehiculo>();
+		for (Vehiculo v : listaVehiculo) {
+			if (v.getNombre().toUpperCase().equals(nombre.toUpperCase())) {
+				lista.add(v);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Nombre");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "5")
@@ -151,16 +171,36 @@ public class RepositorioVehiculo {
 	@ActionLayout(named = "Buscar por Patente")
 	public List<Vehiculo> findByPatente(
 			@ParameterLayout(named = "Patente") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String patente) {
-		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarPatente", "patente", patente.toUpperCase())));
+		final List<Vehiculo> listaVehiculo = listAll();
+		final List<Vehiculo> lista = new ArrayList<Vehiculo>();
+		for (Vehiculo v : listaVehiculo) {
+			if (v.getPatente().toUpperCase().equals(patente.toUpperCase())) {
+				lista.add(v);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe la Patente");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "7")
 	@ActionLayout(named = "Buscar por N° Chasis")
 	public List<Vehiculo> findByNumeroChasis(
 			@ParameterLayout(named = "Numero Chasis") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String numeroChasis) {
-		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarNumeroChasis", "numeroChasis", numeroChasis.toUpperCase())));
+		final List<Vehiculo> listaVehiculo = listAll();
+		final List<Vehiculo> lista = new ArrayList<Vehiculo>();
+		for (Vehiculo v : listaVehiculo) {
+			if (v.getNumeroChasis().toUpperCase().equals(numeroChasis.toUpperCase())) {
+				lista.add(v);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Numero de Chasis");
+		}
+		return lista;
 	}
 
 	/**
