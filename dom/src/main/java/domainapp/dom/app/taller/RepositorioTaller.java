@@ -1,5 +1,6 @@
 package domainapp.dom.app.taller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -27,10 +28,10 @@ public class RepositorioTaller {
 
 		final Taller taller = container.newTransientInstance(Taller.class);
 
-		taller.setNombreComercial(nombreComercial.toUpperCase());
+		taller.setNombreComercial(nombreComercial);
 		taller.setTelefono(telefono);
-		taller.setDescripcion(descripcion.toUpperCase());
-		taller.setDireccion(direccion.toUpperCase());
+		taller.setDescripcion(descripcion);
+		taller.setDireccion(direccion);
 		taller.setEmail(email);
 		taller.setCodigo(codigo);
 		container.persistIfNotAlready(taller);
@@ -70,25 +71,54 @@ public class RepositorioTaller {
 	@ActionLayout(named = "Buscar por Nombre Comercial")
 	public List<Taller> findByNombreComercial(
 			@ParameterLayout(named = "Nombre Comercial") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String nombreComercial) {
-		return container.allMatches(new QueryDefault<>(Taller.class,
-				"buscarPorNombreComercial", "nombreComercial", nombreComercial.toUpperCase()));
+		final List<Taller> listaTaller = listAll();
+		final List<Taller> lista = new ArrayList<Taller>();
+		for (Taller t : listaTaller) {
+			if (t.getNombreComercial().toUpperCase().equals(nombreComercial.toUpperCase())) {
+				lista.add(t);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Nombre Comercial");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por Direccion")
 	public List<Taller> findByDireccion(
 			@ParameterLayout(named = "Direccion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String direccion) {
-		return container.allMatches(new QueryDefault<>(Taller.class,
-				"buscarPorDireccion", "direccion", direccion.toUpperCase()));
+		final List<Taller> listaTaller = listAll();
+		final List<Taller> lista = new ArrayList<Taller>();
+		for (Taller t : listaTaller) {
+			if (t.getDireccion().toUpperCase().equals(direccion.toUpperCase())) {
+				lista.add(t);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe la Direccion");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "5")
 	@ActionLayout(named = "Buscar por Codigo")
 	public List<Taller> findByCodigo(
 			@ParameterLayout(named = "Codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String codigo) {
-		return container.allMatches(new QueryDefault<>(Taller.class,
-				"buscarPorCodigo", "codigo",
-				codigo.toUpperCase()));
+		final List<Taller> listaTaller = listAll();
+		final List<Taller> lista = new ArrayList<Taller>();
+		for (Taller t : listaTaller) {
+			if (t.getCodigo().toUpperCase().equals(codigo.toUpperCase())) {
+				lista.add(t);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Codigo buscado");
+		}
+		return lista;
 	}
 
 
