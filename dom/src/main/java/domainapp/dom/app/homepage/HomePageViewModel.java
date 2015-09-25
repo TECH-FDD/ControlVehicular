@@ -18,32 +18,42 @@
  */
 package domainapp.dom.app.homepage;
 
-import domainapp.dom.modules.simple.SimpleObject;
-import domainapp.dom.modules.simple.SimpleObjects;
-
 import java.util.List;
+
 import org.apache.isis.applib.annotation.ViewModel;
+
+import domainapp.dom.app.alerta.AlertaMatafuego;
+import domainapp.dom.app.alerta.AlertaVehiculo;
+import domainapp.dom.app.alerta.RepositorioAlertaMatafuego;
+import domainapp.dom.app.alerta.RepositorioAlertaVehiculo;
 
 @ViewModel
 public class HomePageViewModel {
 
-    //region > title
-    public String title() {
-        return getObjects().size() + " objects";
-    }
-    //endregion
+	// region > title
+	public String title() {
+		return (getAlertasMatafuego().size() + getAlertasVehiculo().size()) + " Alertas";
+	}
+	// endregion
 
-    //region > object (collection)
-    @org.apache.isis.applib.annotation.HomePage
-    public List<SimpleObject> getObjects() {
-        return simpleObjects.listAll();
-    }
-    //endregion
+	// region > object (collection)
+	@org.apache.isis.applib.annotation.HomePage
+	public List<AlertaMatafuego> getAlertasMatafuego() {
+		return repositorioAlertaMatafuego.listAllMatafuego();
+	}
 
-    //region > injected services
+	@org.apache.isis.applib.annotation.HomePage
+	public List<AlertaVehiculo> getAlertasVehiculo() {
+		return repositorioAlertaVehiculo.listAllVehiculo();
+	}
+	// endregion
 
-    @javax.inject.Inject
-    SimpleObjects simpleObjects;
+	// region > injected services
 
-    //endregion
+	@javax.inject.Inject
+	RepositorioAlertaMatafuego repositorioAlertaMatafuego;
+	@javax.inject.Inject
+	RepositorioAlertaVehiculo repositorioAlertaVehiculo;
+
+	// endregion
 }

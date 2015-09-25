@@ -10,6 +10,7 @@ import javax.jdo.annotations.VersionStrategy;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.ActionLayout;
+import org.apache.isis.applib.annotation.ActionLayout.Position;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
@@ -20,9 +21,10 @@ import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
-import org.apache.isis.applib.annotation.ActionLayout.Position;
 import org.apache.isis.applib.query.QueryDefault;
+import org.apache.isis.applib.services.actinvoc.ActionInvocationContext;
 
+import domainapp.dom.app.Estadoalerta.EstadoAlerta;
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.matafuego.Matafuego;
 
@@ -33,14 +35,14 @@ import domainapp.dom.app.matafuego.Matafuego;
 		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.alerta.AlertaMatafuego"),
 		@javax.jdo.annotations.Query(name = "Buscar_matafuego", language = "JDOQL", value = "SELECT "
-				+ "FROM domainapp.dom.app.alerta.AlertaMatafuego "
-				+ "WHERE matafuego.indexOf(:matafuego)>= 0") })
-@DomainObject(objectType = "ALERTAMATAFUEGO")
+				+ "FROM domainapp.dom.app.alerta.AlertaMatafuego " + "WHERE matafuego.indexOf(:matafuego)>= 0") })
+
+@DomainObject(objectType = "Alerta Matafuego")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class AlertaMatafuego extends Alerta {
 
 	private Matafuego matafuego;
-	private Date contadorAlerta;
+	private Date fechaAlerta;
 
 	@Persistent
 	@MemberOrder(sequence = "21")
@@ -58,12 +60,12 @@ public class AlertaMatafuego extends Alerta {
 	@MemberOrder(sequence = "22")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	@Property(editing = Editing.DISABLED)
-	public Date getContadorAlerta() {
-		return contadorAlerta;
+	public Date getFechaAlerta() {
+		return fechaAlerta;
 	}
 
-	public void setContadorAlerta(Date contadorAlerta) {
-		this.contadorAlerta = contadorAlerta;
+	public void setFechaAlerta(Date fechaAlerta) {
+		this.fechaAlerta = fechaAlerta;
 	}
 
 	@Override
@@ -73,15 +75,13 @@ public class AlertaMatafuego extends Alerta {
 
 	public AlertaMatafuego() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public AlertaMatafuego(String nombre, String descripcion, Date fechaAlta,
-			Empleado empleado, Matafuego matafuego, Date contadorAlerta,
-			Date fechaModificacion, Empleado empleadoModificacion) {
-		super(nombre, descripcion, fechaAlta, empleado);
+	public AlertaMatafuego(String nombre, String descripcion, Date fechaAlta, Empleado empleado, Matafuego matafuego,
+			Date fechaAlerta, EstadoAlerta estado, String estadoAnterior) {
+		super(nombre, descripcion, fechaAlta, empleado, estado, estadoAnterior);
 		this.matafuego = matafuego;
-		this.contadorAlerta = contadorAlerta;
+		this.fechaAlerta = fechaAlerta;
 	}
 
 	@MemberOrder(sequence = "1")
@@ -90,27 +90,25 @@ public class AlertaMatafuego extends Alerta {
 			final @ParameterLayout(named = "Empleado Involucrado") Empleado empleado,
 			final @ParameterLayout(named = "Nombre") @Parameter(optionality = Optionality.OPTIONAL) String nombre,
 			final @ParameterLayout(named = "Descripcion") @Parameter(optionality = Optionality.OPTIONAL) String descripcion,
-			final @ParameterLayout(named = "Fecha Alerta") @Parameter(optionality = Optionality.OPTIONAL) Date contadorAlerta) {
+			final @ParameterLayout(named = "Fecha Alerta") @Parameter(optionality = Optionality.OPTIONAL) Date fechaAlerta) {
 		String datosModificados = "";
-
 		if (nombre != null) {
 			datosModificados = datosModificados + "nombre: " + this.getNombre();
 			this.setNombre(nombre);
 		}
 		if (descripcion != null) {
-			datosModificados = datosModificados + "descripcion: "
-					+ this.getDescripcion();
+			datosModificados = datosModificados + "descripcion: " + this.getDescripcion();
 			this.setDescripcion(descripcion);
 		}
-		if (contadorAlerta != null) {
-			datosModificados = datosModificados + "contador Alarma: "
-					+ this.getDescripcion();
-			this.setContadorAlerta(contadorAlerta);
+		if (fechaAlerta != null) {
+			EstadoAlerta estado = repo.asignarAlertaEstado(fechaAlerta);
+			datosModificados = datosModificados + "contador Alarma: " + this.getDescripcion();
+			this.setFechaAlerta(fechaAlerta);
+			this.setEstadoAlerta(estado);
 		}
 		ModificacionAlertaMatafuego modificacionAlerta = new ModificacionAlertaMatafuego();
 		modificacionAlerta.setAlertaModificacion(this);
-		modificacionAlerta.setFechaModificacion(new Date(System
-				.currentTimeMillis()));
+		modificacionAlerta.setFechaModificacion(new Date(System.currentTimeMillis()));
 		modificacionAlerta.setModificacionEmpleado(empleado);
 		modificacionAlerta.setDatosModificados(datosModificados);
 
@@ -119,8 +117,7 @@ public class AlertaMatafuego extends Alerta {
 	}
 
 	@Programmatic
-	public String validateUpdateEdit(Empleado empleado, String nombre,
-			String descripcion, Date fechaAlerta) {
+	public String validateUpdateEdit(Empleado empleado, String nombre, String descripcion, Date fechaAlerta) {
 		if (nombre == null && descripcion == null && fechaAlerta == null) {
 			return "No se ha ingresado ninguna modificacion, por favor ingrese alguna modificación";
 		}
@@ -130,9 +127,8 @@ public class AlertaMatafuego extends Alerta {
 	@MemberOrder(sequence = "2")
 	@ActionLayout(named = "Lista de Modificaciones", position = Position.BELOW)
 	public List<ModificacionAlertaMatafuego> listAllMatafuego() {
-		final List<ModificacionAlertaMatafuego> listaModificacionAlertaMatafuego = container
-				.allMatches(new QueryDefault<ModificacionAlertaMatafuego>(
-						ModificacionAlertaMatafuego.class, "ListarTodos"));
+		final List<ModificacionAlertaMatafuego> listaModificacionAlertaMatafuego = container.allMatches(
+				new QueryDefault<ModificacionAlertaMatafuego>(ModificacionAlertaMatafuego.class, "ListarTodos"));
 		final List<ModificacionAlertaMatafuego> lista = new ArrayList<ModificacionAlertaMatafuego>();
 		for (ModificacionAlertaMatafuego aV : listaModificacionAlertaMatafuego) {
 			if (aV.getAlertaModificacion().equals(this)) {
@@ -145,7 +141,20 @@ public class AlertaMatafuego extends Alerta {
 		}
 		return lista;
 	}
+
+	@MemberOrder(sequence = "3")
+	@ActionLayout(named = "Aplazar", position = Position.BELOW)
+	public AlertaMatafuego Aplazar() {
+		getEstadoAlerta().aplazarAlertas(this);
+		return this;
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 
+	@javax.inject.Inject
+	public ActionInvocationContext actionInvocationContext;
+
+	@javax.inject.Inject
+	RepositorioAlertaMatafuego repo;
 }

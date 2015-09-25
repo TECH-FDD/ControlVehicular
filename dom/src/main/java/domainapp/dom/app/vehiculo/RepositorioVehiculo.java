@@ -49,7 +49,7 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "cns Combustible Ruta") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String cnsCombustibleRuta,
 			final @ParameterLayout(named = "cns Combustible Ciudad") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String cnsCombustibleCiudad,
 			final @ParameterLayout(named = "Matafuego") Matafuego matafuego,
-			final @ParameterLayout(named = "Kilometros") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String kilometros) {
+			final @ParameterLayout(named = "Kilometros") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS, optionality = Optionality.OPTIONAL) Integer kilometros) {
 
 		final Vehiculo vehiculo = new Vehiculo(marca, nombre, modelo, fechaCompra,
 				patente, numeroChasis, polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
@@ -74,7 +74,7 @@ public class RepositorioVehiculo {
 			Timestamp fechaCompra, String patente, String nroChasis,
 			Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
 			TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
-			Matafuego matafuego, String kilometro){
+			Matafuego matafuego, Integer kilometro){
 
 		List<Vehiculo> lista = listAll();
 		for (Vehiculo v : lista){
@@ -99,7 +99,7 @@ public class RepositorioVehiculo {
 											Timestamp fechaCompra, String patente, String nroChasis,
 											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
 											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
-											Matafuego matafuego, String kilometro){
+											Matafuego matafuego, Integer kilometro){
 		List<Gps> lista=repoGps.gpsNoAsignados(container.allInstances(Gps.class));
 		return lista;
 	}
@@ -113,7 +113,7 @@ public class RepositorioVehiculo {
 											Timestamp fechaCompra, String patente, String nroChasis,
 											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
 											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
-											Matafuego matafuego, String kilometro){
+											Matafuego matafuego, Integer kilometro){
 		return repoMatafuego.noAsignados(container.allInstances(Matafuego.class));
 	}
 

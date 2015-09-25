@@ -10,6 +10,7 @@ import javax.jdo.annotations.VersionStrategy;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.ActionLayout;
+import org.apache.isis.applib.annotation.ActionLayout.Position;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
@@ -20,17 +21,18 @@ import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
-import org.apache.isis.applib.annotation.ActionLayout.Position;
 import org.apache.isis.applib.query.QueryDefault;
 
+import domainapp.dom.app.Estadoalerta.EstadoAlerta;
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.vehiculo.Vehiculo;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "AlertaVehiculo_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
-@javax.jdo.annotations.Queries({ @javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
-		+ "FROM domainapp.dom.app.alerta.AlertaVehiculo") })
+@javax.jdo.annotations.Queries({
+		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.alerta.AlertaVehiculo") })
 @DomainObject(objectType = "ALERTAVEHICULO")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class AlertaVehiculo extends Alerta {
@@ -71,9 +73,9 @@ public class AlertaVehiculo extends Alerta {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlertaVehiculo(String nombre, String descripcion, Date fechaAlta,
-			Empleado empleado, Vehiculo vehiculo, Integer kilometrosAlarma) {
-		super(nombre, descripcion, fechaAlta, empleado);
+	public AlertaVehiculo(String nombre, String descripcion, Date fechaAlta, Empleado empleado, Vehiculo vehiculo,
+			Integer kilometrosAlarma, EstadoAlerta estadoAlerta, String estadoAnterior) {
+		super(nombre, descripcion, fechaAlta, empleado, estadoAlerta, estadoAnterior);
 		this.vehiculo = vehiculo;
 		this.kilometrosAlarma = kilometrosAlarma;
 	}
@@ -91,19 +93,17 @@ public class AlertaVehiculo extends Alerta {
 			this.setNombre(nombre);
 		}
 		if (descripcion != null) {
-			datosModificados = datosModificados + "descripcion: "
-					+ this.getDescripcion();
+			datosModificados = datosModificados + "descripcion: " + this.getDescripcion();
 			this.setDescripcion(descripcion);
 		}
 		if (kilometrosAlerta != null) {
-			datosModificados = datosModificados + "Kilometros Alarma: "
-					+ this.getKilometrosAlarma();
+			datosModificados = datosModificados + "Kilometros Alarma: " + this.getKilometrosAlarma();
 			this.setKilometrosAlarma(kilometrosAlerta);
+			this.setEstadoAlerta(repo.asignarAlertaEstado(kilometrosAlerta));
 		}
 		ModificacionAlertaVehiculo modificacionAlerta = new ModificacionAlertaVehiculo();
 		modificacionAlerta.setAlertaModificacion(this);
-		modificacionAlerta.setFechaModificacion(new Date(System
-				.currentTimeMillis()));
+		modificacionAlerta.setFechaModificacion(new Date(System.currentTimeMillis()));
 		modificacionAlerta.setModificacionEmpleado(empleado);
 		modificacionAlerta.setDatosModificados(datosModificados);
 
@@ -112,8 +112,7 @@ public class AlertaVehiculo extends Alerta {
 	}
 
 	@Programmatic
-	public String validateUpdateEdit(Empleado empleado, String nombre,
-			String descripcion, Integer kilometrosAlerta) {
+	public String validateUpdateEdit(Empleado empleado, String nombre, String descripcion, Integer kilometrosAlerta) {
 		if (nombre == null && descripcion == null && kilometrosAlerta == null) {
 			return "No se ha ingresado ninguna modificacion, por favor ingrese alguna modificación";
 		}
@@ -123,9 +122,8 @@ public class AlertaVehiculo extends Alerta {
 	@MemberOrder(sequence = "2")
 	@ActionLayout(named = "Lista de Modificaciones", position = Position.BELOW)
 	public List<ModificacionAlertaVehiculo> listAllVehiculo() {
-		final List<ModificacionAlertaVehiculo> listaModificacionesVehiculo = container
-				.allMatches(new QueryDefault<ModificacionAlertaVehiculo>(
-						ModificacionAlertaVehiculo.class, "ListarTodos"));
+		final List<ModificacionAlertaVehiculo> listaModificacionesVehiculo = container.allMatches(
+				new QueryDefault<ModificacionAlertaVehiculo>(ModificacionAlertaVehiculo.class, "ListarTodos"));
 		final List<ModificacionAlertaVehiculo> lista = new ArrayList<ModificacionAlertaVehiculo>();
 		for (ModificacionAlertaVehiculo aV : listaModificacionesVehiculo) {
 			if (aV.getAlertaModificacion().equals(this)) {
@@ -138,7 +136,18 @@ public class AlertaVehiculo extends Alerta {
 		}
 		return lista;
 	}
+
+	@MemberOrder(sequence = "3")
+	@ActionLayout(named = "Aplazar", position = Position.BELOW)
+	public AlertaVehiculo aplazar() {
+		getEstadoAlerta().aplazarAlertas(this);
+		return this;
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
+
+	@javax.inject.Inject
+	RepositorioAlertaVehiculo repo;
 
 }
