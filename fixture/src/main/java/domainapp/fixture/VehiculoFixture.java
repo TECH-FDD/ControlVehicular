@@ -23,7 +23,7 @@ public class VehiculoFixture extends Fixture {
 	private static int capTanqueCombustible=1000;
 	private static String cnsCombustibleRuta="1850";
 	private static String cnsCombustibleCiudad="900";
-	private static String kilometros="466580";
+	private static int kilometros=466580;
 
 	private static String getPatente(int x) {
 		return obtenerValor(patente, x);

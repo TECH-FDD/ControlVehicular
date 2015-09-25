@@ -16,7 +16,6 @@ public class AlertaMatafuegoFixture extends Fixture {
 	private static String descripcion = "Vencimiento";
 	
 	public AlertaMatafuegoFixture() {
-		// TODO Auto-generated constructor stub
 		withDiscoverability(Discoverability.DISCOVERABLE);
 	}
 
@@ -34,12 +33,12 @@ public class AlertaMatafuegoFixture extends Fixture {
 			calendar.setTime(fecha);
 			for (int x = 0; x < 3; x++) {
 				calendar.add(Calendar.DAY_OF_YEAR,(100) );
-				create(nombre, descripcion, new Date(System.currentTimeMillis()),empleados.get(x+1),matafuegos.get(x+1),calendar.getTime(), executionContext);
+				create(nombre, descripcion, new Date(System.currentTimeMillis()),empleados.get(x+1),matafuegos.get(x+1),calendar.getTime(),null,executionContext);
 			}
 		
 	}
 
-	private AlertaMatafuego create(String nombre, String descripcion,Date fechaAlta, Empleado empleado, Matafuego matafuego,Date contadorAlerta,
+	private AlertaMatafuego create(String nombre, String descripcion,Date fechaAlta, Empleado empleado, Matafuego matafuego,Date contadorAlerta,String estadoAnterior,
 			ExecutionContext executionContext) {
 		return executionContext.addResult(this,
 				repoAlerta.createAlertaMatafuego(nombre, descripcion, empleado, matafuego, contadorAlerta));
