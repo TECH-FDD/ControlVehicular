@@ -20,6 +20,7 @@ import net.sf.jasperreports.engine.ReportContext;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
@@ -64,6 +65,12 @@ public class GenerarReporte {
 
 				exporterXLS.setConfiguration(configuration);
 				exporterXLS.exportReport();
+			}
+			else{
+				JRDocxExporter export = new JRDocxExporter();
+				export.setExporterInput(new SimpleExporterInput(print));
+				export.setExporterOutput(new SimpleOutputStreamExporterOutput(nombreArchivo + ".docx"));
+				export.exportReport();
 			}
 		// Muestra el reporte en otra ventana
 		// JasperExportManager.exportReportToHtmlFile(print, "nuevo.html");

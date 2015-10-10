@@ -252,9 +252,13 @@ public class RepositorioAlertaMatafuego {
 		if (formato == Formato.PDF)
 			nombreArchivo = "ReporteAlerta/AlertasMatafuego/PDF/AlertaMatafuego "
 					+ new Date(System.currentTimeMillis());
-		else if (formato == Formato.XLS)
+		else
+			if (formato == Formato.XLS)
 			nombreArchivo = "ReporteAlerta/AlertasMatafuego/XLS/AlertaMatafuego "
 					+ new Date(System.currentTimeMillis());
+			else
+				nombreArchivo = "ReporteAlerta/AlertasMatafuego/DOC/AlertaMatafuego "
+						+ new Date(System.currentTimeMillis());
 
 		GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport, formato, nombreArchivo);
 	}
