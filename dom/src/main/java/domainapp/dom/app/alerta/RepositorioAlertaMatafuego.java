@@ -30,6 +30,7 @@ import domainapp.dom.app.Estadoalerta.Aplazado;
 import domainapp.dom.app.Estadoalerta.EstadoAlerta;
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.matafuego.Matafuego;
+import domainapp.dom.app.reporte.Formato;
 import domainapp.dom.app.reporte.GenerarReporte;
 import domainapp.dom.app.reporte.ReporteAlerta;
 import net.sf.jasperreports.engine.JRException;
@@ -218,27 +219,46 @@ public class RepositorioAlertaMatafuego {
 					: (alertaMatafuego1.getFechaAlerta().after(alertaMatafuego2.getFechaAlerta()) ? 1 : 0);
 		}
 	}
+
 	@Programmatic
-	public void exportarTodo() throws JRException, IOException{
+	public void elegirFormato(Formato formato) throws JRException, IOException {
+		exportarTodo(formato);
+	}
+
+	@Programmatic
+	public Formato default0ElegirFormato(final @ParameterLayout(named = "Formato") Formato formato) {
+		return Formato.PDF;
+	}
+
+	@Programmatic
+	public void exportarTodo(Formato formato) throws JRException, IOException {
 		List<Object> objectsReport = new ArrayList<Object>();
-		DateFormat df= DateFormat.getDateInstance(DateFormat.SHORT);
-		for(AlertaMatafuego a: listAll()){
-					String fechaAlerta=df.format(a.getFechaAlerta());
-					String fechaAlta=df.format(a.getFechaAlta());
-					ReporteAlerta alerta = new ReporteAlerta();
-					alerta.setNombre(a.getNombre());
-					alerta.setDescripcion(a.getDescripcion());
-					alerta.setEstadoAlerta(a.getEstadoAlerta().toString());
-					alerta.setAlerta(fechaAlerta);
-					alerta.setFechaAlta(fechaAlta);
-					alerta.setElemento(a.getMatafuego().toString());
-					alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre()+" "+a.getEmpleado().getApellido());
-					alerta.setsubTitulo(" ");
-					objectsReport.add(alerta);
-			}
-		String nombreArchivo = "ReporteAlerta/AlertasMatafuego/PDF/AlertaMatafuego "+new Date(System.currentTimeMillis()); 
-		GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport, nombreArchivo);
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		for (AlertaMatafuego a : listAll()) {
+			String fechaAlerta = df.format(a.getFechaAlerta());
+			String fechaAlta = df.format(a.getFechaAlta());
+			ReporteAlerta alerta = new ReporteAlerta();
+			alerta.setNombre(a.getNombre());
+			alerta.setDescripcion(a.getDescripcion());
+			alerta.setEstadoAlerta(a.getEstadoAlerta().toString());
+			alerta.setAlerta(fechaAlerta);
+			alerta.setFechaAlta(fechaAlta);
+			alerta.setElemento(a.getMatafuego().toString());
+			alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
+			alerta.setsubTitulo(" ");
+			objectsReport.add(alerta);
 		}
+		String nombreArchivo = null;
+		if (formato == Formato.PDF)
+			nombreArchivo = "ReporteAlerta/AlertasMatafuego/PDF/AlertaMatafuego "
+					+ new Date(System.currentTimeMillis());
+		else if (formato == Formato.XLS)
+			nombreArchivo = "ReporteAlerta/AlertasMatafuego/XLS/AlertaMatafuego "
+					+ new Date(System.currentTimeMillis());
+
+		GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport, formato, nombreArchivo);
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

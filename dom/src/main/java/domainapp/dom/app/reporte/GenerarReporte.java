@@ -19,12 +19,16 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.ReportContext;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
 @DomainService()
 @DomainServiceLayout(named = "Reportes")
 public class GenerarReporte {
-	public static void generarReporte(String jrxml, List<Object> parametros, String nombreArchivo)
+	public static void generarReporte(String jrxml, List<Object> parametros,Formato formato, String nombreArchivo)
 			throws JRException, IOException {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -44,12 +48,25 @@ public class GenerarReporte {
 
 		// Lo muestra con el jasperviewer
 		// JasperViewer.viewReport(print, false);
+		if(formato==Formato.PDF)
+			JasperExportManager.exportReportToPdfFile(print, nombreArchivo + ".pdf");
+		else
+			if(formato==Formato.XLS){
+				JRXlsExporter exporterXLS = new JRXlsExporter();
 
-		JasperExportManager.exportReportToPdfFile(print, nombreArchivo + ".pdf");
+				exporterXLS.setExporterInput(new SimpleExporterInput(print));
+				exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(nombreArchivo + ".xls"));
 
+				SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
+				configuration.setOnePagePerSheet(true);
+				configuration.setDetectCellType(true);
+				configuration.setCollapseRowSpan(false);
+
+				exporterXLS.setConfiguration(configuration);
+				exporterXLS.exportReport();
+			}
 		// Muestra el reporte en otra ventana
 		// JasperExportManager.exportReportToHtmlFile(print, "nuevo.html");
-
 	}
 
 	@javax.inject.Inject

@@ -23,12 +23,14 @@ import java.util.List;
 
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
+import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.SemanticsOf;
 import org.apache.isis.applib.annotation.ViewModel;
 import domainapp.dom.app.alerta.AlertaMatafuego;
 import domainapp.dom.app.alerta.AlertaVehiculo;
 import domainapp.dom.app.alerta.RepositorioAlertaMatafuego;
 import domainapp.dom.app.alerta.RepositorioAlertaVehiculo;
+import domainapp.dom.app.reporte.Formato;
 import net.sf.jasperreports.engine.JRException;
 
 @ViewModel
@@ -53,8 +55,8 @@ public class HomePageViewModel {
 
 	@Action(semantics = SemanticsOf.SAFE)
 	@ActionLayout(describedAs="El documento se almacenara en ReporteAlertas/AlertasMatafuego")
-	public String exportarTodo() throws JRException, IOException{
-			repositorioAlertaMatafuego.exportarTodo();
+	public String exportarTodo(@ParameterLayout(named="Formato") Formato formato) throws JRException, IOException{
+			repositorioAlertaMatafuego.elegirFormato(formato);
 			return "Se ha realizado la Exportación correctamente";
 	}
 	@javax.inject.Inject
