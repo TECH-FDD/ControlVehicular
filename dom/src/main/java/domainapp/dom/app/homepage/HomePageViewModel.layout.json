@@ -31,10 +31,18 @@
         {
             "span": 12,
             "collections": {
-                "objects": {
+               
+                "AlertasMatafuego": {
                     "collectionLayout": {
                         "render": "EAGERLY"
-                    }
+                    },
+                     "actions": {
+                        "exportarTodo": {
+                            "actionLayout": {
+                                "named": "ExportarTodo"
+                            }
+                        }
+                	}
                 }
             }
         }

@@ -18,14 +18,18 @@
  */
 package domainapp.dom.app.homepage;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.isis.applib.annotation.Action;
+import org.apache.isis.applib.annotation.ActionLayout;
+import org.apache.isis.applib.annotation.SemanticsOf;
 import org.apache.isis.applib.annotation.ViewModel;
-
 import domainapp.dom.app.alerta.AlertaMatafuego;
 import domainapp.dom.app.alerta.AlertaVehiculo;
 import domainapp.dom.app.alerta.RepositorioAlertaMatafuego;
 import domainapp.dom.app.alerta.RepositorioAlertaVehiculo;
+import net.sf.jasperreports.engine.JRException;
 
 @ViewModel
 public class HomePageViewModel {
@@ -46,10 +50,13 @@ public class HomePageViewModel {
 	public List<AlertaVehiculo> getAlertasVehiculo() {
 		return repositorioAlertaVehiculo.listAllVehiculo();
 	}
-	// endregion
 
-	// region > injected services
-
+	@Action(semantics = SemanticsOf.SAFE)
+	@ActionLayout(describedAs="El documento se almacenara en ReporteAlertas/AlertasMatafuego")
+	public String exportarTodo() throws JRException, IOException{
+			repositorioAlertaMatafuego.exportarTodo();
+			return "Se ha realizado la Exportación correctamente";
+	}
 	@javax.inject.Inject
 	RepositorioAlertaMatafuego repositorioAlertaMatafuego;
 	@javax.inject.Inject

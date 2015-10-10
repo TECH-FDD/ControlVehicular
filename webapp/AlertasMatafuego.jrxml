@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AlertasMatafuego" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="25" bottomMargin="0" uuid="12d450a2-c90d-4fc4-95b6-4609fb243197">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<field name="subTitulo" class="java.lang.String"/>
+	<field name="elemento" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="alerta" class="java.lang.String"/>
+	<field name="estadoAlerta" class="java.lang.String"/>
+	<field name="empleadoInvolucrado" class="java.lang.String"/>
+	<field name="fechaAlta" class="java.lang.String"/>
+	<pageHeader>
+		<band height="102">
+			<textField>
+				<reportElement mode="Transparent" x="1" y="77" width="552" height="25" forecolor="#153353" backcolor="#B6ABA0" uuid="2f279e20-128d-4331-90ab-a2cc1be3b7a1"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="16" isBold="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subTitulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="553" height="77" forecolor="#142332" uuid="a27d4eba-9009-4d06-abaf-054a965d578e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="36" isBold="true" isUnderline="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Alertas Matafuego]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="169" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="139" y="0" width="417" height="25" forecolor="#B6ABA0" backcolor="#0F3351" uuid="4332d784-3b5d-4c00-91ca-a45c4ce13ad5"/>
+				<box>
+					<topPen lineWidth="0.0" lineColor="#0C0A0A"/>
+					<leftPen lineWidth="0.0" lineColor="#0C0A0A"/>
+					<bottomPen lineWidth="0.0" lineColor="#0C0A0A"/>
+					<rightPen lineWidth="0.0" lineColor="#0C0A0A"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{elemento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="275" y="25" width="281" height="21" uuid="09886512-63e4-4c42-90c7-5db75c0b0ab8"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="137" y="25" width="136" height="21" forecolor="#000000" backcolor="#FFFFFF" uuid="929266d7-0c3f-4de2-8d8b-3de4d815ddc0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="137" y="46" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="d9ff81d4-039d-4733-8eac-66213a69a64e"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="137" y="66" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="5a2aeb19-b020-466d-ac6f-0f55114bfea1"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Fecha Alerta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="137" y="86" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="96c8bb32-67bd-4b3d-9f07-f542dab2e90d"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="137" y="106" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="bd073b37-252b-4d74-bf92-0b4d77d144e2"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Empleado Involucrado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="137" y="126" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="445682a3-32d8-45dc-8169-2c24d946e0a8"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Fecha Alta]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="274" y="46" width="281" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="08fc5107-3ddf-47d0-9555-f78187f446e1"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="274" y="66" width="281" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="50642eee-8ed1-47a5-bbba-24b1481156c1"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{alerta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="275" y="86" width="281" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="8bb9ae3e-9517-49bb-9fe5-108df269d6bb"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estadoAlerta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="274" y="106" width="281" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="143b4880-32c7-4770-9417-65320f1c439a"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empleadoInvolucrado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="273" y="126" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="0daa9ca7-840b-46b7-89ba-ff64c91b82de"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaAlta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="0" width="138" height="25" forecolor="#B6ABA0" backcolor="#0F3351" uuid="4d871ff2-1b09-4dfd-80e5-9a86ecfff4d6"/>
+				<box>
+					<pen lineWidth="2.0" lineColor="#0C0505"/>
+					<topPen lineWidth="0.0" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.0" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.0" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.0" lineColor="#0C0505"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Matafuego:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

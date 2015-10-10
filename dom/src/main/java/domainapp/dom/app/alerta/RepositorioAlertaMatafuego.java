@@ -1,6 +1,8 @@
 package domainapp.dom.app.alerta;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -28,6 +30,9 @@ import domainapp.dom.app.Estadoalerta.Aplazado;
 import domainapp.dom.app.Estadoalerta.EstadoAlerta;
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.matafuego.Matafuego;
+import domainapp.dom.app.reporte.GenerarReporte;
+import domainapp.dom.app.reporte.ReporteAlerta;
+import net.sf.jasperreports.engine.JRException;
 
 @DomainService(repositoryFor = AlertaMatafuego.class)
 @DomainServiceLayout(menuOrder = "120", named = "Alerta")
@@ -70,9 +75,6 @@ public class RepositorioAlertaMatafuego {
 		for (AlertaMatafuego alerta : lista) {
 			AlertaMatafuego alertaMatafuego = modificarAlertaEstado(alerta);
 			listaMatafuego.add(alertaMatafuego);
-		}
-		if (lista.isEmpty()) {
-			this.container.warnUser("No hay alertas de matafuegos cargadas en el sistema");
 		}
 		Collections.sort(listaMatafuego, new OrdenaCod());
 		return listaMatafuego;
@@ -137,7 +139,6 @@ public class RepositorioAlertaMatafuego {
 		// Se restan la fecha actual y la fecha de nacimiento
 		long milisec = fechaAlerta.getTimeInMillis() - fechaActual.getTimeInMillis();
 		long days = milisec / 1000 / 60 / 60 / 24;
-		System.out.println("Days : " + days);
 		// int año =fechaAlerta.get(Calendar.)-fechaActual.get(Calendar.DATE);
 		return days;
 	}
@@ -217,7 +218,27 @@ public class RepositorioAlertaMatafuego {
 					: (alertaMatafuego1.getFechaAlerta().after(alertaMatafuego2.getFechaAlerta()) ? 1 : 0);
 		}
 	}
-
+	@Programmatic
+	public void exportarTodo() throws JRException, IOException{
+		List<Object> objectsReport = new ArrayList<Object>();
+		DateFormat df= DateFormat.getDateInstance(DateFormat.SHORT);
+		for(AlertaMatafuego a: listAll()){
+					String fechaAlerta=df.format(a.getFechaAlerta());
+					String fechaAlta=df.format(a.getFechaAlta());
+					ReporteAlerta alerta = new ReporteAlerta();
+					alerta.setNombre(a.getNombre());
+					alerta.setDescripcion(a.getDescripcion());
+					alerta.setEstadoAlerta(a.getEstadoAlerta().toString());
+					alerta.setAlerta(fechaAlerta);
+					alerta.setFechaAlta(fechaAlta);
+					alerta.setElemento(a.getMatafuego().toString());
+					alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre()+" "+a.getEmpleado().getApellido());
+					alerta.setsubTitulo(" ");
+					objectsReport.add(alerta);
+			}
+		String nombreArchivo = "ReporteAlerta/AlertasMatafuego/PDF/AlertaMatafuego "+new Date(System.currentTimeMillis()); 
+		GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport, nombreArchivo);
+		}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
