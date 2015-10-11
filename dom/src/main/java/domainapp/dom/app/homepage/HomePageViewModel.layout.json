@@ -39,7 +39,12 @@
                      "actions": {
                         "exportarTodo": {
                             "actionLayout": {
-                                "named": "ExportarTodo"
+                                "named": "Exportar Todo"
+                            }
+                        },
+                        "exportarPorPeriodo": {
+                            "actionLayout": {
+                                "named": "Exportar Por Periodo"
                             }
                         }
                 	}

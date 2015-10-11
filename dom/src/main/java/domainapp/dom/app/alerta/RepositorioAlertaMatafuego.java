@@ -224,6 +224,10 @@ public class RepositorioAlertaMatafuego {
 	public void elegirFormato(Formato formato) throws JRException, IOException {
 		exportarTodo(formato);
 	}
+	@Programmatic
+	public void elegirFormato(Date desde,Date hasta,Formato formato) throws JRException, IOException {
+		exportarPorPeriodo(desde, hasta, formato);
+	}
 
 	@Programmatic
 	public Formato default0ElegirFormato(final @ParameterLayout(named = "Formato") Formato formato) {
@@ -262,7 +266,32 @@ public class RepositorioAlertaMatafuego {
 
 		GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport, formato, nombreArchivo);
 	}
-
+	@Programmatic
+	public void exportarPorPeriodo(Date desde,Date hasta,Formato formato) throws JRException, IOException{
+		List<Object> objectsReport = new ArrayList<Object>();
+		DateFormat df= DateFormat.getDateInstance(DateFormat.SHORT);
+		for(AlertaMatafuego a: listAll()){
+				if(a.getFechaAlta().after(desde)&&a.getFechaAlta().before(hasta))
+				{
+					String fechaAlerta = df.format(a.getFechaAlerta());
+					String fechaAlta = df.format(a.getFechaAlta());
+					ReporteAlerta alerta = new ReporteAlerta();
+					alerta.setNombre(a.getNombre());
+					alerta.setDescripcion(a.getDescripcion());
+					alerta.setEstadoAlerta(a.getEstadoAlerta().toString());
+					alerta.setAlerta(fechaAlerta);
+					alerta.setFechaAlta(fechaAlta);
+					alerta.setElemento(a.getMatafuego().toString());
+					alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
+					alerta.setsubTitulo("Desde: "+df.format(desde)+", Hasta: "+df.format(hasta));
+					objectsReport.add(alerta);
+				}
+			}
+		if(!(objectsReport.isEmpty())){
+			String nombreArchivo = "ReporteAlerta/AlertasMatafuego/PDF/AlertaMatafuego "+new Date(System.currentTimeMillis()); 
+			GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport,formato, nombreArchivo);
+			}
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }

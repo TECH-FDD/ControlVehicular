@@ -19,13 +19,16 @@
 package domainapp.dom.app.homepage;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
+import org.apache.isis.applib.annotation.HomePage;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.SemanticsOf;
 import org.apache.isis.applib.annotation.ViewModel;
+
 import domainapp.dom.app.alerta.AlertaMatafuego;
 import domainapp.dom.app.alerta.AlertaVehiculo;
 import domainapp.dom.app.alerta.RepositorioAlertaMatafuego;
@@ -43,20 +46,24 @@ public class HomePageViewModel {
 	// endregion
 
 	// region > object (collection)
-	@org.apache.isis.applib.annotation.HomePage
+	@HomePage
 	public List<AlertaMatafuego> getAlertasMatafuego() {
 		return repositorioAlertaMatafuego.listAllMatafuego();
 	}
-
-	@org.apache.isis.applib.annotation.HomePage
+	@HomePage
 	public List<AlertaVehiculo> getAlertasVehiculo() {
 		return repositorioAlertaVehiculo.listAllVehiculo();
 	}
-
 	@Action(semantics = SemanticsOf.SAFE)
 	@ActionLayout(describedAs="El documento se almacenara en ReporteAlertas/AlertasMatafuego")
 	public String exportarTodo(@ParameterLayout(named="Formato") Formato formato) throws JRException, IOException{
 			repositorioAlertaMatafuego.elegirFormato(formato);
+			return "Se ha realizado la Exportación correctamente";
+	}
+	@Action(semantics = SemanticsOf.SAFE)
+	@ActionLayout(describedAs="El documento se almacenara en ReporteAlertas/AlertasMatafuego")
+	public String exportarPorPeriodo(@ParameterLayout(named="Formato") Formato formato,@ParameterLayout(named="Desde") Date desde,@ParameterLayout(named="Hasta") Date hasta) throws JRException, IOException{
+			repositorioAlertaMatafuego.elegirFormato(desde, hasta,formato);
 			return "Se ha realizado la Exportación correctamente";
 	}
 	@javax.inject.Inject
