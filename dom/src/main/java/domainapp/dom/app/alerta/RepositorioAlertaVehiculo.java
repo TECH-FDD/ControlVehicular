@@ -257,6 +257,9 @@ public class RepositorioAlertaVehiculo {
 			else if (formato == Formato.DOCX)
 				nombreArchivo = "ReporteAlerta/AlertasVehiculo/DOC/AlertaVehiculo "
 						+ new Date(System.currentTimeMillis());
+			else
+				nombreArchivo = "ReporteAlerta/AlertasVehiculo/XLS/AlertaVehiculo "
+						+ new Date(System.currentTimeMillis());
 
 			GenerarReporte.generarReporte("AlertasVehiculo.jrxml", objectsReport, formato, nombreArchivo);
 			return "Se ha realizado la exportacion Correctamente";
