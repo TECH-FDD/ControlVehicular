@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.HomePage;
@@ -50,6 +51,7 @@ public class HomePageViewModel {
 	public List<AlertaMatafuego> getAlertasMatafuego() {
 		return repositorioAlertaMatafuego.listAllMatafuego();
 	}
+
 	@HomePage
 	public List<AlertaVehiculo> getAlertasVehiculo() {
 		return repositorioAlertaVehiculo.listAllVehiculo();
@@ -58,12 +60,8 @@ public class HomePageViewModel {
 	@Action(semantics = SemanticsOf.SAFE)
 	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasMatafuego")
 	public String exportarTodo(@ParameterLayout(named = "Formato") Formato formato) throws JRException, IOException {
-		if (getAlertasMatafuego().isEmpty())
-			return "No hay elementos para Exportar";
-		else {
-			repositorioAlertaMatafuego.elegirFormato(formato);
-			return "Se ha realizado la Exportación correctamente";
-		}
+		return repositorioAlertaMatafuego.elegirFormato(formato);
+
 	}
 
 	@Action(semantics = SemanticsOf.SAFE)
@@ -71,13 +69,16 @@ public class HomePageViewModel {
 	public String exportarPorPeriodo(@ParameterLayout(named = "Formato") Formato formato,
 			@ParameterLayout(named = "Desde") Date desde, @ParameterLayout(named = "Hasta") Date hasta)
 					throws JRException, IOException {
-		if (getAlertasMatafuego().isEmpty())
+		if (repositorioAlertaMatafuego.listAll().isEmpty())
 			return "No hay elementos para Exportar";
 		else {
-			repositorioAlertaMatafuego.elegirFormato(desde, hasta, formato);
-			return "Se ha realizado la Exportación correctamente";
+			return repositorioAlertaMatafuego.elegirFormato(desde, hasta, formato);
+
 		}
 	}
+
+	@javax.inject.Inject
+	DomainObjectContainer container;
 	@javax.inject.Inject
 	RepositorioAlertaMatafuego repositorioAlertaMatafuego;
 	@javax.inject.Inject
