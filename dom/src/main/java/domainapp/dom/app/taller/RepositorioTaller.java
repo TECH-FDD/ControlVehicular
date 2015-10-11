@@ -1,6 +1,8 @@
 package domainapp.dom.app.taller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -10,7 +12,13 @@ import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
+
+import domainapp.dom.app.reporte.Formato;
+import domainapp.dom.app.reporte.GenerarReporte;
+import domainapp.dom.app.reporte.ReporteTaller;
+import net.sf.jasperreports.engine.JRException;
 
 @DomainService(repositoryFor = Taller.class)
 @DomainServiceLayout(menuOrder = "100", named = "Taller")
@@ -119,6 +127,41 @@ public class RepositorioTaller {
 			this.container.warnUser("No existe el Codigo buscado");
 		}
 		return lista;
+	}
+	@MemberOrder(sequence="6")
+	@ActionLayout(named="Exportar Talleres")
+	public String elegirFormato(Formato formato) throws JRException, IOException {
+		return exportarTodo(formato);
+	}
+
+	@Programmatic
+	public Formato default0ElegirFormato(final @ParameterLayout(named = "Formato") Formato formato) {
+		return Formato.PDF;
+	}
+
+	@Programmatic
+	public String exportarTodo(Formato formato) throws JRException, IOException {
+		List<Object> objectsReport = new ArrayList<Object>();
+		for (Taller t : listAll()) {
+			ReporteTaller taller= new ReporteTaller();
+			taller.setCodigo(t.getCodigo());
+			taller.setNombreComercial(t.getNombreComercial());
+			taller.setDescripcion(t.getDescripcion());
+			taller.setEmail(t.getEmail());
+			taller.setTelefono(t.getTelefono());
+			taller.setDireccion(t.getDireccion());
+			objectsReport.add(taller);
+		}
+		if (objectsReport.isEmpty() == false) {
+			String nombreArchivo = null;
+			if (formato == Formato.PDF)
+				nombreArchivo = "ReporteTaller/PDF/Talleres "
+						+ new Date(System.currentTimeMillis());
+
+			GenerarReporte.generarReporte("Talleres.jrxml", objectsReport, formato, nombreArchivo);
+			return "Se ha realizado la exportacion Correctamente";
+		} else
+			return "No hay elementos para imprimir";
 	}
 
 
