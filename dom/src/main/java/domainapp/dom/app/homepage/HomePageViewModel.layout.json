@@ -58,7 +58,13 @@
                             "actionLayout": {
                                 "named": "Exportar Todo"
                             }
+                        },
+                        "exportarPorPeriodoVehiculo": {
+                            "actionLayout": {
+                                "named": "Exportar Por Periodo"
+                            }
                         }
+                        
                 	}
                 }
                 

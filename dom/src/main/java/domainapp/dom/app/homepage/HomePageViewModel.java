@@ -69,20 +69,24 @@ public class HomePageViewModel {
 	public String exportarPorPeriodo(@ParameterLayout(named = "Formato") Formato formato,
 			@ParameterLayout(named = "Desde") Date desde, @ParameterLayout(named = "Hasta") Date hasta)
 					throws JRException, IOException {
-		if (repositorioAlertaMatafuego.listAll().isEmpty())
-			return "No hay elementos para Exportar";
-		else {
 			return repositorioAlertaMatafuego.elegirFormato(desde, hasta, formato);
-
-		}
 	}
+
 	@Action(semantics = SemanticsOf.SAFE)
 	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasVehiculo")
-	public String exportarTodoVehiculo(@ParameterLayout(named = "Formato") Formato formato) throws JRException, IOException {
+	public String exportarTodoVehiculo(@ParameterLayout(named = "Formato") Formato formato)
+			throws JRException, IOException {
 		return repositorioAlertaVehiculo.elegirFormato(formato);
 
 	}
 
+	@Action(semantics = SemanticsOf.SAFE)
+	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasVehiculo")
+	public String exportarPorPeriodoVehiculo(@ParameterLayout(named = "Formato") Formato formato,
+			@ParameterLayout(named = "Desde") Date desde, @ParameterLayout(named = "Hasta") Date hasta)
+					throws JRException, IOException {
+		return repositorioAlertaVehiculo.elegirFormato(formato, desde, hasta);
+	}
 
 	@javax.inject.Inject
 	DomainObjectContainer container;

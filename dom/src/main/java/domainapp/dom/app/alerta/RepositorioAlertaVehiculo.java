@@ -186,6 +186,11 @@ public class RepositorioAlertaVehiculo {
 	}
 
 	@Programmatic
+	public String elegirFormato(Formato formato, Date desde, Date hasta) throws JRException, IOException {
+		return exportarPorPeriodo(desde, hasta, formato);
+	}
+
+	@Programmatic
 	public Formato default0ElegirFormato(final @ParameterLayout(named = "Formato") Formato formato) {
 		return Formato.PDF;
 	}
@@ -216,13 +221,45 @@ public class RepositorioAlertaVehiculo {
 				nombreArchivo = "ReporteAlerta/AlertasVehiculo/XLS/AlertaVehiculo "
 						+ new Date(System.currentTimeMillis());
 			else
-							nombreArchivo = "ReporteAlerta/AlertasVehiculo/DOC/AlertaVehiculo "
-									+ new Date(System.currentTimeMillis());
+				nombreArchivo = "ReporteAlerta/AlertasVehiculo/DOC/AlertaVehiculo "
+						+ new Date(System.currentTimeMillis());
 
 			GenerarReporte.generarReporte("AlertasVehiculo.jrxml", objectsReport, formato, nombreArchivo);
 			return "Se ha realizado la exportacion Correctamente";
 		} else
 			return "No hay elementos para imprimir";
+	}
+
+	@Programmatic
+	public String exportarPorPeriodo(Date desde, Date hasta, Formato formato) throws JRException, IOException {
+		List<Object> objectsReport = new ArrayList<Object>();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		for (AlertaVehiculo a : listAll()) {
+			if (a.getFechaAlta().after(desde) && a.getFechaAlta().before(hasta)) {
+				String fechaAlta = df.format(a.getFechaAlta());
+				ReporteAlerta alerta = new ReporteAlerta();
+				alerta.setNombre(a.getNombre());
+				alerta.setDescripcion(a.getDescripcion());
+				alerta.setEstadoAlerta(a.getEstadoAlerta().toString());
+				alerta.setAlerta(a.getKilometrosAlarma().toString());
+				alerta.setFechaAlta(fechaAlta);
+				alerta.setElemento(a.getVehiculo().toString());
+				alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
+				alerta.setsubTitulo("Desde: " + df.format(desde) + ", Hasta: " + df.format(hasta));
+				objectsReport.add(alerta);
+			}
+		}
+		if (objectsReport.isEmpty() == false) {
+			String nombreArchivo = null;
+			if (formato == Formato.PDF)
+				nombreArchivo = "ReporteAlerta/AlertasVehiculo/PDF/AlertaVehiculo "
+						+ new Date(System.currentTimeMillis());
+
+			GenerarReporte.generarReporte("AlertasVehiculo.jrxml", objectsReport, formato, nombreArchivo);
+			return "Se ha realizado la exportacion Correctamente";
+		} else
+			return "No hay elementos para imprimir";
+
 	}
 
 	@javax.inject.Inject
