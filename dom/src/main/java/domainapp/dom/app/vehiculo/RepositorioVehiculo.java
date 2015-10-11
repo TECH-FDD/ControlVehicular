@@ -1,7 +1,10 @@
 package domainapp.dom.app.vehiculo;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -27,6 +30,10 @@ import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.gps.RepositorioGps;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.matafuego.RepositorioMatafuego;
+import domainapp.dom.app.reporte.Formato;
+import domainapp.dom.app.reporte.GenerarReporte;
+import domainapp.dom.app.reporte.ReporteVehiculo;
+import net.sf.jasperreports.engine.JRException;
 
 @DomainService(repositoryFor = Vehiculo.class)
 @DomainServiceLayout(menuOrder = "80", named = "Vehiculo")
@@ -257,6 +264,51 @@ public class RepositorioVehiculo {
 				bajas.add(vehiculo);
 		}
 		return bajas;
+	}
+	@MemberOrder(sequence="4")
+	@ActionLayout(named="Exportar Vehiculo")
+	public String elegirFormato(Formato formato) throws JRException, IOException {
+		return exportarTodo(formato);
+	}
+
+	@Programmatic
+	public Formato default0ElegirFormato(final @ParameterLayout(named = "Formato") Formato formato) {
+		return Formato.PDF;
+	}
+
+	@Programmatic
+	public String exportarTodo(Formato formato) throws JRException, IOException {
+		List<Object> objectsReport = new ArrayList<Object>();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		for (Vehiculo v : listAll()) {
+			ReporteVehiculo vehiculo= new ReporteVehiculo();
+			String fechaCompra = df.format(v.getFechaCompra());
+			vehiculo.setNombre(v.getMarca()+", "+v.getNombre());
+			vehiculo.setModelo(v.getModelo().toString());
+			vehiculo.setFechaCompra(fechaCompra);
+			vehiculo.setNumeroChasis(v.getNumeroChasis());
+			vehiculo.setPatente(v.getPatente());
+			vehiculo.setPolizaSeguro(v.getPolizaSeguro().toString());
+			vehiculo.setEstado(v.getEstado().toString());
+			vehiculo.setCapacTanqueCombustible(v.getCapacTanqueCombustible().toString());
+			vehiculo.setCnsCombustibleCiudad(v.getCnsCombuestibleCiudad());
+			vehiculo.setCnsCombustibleRuta(v.getCnsCombustibleRuta());
+			vehiculo.setGps(v.getGps().toString());
+			vehiculo.setMatafuego(v.getMatafuego().toString());
+			vehiculo.setKilometros(v.getKilometros().toString());
+			vehiculo.setTipoAceite(v.getTipoAceite().toString());
+			vehiculo.setTipoCombustible(v.getTipoCombustible().toString());
+			objectsReport.add(vehiculo);
+		}
+		if (objectsReport.isEmpty() == false) {
+			String nombreArchivo = null;
+			if (formato == Formato.PDF)
+				nombreArchivo = "ReporteVehiculo/PDF/Vehiculos "
+						+ new Date(System.currentTimeMillis());
+			GenerarReporte.generarReporte("Vehiculos.jrxml", objectsReport, formato, nombreArchivo);
+			return "Se ha realizado la exportacion Correctamente";
+		} else
+			return "No hay elementos para imprimir";
 	}
 
 	@javax.inject.Inject
