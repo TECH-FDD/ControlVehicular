@@ -54,17 +54,29 @@ public class HomePageViewModel {
 	public List<AlertaVehiculo> getAlertasVehiculo() {
 		return repositorioAlertaVehiculo.listAllVehiculo();
 	}
+
 	@Action(semantics = SemanticsOf.SAFE)
-	@ActionLayout(describedAs="El documento se almacenara en ReporteAlertas/AlertasMatafuego")
-	public String exportarTodo(@ParameterLayout(named="Formato") Formato formato) throws JRException, IOException{
+	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasMatafuego")
+	public String exportarTodo(@ParameterLayout(named = "Formato") Formato formato) throws JRException, IOException {
+		if (getAlertasMatafuego().isEmpty())
+			return "No hay elementos para Exportar";
+		else {
 			repositorioAlertaMatafuego.elegirFormato(formato);
 			return "Se ha realizado la Exportación correctamente";
+		}
 	}
+
 	@Action(semantics = SemanticsOf.SAFE)
-	@ActionLayout(describedAs="El documento se almacenara en ReporteAlertas/AlertasMatafuego")
-	public String exportarPorPeriodo(@ParameterLayout(named="Formato") Formato formato,@ParameterLayout(named="Desde") Date desde,@ParameterLayout(named="Hasta") Date hasta) throws JRException, IOException{
-			repositorioAlertaMatafuego.elegirFormato(desde, hasta,formato);
+	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasMatafuego")
+	public String exportarPorPeriodo(@ParameterLayout(named = "Formato") Formato formato,
+			@ParameterLayout(named = "Desde") Date desde, @ParameterLayout(named = "Hasta") Date hasta)
+					throws JRException, IOException {
+		if (getAlertasMatafuego().isEmpty())
+			return "No hay elementos para Exportar";
+		else {
+			repositorioAlertaMatafuego.elegirFormato(desde, hasta, formato);
 			return "Se ha realizado la Exportación correctamente";
+		}
 	}
 	@javax.inject.Inject
 	RepositorioAlertaMatafuego repositorioAlertaMatafuego;

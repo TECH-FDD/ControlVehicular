@@ -285,12 +285,18 @@ public class RepositorioAlertaMatafuego {
 					alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
 					alerta.setsubTitulo("Desde: "+df.format(desde)+", Hasta: "+df.format(hasta));
 					objectsReport.add(alerta);
-				}
 			}
-		if(!(objectsReport.isEmpty())){
-			String nombreArchivo = "ReporteAlerta/AlertasMatafuego/PDF/AlertaMatafuego "+new Date(System.currentTimeMillis()); 
-			GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport,formato, nombreArchivo);
-			}
+		}
+		String nombreArchivo = null;
+		if (formato == Formato.PDF)
+			nombreArchivo = "ReporteAlerta/AlertasMatafuego/PDF/AlertaMatafuego "
+					+ new Date(System.currentTimeMillis());
+		else if (formato == Formato.DOCX)
+			nombreArchivo = "ReporteAlerta/AlertasMatafuego/DOC/AlertaMatafuego "
+					+ new Date(System.currentTimeMillis());
+
+		GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport, formato, nombreArchivo);
+
 	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
