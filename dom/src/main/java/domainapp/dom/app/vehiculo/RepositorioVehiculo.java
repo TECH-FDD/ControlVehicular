@@ -308,6 +308,9 @@ public class RepositorioVehiculo {
 			else if (formato == Formato.XLS)
 				nombreArchivo = "ReporteVehiculo/XLS/Vehiculos "
 						+ new Date(System.currentTimeMillis());
+				else
+					nombreArchivo = "ReporteVehiculo/DOC/Vehiculos "
+							+ new Date(System.currentTimeMillis());
 			GenerarReporte.generarReporte("Vehiculos.jrxml", objectsReport, formato, nombreArchivo);
 			return "Se ha realizado la exportacion Correctamente";
 		} else
