@@ -76,6 +76,13 @@ public class HomePageViewModel {
 
 		}
 	}
+	@Action(semantics = SemanticsOf.SAFE)
+	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasVehiculo")
+	public String exportarTodoVehiculo(@ParameterLayout(named = "Formato") Formato formato) throws JRException, IOException {
+		return repositorioAlertaVehiculo.elegirFormato(formato);
+
+	}
+
 
 	@javax.inject.Inject
 	DomainObjectContainer container;

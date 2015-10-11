@@ -1,6 +1,8 @@
 package domainapp.dom.app.alerta;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,7 +28,11 @@ import domainapp.dom.app.Estadoalerta.AlertaRoja;
 import domainapp.dom.app.Estadoalerta.Aplazado;
 import domainapp.dom.app.Estadoalerta.EstadoAlerta;
 import domainapp.dom.app.empleado.Empleado;
+import domainapp.dom.app.reporte.Formato;
+import domainapp.dom.app.reporte.GenerarReporte;
+import domainapp.dom.app.reporte.ReporteAlerta;
 import domainapp.dom.app.vehiculo.Vehiculo;
+import net.sf.jasperreports.engine.JRException;
 
 @DomainService(repositoryFor = AlertaVehiculo.class)
 @DomainServiceLayout(menuOrder = "120", named = "Alerta")
@@ -172,6 +178,45 @@ public class RepositorioAlertaVehiculo {
 			AlertaVehiculo alerta2 = (AlertaVehiculo) o2;
 			return (alerta1.getKilometrosAlarma()).compareTo(alerta2.getKilometrosAlarma());
 		}
+	}
+
+	@Programmatic
+	public String elegirFormato(Formato formato) throws JRException, IOException {
+		return exportarTodo(formato);
+	}
+
+	@Programmatic
+	public Formato default0ElegirFormato(final @ParameterLayout(named = "Formato") Formato formato) {
+		return Formato.PDF;
+	}
+
+	@Programmatic
+	public String exportarTodo(Formato formato) throws JRException, IOException {
+		List<Object> objectsReport = new ArrayList<Object>();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		for (AlertaVehiculo a : listAll()) {
+			String fechaAlta = df.format(a.getFechaAlta());
+			ReporteAlerta alerta = new ReporteAlerta();
+			alerta.setNombre(a.getNombre());
+			alerta.setDescripcion(a.getDescripcion());
+			alerta.setEstadoAlerta(a.getEstadoAlerta().toString());
+			alerta.setAlerta(a.getKilometrosAlarma().toString());
+			alerta.setFechaAlta(fechaAlta);
+			alerta.setElemento(a.getVehiculo().toString());
+			alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
+			alerta.setsubTitulo(" ");
+			objectsReport.add(alerta);
+		}
+		if (objectsReport.isEmpty() == false) {
+			String nombreArchivo = null;
+			if (formato == Formato.PDF)
+				nombreArchivo = "ReporteAlerta/AlertasVehiculo/PDF/AlertaVehiculo "
+						+ new Date(System.currentTimeMillis());
+
+			GenerarReporte.generarReporte("AlertasVehiculo.jrxml", objectsReport, formato, nombreArchivo);
+			return "Se ha realizado la exportacion Correctamente";
+		} else
+			return "No hay elementos para imprimir";
 	}
 
 	@javax.inject.Inject
