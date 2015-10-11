@@ -157,6 +157,9 @@ public class RepositorioTaller {
 			if (formato == Formato.PDF)
 				nombreArchivo = "ReporteTaller/PDF/Talleres "
 						+ new Date(System.currentTimeMillis());
+			else if (formato == Formato.XLS)
+				nombreArchivo = "ReporteTaller/XLS/Talleres "
+						+ new Date(System.currentTimeMillis());
 
 			GenerarReporte.generarReporte("Talleres.jrxml", objectsReport, formato, nombreArchivo);
 			return "Se ha realizado la exportacion Correctamente";
