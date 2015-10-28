@@ -1,6 +1,7 @@
 package domainapp.dom.app.aceite;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -12,6 +13,7 @@ import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
+
 
 @DomainService(repositoryFor = Aceite.class)
 @DomainServiceLayout(menuOrder = "60", named="Aceites")
@@ -26,12 +28,12 @@ public class RepositorioAceite {
 			@ParameterLayout(named="Tipo de Aceite")TipoAceite tipoAceite,
 			@ParameterLayout(named="Duración (km)")@Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS)int duracion){
 		final Aceite aceite = container.newTransientInstance(Aceite.class);
-		aceite.setCodigo(codigo.toUpperCase());
-		aceite.setDescripcion(descripcion.toUpperCase());
+		aceite.setCodigo(codigo);
+		aceite.setDescripcion(descripcion);
 		aceite.setDuracion(duracion);
 		aceite.setFechaAlta(new Timestamp(System.currentTimeMillis()));
-		aceite.setMarca(marca.toUpperCase());
-		aceite.setNombre(nombre.toUpperCase());
+		aceite.setMarca(marca);
+		aceite.setNombre(nombre);
 		aceite.setTipoAceite(tipoAceite);
 		aceite.setActivo(true);
 		container.persistIfNotAlready(aceite);
@@ -69,21 +71,55 @@ public class RepositorioAceite {
 	@MemberOrder(sequence ="3")
 	public List<Aceite> findByMarca(
 			@ParameterLayout(named="Marca") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS)String marca){
-		return container.allMatches(new QueryDefault<Aceite>(Aceite.class, "Buscar_Marca", "marca",marca.toUpperCase()));
+		final List<Aceite> listaAceite = listAll();
+		final List<Aceite> lista = new ArrayList<Aceite>();
+		for (Aceite a : listaAceite) {
+			if (a.getMarca().toUpperCase().equals(marca.toUpperCase())) {
+				lista.add(a);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe la Marca buscada");
+		}
+		return lista;
 	}
+
 
 	@ActionLayout(named="Buscar por Nombre")
 	@MemberOrder(sequence="4")
 	public List<Aceite> findByNombre(
-			@ParameterLayout(named="Nombre") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) String nombre){
-		return container.allMatches(new QueryDefault<Aceite>(Aceite.class, "Buscar_Nombre","nombre",nombre.toUpperCase()));
+			@ParameterLayout(named="Nombre") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String nombre){
+		final List<Aceite> listaAceite = listAll();
+		final List<Aceite> lista = new ArrayList<Aceite>();
+		for (Aceite a : listaAceite) {
+			if (a.getNombre().toUpperCase().equals(nombre.toUpperCase())) {
+				lista.add(a);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Nombre buscado");
+		}
+		return lista;
 	}
 
 	@ActionLayout(named="Buscar por Codigo")
 	@MemberOrder(sequence="5")
 	public List<Aceite> findByCodigo(
 			@ParameterLayout(named="Codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo){
-		return container.allMatches(new QueryDefault<Aceite>(Aceite.class,"Buscar_Codigo","codigo",codigo.toUpperCase()));
+		final List<Aceite> listaAceite = listAll();
+		final List<Aceite> lista = new ArrayList<Aceite>();
+		for (Aceite a : listaAceite) {
+			if (a.getCodigo().toUpperCase().equals(codigo.toUpperCase())) {
+				lista.add(a);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el codigo buscado");
+		}
+		return lista;
 	}
 
 	@ActionLayout(named="Listar por Tipo de Aceite")

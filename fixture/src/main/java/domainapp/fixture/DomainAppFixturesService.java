@@ -67,7 +67,6 @@ public class DomainAppFixturesService extends FixtureScripts {
 	@MemberOrder(sequence = "20")
 	public String actualizarBaseDatos() {
 		findFixtureScriptFor(AreaFixture.class).run(null);
-		findFixtureScriptFor(EmpleadoFixture.class).run(null);
 		findFixtureScriptFor(AceiteFixture.class).run(null);
 		findFixtureScriptFor(TipoCombustibleFixture.class).run(null);
 		findFixtureScriptFor(CombustibleFixture.class).run(null);
@@ -75,6 +74,9 @@ public class DomainAppFixturesService extends FixtureScripts {
 		findFixtureScriptFor(TallerFixture.class).run(null);
 		findFixtureScriptFor(MatafuegoFixture.class).run(null);
 		findFixtureScriptFor(VehiculoFixture.class).run(null);
+		findFixtureScriptFor(EmpleadoFixture.class).run(null);
+		findFixtureScriptFor(AlertaMatafuegoFixture.class).run(null);
+		findFixtureScriptFor(AlertaVehiculoFixture.class).run(null);
 		return "La Base de Datos, se ha actualizado con exito!";
 	}
 }

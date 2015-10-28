@@ -65,25 +65,54 @@ public class RepositorioGps {
 	@ActionLayout(named = "Buscar por Modelo")
 	public List<Gps> findByModelo(
 			@ParameterLayout(named = "Modelo Gps") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String modelo) {
-		return gpsActivos(container.allMatches(new QueryDefault<>(Gps.class,
-				"buscarPorModelo", "modelo", modelo.toUpperCase())));
+		final List<Gps> listaGps = listarTodos();
+		final List<Gps> lista = new ArrayList<Gps>();
+		for (Gps g : listaGps) {
+			if (g.getModelo().toUpperCase().equals(modelo.toUpperCase())) {
+				lista.add(g);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Modelo buscado");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por Marca")
 	public List<Gps> findByMarca(
 			@ParameterLayout(named = "Marca Gps") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String marca) {
-		return gpsActivos(container.allMatches(new QueryDefault<>(Gps.class,
-				"buscarPorMarca", "marca", marca.toUpperCase())));
+		final List<Gps> listaGps = listarTodos();
+		final List<Gps> lista = new ArrayList<Gps>();
+		for (Gps g : listaGps) {
+			if (g.getMarca().toUpperCase().equals(marca.toUpperCase())) {
+				lista.add(g);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe la Marca buscada");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "5")
 	@ActionLayout(named = "Buscar por Codigo Identificacion")
 	public List<Gps> findByCodIdentificacion(
 			@ParameterLayout(named = "Codigo Identificacacion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String codIdentificacion) {
-		return gpsActivos(container.allMatches(new QueryDefault<>(Gps.class,
-				"buscarPorCodigoIdentificacion", "codIdentificacion",
-				codIdentificacion.toUpperCase())));
+		final List<Gps> listaGps = listarTodos();
+		final List<Gps> lista = new ArrayList<Gps>();
+		for (Gps g : listaGps) {
+			if (g.getCodIdentificacion().toUpperCase().equals(codIdentificacion.toUpperCase())) {
+				lista.add(g);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Codigo de Identificación buscado");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "3", name="Elementos Inactivos")

@@ -25,8 +25,8 @@ public class RepositorioTipoCombustible {
 
 		TipoCombustible tipoCombustible = container
 				.newTransientInstance(TipoCombustible.class);
-		tipoCombustible.setTipo(tipo.toUpperCase());
-		tipoCombustible.setDescripcion(descripcion.toUpperCase());
+		tipoCombustible.setTipo(tipo);
+		tipoCombustible.setDescripcion(descripcion);
 		container.persistIfNotAlready(tipoCombustible);
 		return tipoCombustible;
 	}

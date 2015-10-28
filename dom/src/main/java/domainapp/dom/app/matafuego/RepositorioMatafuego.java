@@ -36,7 +36,7 @@ public class RepositorioMatafuego {
 			final @ParameterLayout(named = "Fecha de última Recarga") Timestamp fechaRecarga,
 			final @ParameterLayout(named = "Fecha de caducidad") Timestamp fechaCadRecarga) {
 
-		Matafuego matafuego = new Matafuego(Marca.toUpperCase(), codigo.toUpperCase(), descripcion.toUpperCase(),
+		Matafuego matafuego = new Matafuego(Marca, codigo, descripcion,
 				capacidad, new Timestamp(System.currentTimeMillis()),
 				fechaRecarga, fechaCadRecarga);
 		container.persistIfNotAlready(matafuego);
@@ -76,13 +76,18 @@ public class RepositorioMatafuego {
 	public List<Matafuego> findByMarca(
 			@ParameterLayout(named = "Marca") final String marca) {
 
-		final List<Matafuego> listaMatafuego = activos (this.container
-				.allMatches(new QueryDefault<Matafuego>(Matafuego.class,
-						"buscarPorMarca", "marca", marca.toUpperCase())));
-		if (listaMatafuego.isEmpty()) {
-			this.container.warnUser("No existe el matafuego buscado");
+		final List<Matafuego> listaMatafuego = listAll();
+		final List<Matafuego> lista = new ArrayList<Matafuego>();
+		for (Matafuego m : listaMatafuego) {
+			if (m.getMarca().toUpperCase().equals(marca.toUpperCase())) {
+				lista.add(m);
+			}
 		}
-		return listaMatafuego;
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe la Marca buscada");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "4", name="Elementos Inactivos")

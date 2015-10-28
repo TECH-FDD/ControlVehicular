@@ -68,7 +68,7 @@ public class Vehiculo {
 	private TipoAceite tipoAceite;
 	private String cnsCombustibleRuta;
 	private String cnsCombuestibleCiudad;
-	private String kilometros;
+	private Integer kilometros;
 	private Estado estado;
 
 	@Persistent
@@ -227,11 +227,11 @@ public class Vehiculo {
 	@MemberOrder(sequence = "14")
 	@Property(editing = Editing.DISABLED)
 	@Column(allowsNull = "true")
-	public String getKilometros() {
+	public Integer getKilometros() {
 		return kilometros;
 	}
 
-	public void setKilometros(String kilometros) {
+	public void setKilometros(Integer kilometros) {
 		this.kilometros = kilometros;
 	}
 
@@ -259,7 +259,7 @@ public class Vehiculo {
 
 	@Override
 	public String toString() {
-		return marca + ", " + modelo;
+		return marca + ", " + nombre;
 	}
 
 	public Vehiculo(String marca, String nombre, Integer modelo,
@@ -267,7 +267,7 @@ public class Vehiculo {
 			Integer polizaSeguro, Gps gps, TipoCombustible tipoCombustible,
 			Integer capacTanqueCombustible, TipoAceite tipoAceite,
 			String cnsCombustibleRuta, String cnsCombuestibleCiudad,
-			String kilometros, Matafuego matafuego) {
+			Integer kilometros, Matafuego matafuego) {
 		super();
 		this.marca = marca;
 		this.nombre = nombre;

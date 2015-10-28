@@ -50,7 +50,7 @@ import domainapp.dom.app.vehiculo.Vehiculo;
 		@javax.jdo.annotations.Query(name = "Buscar_Legajo", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.Empleado "
 				+ "WHERE legajo.indexOf(:legajo) >= 0 ") })
-@DomainObject(objectType = "EMPLEADO")
+@DomainObject(objectType = "EMPLEADO", bounded = true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Empleado extends Persona {
 	private String legajo;

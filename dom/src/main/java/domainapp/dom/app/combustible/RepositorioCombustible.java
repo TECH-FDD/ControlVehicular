@@ -1,6 +1,7 @@
 package domainapp.dom.app.combustible;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -38,11 +39,11 @@ public class RepositorioCombustible {
 		final Combustible combustible = container
 				.newTransientInstance(Combustible.class);
 
-		combustible.setNombre(nombre.toUpperCase());
-		combustible.setEmpresa(empresa.toUpperCase());
-		combustible.setCodigo(codigo.toUpperCase());
-		combustible.setDescripcion(descripcion.toUpperCase());
-		combustible.setCategoria(categoria.toUpperCase());
+		combustible.setNombre(nombre);
+		combustible.setEmpresa(empresa);
+		combustible.setCodigo(codigo);
+		combustible.setDescripcion(descripcion);
+		combustible.setCategoria(categoria);
 		combustible.setPrecioLitro(precioLitro);
 		combustible.setPrecioAnterior(precioAnterior);
 		combustible.setPorcentajeAumento(porceAumento);
@@ -94,26 +95,36 @@ public class RepositorioCombustible {
 	public List<Combustible> findByNombre(
 			@ParameterLayout(named = "Nombre") final String nombre) {
 
-		final List<Combustible> listaCombustible = this.container
-				.allMatches(new QueryDefault<Combustible>(Combustible.class,
-						"buscarPorNombre", "nombre", nombre.toUpperCase()));
-		if (listaCombustible.isEmpty()) {
-			this.container.warnUser("No existe el combustible buscado");
+		final List<Combustible> listaCombustible = listAll();
+		final List<Combustible> lista = new ArrayList<Combustible>();
+		for (Combustible c : listaCombustible) {
+			if (c.getNombre().toUpperCase().equals(nombre.toUpperCase())) {
+				lista.add(c);
+			}
 		}
-		return listaCombustible;
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Nombre buscado");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por codigo")
 	public List<Combustible> findByCodigo(
 			@ParameterLayout(named = "Codigo") final String codigo) {
-		final List<Combustible> listaCombustible = this.container
-				.allMatches(new QueryDefault<Combustible>(Combustible.class,
-						"buscarPorCodigo", "codigo", codigo.toUpperCase()));
-		if (listaCombustible.isEmpty()) {
-			this.container.warnUser("No existe el combustible buscado");
+		final List<Combustible> listaCombustible = listAll();
+		final List<Combustible> lista = new ArrayList<Combustible>();
+		for (Combustible c : listaCombustible) {
+			if (c.getCodigo().toUpperCase().equals(codigo.toUpperCase())) {
+				lista.add(c);
+			}
 		}
-		return listaCombustible;
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el codigo buscado");
+		}
+		return lista;
 	}
 
 	@MemberOrder(sequence = "2", name = "Elementos Inactivos")
