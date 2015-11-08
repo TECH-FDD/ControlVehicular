@@ -1,10 +1,11 @@
 package domainapp.dom.app.vehiculo;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -30,10 +31,16 @@ import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.gps.RepositorioGps;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.matafuego.RepositorioMatafuego;
-import domainapp.dom.app.reporte.Formato;
-import domainapp.dom.app.reporte.GenerarReporte;
 import domainapp.dom.app.reporte.ReporteVehiculo;
+import domainapp.dom.app.reporte.VehiculoDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = Vehiculo.class)
 @DomainServiceLayout(menuOrder = "80", named = "Vehiculo")
@@ -58,14 +65,14 @@ public class RepositorioVehiculo {
 			final @ParameterLayout(named = "Matafuego") Matafuego matafuego,
 			final @ParameterLayout(named = "Kilometros") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS, optionality = Optionality.OPTIONAL) Integer kilometros) {
 
-		final Vehiculo vehiculo = new Vehiculo(marca, nombre, modelo, fechaCompra,
-				patente, numeroChasis, polizaSeguro, gps, tipoCombustible, capTanqueCombustible,
-				tipoAceite, cnsCombustibleRuta, cnsCombustibleCiudad, kilometros, matafuego);
+		final Vehiculo vehiculo = new Vehiculo(marca, nombre, modelo, fechaCompra, patente, numeroChasis, polizaSeguro,
+				gps, tipoCombustible, capTanqueCombustible, tipoAceite, cnsCombustibleRuta, cnsCombustibleCiudad,
+				kilometros, matafuego);
 
-		//Pasar el Gps al estado Asignado
+		// Pasar el Gps al estado Asignado
 		gps.getEstado().asignarGps(gps);
 
-		//Pasar el Matafuego al estado Asignado
+		// Pasar el Matafuego al estado Asignado
 		matafuego.getEstado().asignarMatafuego(matafuego);
 
 		container.persistIfNotAlready(vehiculo);
@@ -77,21 +84,19 @@ public class RepositorioVehiculo {
 	 *
 	 * @return Mensaje de error.
 	 */
-	public String validateCreateVehiculo(String marca, String nombre, Integer modelo,
-			Timestamp fechaCompra, String patente, String nroChasis,
-			Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
-			TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
-			Matafuego matafuego, Integer kilometro){
+	public String validateCreateVehiculo(String marca, String nombre, Integer modelo, Timestamp fechaCompra,
+			String patente, String nroChasis, Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
+			TipoAceite tipoAceite, String consumoRuta, String consumoCiudad, Matafuego matafuego, Integer kilometro) {
 
 		List<Vehiculo> lista = listAll();
-		for (Vehiculo v : lista){
+		for (Vehiculo v : lista) {
 			if (v.getGps().equals(gps))
 				return "El Gps ingresado, ya se encuetra asignado al Vehiculo:" + v.toString();
 			if (v.getMatafuego().equals(matafuego))
 				return "El Matafuego ingresado, ya se encuentra asignado al Vehiculo:" + v.toString();
-			if (v.getNumeroChasis()==nroChasis.toUpperCase())
+			if (v.getNumeroChasis() == nroChasis.toUpperCase())
 				return "El Número de Chasis ingresado, pertenece al Vehiculo:" + v.toString();
-			if (v.getPatente()==patente.toUpperCase())
+			if (v.getPatente() == patente.toUpperCase())
 				return "La Patente Ingresada, pertenece al Vehiculo:" + v.toString();
 		}
 		return null;
@@ -102,25 +107,21 @@ public class RepositorioVehiculo {
 	 *
 	 * @return List<Gps> activos
 	 */
-	public List<Gps> choices7CreateVehiculo(String marca, String nombre, Integer modelo,
-											Timestamp fechaCompra, String patente, String nroChasis,
-											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
-											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
-											Matafuego matafuego, Integer kilometro){
-		List<Gps> lista=repoGps.gpsNoAsignados(container.allInstances(Gps.class));
+	public List<Gps> choices7CreateVehiculo(String marca, String nombre, Integer modelo, Timestamp fechaCompra,
+			String patente, String nroChasis, Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
+			TipoAceite tipoAceite, String consumoRuta, String consumoCiudad, Matafuego matafuego, Integer kilometro) {
+		List<Gps> lista = repoGps.gpsNoAsignados(container.allInstances(Gps.class));
 		return lista;
 	}
 
 	/**
-	 *Mostrar solo Matafuegos Activos
+	 * Mostrar solo Matafuegos Activos
 	 *
 	 * @return List<Matafuego> activos.
 	 */
-	public List<Matafuego> choices13CreateVehiculo(String marca, String nombre, Integer modelo,
-											Timestamp fechaCompra, String patente, String nroChasis,
-											Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
-											TipoAceite tipoAceite, String consumoRuta, String consumoCiudad,
-											Matafuego matafuego, Integer kilometro){
+	public List<Matafuego> choices13CreateVehiculo(String marca, String nombre, Integer modelo, Timestamp fechaCompra,
+			String patente, String nroChasis, Integer poliza, Gps gps, TipoCombustible tipoCombustible, Integer tanque,
+			TipoAceite tipoAceite, String consumoRuta, String consumoCiudad, Matafuego matafuego, Integer kilometro) {
 		return repoMatafuego.noAsignados(container.allInstances(Matafuego.class));
 	}
 
@@ -170,8 +171,7 @@ public class RepositorioVehiculo {
 	@ActionLayout(named = "Buscar por Modelo")
 	public List<Vehiculo> findByModelo(
 			@ParameterLayout(named = "Modelo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) final Integer modelo) {
-		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class,
-				"BuscarModelo", "modelo", modelo)));
+		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class, "BuscarModelo", "modelo", modelo)));
 	}
 
 	@MemberOrder(sequence = "6")
@@ -212,14 +212,14 @@ public class RepositorioVehiculo {
 
 	/**
 	 * Filtrar lista de Vehiculo, por estado Activo.
+	 *
 	 * @param lista
 	 * @return lista de Vehiculo Activos.
 	 */
-	private List<Vehiculo> activos(List<Vehiculo> lista){
+	private List<Vehiculo> activos(List<Vehiculo> lista) {
 		List<Vehiculo> activos = new ArrayList<Vehiculo>();
-		for (Vehiculo v : lista){
-			if (v.getEstado() instanceof Activo ||
-					v.getEstado() instanceof Asignado)
+		for (Vehiculo v : lista) {
+			if (v.getEstado() instanceof Activo || v.getEstado() instanceof Asignado)
 				activos.add(v);
 		}
 		return activos;
@@ -227,63 +227,54 @@ public class RepositorioVehiculo {
 
 	/**
 	 * Filtrar lista de Vehiculo, por no Asignados.
+	 *
 	 * @param lista
 	 * @return lista de Vehiculo no Asignados.
 	 */
 	@Programmatic
-	public List<Vehiculo> noAsignados(List<Vehiculo> lista){
+	public List<Vehiculo> noAsignados(List<Vehiculo> lista) {
 		List<Vehiculo> noAsignados = new ArrayList<Vehiculo>();
-		for (Vehiculo v : lista){
+		for (Vehiculo v : lista) {
 			if (v.getEstado() instanceof Activo)
 				noAsignados.add(v);
 		}
 		return noAsignados;
 	}
 
-	@MemberOrder(sequence = "5", name="Elementos Inactivos")
+	@MemberOrder(sequence = "5", name = "Elementos Inactivos")
 	@ActionLayout(named = "Vehiculo")
-	public List<Vehiculo> listInactivos(){
-		List<Vehiculo> lista=container.allInstances(Vehiculo.class);
-		List<Vehiculo> inactivos= new ArrayList<Vehiculo>();
-		for (Vehiculo vehiculo : lista){
-			if ((vehiculo.getEstado() instanceof Inactivo ||
-				vehiculo.getEstado() instanceof NecesitaReparacion ||
-				vehiculo.getEstado() instanceof Reparacion))
+	public List<Vehiculo> listInactivos() {
+		List<Vehiculo> lista = container.allInstances(Vehiculo.class);
+		List<Vehiculo> inactivos = new ArrayList<Vehiculo>();
+		for (Vehiculo vehiculo : lista) {
+			if ((vehiculo.getEstado() instanceof Inactivo || vehiculo.getEstado() instanceof NecesitaReparacion
+					|| vehiculo.getEstado() instanceof Reparacion))
 				inactivos.add(vehiculo);
 		}
 		return inactivos;
 	}
 
-	@MemberOrder(sequence = "3", name="Elementos Desestimados")
+	@MemberOrder(sequence = "3", name = "Elementos Desestimados")
 	@ActionLayout(named = "Vehiculo")
-	public List<Vehiculo> listBaja(){
+	public List<Vehiculo> listBaja() {
 		List<Vehiculo> lista = container.allInstances(Vehiculo.class);
-		List<Vehiculo> bajas= new ArrayList<Vehiculo>();
-		for (Vehiculo vehiculo : lista){
+		List<Vehiculo> bajas = new ArrayList<Vehiculo>();
+		for (Vehiculo vehiculo : lista) {
 			if (vehiculo.getEstado() instanceof Baja)
 				bajas.add(vehiculo);
 		}
 		return bajas;
 	}
-	@MemberOrder(sequence="4")
-	@ActionLayout(named="Exportar Vehiculo")
-	public String elegirFormato(Formato formato) throws JRException, IOException {
-		return exportarTodo(formato);
-	}
 
-	@Programmatic
-	public Formato default0ElegirFormato(final @ParameterLayout(named = "Formato") Formato formato) {
-		return Formato.PDF;
-	}
-
-	@Programmatic
-	public String exportarTodo(Formato formato) throws JRException, IOException {
-		List<Object> objectsReport = new ArrayList<Object>();
+	@MemberOrder(sequence = "8")
+	@ActionLayout(named = "Exportar Vehiculo")
+	public String downloadAll() throws JRException, IOException {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		VehiculoDataSource datasource = new VehiculoDataSource();
 		for (Vehiculo v : listAll()) {
-			ReporteVehiculo vehiculo= new ReporteVehiculo();
+			ReporteVehiculo vehiculo = new ReporteVehiculo();
 			String fechaCompra = df.format(v.getFechaCompra());
-			vehiculo.setNombre(v.getMarca()+", "+v.getNombre());
+			vehiculo.setNombre(v.getMarca() + ", " + v.getNombre());
 			vehiculo.setModelo(v.getModelo().toString());
 			vehiculo.setFechaCompra(fechaCompra);
 			vehiculo.setNumeroChasis(v.getNumeroChasis());
@@ -298,23 +289,22 @@ public class RepositorioVehiculo {
 			vehiculo.setKilometros(v.getKilometros().toString());
 			vehiculo.setTipoAceite(v.getTipoAceite().toString());
 			vehiculo.setTipoCombustible(v.getTipoCombustible().toString());
-			objectsReport.add(vehiculo);
+			datasource.addParticipante(vehiculo);
 		}
-		if (objectsReport.isEmpty() == false) {
-			String nombreArchivo = null;
-			if (formato == Formato.PDF)
-				nombreArchivo = "ReporteVehiculo/PDF/Vehiculos "
-						+ new Date(System.currentTimeMillis());
-			else if (formato == Formato.XLS)
-				nombreArchivo = "ReporteVehiculo/XLS/Vehiculos "
-						+ new Date(System.currentTimeMillis());
-				else
-					nombreArchivo = "ReporteVehiculo/DOC/Vehiculos "
-							+ new Date(System.currentTimeMillis());
-			GenerarReporte.generarReporte("Vehiculos.jrxml", objectsReport, formato, nombreArchivo);
-			return "Se ha realizado la exportacion Correctamente";
-		} else
-			return "No hay elementos para imprimir";
+		File file = new File("Vehiculos.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
+
 	}
 
 	@javax.inject.Inject

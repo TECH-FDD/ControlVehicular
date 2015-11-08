@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Vehiculos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="25" bottomMargin="0" uuid="12d450a2-c90d-4fc4-95b6-4609fb243197">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Vehiculos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="25" bottomMargin="0" uuid="12d450a2-c90d-4fc4-95b6-4609fb243197">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="17"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
@@ -23,275 +23,483 @@
 	<field name="kilometros" class="java.lang.String"/>
 	<field name="modelo" class="java.lang.String"/>
 	<pageHeader>
-		<band height="77">
+		<band height="192">
+			<image>
+				<reportElement mode="Opaque" x="1" y="0" width="209" height="111" backcolor="#F6F4F2" uuid="7c5d1ef7-4125-4542-ae7e-41ca5e82f1e9"/>
+				<box>
+					<topPen lineWidth="2.25" lineColor="#868181"/>
+					<leftPen lineWidth="2.25" lineColor="#868181"/>
+					<bottomPen lineWidth="2.25" lineColor="#868181"/>
+					<rightPen lineWidth="2.25" lineColor="#868181"/>
+				</box>
+				<imageExpression><![CDATA["/home/alejandra/Descargas/letra blanca1.png"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement x="0" y="0" width="553" height="77" forecolor="#142332" uuid="a27d4eba-9009-4d06-abaf-054a965d578e"/>
+				<reportElement mode="Opaque" x="210" y="0" width="592" height="111" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="406cad35-62ce-4911-9ff2-955efa609662"/>
+				<box>
+					<topPen lineWidth="2.25" lineColor="#989898"/>
+					<leftPen lineWidth="2.25" lineColor="#989898"/>
+					<bottomPen lineWidth="2.25" lineColor="#989898"/>
+					<rightPen lineWidth="2.25" lineColor="#989898"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="15" isBold="false" isItalic="false" isUnderline="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[
+SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="32" y="136" width="801" height="38" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="a27d4eba-9009-4d06-abaf-054a965d578e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="Arial" size="36" isBold="true" isUnderline="true"/>
+					<font fontName="Arial" size="22" isBold="true" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[Listado de Vehiculos]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
-	<detail>
-		<band height="310" splitType="Stretch">
-			<textField>
-				<reportElement mode="Opaque" x="139" y="0" width="417" height="25" forecolor="#B6ABA0" backcolor="#0F3351" uuid="4332d784-3b5d-4c00-91ca-a45c4ce13ad5"/>
-				<box>
-					<topPen lineWidth="0.0" lineColor="#0C0A0A"/>
-					<leftPen lineWidth="0.0" lineColor="#0C0A0A"/>
-					<bottomPen lineWidth="0.0" lineColor="#0C0A0A"/>
-					<rightPen lineWidth="0.0" lineColor="#0C0A0A"/>
-				</box>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
-			</textField>
+	<columnHeader>
+		<band height="31">
 			<staticText>
-				<reportElement mode="Transparent" x="137" y="25" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="5a2aeb19-b020-466d-ac6f-0f55114bfea1"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="48" y="0" width="42" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="5a2aeb19-b020-466d-ac6f-0f55114bfea1"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[Modelo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="137" y="45" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="96c8bb32-67bd-4b3d-9f07-f542dab2e90d"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Fecha de Compra]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="137" y="66" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="bd073b37-252b-4d74-bf92-0b4d77d144e2"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Patente]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="137" y="86" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="445682a3-32d8-45dc-8169-2c24d946e0a8"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Numero Chasis]]></text>
-			</staticText>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="273" y="25" width="281" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="50642eee-8ed1-47a5-bbba-24b1481156c1"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="275" y="46" width="281" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="8bb9ae3e-9517-49bb-9fe5-108df269d6bb"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{fechaCompra}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="66" width="281" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="143b4880-32c7-4770-9417-65320f1c439a"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{patente}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="86" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="0daa9ca7-840b-46b7-89ba-ff64c91b82de"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{numeroChasis}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Opaque" x="1" y="0" width="138" height="25" forecolor="#B6ABA0" backcolor="#0F3351" uuid="4d871ff2-1b09-4dfd-80e5-9a86ecfff4d6"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="758" y="0" width="45" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="2f044f39-6100-4adf-a265-0c2e7393011e"/>
 				<box>
-					<pen lineWidth="2.0" lineColor="#0C0505"/>
-					<topPen lineWidth="0.0" lineColor="#0C0505"/>
-					<leftPen lineWidth="0.0" lineColor="#0C0505"/>
-					<bottomPen lineWidth="0.0" lineColor="#0C0505"/>
-					<rightPen lineWidth="0.0" lineColor="#0C0505"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[Vehiculo:]]></text>
+				<text><![CDATA[Gps]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="137" y="106" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="b40353c8-e566-428d-adc7-91a8f166544d"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Poliza/Seguro]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="137" y="126" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a2176fe0-97b5-4613-9fc0-7b772ea6ab85"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Tipo Combustible]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="137" y="146" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="54fdd3c4-4d7c-4c4c-84d3-de8b3dbbe30b"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Matafuego]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="137" y="166" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="108abbc5-45d5-4def-bf45-98e6045977c3"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="426" y="0" width="68" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="108abbc5-45d5-4def-bf45-98e6045977c3"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[Cap. Tanque Combustible]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="138" y="186" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="d8252e72-2319-4e4a-b8b6-ab694dc88d93"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="132" y="0" width="48" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="bd073b37-252b-4d74-bf92-0b4d77d144e2"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Patente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="243" y="0" width="68" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="b40353c8-e566-428d-adc7-91a8f166544d"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Poliza/Seguro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="90" y="0" width="42" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="96c8bb32-67bd-4b3d-9f07-f542dab2e90d"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Fecha de Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="48" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="4d871ff2-1b09-4dfd-80e5-9a86ecfff4d6"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="494" y="0" width="41" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="d8252e72-2319-4e4a-b8b6-ab694dc88d93"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[Tipo Aceite]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="137" y="206" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="b54da53b-c2c4-455e-8a00-aa522beb5bb2"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Garuda" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="684" y="0" width="39" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="f0524fe9-fb7d-4171-8c66-45ad2e7f9f47"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[Cns Combustible Ruta]]></text>
+				<text><![CDATA[Km]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="137" y="226" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="1ef4647b-d404-4a3b-944e-af7121a305a5"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="604" y="0" width="80" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="1ef4647b-d404-4a3b-944e-af7121a305a5"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[Cns Combustible Ciudad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="137" y="246" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="f0524fe9-fb7d-4171-8c66-45ad2e7f9f47"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement style="Column header" stretchType="RelativeToTallestObject" mode="Transparent" x="535" y="0" width="69" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="b54da53b-c2c4-455e-8a00-aa522beb5bb2"/>
+				<box>
+					<topPen lineWidth="1.5" lineColor="#908B8B"/>
+					<leftPen lineWidth="1.5" lineColor="#908B8B"/>
+					<bottomPen lineWidth="1.5" lineColor="#908B8B"/>
+					<rightPen lineWidth="1.5" lineColor="#908B8B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[Kilometros]]></text>
+				<text><![CDATA[Cns Combustible Ruta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="137" y="266" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a3a99d9b-d46e-48a1-9f2e-9922cfcc1ad0"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="311" y="0" width="62" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="a2176fe0-97b5-4613-9fc0-7b772ea6ab85"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Tipo Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="180" y="0" width="63" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="445682a3-32d8-45dc-8169-2c24d946e0a8"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Numero Chasis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="723" y="0" width="35" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="a3a99d9b-d46e-48a1-9f2e-9922cfcc1ad0"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[Estado]]></text>
 			</staticText>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="246" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="bb939dc1-fa03-4c1d-a319-e11fbed8e916"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="373" y="0" width="53" height="30" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="54fdd3c4-4d7c-4c4c-84d3-de8b3dbbe30b"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{kilometros}]]></textFieldExpression>
+				<text><![CDATA[Matafuego]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="48" y="0" width="42" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="50642eee-8ed1-47a5-bbba-24b1481156c1"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="266" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="44d7a32f-92b7-4355-85be-4c2a4dcfe0ab"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="226" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2cefa40c-92f7-4700-98ba-91c2b9ebfed2"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{cnsCombustibleCiudad}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="206" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="9d08beb0-3317-4369-a08e-0e0c0f42a39b"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="535" y="0" width="69" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="9d08beb0-3317-4369-a08e-0e0c0f42a39b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cnsCombustibleRuta}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="186" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="f31f6c81-9603-493e-9a2d-84b578ae5a32"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="90" y="0" width="42" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="8bb9ae3e-9517-49bb-9fe5-108df269d6bb"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaCompra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="684" y="0" width="39" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="bb939dc1-fa03-4c1d-a319-e11fbed8e916"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kilometros}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="723" y="0" width="35" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="44d7a32f-92b7-4355-85be-4c2a4dcfe0ab"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="604" y="0" width="80" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="2cefa40c-92f7-4700-98ba-91c2b9ebfed2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cnsCombustibleCiudad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="494" y="0" width="41" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="f31f6c81-9603-493e-9a2d-84b578ae5a32"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tipoAceite}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="273" y="106" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="696ab7b0-d8ac-471c-a165-94b60e2fca88"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{polizaSeguro}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="126" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="ce8f2190-f219-4c91-b4cd-b148a09bad7d"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="311" y="0" width="62" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="ce8f2190-f219-4c91-b4cd-b148a09bad7d"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tipoCombustible}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="146" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="4ccfe355-1f07-4df8-8ca8-5a0e299f3b22"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="373" y="0" width="53" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="4ccfe355-1f07-4df8-8ca8-5a0e299f3b22"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{matafuego}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="166" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="33f9ab3f-87ba-4731-9ad7-6f7f2159a83b"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="426" y="0" width="68" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="33f9ab3f-87ba-4731-9ad7-6f7f2159a83b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{capacTanqueCombustible}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement mode="Transparent" x="136" y="286" width="136" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2f044f39-6100-4adf-a265-0c2e7393011e"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Gps]]></text>
-			</staticText>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="272" y="286" width="280" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="89f3c217-6644-461d-b936-7bab9bed9911"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="758" y="0" width="45" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="89f3c217-6644-461d-b936-7bab9bed9911"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{gps}]]></textFieldExpression>
 			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="132" y="0" width="48" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="143b4880-32c7-4770-9417-65320f1c439a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="180" y="0" width="63" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="0daa9ca7-840b-46b7-89ba-ff64c91b82de"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroChasis}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="243" y="0" width="68" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="696ab7b0-d8ac-471c-a165-94b60e2fca88"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{polizaSeguro}]]></textFieldExpression>
+			</textField>
+			<elementGroup>
+				<textField>
+					<reportElement style="Detail" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="48" height="26" isPrintWhenDetailOverflows="true" forecolor="#808080" backcolor="#FFFFFF" uuid="4332d784-3b5d-4c00-91ca-a45c4ce13ad5"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="1_1_2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+			</elementGroup>
 		</band>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="516" y="6" width="285" height="20" uuid="99b871bd-3094-4668-8a46-d1a3352e7e08"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 </jasperReport>

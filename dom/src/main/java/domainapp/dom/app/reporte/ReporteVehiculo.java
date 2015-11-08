@@ -10,7 +10,7 @@ public class ReporteVehiculo {
 	private String numeroChasis;
 	private String polizaSeguro;
 	private String gps;
-	private String TipoCombustible;
+	private String tipoCombustible;
 	private String matafuego;
 	private String capacTanqueCombustible;
 	private String tipoAceite;
@@ -84,11 +84,11 @@ public class ReporteVehiculo {
 
 	@MemberOrder(sequence = "1")
 	public String getTipoCombustible() {
-		return TipoCombustible;
+		return tipoCombustible;
 	}
 
 	public void setTipoCombustible(String tipoCombustible) {
-		TipoCombustible = tipoCombustible;
+		this.tipoCombustible = tipoCombustible;
 	}
 
 	@MemberOrder(sequence = "1")
