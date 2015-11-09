@@ -36,10 +36,11 @@ public class Taller {
 	private String telefono;
 	private String codigo;
 	private String email;
+	private boolean activo;
 	
 
 	public Taller(String nombreComercial, String descripcion, String direccion,
-			String telefono, String codigo, String email) {
+			String telefono, String codigo, String email,boolean activo) {
 		super();
 		this.nombreComercial = nombreComercial;
 		this.descripcion = descripcion;
@@ -47,6 +48,7 @@ public class Taller {
 		this.telefono = telefono;
 		this.codigo = codigo;
 		this.email = email;
+		this.activo=activo;
 	}
 	
 	
@@ -117,6 +119,17 @@ public class Taller {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Persistent
+	@MemberOrder(sequence = "7")
+	@javax.jdo.annotations.Column(allowsNull = "false")
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
 	@Override
 	public String toString() {
 		return "nombreComercial:" + nombreComercial ;

@@ -48,6 +48,7 @@ public class RepositorioTaller {
 		taller.setDireccion(direccion);
 		taller.setEmail(email);
 		taller.setCodigo(codigo);
+		taller.setActivo(true);
 		container.persistIfNotAlready(taller);
 		return taller;
 
