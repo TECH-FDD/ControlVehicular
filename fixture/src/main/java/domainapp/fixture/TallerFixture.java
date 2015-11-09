@@ -38,11 +38,11 @@ public class TallerFixture extends Fixture{
 	protected void execute(ExecutionContext executionContext) {
 			borrarTabla(executionContext,"Taller");
 			for (int x = 0; x < 3; x++) {
-				create(getnombreComercial(x),getDireccion(x),getCodigo(x),getTelefono(x),getEmail(x), executionContext);
+				create(getnombreComercial(x),getDireccion(x),getCodigo(x),getTelefono(x),getEmail(x),true, executionContext);
 			}
 		}
 private Taller create(String nombreComercial, String direccion,String codigo, String telefono,
-		String email,ExecutionContext executionContext) {
+		String email,boolean activo, ExecutionContext executionContext) {
 	return executionContext.addResult(this, repoTaller.createTaller(nombreComercial, descripcion, direccion, telefono, codigo, email));
 }
 
