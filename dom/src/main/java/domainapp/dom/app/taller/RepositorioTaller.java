@@ -1,8 +1,9 @@
 package domainapp.dom.app.taller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.isis.applib.DomainObjectContainer;
@@ -12,13 +13,18 @@ import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
-import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 
-import domainapp.dom.app.reporte.Formato;
-import domainapp.dom.app.reporte.GenerarReporte;
 import domainapp.dom.app.reporte.ReporteTaller;
+import domainapp.dom.app.reporte.TallerDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = Taller.class)
 @DomainServiceLayout(menuOrder = "100", named = "Taller")
@@ -130,46 +136,32 @@ public class RepositorioTaller {
 	}
 	@MemberOrder(sequence="6")
 	@ActionLayout(named="Exportar Talleres")
-	public String elegirFormato(Formato formato) throws JRException, IOException {
-		return exportarTodo(formato);
-	}
-
-	@Programmatic
-	public Formato default0ElegirFormato(final @ParameterLayout(named = "Formato") Formato formato) {
-		return Formato.PDF;
-	}
-
-	@Programmatic
-	public String exportarTodo(Formato formato) throws JRException, IOException {
-		List<Object> objectsReport = new ArrayList<Object>();
+	public String downloadAll() throws JRException, IOException {
+		TallerDataSource datasource = new TallerDataSource();
 		for (Taller t : listAll()) {
-			ReporteTaller taller= new ReporteTaller();
+			ReporteTaller taller = new ReporteTaller();
 			taller.setCodigo(t.getCodigo());
 			taller.setNombreComercial(t.getNombreComercial());
 			taller.setDescripcion(t.getDescripcion());
-			taller.setEmail(t.getEmail());
-			taller.setTelefono(t.getTelefono());
 			taller.setDireccion(t.getDireccion());
-			objectsReport.add(taller);
+			taller.setTelefono(t.getTelefono());
+			taller.setEmail(t.getEmail());
+			datasource.addParticipante(taller);
 		}
-		if (objectsReport.isEmpty() == false) {
-			String nombreArchivo = null;
-			if (formato == Formato.PDF)
-				nombreArchivo = "ReporteTaller/PDF/Talleres "
-						+ new Date(System.currentTimeMillis());
-			else if (formato == Formato.XLS)
-				nombreArchivo = "ReporteTaller/XLS/Talleres "
-						+ new Date(System.currentTimeMillis());
-				else
-					nombreArchivo = "ReporteTaller/DOC/Talleres "
-							+ new Date(System.currentTimeMillis());
+		File file = new File("Taller.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
 
-			GenerarReporte.generarReporte("Talleres.jrxml", objectsReport, formato, nombreArchivo);
-			return "Se ha realizado la exportacion Correctamente";
-		} else
-			return "No hay elementos para imprimir";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
 	}
-
 
 	@javax.inject.Inject
 	DomainObjectContainer container;
