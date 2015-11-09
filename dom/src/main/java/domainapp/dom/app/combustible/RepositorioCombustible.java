@@ -1,6 +1,10 @@
 package domainapp.dom.app.combustible;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +20,16 @@ import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.combustible.TipoCombustible;
+import domainapp.dom.app.reporte.CombustibleDataSource;
+import domainapp.dom.app.reporte.ReporteCombustible;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = Combustible.class)
 @DomainServiceLayout(menuOrder = "40", named = "Combustible", menuBar = MenuBar.PRIMARY)
@@ -135,7 +149,42 @@ public class RepositorioCombustible {
 						"ListarInactivos"));
 		return lista;
 	}
+	@MemberOrder(sequence="5")
+	@ActionLayout(named="Exportar Combustibles")
+	public String downloadAll() throws JRException, IOException {
+		CombustibleDataSource datasource = new CombustibleDataSource();
+		for (Combustible c : listAll()) {
+			ReporteCombustible combustible= new ReporteCombustible();
+			combustible.setCodigo(c.getCodigo());
+			combustible.setNombre(c.getNombre());
+			combustible.setDescripcion(c.getDescripcion());
+			combustible.setCategoria(c.getCategoria());
+			combustible.setEmpresa(c.getEmpresa());
+			combustible.setOctanaje(Integer.toString(c.getOctanaje()));
+			combustible.setPrecioLitro(c.getPrecioLitro().toString());
+			combustible.setPrecioAnterior(c.getPrecioAnterior().toString());
+			combustible.setPorcentajeAumento(c.getPorcentajeAumento().toString());
+			combustible.setTipoCombustible(c.getTipoCombustible().toString());
+			if(c.isActivo())
+				combustible.setActivo("Activo");
+			else
+				combustible.setActivo("Inactivo");
+			datasource.addParticipante(combustible);
+		}
+		File file = new File("Combustible.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
