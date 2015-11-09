@@ -1,6 +1,10 @@
 package domainapp.dom.app.area;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +19,16 @@ import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
 
 import domainapp.dom.app.area.Area;
+import domainapp.dom.app.reporte.AreaDataSource;
+import domainapp.dom.app.reporte.ReporteArea;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = Area.class)
 @DomainServiceLayout(menuOrder = "30", named = "Area")
@@ -102,6 +116,34 @@ public class RepositorioArea {
 			this.container.warnUser("No existe el Codigo buscado");
 		}
 		return lista;
+	}
+	@MemberOrder(sequence="5")
+	@ActionLayout(named="Exportar Areas")
+	public String downloadAll() throws JRException, IOException {
+		AreaDataSource datasource = new AreaDataSource();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		for (Area a : listAll()) {
+			ReporteArea area = new ReporteArea();
+			area.setCodigoArea(a.getCodigoArea());
+			area.setNombre(a.getNombre());
+			area.setDescripcion(a.getDescripcion());
+			area.setFechaAlta(df.format(a.getFechaAlta()));
+			area.setActivo(Boolean.toString(a.isActivo()));
+			datasource.addParticipante(area);
+		}
+		File file = new File("Area.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
 	}
 
 	@javax.inject.Inject
