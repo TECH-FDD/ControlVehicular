@@ -3,9 +3,6 @@ package domainapp.dom.app.reporte;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.isis.applib.annotation.DomainService;
-import org.apache.isis.applib.annotation.DomainServiceLayout;
-
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;

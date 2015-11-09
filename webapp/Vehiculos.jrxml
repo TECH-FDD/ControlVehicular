@@ -51,9 +51,9 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="32" y="136" width="801" height="38" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="a27d4eba-9009-4d06-abaf-054a965d578e"/>
+				<reportElement mode="Opaque" x="2" y="136" width="801" height="38" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="a27d4eba-9009-4d06-abaf-054a965d578e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="Arial" size="22" isBold="true" isItalic="false" isUnderline="false"/>
+					<font fontName="Arial" size="15" isBold="true" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[Listado de Vehiculos]]></text>
@@ -490,9 +490,6 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 			</elementGroup>
 		</band>
 	</detail>
-	<columnFooter>
-		<band splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="26">
 			<textField>
