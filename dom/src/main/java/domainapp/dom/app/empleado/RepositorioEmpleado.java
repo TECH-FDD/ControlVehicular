@@ -1,6 +1,11 @@
 package domainapp.dom.app.empleado;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +25,18 @@ import domainapp.dom.app.persona.Ciudad;
 import domainapp.dom.app.persona.Documento;
 import domainapp.dom.app.persona.Provincia;
 import domainapp.dom.app.persona.Sexo;
+import domainapp.dom.app.reporte.EmpleadoDataSource;
+import domainapp.dom.app.reporte.ReporteEmpleado;
 import domainapp.dom.app.vehiculo.Vehiculo;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = Empleado.class)
 @DomainServiceLayout(menuOrder = "20", named = "Empleado")
@@ -205,6 +221,52 @@ public class RepositorioEmpleado {
 		return activos;
 	}
 
+	@MemberOrder(sequence = "7")
+	@ActionLayout(named = "Exportar Empleado")
+	public String downloadAll() throws JRException, IOException {
+		EmpleadoDataSource datasource = new EmpleadoDataSource();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		List<Empleado> listaEmpleado = container.allInstances(Empleado.class);
+		for (Empleado e : listaEmpleado) {
+			ReporteEmpleado empleado = new ReporteEmpleado();
+			empleado.setLegajo(e.getLegajo().toString());
+			empleado.setNombre(e.getNombre() + " " + e.getApellido());
+			empleado.setTipoDocumento(e.getTipoDocumento().toString());
+			empleado.setNroDocumento(Integer.toString(e.getNroDocumento()));
+			empleado.setFechaNacimiento(e.getFechaNacimiento().toString());
+			empleado.setProvincia(e.getProvincia().toString());
+			empleado.setCiudad(e.getCiudad().toString());
+			empleado.setDomicilio(e.getDomicilio());
+			empleado.setCodigoPostal(Integer.toString(e.getCodigoPostal()));
+			empleado.setFechaAlta(df.format(e.getFechaAlta()));
+			empleado.setSexo(e.getSexo().toString());
+			empleado.setTelefono(e.getTelefono());
+			empleado.setEmail(e.getEmail());
+			if (e.isActivo())
+				empleado.setActivo("Activo");
+			else
+				empleado.setActivo("Inactivo");
+			if (e.getVehiculo() != null)
+				empleado.setVehiculo(e.getVehiculo().toString());
+			else
+				empleado.setVehiculo("No Asignado");
+			empleado.setArea(e.getArea().toString());
+			datasource.addParticipante(empleado);
+		}
+		File file = new File("Empleado.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
