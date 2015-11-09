@@ -1,6 +1,10 @@
 package domainapp.dom.app.aceite;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +17,17 @@ import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
+
+import domainapp.dom.app.reporte.AceiteDataSource;
+import domainapp.dom.app.reporte.ReporteAceite;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 @DomainService(repositoryFor = Aceite.class)
@@ -127,6 +142,37 @@ public class RepositorioAceite {
 	public List<Aceite> listTipoAceite(
 			@ParameterLayout(named="Tipo de Aceite") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) TipoAceite tipoAceite){
 		return container.allMatches(new QueryDefault<Aceite>(Aceite.class,"Buscar_Tipo","tipoAceite",tipoAceite));
+	}
+	@MemberOrder(sequence="7")
+	@ActionLayout(named="Exportar Aceites")
+	public String downloadAll() throws JRException, IOException {
+		AceiteDataSource datasource = new AceiteDataSource();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		for (Aceite a : listAll()) {
+			ReporteAceite aceite = new ReporteAceite();
+			aceite.setCodigo(a.getCodigo());
+			aceite.setNombre(a.getNombre());
+			aceite.setDescripcion(a.getDescripcion());
+			aceite.setDuracion(Integer.toString(a.getDuracion()));
+			aceite.setActivo(Boolean.toString(a.isActivo()));
+			aceite.setFechaAlta(df.format(a.getFechaAlta()));
+			aceite.setTipoAceite(a.getTipoAceite().toString());
+			aceite.setMarca(a.getMarca());
+			datasource.addParticipante(aceite);
+		}
+		File file = new File("Aceite.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
 	}
 	@javax.inject.Inject
     DomainObjectContainer container;
