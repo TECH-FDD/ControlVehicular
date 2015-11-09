@@ -34,7 +34,6 @@ import domainapp.dom.app.alerta.AlertaMatafuego;
 import domainapp.dom.app.alerta.AlertaVehiculo;
 import domainapp.dom.app.alerta.RepositorioAlertaMatafuego;
 import domainapp.dom.app.alerta.RepositorioAlertaVehiculo;
-import domainapp.dom.app.reporte.Formato;
 import net.sf.jasperreports.engine.JRException;
 
 @ViewModel
@@ -58,34 +57,28 @@ public class HomePageViewModel {
 	}
 
 	@Action(semantics = SemanticsOf.SAFE)
-	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasMatafuego")
-	public String exportarTodo(@ParameterLayout(named = "Formato") Formato formato) throws JRException, IOException {
-		return repositorioAlertaMatafuego.elegirFormato(formato);
+	public String downloadAllMatafuego() throws JRException, IOException{
+		return repositorioAlertaMatafuego.downloadAll();
 
 	}
 
 	@Action(semantics = SemanticsOf.SAFE)
 	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasMatafuego")
-	public String exportarPorPeriodo(@ParameterLayout(named = "Formato") Formato formato,
-			@ParameterLayout(named = "Desde") Date desde, @ParameterLayout(named = "Hasta") Date hasta)
+	public String downloadByPeriodMatafuego(@ParameterLayout(named = "Desde") Date desde, @ParameterLayout(named = "Hasta") Date hasta)
 					throws JRException, IOException {
-			return repositorioAlertaMatafuego.elegirFormato(desde, hasta, formato);
+			return repositorioAlertaMatafuego.exportarPorPeriodo(desde, hasta);
+	}
+
+	@Action(semantics = SemanticsOf.SAFE)
+	public String downloadAllVehiculo() throws JRException, IOException{
+		return repositorioAlertaVehiculo.downloadAll();
 	}
 
 	@Action(semantics = SemanticsOf.SAFE)
 	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasVehiculo")
-	public String exportarTodoVehiculo(@ParameterLayout(named = "Formato") Formato formato)
-			throws JRException, IOException {
-		return repositorioAlertaVehiculo.elegirFormato(formato);
-
-	}
-
-	@Action(semantics = SemanticsOf.SAFE)
-	@ActionLayout(describedAs = "El documento se almacenara en ReporteAlertas/AlertasVehiculo")
-	public String exportarPorPeriodoVehiculo(@ParameterLayout(named = "Formato") Formato formato,
-			@ParameterLayout(named = "Desde") Date desde, @ParameterLayout(named = "Hasta") Date hasta)
+	public String downloadByPeriodVehiculo(@ParameterLayout(named = "Desde") Date desde, @ParameterLayout(named = "Hasta") Date hasta)
 					throws JRException, IOException {
-		return repositorioAlertaVehiculo.elegirFormato(formato, desde, hasta);
+		return repositorioAlertaVehiculo.exportarPorPeriodo(desde, hasta);
 	}
 
 	@javax.inject.Inject

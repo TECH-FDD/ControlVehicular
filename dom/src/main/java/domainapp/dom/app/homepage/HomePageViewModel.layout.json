@@ -37,12 +37,12 @@
                         "render": "EAGERLY"
                     },
                      "actions": {
-                        "exportarTodo": {
+                        "downloadAllMatafuego": {
                             "actionLayout": {
                                 "named": "Exportar Todo"
                             }
                         },
-                        "exportarPorPeriodo": {
+                        "downloadByPeriodMatafuego": {
                             "actionLayout": {
                                 "named": "Exportar Por Periodo"
                             }
@@ -54,12 +54,12 @@
                         "render": "EAGERLY"
                     },
                      "actions": {
-                        "exportarTodoVehiculo": {
+                        "downloadAllVehiculo": {
                             "actionLayout": {
                                 "named": "Exportar Todo"
                             }
                         },
-                        "exportarPorPeriodoVehiculo": {
+                        "downloadByPeriodVehiculo": {
                             "actionLayout": {
                                 "named": "Exportar Por Periodo"
                             }

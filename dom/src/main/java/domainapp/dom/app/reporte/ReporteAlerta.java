@@ -29,6 +29,7 @@ public class ReporteAlerta {
 	public void setNombre(final String nombre) {
 		this.nombre = nombre;
 	}
+
 	@MemberOrder(sequence = "1")
 	public String getDescripcion() {
 		return descripcion;
@@ -37,6 +38,7 @@ public class ReporteAlerta {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 	@MemberOrder(sequence = "1")
 	public String getEstadoAlerta() {
 		return estadoAlerta;
@@ -45,6 +47,7 @@ public class ReporteAlerta {
 	public void setEstadoAlerta(String estadoAlerta) {
 		this.estadoAlerta = estadoAlerta;
 	}
+
 	@MemberOrder(sequence = "1")
 	public String getEmpleadoInvolucrado() {
 		return empleadoInvolucrado;
@@ -53,6 +56,7 @@ public class ReporteAlerta {
 	public void setEmpleadoInvolucrado(String empleadoInvolucrado) {
 		this.empleadoInvolucrado = empleadoInvolucrado;
 	}
+
 	@MemberOrder(sequence = "1")
 	public String getAlerta() {
 		return alerta;
@@ -61,6 +65,7 @@ public class ReporteAlerta {
 	public void setAlerta(String alerta) {
 		this.alerta = alerta;
 	}
+
 	@MemberOrder(sequence = "1")
 	public String getElemento() {
 		return elemento;
@@ -69,6 +74,7 @@ public class ReporteAlerta {
 	public void setElemento(String elemento) {
 		this.elemento = elemento;
 	}
+
 	@MemberOrder(sequence = "1")
 	public String getFechaAlta() {
 		return fechaAlta;

@@ -1,5 +1,7 @@
 package domainapp.dom.app.alerta;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -30,10 +32,16 @@ import domainapp.dom.app.Estadoalerta.Aplazado;
 import domainapp.dom.app.Estadoalerta.EstadoAlerta;
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.matafuego.Matafuego;
-import domainapp.dom.app.reporte.Formato;
-import domainapp.dom.app.reporte.GenerarReporte;
+import domainapp.dom.app.reporte.AlertaMatafuegoDataSource;
 import domainapp.dom.app.reporte.ReporteAlerta;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = AlertaMatafuego.class)
 @DomainServiceLayout(menuOrder = "120", named = "Alerta")
@@ -221,24 +229,9 @@ public class RepositorioAlertaMatafuego {
 	}
 
 	@Programmatic
-	public String elegirFormato(Formato formato) throws JRException, IOException {
-		return exportarTodo(formato);
-	}
-
-	@Programmatic
-	public String elegirFormato(Date desde, Date hasta, Formato formato) throws JRException, IOException {
-		return exportarPorPeriodo(desde, hasta, formato);
-	}
-
-	@Programmatic
-	public Formato default0ElegirFormato(final @ParameterLayout(named = "Formato") Formato formato) {
-		return Formato.PDF;
-	}
-
-	@Programmatic
-	public String exportarTodo(Formato formato) throws JRException, IOException {
-		List<Object> objectsReport = new ArrayList<Object>();
+	public String downloadAll() throws JRException, IOException {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		AlertaMatafuegoDataSource datasource = new AlertaMatafuegoDataSource();
 		for (AlertaMatafuego a : listAll()) {
 			String fechaAlerta = df.format(a.getFechaAlerta());
 			String fechaAlta = df.format(a.getFechaAlta());
@@ -251,63 +244,54 @@ public class RepositorioAlertaMatafuego {
 			alerta.setElemento(a.getMatafuego().toString());
 			alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
 			alerta.setsubTitulo(" ");
-			objectsReport.add(alerta);
+			datasource.addParticipante(alerta);
 		}
-		if (objectsReport.isEmpty() == false) {
-			String nombreArchivo = null;
-			if (formato == Formato.PDF)
-				nombreArchivo = "ReporteAlerta/AlertasMatafuego/PDF/AlertaMatafuego "
-						+ new Date(System.currentTimeMillis());
-			else if (formato == Formato.XLS)
-				nombreArchivo = "ReporteAlerta/AlertasMatafuego/XLS/AlertaMatafuego "
-						+ new Date(System.currentTimeMillis());
-			else
-				nombreArchivo = "ReporteAlerta/AlertasMatafuego/DOC/AlertaMatafuego "
-						+ new Date(System.currentTimeMillis());
+		File file = new File("AlertaMatafuego.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
 
-			GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport, formato, nombreArchivo);
-			return "Se ha realizado la exportacion Correctamente";
-		} else
-			return "No hay elementos para imprimir";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
 	}
 
 	@Programmatic
-	public String exportarPorPeriodo(Date desde, Date hasta, Formato formato) throws JRException, IOException {
-		List<Object> objectsReport = new ArrayList<Object>();
+	public String exportarPorPeriodo(Date desde, Date hasta) throws JRException, IOException {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		AlertaMatafuegoDataSource datasource = new AlertaMatafuegoDataSource();
 		for (AlertaMatafuego a : listAll()) {
-			if (a.getFechaAlta().after(desde) && a.getFechaAlta().before(hasta)) {
-				String fechaAlerta = df.format(a.getFechaAlerta());
-				String fechaAlta = df.format(a.getFechaAlta());
-				ReporteAlerta alerta = new ReporteAlerta();
-				alerta.setNombre(a.getNombre());
-				alerta.setDescripcion(a.getDescripcion());
-				alerta.setEstadoAlerta(a.getEstadoAlerta().toString());
-				alerta.setAlerta(fechaAlerta);
-				alerta.setFechaAlta(fechaAlta);
-				alerta.setElemento(a.getMatafuego().toString());
-				alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
-				alerta.setsubTitulo("Desde: " + df.format(desde) + ", Hasta: " + df.format(hasta));
-				objectsReport.add(alerta);
-			}
+			String fechaAlerta = df.format(a.getFechaAlerta());
+			String fechaAlta = df.format(a.getFechaAlta());
+			ReporteAlerta alerta = new ReporteAlerta();
+			alerta.setNombre(a.getNombre());
+			alerta.setDescripcion(a.getDescripcion());
+			alerta.setEstadoAlerta(a.getEstadoAlerta().toString());
+			alerta.setAlerta(fechaAlerta);
+			alerta.setFechaAlta(fechaAlta);
+			alerta.setElemento(a.getMatafuego().toString());
+			alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
+			alerta.setsubTitulo("Desde: " + df.format(desde) + ", Hasta: " + df.format(hasta));
+			datasource.addParticipante(alerta);
 		}
-		if (objectsReport.isEmpty() == false) {
-			String nombreArchivo = null;
-			if (formato == Formato.PDF)
-				nombreArchivo = "ReporteAlerta/AlertasMatafuego/PDF/AlertaMatafuego "
-						+ new Date(System.currentTimeMillis());
-			else if (formato == Formato.DOCX)
-				nombreArchivo = "ReporteAlerta/AlertasMatafuego/DOC/AlertaMatafuego "
-						+ new Date(System.currentTimeMillis());
-			else
-				nombreArchivo = "ReporteAlerta/AlertasMatafuego/XLS/AlertaMatafuego "
-						+ new Date(System.currentTimeMillis());
+		File file = new File("AlertaMatafuego.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
 
-			GenerarReporte.generarReporte("AlertasMatafuego.jrxml", objectsReport, formato, nombreArchivo);
-			return "Se ha realizado la exportacion Correctamente";
-		} else
-			return "No hay elementos para imprimir";
-
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
 	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
