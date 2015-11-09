@@ -1,6 +1,10 @@
 package domainapp.dom.app.gps;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +25,16 @@ import domainapp.dom.app.estadoelemento.Baja;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.NecesitaReparacion;
 import domainapp.dom.app.estadoelemento.Reparacion;
+import domainapp.dom.app.reporte.GpsDataSource;
+import domainapp.dom.app.reporte.ReporteGps;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = Gps.class)
 @DomainServiceLayout(menuOrder = "50", named = "Gps")
@@ -170,7 +184,36 @@ public class RepositorioGps {
 		}
 		return bajas;
 	}
+	@ActionLayout(named="Exportar Gps")
+	public String downloadAll() throws JRException, IOException {
+		GpsDataSource datasource = new GpsDataSource();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		for (Gps g : listarTodos()) {
+			ReporteGps gps= new ReporteGps();
+			gps.setCodIdentificacion(g.getCodIdentificacion());
+			gps.setMarca(g.getMarca());
+			gps.setDescripcion(g.getDescripcion());
+			gps.setEstado(g.getEstado().toString());
+			gps.setFechaAlta(df.format(g.getFechaAlta()));
+			gps.setFechaAsigVehiculo(df.format(g.getFechaAsigVehiculo()));
+			gps.setModelo(g.getModelo());
+			gps.setObsEstadoDispositivo(g.getObsEstadoDispositivo());
+			datasource.addParticipante(gps);
+		}
+		File file = new File("Gps.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
