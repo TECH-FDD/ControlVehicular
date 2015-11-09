@@ -1,6 +1,10 @@
 package domainapp.dom.app.matafuego;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +24,19 @@ import domainapp.dom.app.estadoelemento.Baja;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.NecesitaReparacion;
 import domainapp.dom.app.estadoelemento.Reparacion;
+import domainapp.dom.app.gps.Gps;
+import domainapp.dom.app.reporte.GpsDataSource;
+import domainapp.dom.app.reporte.MatafuegoDataSource;
+import domainapp.dom.app.reporte.ReporteGps;
+import domainapp.dom.app.reporte.ReporteMatafuego;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = Matafuego.class)
 @DomainServiceLayout(menuOrder = "80", named = "Matafuego")
@@ -145,7 +162,36 @@ public class RepositorioMatafuego {
 		}
 		return noAsignados;
 	}
+	@ActionLayout(named="Exportar Matafuego")
+	public String downloadAll() throws JRException, IOException {
+		MatafuegoDataSource datasource = new MatafuegoDataSource();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		for (Matafuego m : listAll()) {
+			ReporteMatafuego matafuego= new ReporteMatafuego();
+			matafuego.setCodigo(m.getCodigo());
+			matafuego.setMarca(m.getMarca());
+			matafuego.setCapacidad(Integer.toString(m.getCapacidad()));
+			matafuego.setDescripcion(m.getDescripcion());
+			matafuego.setEstado(m.getEstado().toString());
+			matafuego.setFechaAlta(df.format(m.getFechaAlta()));
+			matafuego.setFechaCadRecarga(df.format(m.getFechaCadRecarga()));
+			matafuego.setFechaRecarga(df.format(m.getFechaRecarga()));
+			datasource.addParticipante(matafuego);
+		}
+		File file = new File("Matafuego.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, true);
+		return "Reporte Generado";
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 }
