@@ -164,7 +164,6 @@ public class RepositorioAlertaMatafuego {
 			estado = new AlertaRoja(new Timestamp(System.currentTimeMillis()));
 		else {
 			estado = new Activa(new Timestamp(System.currentTimeMillis()));
-			container.warnUser("dia" + dia);
 		}
 		return estado;
 	}
