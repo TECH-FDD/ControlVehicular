@@ -167,7 +167,7 @@ public class RepositorioEmpleado {
 	@ActionLayout(named = "Buscar por Legajo")
 	public List<Empleado> findByLegajo(
 			@ParameterLayout(named = "N° de Legajo") final String legajo) {
-		final List<Empleado> listaEmpleado = listAllEmpleados();
+		final List<Empleado> listaEmpleado = listarTodos();
 		final List<Empleado> lista = new ArrayList<Empleado>();
 		for (Empleado e : listaEmpleado) {
 			if (e.getLegajo().toUpperCase().equals(legajo.toUpperCase())) {
