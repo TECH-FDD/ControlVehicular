@@ -41,7 +41,7 @@ public class Validador {
 	 */
 	public static final class ValidacionLetras {
 		private ValidacionLetras() {}
-		public static final String ADMITIDOS ="[A-Z,a-z,ñ,Ñ,]+";
+		public static final String ADMITIDOS ="[A-Z,a-z,ñ,Ñ, ,]+";
 	}
 	
 }
