@@ -144,7 +144,7 @@ public class RepositorioEmpleado {
 	@ActionLayout(named = "Buscar por Apellido")
 	public List<Empleado> findByApellido(
 			@ParameterLayout(named = "Apellido") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) final String apellido) {
-		final List<Empleado> listaEmpleado = listAllEmpleados();
+		final List<Empleado> listaEmpleado = listarTodos();
 		final List<Empleado> lista = new ArrayList<Empleado>();
 		for (Empleado e : listaEmpleado) {
 			if (e.getApellido().toUpperCase().equals(apellido.toUpperCase())) {
