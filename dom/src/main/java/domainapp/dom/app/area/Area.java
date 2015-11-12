@@ -83,7 +83,7 @@ public class Area {
 
 	@Persistent
 	@MemberOrder(sequence = "30")
-	@javax.jdo.annotations.Column(allowsNull = "false")
+	@javax.jdo.annotations.Column(allowsNull = "true")
 	public String getDescripcion() {
 		return descripcion;
 	}
