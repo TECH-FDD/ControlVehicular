@@ -14,6 +14,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.Where;
 import org.apache.isis.applib.query.QueryDefault;
@@ -138,6 +139,13 @@ public class Area {
 					.warnUser("No se pudo realizar esta acción. El objeto que intenta eliminar esta asignado");
 		}
 		return this;
+	}
+	@Programmatic
+	public boolean hideDeleteArea() {
+		if (!isActivo())
+			return true;
+		else
+			return false;
 	}
 
 	@javax.inject.Inject
