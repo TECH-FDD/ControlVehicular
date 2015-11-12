@@ -83,6 +83,14 @@ public class RepositorioArea {
 		return listaArea;
 	}
 
+	@MemberOrder(sequence = "6", name = "Elementos Inactivos")
+	@ActionLayout(named = "Areas")
+	public List<Area> listAllInactivos() {
+		final List<Area> listaInactivos = this.container
+				.allMatches(new QueryDefault<Area>(Area.class, "ListarInactivos"));
+		return listaInactivos;
+	}
+
 	@MemberOrder(sequence = "3")
 	@ActionLayout(named = "Buscar por nombre")
 	public List<Area> findByNombre(

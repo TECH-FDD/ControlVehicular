@@ -27,6 +27,9 @@ import domainapp.dom.app.empleado.Empleado;
 		@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.area.Area " 
 				+ "WHERE activo == true"),
+		@javax.jdo.annotations.Query(name = "ListarInactivos", language = "JDOQL", value = "SELECT "
+				+ "FROM domainapp.dom.app.area.Area "
+				+ "WHERE activo == false"),
 		@javax.jdo.annotations.Query(name = "buscarPorNombre", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.area.Area "
 				+ "WHERE nombre.indexOf(:nombre) >= 0 && activo == true"),
