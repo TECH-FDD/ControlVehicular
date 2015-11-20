@@ -14,8 +14,8 @@ import domainapp.dom.app.vehiculo.Vehiculo;
 
 public class VehiculoFixture extends Fixture {
 
-	private static String marca="Ford";
-	private static String nombre= "Cargo 815";
+	private static String marca="Ford, Isuzu, Iveco, Iveco, Hyundai";
+	private static String nombre= "Cargo 815, FTR, Cursor, Trakker, HD78";
 	private static int modelo=2015;
 	private static String patente="SER 123,HBD 789,HUG 675,IBM 255,KIJ 567";
 	private static String numeroChasis="JGASDYUGSUY5468FG,KSUDS327DSF44RFDE,HDJSY2653GHETDBSH78,JFUERJ463548EHDGJFU80K,JUDH6DHSYS987SHYC7";
@@ -25,6 +25,14 @@ public class VehiculoFixture extends Fixture {
 	private static String cnsCombustibleCiudad="900";
 	private static int kilometros=466580;
 
+	private static String getMarca(int x) {
+		return obtenerValor(marca, x);
+	}
+	
+	private static String getNombre(int x) {
+		return obtenerValor(nombre, x);
+	}
+	
 	private static String getPatente(int x) {
 		return obtenerValor(patente, x);
 	}
@@ -51,13 +59,13 @@ public class VehiculoFixture extends Fixture {
 		List<Matafuego> matafuegos= container.allInstances(Matafuego.class);
 
 		for (int x=0; x<5; x++){
-			create(new Timestamp(System.currentTimeMillis()),getPatente(x),
+			create(getMarca(x),getNombre(x),new Timestamp(System.currentTimeMillis()),getPatente(x),
 					getNumeroChasis(x),getPolizaSeguro(x),gps.get(x),tipoCombustibles.get(0),
 					matafuegos.get(x),TipoAceite.SemiSintetico,executionContext);
 		}
 	}
 
-	private Vehiculo create( Timestamp fechaCompra,
+	private Vehiculo create(String marca,String nombre, Timestamp fechaCompra,
 			String patente, String numeroChasis, Integer polizaSeguro,
 			Gps gps, TipoCombustible tipoCombustible, Matafuego matafuego,
 			TipoAceite tipoAceite, ExecutionContext executionContext) {
