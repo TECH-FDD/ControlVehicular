@@ -264,7 +264,7 @@ public class RepositorioEmpleado {
 		JasperDesign jd = JRXmlLoader.load(input);
 		JasperReport reporte = JasperCompileManager.compileReport(jd);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
-		JasperViewer.viewReport(jasperPrint, true);
+		JasperViewer.viewReport(jasperPrint, false);
 		return "Reporte Generado";
 	}
 	@javax.inject.Inject
