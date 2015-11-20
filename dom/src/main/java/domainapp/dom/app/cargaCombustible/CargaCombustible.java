@@ -18,6 +18,10 @@ import domainapp.dom.app.vehiculo.Vehiculo;
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "CargaCombustible_ID")
 @javax.jdo.annotations.Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
+@javax.jdo.annotations.Queries({
+	@javax.jdo.annotations.Query(name = "ListarTodos", language = "JDOQL", value = "SELECT "
+			+ "FROM domainapp.dom.app.cargaCombustible.CargaCombustible ")})
+
 @DomainObject(objectType = "Carga Combustible")
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class CargaCombustible {
@@ -25,10 +29,10 @@ public class CargaCombustible {
 	private Date fechaCarga;
 	private Combustible combustible;
 	private BigDecimal costoTotal;
-	private BigDecimal litrosCargados;
+	private Double litrosCargados;
 
 	public CargaCombustible(Vehiculo vehiculo, Date fechaCarga, Combustible combustible, BigDecimal costoTotal,
-			BigDecimal litrosCargados) {
+			Double litrosCargados) {
 		super();
 		this.vehiculo = vehiculo;
 		this.fechaCarga = fechaCarga;
@@ -84,11 +88,11 @@ public class CargaCombustible {
 	@Persistent
 	@MemberOrder(sequence = "34")
 	@javax.jdo.annotations.Column(allowsNull = "false")
-	public BigDecimal getLitrosCargados() {
+	public Double getLitrosCargados() {
 		return litrosCargados;
 	}
 
-	public void setLitrosCargados(BigDecimal litrosCargados) {
+	public void setLitrosCargados(Double litrosCargados) {
 		this.litrosCargados = litrosCargados;
 	}
 
