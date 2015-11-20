@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = Combustible.class)
-@DomainServiceLayout(menuOrder = "40", named = "Combustible", menuBar = MenuBar.PRIMARY)
+@DomainServiceLayout(menuOrder = "40.1", named = "Combustible", menuBar = MenuBar.PRIMARY)
 public class RepositorioCombustible {
 
 	@MemberOrder(sequence = "1")
