@@ -1,6 +1,7 @@
 package domainapp.dom.app.cargaCombustible;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +45,25 @@ public class RepositorioCargaCombustible {
 					.warnUser("No hay cargas de combustible cargados en el sistema");
 		}
 		return listaCargaCombustible;
+	}
+
+	@MemberOrder(sequence = "3")
+	@ActionLayout(named = "Buscar por vehiculo")
+	public List<CargaCombustible> findByVehiculo(
+			@ParameterLayout(named = "Vehiculo") final Vehiculo vehiculo) {
+
+		final List<CargaCombustible> listaCargaCombustible = listAll();
+		final List<CargaCombustible> lista = new ArrayList<CargaCombustible>();
+		for (CargaCombustible cc : listaCargaCombustible) {
+			if (cc.getVehiculo().equals(vehiculo)) {
+				lista.add(cc);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Vehiculo buscado");
+		}
+		return lista;
 	}
 
 	@javax.inject.Inject
