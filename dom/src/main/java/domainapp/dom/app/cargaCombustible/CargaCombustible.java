@@ -10,7 +10,9 @@ import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.vehiculo.Vehiculo;
@@ -43,6 +45,7 @@ public class CargaCombustible {
 
 	@Persistent
 	@MemberOrder(sequence = "30")
+	@Property(editing = Editing.DISABLED)
 	@javax.jdo.annotations.Column(allowsNull = "Vehiculo")
 	public Vehiculo getVehiculo() {
 		return vehiculo;
@@ -54,6 +57,7 @@ public class CargaCombustible {
 
 	@Persistent
 	@MemberOrder(sequence = "31")
+	@Property(editing = Editing.DISABLED)
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public Date getFechaCarga() {
 		return fechaCarga;
