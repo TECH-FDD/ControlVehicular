@@ -109,7 +109,7 @@ public class Combustible {
 
 	@Persistent
 	@MemberOrder(sequence = "40")
-	@javax.jdo.annotations.Column(allowsNull = "false")
+	@javax.jdo.annotations.Column(allowsNull = "true")
 	public String getDescripcion() {
 		return descripcion;
 	}
