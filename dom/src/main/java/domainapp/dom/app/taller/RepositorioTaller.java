@@ -146,6 +146,7 @@ public class RepositorioTaller {
 			taller.setCodigo(t.getCodigo());
 			taller.setNombreComercial(t.getNombreComercial());
 			taller.setDescripcion(t.getDescripcion());
+			taller.setRubro(t.getRubro().toString());
 			taller.setDireccion(t.getDireccion());
 			taller.setTelefono(t.getTelefono());
 			taller.setEmail(t.getEmail());
@@ -162,7 +163,7 @@ public class RepositorioTaller {
 		JasperDesign jd = JRXmlLoader.load(input);
 		JasperReport reporte = JasperCompileManager.compileReport(jd);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
-		JasperViewer.viewReport(jasperPrint, true);
+		JasperViewer.viewReport(jasperPrint, false);
 		return "Reporte Generado";
 	}
 

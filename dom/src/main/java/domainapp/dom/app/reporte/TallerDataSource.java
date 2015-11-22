@@ -25,6 +25,8 @@ public class TallerDataSource implements JRDataSource{
 			valor = listaTaller.get(indiceTallerActual).getCodigo();
 		} else if ("email".equals(jrf.getName())) {
 			valor = listaTaller.get(indiceTallerActual).getEmail();
+		}  else if ("rubro".equals(jrf.getName())) {
+			valor = listaTaller.get(indiceTallerActual).getRubro();
 		} 
 		return valor;
 	}

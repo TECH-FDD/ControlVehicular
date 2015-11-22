@@ -5,6 +5,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 public class ReporteTaller {
 	private String nombreComercial;
 	private String descripcion;
+	private String rubro;
 	private String direccion;
 	private String telefono;
 	private String codigo;
@@ -62,6 +63,15 @@ public class ReporteTaller {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@MemberOrder(sequence = "1")
+	public String getRubro() {
+		return rubro;
+	}
+
+	public void setRubro(String rubro) {
+		this.rubro = rubro;
 	}
 
 }
