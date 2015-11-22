@@ -140,6 +140,24 @@ public class RepositorioCombustible {
 		}
 		return lista;
 	}
+	@MemberOrder(sequence = "3")
+	@ActionLayout(named = "Buscar por Tipo Combustible")
+	public List<Combustible> findByTipoCombustible(
+			@ParameterLayout(named = "Tipo Combustible") final TipoCombustible tipoCombustible) {
+
+		final List<Combustible> listaCombustible = listAll();
+		final List<Combustible> lista = new ArrayList<Combustible>();
+		for (Combustible c : listaCombustible) {
+			if (c.getTipoCombustible().equals(tipoCombustible)) {
+				lista.add(c);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el tipo Combustible buscado");
+		}
+		return lista;
+	}
 
 	@MemberOrder(sequence = "2", name = "Elementos Inactivos")
 	@ActionLayout(named = "Combustibles")
@@ -182,7 +200,7 @@ public class RepositorioCombustible {
 		JasperDesign jd = JRXmlLoader.load(input);
 		JasperReport reporte = JasperCompileManager.compileReport(jd);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
-		JasperViewer.viewReport(jasperPrint, true);
+		JasperViewer.viewReport(jasperPrint, false);
 		return "Reporte Generado";
 	}
 	@javax.inject.Inject
