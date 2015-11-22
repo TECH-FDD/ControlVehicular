@@ -19,13 +19,13 @@ import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 import org.joda.time.LocalDate;
 
-import domainapp.dom.app.Estadoalerta.Activa;
-import domainapp.dom.app.Estadoalerta.AlertaAmarilla;
-import domainapp.dom.app.Estadoalerta.AlertaNaranja;
-import domainapp.dom.app.Estadoalerta.AlertaRoja;
-import domainapp.dom.app.Estadoalerta.Aplazado;
-import domainapp.dom.app.Estadoalerta.EstadoAlerta;
 import domainapp.dom.app.empleado.Empleado;
+import domainapp.dom.app.estadoalerta.Activa;
+import domainapp.dom.app.estadoalerta.AlertaAmarilla;
+import domainapp.dom.app.estadoalerta.AlertaNaranja;
+import domainapp.dom.app.estadoalerta.AlertaRoja;
+import domainapp.dom.app.estadoalerta.Aplazado;
+import domainapp.dom.app.estadoalerta.EstadoAlerta;
 import domainapp.dom.app.vehiculo.Vehiculo;
 
 @DomainService(repositoryFor = AlertaVehiculo.class)

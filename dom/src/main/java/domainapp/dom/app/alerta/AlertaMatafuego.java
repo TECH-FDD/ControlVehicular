@@ -24,8 +24,8 @@ import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.query.QueryDefault;
 import org.apache.isis.applib.services.actinvoc.ActionInvocationContext;
 
-import domainapp.dom.app.Estadoalerta.EstadoAlerta;
 import domainapp.dom.app.empleado.Empleado;
+import domainapp.dom.app.estadoalerta.EstadoAlerta;
 import domainapp.dom.app.matafuego.Matafuego;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
