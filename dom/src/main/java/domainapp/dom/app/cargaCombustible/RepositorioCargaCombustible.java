@@ -13,6 +13,7 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.query.QueryDefault;
+import org.joda.time.LocalDate;
 
 import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.vehiculo.Vehiculo;
@@ -64,6 +65,23 @@ public class RepositorioCargaCombustible {
 			this.container.warnUser("No existe el Vehiculo buscado");
 		}
 		return lista;
+	}
+
+	@MemberOrder(sequence = "4")
+	@ActionLayout(named = "Buscar por Fecha")
+	public List<CargaCombustible> findByFechaCarga(@ParameterLayout(named = "Fecha Carga") final LocalDate fecha) {
+		List<CargaCombustible> listaCargaCombustible = container.allInstances(CargaCombustible.class);
+		List<CargaCombustible> listaCarga = new ArrayList<CargaCombustible>();
+		for (CargaCombustible cargaCombustible: listaCargaCombustible) {
+			LocalDate ld = LocalDate.fromDateFields(cargaCombustible.getFechaCarga());
+			if (ld.compareTo(fecha) == 0) {
+				listaCarga.add(cargaCombustible);
+			}
+		}
+		if (listaCarga.isEmpty()) {
+			this.container.warnUser("No existe la fecha buscada");
+		}
+		return listaCarga;
 	}
 
 	@javax.inject.Inject
