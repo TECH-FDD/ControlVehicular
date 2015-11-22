@@ -12,10 +12,13 @@ import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 import org.joda.time.LocalDate;
 
 import domainapp.dom.app.combustible.Combustible;
+import domainapp.dom.app.combustible.RepositorioCombustible;
+import domainapp.dom.app.combustible.TipoCombustible;
 import domainapp.dom.app.vehiculo.Vehiculo;
 
 @DomainService(repositoryFor = CargaCombustible.class)
@@ -24,7 +27,8 @@ public class RepositorioCargaCombustible {
 	@MemberOrder(sequence = "1")
 	@ActionLayout(named = "Crear Carga combustible")
 	public CargaCombustible createCargaCombustible(final @ParameterLayout(named = "Vehiculo") Vehiculo vehiculo,
-			final @ParameterLayout(named = "TipoCombustible") Combustible combustible,
+			final @ParameterLayout(named= "Tipo Combustible") TipoCombustible tipoCombustible,
+			final @ParameterLayout(named = "Combustible") Combustible combustible,
 			final @ParameterLayout(named = "Litros Cargados") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) Double litrosCargados) {
 
 		BigDecimal costoTotal = (combustible.getPrecioLitro()).multiply(BigDecimal.valueOf(litrosCargados));
@@ -84,6 +88,31 @@ public class RepositorioCargaCombustible {
 		return listaCarga;
 	}
 
+	/**
+	 * Cambia el listado de combustible a mostrar, según la el tipo
+	 * seleccionada.
+	 *
+	 * @return List<Combustible>
+	 */
+	public List<Combustible> choices2CreateCargaCombustible(Vehiculo vehiculo, TipoCombustible tipoCombustible,
+			Combustible combustible, Double litrosCargados) {
+		return listarPor(tipoCombustible);
+	}
+
+	@Programmatic
+	public List<Combustible> listarPor(final TipoCombustible tipoCombustible) {
+		List<Combustible> lista = repoCombustible.listAll();
+		List<Combustible> listaPor = new ArrayList<Combustible>();
+		for (Combustible c : lista) {
+			if (c.getTipoCombustible().equals(tipoCombustible)) {
+				listaPor.add(c);
+			}
+		}
+		return listaPor;
+	}
+
 	@javax.inject.Inject
 	DomainObjectContainer container;
+	@javax.inject.Inject
+	RepositorioCombustible repoCombustible;
 }
