@@ -1,4 +1,4 @@
-package domainapp.dom.app.Estadoalerta;
+package domainapp.dom.app.estadoalerta;
 
 import java.sql.Timestamp;
 
