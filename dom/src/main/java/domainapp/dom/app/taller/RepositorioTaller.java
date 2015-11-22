@@ -35,6 +35,7 @@ public class RepositorioTaller {
 	public Taller createTaller(
 			final @ParameterLayout(named = "Nombre Comercial") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String nombreComercial,
 			final @ParameterLayout(named = "Descripcion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String descripcion,
+			final @ParameterLayout(named= "Rubro") Rubro rubro,
 			final @ParameterLayout(named = "Direccion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String direccion,
 			final @ParameterLayout(named = "telefono") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionTel.ADMITIDOS) String telefono,
 			final @ParameterLayout(named = "Codigo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String codigo,
@@ -45,6 +46,7 @@ public class RepositorioTaller {
 		taller.setNombreComercial(nombreComercial);
 		taller.setTelefono(telefono);
 		taller.setDescripcion(descripcion);
+		taller.setRubro(rubro);
 		taller.setDireccion(direccion);
 		taller.setEmail(email);
 		taller.setCodigo(codigo);
@@ -55,8 +57,8 @@ public class RepositorioTaller {
 	}
 
 	// Validar nombre comercial y codigo del taller
-	public String validateCreateTaller(String nombreComercial, String telefono,
-			String descripcion, String codigo, String direccion, String email) {
+	public String validateCreateTaller(String nombreComercial,String descripcion,Rubro rubro,
+			String direccion,String telefono,String codigo, String email) {
 		if (!container.allMatches(
 				new QueryDefault<Taller>(Taller.class,
 						"buscarPorNombreComercial", "nombreComercial",
