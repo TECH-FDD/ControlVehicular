@@ -1,6 +1,7 @@
 package domainapp.fixture;
 
 import domainapp.dom.app.taller.RepositorioTaller;
+import domainapp.dom.app.taller.Rubro;
 import domainapp.dom.app.taller.Taller;
 
 public class TallerFixture extends Fixture{
@@ -38,12 +39,12 @@ public class TallerFixture extends Fixture{
 	protected void execute(ExecutionContext executionContext) {
 			borrarTabla(executionContext,"Taller");
 			for (int x = 0; x < 3; x++) {
-				create(getnombreComercial(x),getDireccion(x),getCodigo(x),getTelefono(x),getEmail(x),true, executionContext);
+				create(getnombreComercial(x),Rubro.Vehicular,getDireccion(x),getCodigo(x),getTelefono(x),getEmail(x),true, executionContext);
 			}
 		}
-private Taller create(String nombreComercial, String direccion,String codigo, String telefono,
+private Taller create(String nombreComercial,Rubro rubro, String direccion,String codigo, String telefono,
 		String email,boolean activo, ExecutionContext executionContext) {
-	return executionContext.addResult(this, repoTaller.createTaller(nombreComercial, descripcion, direccion, telefono, codigo, email));
+	return executionContext.addResult(this, repoTaller.createTaller(nombreComercial, descripcion, rubro, direccion, telefono, codigo, email));
 }
 
 @javax.inject.Inject
