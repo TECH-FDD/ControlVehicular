@@ -1,8 +1,6 @@
 package domainapp.dom.app.alerta;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Persistent;
@@ -16,13 +14,8 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Optionality;
-import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
-import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
-import org.apache.isis.applib.query.QueryDefault;
-import org.apache.isis.applib.services.actinvoc.ActionInvocationContext;
 
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.estadoalerta.EstadoAlerta;
@@ -83,77 +76,22 @@ public class AlertaMatafuego extends Alerta {
 		this.matafuego = matafuego;
 		this.fechaAlerta = fechaAlerta;
 	}
-
-	@MemberOrder(sequence = "1")
-	@ActionLayout(named = "Edit", position = Position.BELOW)
-	public ModificacionAlertaMatafuego updateEdit(
-			final @ParameterLayout(named = "Empleado Involucrado") Empleado empleado,
-			final @ParameterLayout(named = "Nombre") @Parameter(optionality = Optionality.OPTIONAL) String nombre,
-			final @ParameterLayout(named = "Descripcion") @Parameter(optionality = Optionality.OPTIONAL) String descripcion,
-			final @ParameterLayout(named = "Fecha Alerta") @Parameter(optionality = Optionality.OPTIONAL) Date fechaAlerta) {
-		String datosModificados = "";
-		if (nombre != null) {
-			datosModificados = datosModificados + "nombre: " + this.getNombre();
-			this.setNombre(nombre);
-		}
-		if (descripcion != null) {
-			datosModificados = datosModificados + "descripcion: " + this.getDescripcion();
-			this.setDescripcion(descripcion);
-		}
-		if (fechaAlerta != null) {
-			EstadoAlerta estado = repo.asignarAlertaEstado(fechaAlerta);
-			datosModificados = datosModificados + "contador Alarma: " + this.getDescripcion();
-			this.setFechaAlerta(fechaAlerta);
-			this.setEstadoAlerta(estado);
-		}
-		ModificacionAlertaMatafuego modificacionAlerta = new ModificacionAlertaMatafuego();
-		modificacionAlerta.setAlertaModificacion(this);
-		modificacionAlerta.setFechaModificacion(new Date(System.currentTimeMillis()));
-		modificacionAlerta.setModificacionEmpleado(empleado);
-		modificacionAlerta.setDatosModificados(datosModificados);
-
-		container.persistIfNotAlready(modificacionAlerta);
-		return modificacionAlerta;
-	}
-
-	@Programmatic
-	public String validateUpdateEdit(Empleado empleado, String nombre, String descripcion, Date fechaAlerta) {
-		if (nombre == null && descripcion == null && fechaAlerta == null) {
-			return "No se ha ingresado ninguna modificacion, por favor ingrese alguna modificación";
-		}
-		return null;
-	}
-
-	@MemberOrder(sequence = "2")
-	@ActionLayout(named = "Lista de Modificaciones", position = Position.BELOW)
-	public List<ModificacionAlertaMatafuego> listAllMatafuego() {
-		final List<ModificacionAlertaMatafuego> listaModificacionAlertaMatafuego = container.allMatches(
-				new QueryDefault<ModificacionAlertaMatafuego>(ModificacionAlertaMatafuego.class, "ListarTodos"));
-		final List<ModificacionAlertaMatafuego> lista = new ArrayList<ModificacionAlertaMatafuego>();
-		for (ModificacionAlertaMatafuego aV : listaModificacionAlertaMatafuego) {
-			if (aV.getAlertaModificacion().equals(this)) {
-				lista.add(aV);
-			}
-		}
-
-		if (lista.isEmpty()) {
-			this.container.warnUser("No existen Modificaciones en esta alerta");
-		}
-		return lista;
-	}
-
 	@MemberOrder(sequence = "3")
 	@ActionLayout(named = "Aplazar", position = Position.BELOW)
 	public AlertaMatafuego Aplazar() {
 		getEstadoAlerta().aplazarAlertas(this);
 		return this;
 	}
+	@MemberOrder(sequence = "1", name = "FechaAlerta")
+	@ActionLayout(named = "Cambiar Fecha Alerta", position = Position.BELOW)
+	public AlertaMatafuego updateFechaAlerta(final @ParameterLayout(named = "Fecha Alerta")Date fechaAlerta){
+		this.setFechaAlerta(fechaAlerta);
+		this.setEstadoAlerta(repo.asignarAlertaEstado(fechaAlerta));
+		return this;
+	}
 
 	@javax.inject.Inject
 	DomainObjectContainer container;
-
-	@javax.inject.Inject
-	public ActionInvocationContext actionInvocationContext;
 
 	@javax.inject.Inject
 	RepositorioAlertaMatafuego repo;
