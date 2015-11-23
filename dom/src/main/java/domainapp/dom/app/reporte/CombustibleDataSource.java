@@ -12,17 +12,6 @@ public class CombustibleDataSource implements JRDataSource{
 	private int indiceCombustibleActual = -1;
 	public Object getFieldValue(JRField jrf) throws JRException {
 		Object valor = null;
-		/*	private String nombre;
-	private String empresa;
-	private String codigo;
-	private String descripcion;
-	private String categoria;
-	private String precioLitro;
-	private String precioAnterior;
-	private String porcentajeAumento;
-	private String octanaje;
-	private String tipoCombustible;
-	private String activo;*/
 		if ("codigo".equals(jrf.getName())) {
 			valor = listaCombustible.get(indiceCombustibleActual).getCodigo();
 		} else if ("nombre".equals(jrf.getName())) {
