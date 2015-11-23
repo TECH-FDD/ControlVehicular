@@ -29,7 +29,6 @@ public abstract class Alerta {
 	@Persistent
 	@MemberOrder(sequence = "1")
 	@javax.jdo.annotations.Column(allowsNull = "false")
-	@Property(editing = Editing.DISABLED)
 	public String getNombre() {
 		return nombre;
 	}
@@ -41,7 +40,6 @@ public abstract class Alerta {
 	@Persistent
 	@MemberOrder(sequence = "2")
 	@javax.jdo.annotations.Column(allowsNull = "true")
-	@Property(editing = Editing.DISABLED)
 	public String getDescripcion() {
 		return descripcion;
 	}
