@@ -32,6 +32,7 @@ import domainapp.dom.app.estadoalerta.AlertaNaranja;
 import domainapp.dom.app.estadoalerta.AlertaRoja;
 import domainapp.dom.app.estadoalerta.Aplazado;
 import domainapp.dom.app.estadoalerta.EstadoAlerta;
+import domainapp.dom.app.estadoalerta.Finalizada;
 import domainapp.dom.app.vehiculo.Vehiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -171,7 +172,7 @@ public class RepositorioAlertaVehiculo {
 		List<AlertaVehiculo> lista = listAll();
 		List<AlertaVehiculo> listaAlerta = new ArrayList<AlertaVehiculo>();
 		for (AlertaVehiculo alerta : lista) {
-			if (!(alerta.getEstadoAlerta() instanceof Aplazado || alerta.getEstadoAlerta() instanceof Activa)) {
+			if (!(alerta.getEstadoAlerta() instanceof Aplazado || alerta.getEstadoAlerta() instanceof Activa || alerta.getEstadoAlerta() instanceof Finalizada)) {
 				listaAlerta.add(alerta);
 			}
 		}
