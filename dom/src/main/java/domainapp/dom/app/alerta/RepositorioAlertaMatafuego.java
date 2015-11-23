@@ -31,6 +31,7 @@ import domainapp.dom.app.estadoalerta.AlertaNaranja;
 import domainapp.dom.app.estadoalerta.AlertaRoja;
 import domainapp.dom.app.estadoalerta.Aplazado;
 import domainapp.dom.app.estadoalerta.EstadoAlerta;
+import domainapp.dom.app.estadoalerta.Finalizada;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.reporte.AlertaMatafuegoDataSource;
 import domainapp.dom.app.reporte.ReporteAlerta;
@@ -209,7 +210,7 @@ public class RepositorioAlertaMatafuego {
 		List<AlertaMatafuego> lista = listAll();
 		List<AlertaMatafuego> listaAlerta = new ArrayList<AlertaMatafuego>();
 		for (AlertaMatafuego alerta : lista) {
-			if (!(alerta.getEstadoAlerta() instanceof Aplazado || alerta.getEstadoAlerta() instanceof Activa)) {
+			if (!(alerta.getEstadoAlerta() instanceof Aplazado || alerta.getEstadoAlerta() instanceof Activa || alerta.getEstadoAlerta() instanceof Finalizada)) {
 				listaAlerta.add(alerta);
 			}
 		}

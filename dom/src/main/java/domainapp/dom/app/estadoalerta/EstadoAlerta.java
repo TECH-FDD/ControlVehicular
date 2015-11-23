@@ -61,6 +61,14 @@ public abstract class EstadoAlerta {
 
 	public abstract void aplazarAlertas(AlertaVehiculo vehiculo);
 
+	/**********************************
+	 * Finalizar Alertas*
+	 **********************************/
+
+	public abstract void finalizarAlertas(AlertaMatafuego matafuego);
+
+	public abstract void finalizarAlertas(AlertaVehiculo vehiculo);
+
 	/**
 	 * Actualizar la alerta matafuergo con el nuevo estado y eliminar el estado
 	 * anterior de la BD.

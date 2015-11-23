@@ -67,4 +67,21 @@ public class AlertaAmarilla extends EstadoAlerta {
 		container.informUser("Se aplazo Exitosamente.");
 
 	}
+	@Override
+	public void finalizarAlertas(AlertaMatafuego matafuego) {
+		EstadoAlerta estado = new Finalizada(new Timestamp(System.currentTimeMillis()));
+		if(matafuego.getMantenimiento()==null)
+			actualizarAlertaMatafuego(matafuego, estado);
+		else
+			container.warnUser("El Alerta no se puede eliminar, se encuentra asignado a un Mantenimiento");
+	}
+
+	@Override
+	public void finalizarAlertas(AlertaVehiculo vehiculo) {
+		EstadoAlerta estado = new Finalizada(new Timestamp(System.currentTimeMillis()));
+		if(vehiculo.getMantenimiento()==null)
+			actualizarAlertaVehiculo(vehiculo, estado);
+		else
+			container.warnUser("El Alerta no se puede eliminar, se encuentra asignado a un Mantenimiento");
+	}
 }

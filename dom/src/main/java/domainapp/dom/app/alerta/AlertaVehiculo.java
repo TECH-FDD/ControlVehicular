@@ -15,10 +15,13 @@ import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.estadoalerta.EstadoAlerta;
+import domainapp.dom.app.estadoalerta.Finalizada;
+import domainapp.dom.app.mantenimiento.Mantenimiento;
 import domainapp.dom.app.vehiculo.Vehiculo;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
@@ -86,6 +89,18 @@ public class AlertaVehiculo extends Alerta {
 		this.setEstadoAlerta(repo.asignarAlertaEstado(kilometrosAlerta));
 		container.persistIfNotAlready(this);
 		return this;
+	}
+	@ActionLayout(named = "Eliminar alerta")
+	public AlertaVehiculo deleteAlertaVehiculo() {
+		getEstadoAlerta().finalizarAlertas(this);
+		return this;
+	}
+	@Programmatic
+	public boolean hideDeleteAlertaVehiculo() {
+		if (this.getEstadoAlerta() instanceof Finalizada)
+			return true;
+		else
+			return false;
 	}
 
 	@javax.inject.Inject
