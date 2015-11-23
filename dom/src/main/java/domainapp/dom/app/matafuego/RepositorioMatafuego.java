@@ -24,10 +24,7 @@ import domainapp.dom.app.estadoelemento.Baja;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.NecesitaReparacion;
 import domainapp.dom.app.estadoelemento.Reparacion;
-import domainapp.dom.app.gps.Gps;
-import domainapp.dom.app.reporte.GpsDataSource;
 import domainapp.dom.app.reporte.MatafuegoDataSource;
-import domainapp.dom.app.reporte.ReporteGps;
 import domainapp.dom.app.reporte.ReporteMatafuego;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -189,7 +186,7 @@ public class RepositorioMatafuego {
 		JasperDesign jd = JRXmlLoader.load(input);
 		JasperReport reporte = JasperCompileManager.compileReport(jd);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
-		JasperViewer.viewReport(jasperPrint, true);
+		JasperViewer.viewReport(jasperPrint, false);
 		return "Reporte Generado";
 	}
 	@javax.inject.Inject
