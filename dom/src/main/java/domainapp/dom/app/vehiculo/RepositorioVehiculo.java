@@ -170,7 +170,7 @@ public class RepositorioVehiculo {
 	@MemberOrder(sequence = "5")
 	@ActionLayout(named = "Buscar por Modelo")
 	public List<Vehiculo> findByModelo(
-			@ParameterLayout(named = "Modelo") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) final Integer modelo) {
+			@ParameterLayout(named = "Modelo")final Integer modelo) {
 		return activos(container.allMatches(new QueryDefault<>(Vehiculo.class, "BuscarModelo", "modelo", modelo)));
 	}
 
@@ -302,7 +302,7 @@ public class RepositorioVehiculo {
 		JasperDesign jd = JRXmlLoader.load(input);
 		JasperReport reporte = JasperCompileManager.compileReport(jd);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
-		JasperViewer.viewReport(jasperPrint, true);
+		JasperViewer.viewReport(jasperPrint, false);
 		return "Reporte Generado";
 
 	}
