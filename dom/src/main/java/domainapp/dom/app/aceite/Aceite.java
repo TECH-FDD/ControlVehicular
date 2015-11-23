@@ -12,6 +12,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.Where;
 
@@ -167,13 +168,20 @@ public class Aceite {
 		return marca + " "+ nombre;
 	}
 
-	@ActionLayout(named="Desactivar")
+	@ActionLayout(named="Eliminar")
 	public Aceite delete(){
 		this.container.warnUser("El Aceite, ha sido desactivado con exito.");
 		this.setActivo(false);
 		return this;
 	}
 
+	@Programmatic
+	public boolean hideDelete() {
+		if (!isActivo())
+			return true;
+		else
+			return false;
+	}
 	@javax.inject.Inject
     DomainObjectContainer container;
 }
