@@ -14,6 +14,7 @@ import org.apache.isis.applib.annotation.Where;
 
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.estadoalerta.EstadoAlerta;
+import domainapp.dom.app.mantenimiento.Mantenimiento;
 
 @PersistenceCapable
 @Inheritance(strategy = InheritanceStrategy.SUBCLASS_TABLE)
@@ -25,6 +26,7 @@ public abstract class Alerta {
 	private Empleado empleado;
 	private EstadoAlerta estadoAlerta;
 	private String estadoAnterior;
+	private Mantenimiento mantenimiento;
 
 	@Persistent
 	@MemberOrder(sequence = "1")
@@ -92,6 +94,16 @@ public abstract class Alerta {
 		return estadoAnterior;
 	}
 
+	@Persistent
+	@MemberOrder(sequence = "8")
+	@javax.jdo.annotations.Column(allowsNull = "true")
+	public Mantenimiento getMantenimiento() {
+		return mantenimiento;
+	}
+
+	public void setMantenimiento(Mantenimiento mantenimiento) {
+		this.mantenimiento = mantenimiento;
+	}
 	public void setEstadoAnterior(String estadoAnterior) {
 		this.estadoAnterior = estadoAnterior;
 	}
@@ -116,4 +128,5 @@ public abstract class Alerta {
 		return "Alerta [nombre=" + nombre + ", descripcion=" + descripcion + ", fechaAlta=" + fechaAlta + ", empleado="
 				+ empleado;
 	}
+
 }
