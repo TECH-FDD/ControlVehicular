@@ -13,6 +13,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.combustible.TipoCombustible;
@@ -200,6 +201,13 @@ public class Combustible {
 		this.setActivo(false);
 		this.container.informUser("El combustible ha sido eliminado de manera exitosa");
 		return this;
+	}
+	@Programmatic
+	public boolean hideDeleteCombustible() {
+		if (!isActivo())
+			return true;
+		else
+			return false;
 	}
 	@Override
 	public String toString() {

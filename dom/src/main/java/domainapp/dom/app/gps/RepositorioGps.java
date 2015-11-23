@@ -49,8 +49,8 @@ public class RepositorioGps {
 			final @ParameterLayout(named = "Fecha Asignacion Vehiculo") Timestamp fechaAsigVehiculo,
 			final @ParameterLayout(named = "observacion Estado Dispositivo ") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String obsEstadoDisp) {
 
-		final Gps gps = new Gps(codIdentificacion.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(),
-				descripcion.toUpperCase(), new Timestamp(System.currentTimeMillis()),
+		final Gps gps = new Gps(codIdentificacion, marca, modelo,
+				descripcion, new Timestamp(System.currentTimeMillis()),
 				fechaAsigVehiculo, obsEstadoDisp);
 
 		container.persistIfNotAlready(gps);
@@ -64,7 +64,7 @@ public class RepositorioGps {
 		if (!container.allMatches(
 				new QueryDefault<Gps>(Gps.class,
 						"buscarPorCodigoIdentificacion", "codIdentificacion",
-						codIdentificacion.toUpperCase())).isEmpty()) {
+						codIdentificacion)).isEmpty()) {
 			return "El código de Identificación ya existe. Por favor verificar los Datos Ingresados.";
 		}
 		return null;
@@ -78,7 +78,7 @@ public class RepositorioGps {
 	@MemberOrder(sequence = "3")
 	@ActionLayout(named = "Buscar por Modelo")
 	public List<Gps> findByModelo(
-			@ParameterLayout(named = "Modelo Gps") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String modelo) {
+			@ParameterLayout(named = "Modelo Gps") final String modelo) {
 		final List<Gps> listaGps = listarTodos();
 		final List<Gps> lista = new ArrayList<Gps>();
 		for (Gps g : listaGps) {
@@ -96,7 +96,7 @@ public class RepositorioGps {
 	@MemberOrder(sequence = "4")
 	@ActionLayout(named = "Buscar por Marca")
 	public List<Gps> findByMarca(
-			@ParameterLayout(named = "Marca Gps") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String marca) {
+			@ParameterLayout(named = "Marca Gps") final String marca) {
 		final List<Gps> listaGps = listarTodos();
 		final List<Gps> lista = new ArrayList<Gps>();
 		for (Gps g : listaGps) {
@@ -114,7 +114,7 @@ public class RepositorioGps {
 	@MemberOrder(sequence = "5")
 	@ActionLayout(named = "Buscar por Codigo Identificacion")
 	public List<Gps> findByCodIdentificacion(
-			@ParameterLayout(named = "Codigo Identificacacion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) final String codIdentificacion) {
+			@ParameterLayout(named = "Codigo Identificacacion")final String codIdentificacion) {
 		final List<Gps> listaGps = listarTodos();
 		final List<Gps> lista = new ArrayList<Gps>();
 		for (Gps g : listaGps) {
@@ -211,7 +211,7 @@ public class RepositorioGps {
 		JasperDesign jd = JRXmlLoader.load(input);
 		JasperReport reporte = JasperCompileManager.compileReport(jd);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
-		JasperViewer.viewReport(jasperPrint, true);
+		JasperViewer.viewReport(jasperPrint, false);
 		return "Reporte Generado";
 	}
 	@javax.inject.Inject
