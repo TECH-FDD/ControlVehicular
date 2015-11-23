@@ -137,11 +137,22 @@ public class RepositorioAceite {
 		return lista;
 	}
 
-	@ActionLayout(named="Listar por Tipo de Aceite")
-	@MemberOrder(sequence="6")
+	@ActionLayout(named = "Listar por Tipo de Aceite")
+	@MemberOrder(sequence = "6")
 	public List<Aceite> listTipoAceite(
-			@ParameterLayout(named="Tipo de Aceite") @Parameter(regexPattern=domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) TipoAceite tipoAceite){
-		return container.allMatches(new QueryDefault<Aceite>(Aceite.class,"Buscar_Tipo","tipoAceite",tipoAceite));
+			@ParameterLayout(named = "Tipo de Aceite") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionLetras.ADMITIDOS) TipoAceite tipoAceite) {
+		final List<Aceite> listaAceite = listAll();
+		final List<Aceite> lista = new ArrayList<Aceite>();
+		for (Aceite a : listaAceite) {
+			if (a.getTipoAceite().equals(tipoAceite)) {
+				lista.add(a);
+			}
+		}
+
+		if (lista.isEmpty()) {
+			this.container.warnUser("No existe el Tipo de Aceite buscado");
+		}
+		return lista;
 	}
 	@MemberOrder(sequence="7")
 	@ActionLayout(named="Exportar Aceites")
@@ -171,7 +182,7 @@ public class RepositorioAceite {
 		JasperDesign jd = JRXmlLoader.load(input);
 		JasperReport reporte = JasperCompileManager.compileReport(jd);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
-		JasperViewer.viewReport(jasperPrint, true);
+		JasperViewer.viewReport(jasperPrint, false);
 		return "Reporte Generado";
 	}
 	@javax.inject.Inject
