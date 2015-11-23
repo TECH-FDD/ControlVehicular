@@ -1,6 +1,10 @@
 package domainapp.dom.app.cargaCombustible;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +23,17 @@ import org.joda.time.LocalDate;
 import domainapp.dom.app.combustible.Combustible;
 import domainapp.dom.app.combustible.RepositorioCombustible;
 import domainapp.dom.app.combustible.TipoCombustible;
+import domainapp.dom.app.reporte.CargaCombustibleDataSource;
+import domainapp.dom.app.reporte.ReporteCargaCombustible;
 import domainapp.dom.app.vehiculo.Vehiculo;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @DomainService(repositoryFor = CargaCombustible.class)
 @DomainServiceLayout(menuOrder = "40", named = "Carga Combustible")
@@ -109,6 +123,34 @@ public class RepositorioCargaCombustible {
 			}
 		}
 		return listaPor;
+	}
+	@MemberOrder(sequence="7")
+	@ActionLayout(named="Exportar Cargas Combustible")
+	public String downloadAll() throws JRException, IOException {
+		CargaCombustibleDataSource datasource = new CargaCombustibleDataSource();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		for (CargaCombustible cc : listAll()) {
+			ReporteCargaCombustible cargaCombustible = new ReporteCargaCombustible();
+			cargaCombustible.setCombustible(cc.getCombustible().getNombre());
+			cargaCombustible.setVehiculo(cc.getVehiculo().toString());
+			cargaCombustible.setCostoTotal(cc.getCostoTotal().toString());
+			cargaCombustible.setFechaCarga(df.format(cc.getFechaCarga()));
+			cargaCombustible.setLitrosCargados(cc.getLitrosCargados().toString());
+			datasource.addParticipante(cargaCombustible);
+		}
+		File file = new File("CargaCombustible.jrxml");
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		JasperDesign jd = JRXmlLoader.load(input);
+		JasperReport reporte = JasperCompileManager.compileReport(jd);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, datasource);
+		JasperViewer.viewReport(jasperPrint, false);
+		return "Reporte Generado";
 	}
 
 	@javax.inject.Inject
