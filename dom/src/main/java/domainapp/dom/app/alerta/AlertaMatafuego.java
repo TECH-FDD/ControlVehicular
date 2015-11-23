@@ -15,10 +15,13 @@ import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.estadoalerta.EstadoAlerta;
+import domainapp.dom.app.estadoalerta.Finalizada;
+import domainapp.dom.app.mantenimiento.Mantenimiento;
 import domainapp.dom.app.matafuego.Matafuego;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
@@ -89,7 +92,18 @@ public class AlertaMatafuego extends Alerta {
 		this.setEstadoAlerta(repo.asignarAlertaEstado(fechaAlerta));
 		return this;
 	}
-
+	@ActionLayout(named = "Eliminar alerta")
+	public AlertaMatafuego deleteAlertaMatafuego() {
+		getEstadoAlerta().finalizarAlertas(this);
+		return this;
+	}
+	@Programmatic
+	public boolean hideDeleteAlertaMatafuego() {
+		if (this.getEstadoAlerta()instanceof Finalizada)
+			return true;
+		else
+			return false;
+	}
 	@javax.inject.Inject
 	DomainObjectContainer container;
 
