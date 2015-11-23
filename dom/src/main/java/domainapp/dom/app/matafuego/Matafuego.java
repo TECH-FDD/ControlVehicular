@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
@@ -22,6 +24,7 @@ import domainapp.dom.app.estadoelemento.Asignado;
 import domainapp.dom.app.estadoelemento.Estado;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
+import domainapp.dom.app.mantenimiento.ObjetoMantenible;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "Matafuego_ID")
@@ -33,7 +36,8 @@ import domainapp.dom.app.estadoelemento.Motivo;
 				+ "WHERE marca.indexOf(:marca) >= 0 ") })
 @DomainObject(objectType = "MATAFUEGO", bounded = true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
-public class Matafuego {
+@Inheritance(strategy= InheritanceStrategy.NEW_TABLE)
+public class Matafuego extends ObjetoMantenible {
 	private String marca;
 	private String codigo;
 	private String descripcion;

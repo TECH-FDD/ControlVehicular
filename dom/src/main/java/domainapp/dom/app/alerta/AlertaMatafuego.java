@@ -39,7 +39,7 @@ public class AlertaMatafuego extends Alerta {
 
 	@Persistent
 	@MemberOrder(sequence = "21")
-	@javax.jdo.annotations.Column(allowsNull = "Matafuego")
+	@javax.jdo.annotations.Column(allowsNull = "true")
 	@Property(editing = Editing.DISABLED)
 	public Matafuego getMatafuego() {
 		return matafuego;

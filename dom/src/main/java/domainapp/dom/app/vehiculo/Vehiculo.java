@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
@@ -26,6 +28,7 @@ import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.gps.Gps;
 import domainapp.dom.app.gps.RepositorioGps;
+import domainapp.dom.app.mantenimiento.ObjetoMantenible;
 import domainapp.dom.app.matafuego.Matafuego;
 import domainapp.dom.app.matafuego.RepositorioMatafuego;
 import domainapp.dom.app.aceite.TipoAceite;
@@ -53,7 +56,8 @@ import domainapp.dom.app.combustible.TipoCombustible;
 				+ "WHERE numeroChasis.indexOf(:numeroChasis) >= 0 ") })
 @DomainObject(objectType = "VEHICULO", bounded = true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
-public class Vehiculo {
+@Inheritance(strategy= InheritanceStrategy.NEW_TABLE)
+public class Vehiculo extends ObjetoMantenible {
 	private String marca;
 	private String nombre;
 	private Integer modelo;

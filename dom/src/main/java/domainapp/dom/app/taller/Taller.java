@@ -24,7 +24,7 @@ import org.apache.isis.applib.annotation.Property;
 		@javax.jdo.annotations.Query(name = "buscarPorCodigo", language = "JDOQL", value = "SELECT "
 				+ "FROM domainapp.dom.app.taller.Taller " + "WHERE codigo.indexOf(:codigo)>= 0") })
 
-@DomainObject(objectType = "TALLER")
+@DomainObject(objectType = "TALLER", bounded = true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 public class Taller {
 	private String nombreComercial;
@@ -144,6 +144,6 @@ public class Taller {
 
 	@Override
 	public String toString() {
-		return "nombreComercial:" + nombreComercial;
+		return nombreComercial;
 	}
 }
