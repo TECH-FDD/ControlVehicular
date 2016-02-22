@@ -45,7 +45,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 					<bottomPen lineWidth="2.25" lineColor="#868181"/>
 					<rightPen lineWidth="2.25" lineColor="#868181"/>
 				</box>
-				<imageExpression><![CDATA["/home/alejandra/Descargas/letra blanca1.png"]]></imageExpression>
+				<imageExpression><![CDATA["letra blanca1.png"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement mode="Opaque" x="338" y="168" width="463" height="24" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="0675c52a-c1f7-4e4f-88a5-acc20e5f4187"/>

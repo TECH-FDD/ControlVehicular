@@ -21,7 +21,7 @@
 					<bottomPen lineWidth="2.25" lineColor="#868181"/>
 					<rightPen lineWidth="2.25" lineColor="#868181"/>
 				</box>
-				<imageExpression><![CDATA["/home/alejandra/Descargas/letra blanca1.png"]]></imageExpression>
+				<imageExpression><![CDATA["letra blanca1.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement mode="Opaque" x="1" y="130" width="801" height="38" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="ea4de676-9848-4b8f-848c-9b362f7e89a4"/>
