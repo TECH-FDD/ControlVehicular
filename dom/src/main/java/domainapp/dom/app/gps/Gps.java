@@ -26,7 +26,10 @@
 package domainapp.dom.app.gps;
 
 import java.sql.Timestamp;
+import java.util.Comparator;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
@@ -36,13 +39,20 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
 import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.Action;
+import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
+import org.apache.isis.applib.annotation.CollectionLayout;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;
+import org.apache.isis.applib.annotation.RenderType;
+import org.apache.isis.applib.annotation.SemanticsOf;
+
+import com.google.common.collect.Ordering;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Asignado;
@@ -172,6 +182,37 @@ public class Gps extends ObjetoMantenible {
 		this.estado = estado;
 	}
 
+	@javax.jdo.annotations.Persistent(table="Destinos")
+    @javax.jdo.annotations.Join(column="dependingId")
+    @javax.jdo.annotations.Element(column="dependentId")
+    private SortedSet<Destino> destinos = new TreeSet<>();
+
+    @CollectionLayout(
+            sortedBy = DependenciesComparator.class,
+            render = RenderType.EAGERLY
+    )
+    public SortedSet<Destino> getDestinos() {
+        return destinos;
+    }
+
+    public void setDestinos(final SortedSet<Destino> destinos) {
+        this.destinos = destinos;
+    }
+
+    public static class DependenciesComparator implements Comparator<Destino> {
+        @Override
+        public int compare(final Destino p, final Destino q) {
+            final Ordering<Destino> byDescription = new Ordering<Destino>() {
+                public int compare(final Destino p, final Destino q) {
+                    return Ordering.natural().nullsFirst().compare(p.getDescripcion(), q.getDescripcion());
+                }
+            };
+            return byDescription
+                    .compound(Ordering.<Destino>natural())
+                    .compare(p, q);
+        }
+    }
+
 	@Override
 	public String toString() {
 		return marca + " " + modelo;
@@ -247,6 +288,21 @@ public class Gps extends ObjetoMantenible {
 			return true;
 		else
 			return false;
+	}
+
+	/**
+	 * Agregar un nuevo destino para marcar en el gps.
+	 * @param descripcion
+	 * @return
+	 */
+	@Action(semantics = SemanticsOf.SAFE)
+	@ActionLayout(named = "Agregar Destino")
+	public Gps addDestino(@ParameterLayout(named="Dirección") final String descripcion) {
+		final Destino destino = new Destino(descripcion);
+		destinos.add(destino);
+		container.persistIfNotAlready(this);
+		
+		return this;
 	}
 
 	@javax.inject.Inject
