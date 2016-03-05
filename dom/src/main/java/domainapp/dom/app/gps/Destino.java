@@ -47,13 +47,15 @@ public class Destino implements Locatable, Comparable<Destino> {
 
 	private Double latitud;
 	private Double longitud;
-	private String descripcion = "";
+	private String direccion;
 	private boolean visitado;
+	private String descripcion;
 
-	public Destino(final String descripcion) {
+	public Destino(final String direccion, final String descripcion) {
 		super();
-		this.setLocation(descripcion);
+		this.setLocation(direccion);
 		this.visitado = false;
+		this.descripcion = descripcion;
 	}
 
 	@Persistent
@@ -81,16 +83,27 @@ public class Destino implements Locatable, Comparable<Destino> {
 	@Persistent
 	@MemberOrder(sequence = "3")
 	@Column(allowsNull = "true")
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		setLocation(direccion);
+	}
+
+	@Persistent
+	@MemberOrder(sequence = "4")
+	@Column(allowsNull = "true")
 	public String getDescripcion() {
 		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
-		setLocation(descripcion);
+		this.descripcion = descripcion;
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "4")
+	@MemberOrder(sequence = "5")
 	@Column(allowsNull = "true")
 	public boolean isVisitado() {
 		return visitado;
@@ -109,13 +122,13 @@ public class Destino implements Locatable, Comparable<Destino> {
 		return new Location(this.latitud, this.longitud);
 	}
 
-	public void setLocation(final String descripcion) {
+	public void setLocation(final String direccion) {
 		Geocoder geocoder = new Geocoder();
 		try {
-			GLatLng glatlng = geocoder.geocode(descripcion);
+			GLatLng glatlng = geocoder.geocode(direccion);
 			this.latitud = glatlng.getLat();
 			this.longitud = glatlng.getLng();
-			this.descripcion = descripcion;
+			this.direccion = direccion;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -128,6 +141,6 @@ public class Destino implements Locatable, Comparable<Destino> {
 
 	@Override
 	public String toString() {
-		return "Destino[" + descripcion + "]";
+		return "Destino[" + direccion + "]";
 	}
 }
