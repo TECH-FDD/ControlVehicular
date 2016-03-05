@@ -35,6 +35,7 @@ import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
@@ -182,22 +183,51 @@ public class Gps extends ObjetoMantenible {
 		this.estado = estado;
 	}
 
-	@javax.jdo.annotations.Persistent(table="Destinos_Gps")
-    @javax.jdo.annotations.Join(column="dependingId")
-    @javax.jdo.annotations.Element(column="dependentId")
-    private SortedSet<Destino> destinos = new TreeSet<>();
+	@javax.jdo.annotations.Persistent(table = "Destino_Gps")
+	@javax.jdo.annotations.Join(column = "Gps_Id")
+	@javax.jdo.annotations.Element(column = "Destino_Id")
+	private SortedSet<Destino> destinos = new TreeSet<>();
 
-    @CollectionLayout(
-            sortedBy = DependenciesComparator.class,
-            render = RenderType.EAGERLY
-    )
-    public SortedSet<Destino> getDestinos() {
-        return destinos;
-    }
+	@CollectionLayout(sortedBy = DependenciesComparator.class, render = RenderType.EAGERLY)
+	public SortedSet<Destino> getDestinos() {
+		return destinos;
+	}
 
-    public void setDestinos(final SortedSet<Destino> destinos) {
-        this.destinos = destinos;
-    }
+	public void setDestinos(final SortedSet<Destino> destinos) {
+		this.destinos = destinos;
+	}
+
+	private SortedSet<Destino> visitados = new TreeSet<>();
+
+	@CollectionLayout(render = RenderType.EAGERLY)
+	@NotPersistent
+	public SortedSet<Destino> getVisitados() {
+		for (final Destino d : destinos) {
+			if (d.isVisitado())
+				visitados.add(d);
+		}
+		return visitados;
+	}
+
+	public void setVisitados(final SortedSet<Destino> visitados) {
+		this.visitados = visitados;
+	}
+
+	private SortedSet<Destino> nuevos = new TreeSet<>();
+
+	@CollectionLayout(render = RenderType.EAGERLY)
+	@NotPersistent
+	public SortedSet<Destino> getNuevos() {
+		for (final Destino d : destinos) {
+			if (!d.isVisitado())
+				nuevos.add(d);
+		}
+		return nuevos;
+	}
+
+	public void setNuevos(final SortedSet<Destino> nuevos) {
+		this.nuevos = nuevos;
+	}
 
     public static class DependenciesComparator implements Comparator<Destino> {
         @Override
@@ -300,9 +330,18 @@ public class Gps extends ObjetoMantenible {
 	public Gps addDestino(@ParameterLayout(named = "Dirección") final String direccion,
 						@ParameterLayout(named = "Descripción") final String descripcion) {
 		final Destino destino = new Destino(direccion, descripcion);
+		visitados.add(destino);
 		destinos.add(destino);
 		container.persistIfNotAlready(this);
 
+		return this;
+	}
+
+	public Gps actualizarVisitados() {
+		for (Destino d : destinos) {
+			if (d.isVisitado())
+				visitados.add(d);
+		}
 		return this;
 	}
 
