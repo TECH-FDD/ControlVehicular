@@ -86,7 +86,7 @@ public class RepositorioMantenimiento {
 						Mantenimiento.class, "ListarTodos"));
 		if (listaMantenimiento.isEmpty()) {
 			this.container
-					.warnUser("No hay combustibles cargados en el sistema");
+					.warnUser("No hay mantenimientos cargados en el sistema");
 		}
 		return listaMantenimiento;
 	}
