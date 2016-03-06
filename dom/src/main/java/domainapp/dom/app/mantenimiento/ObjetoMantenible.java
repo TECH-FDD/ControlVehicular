@@ -41,8 +41,10 @@ public abstract class ObjetoMantenible {
 		super();
 	}
 
+	protected String publico;
+
 	@Override
 	public String toString() {
-		return "";
+		return publico;
 	}
 }

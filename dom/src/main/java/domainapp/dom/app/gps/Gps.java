@@ -260,6 +260,7 @@ public class Gps extends ObjetoMantenible {
 		this.fechaAsigVehiculo = fechaAsigVehiculo;
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
 		this.estado= new Activo(new Timestamp(System.currentTimeMillis()),Motivo.ALTA);
+		this.publico = toString();
 	}
 
 	public Gps() {
