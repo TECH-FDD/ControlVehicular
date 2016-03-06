@@ -12,6 +12,146 @@
 #
 ##############################################################################
 
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+msgid "AutoLabel.CSS.required"
+msgstr "Requerido"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "confirmPasswordLabel"
+msgstr "Confirmar Contraseña"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+msgid "emailIsNotAvailable"
+msgstr "El correo electronico, ya se encuentra en uso"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "emailPlaceholder"
+msgstr "Ingrese su E-mail"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+msgid "emailPlaceholder"
+msgstr "Ingrese un E-mail para su cuenta"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "emailLabel"
+msgstr "Email"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "emailSentMessage"
+msgstr "Un email ha sido enviado. Ingrese a su '${email}' para completar la verificación."
+
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+msgid "forgotPasswordLinkLabel"
+msgstr "Olvido su Contraseña?"
+
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+msgid "loginHeader"
+msgstr "Inicio de Sesión"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "noSuchUserByEmail"
+msgstr "No existe ninguna cuenta con esta dirección de E-mail"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "noUserForAnEmailValidToken"
+msgstr "The account seems to be either already deleted or has changed its email address. Please try again."
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "passwordChangeSuccessful"
+msgstr "The password has been changed successfully. You can <a class=\"alert-success\" style=\"text-decoration:underline;\" href=\"${signInUrl}\">login</a> now."
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "passwordChangeUnsuccessful"
+msgstr "There was a problem while updating the password. Please try again."
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "passwordLabel"
+msgstr "Contraseña"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "passwordPlaceholder"
+msgstr "Ingrese Contraseña"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "passwordResetExpiredOrInvalidToken"
+msgstr "You are trying to reset the password for an expired or invalid token"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "passwordResetHeader"
+msgstr "Cambio de Contraseña"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "passwordResetSubmitLabel"
+msgstr "Submit"
+
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+msgid "registerButtonLabel"
+msgstr "Registrar"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+msgid "registerHeader"
+msgstr "Registro"
+
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+msgid "rememberMeLabel"
+msgstr "Recordarme"
+
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+msgid "resetButtonLabel"
+msgstr "Reiniciar"
+
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+msgid "signInButtonLabel"
+msgstr "Iniciar"
+
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+msgid "signUpButtonLabel"
+msgstr "No tiene cuenta? Cree una ahora."
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "signUpButtonLabel"
+msgstr "Verificar E-mail"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+msgid "signUpHeader"
+msgstr "Crear Cuenta"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "usernameIsNotAvailable"
+msgstr "The provided username is already in use"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "usernameLabel"
+msgstr "Nombre de Usuario"
+
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.signup.RegistrationFormPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.register.RegisterPage
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+#: org.apache.isis.viewer.wicket.ui.pages.accmngt.password_reset.PasswordResetPage
+msgid "usernamePlaceholder"
+msgstr "Nombre de Usuario"
+
 #: org.apache.isis.core.runtime.services.i18n.po.TranslationServicePoMenu#downloadTranslations(java.lang.String)
 msgid ".pot file name"
 msgstr ""
@@ -19,7 +159,7 @@ msgstr ""
 
 #: org.apache.isis.core.runtime.services.i18n.po.TranslationServicePoMenu#resetTranslationCache()
 msgid "Clear translation cache"
-msgstr ""
+msgstr "Limpiar cache de traducción"
 
 
 #: domainapp.dom.modules.simple.SimpleObjects#create()
@@ -29,7 +169,7 @@ msgstr ""
 
 #: org.apache.isis.core.runtime.services.i18n.po.TranslationServicePoMenu#downloadTranslations()
 msgid "Download Translations"
-msgstr ""
+msgstr "Descargar Archivo de Traducción"
 
 
 #: domainapp.dom.modules.simple.SimpleObject#updateName()
@@ -49,7 +189,7 @@ msgstr ""
 
 #: domainapp.dom.app.homepage.HomePageService#homePage()
 msgid "Home Page"
-msgstr ""
+msgstr "Pagina de Inicio"
 
 
 #: domainapp.dom.modules.simple.SimpleObjects#listAll()
@@ -88,13 +228,13 @@ msgstr ""
 #: domainapp.fixture.DomainAppFixturesService#runFixtureScript(org.apache.isis.applib.fixturescripts.FixtureScript,java.lang.String)
 #: org.apache.isis.applib.fixturescripts.FixtureScripts#runFixtureScript(org.apache.isis.applib.fixturescripts.FixtureScript,java.lang.String)
 msgid "Parameters"
-msgstr ""
+msgstr "Parametros"
 
 
 #: domainapp.fixture.DomainAppFixturesService
 #: org.apache.isis.core.runtime.services.i18n.po.TranslationServicePoMenu
 msgid "Prototyping"
-msgstr ""
+msgstr "Prototipos"
 
 
 #: domainapp.fixture.DomainAppFixturesService#recreateObjectsAndReturnFirst()
@@ -104,12 +244,12 @@ msgstr ""
 
 #: org.apache.isis.applib.fixturescripts.FixtureResult#object
 msgid "Result"
-msgstr ""
+msgstr "Resultados"
 
 
 #: org.apache.isis.applib.fixturescripts.FixtureResult#className
 msgid "Result class"
-msgstr ""
+msgstr "Clases Resultantes"
 
 
 #: org.apache.isis.applib.fixturescripts.FixtureResult#key
@@ -120,7 +260,7 @@ msgstr ""
 #: domainapp.fixture.DomainAppFixturesService#runFixtureScript()
 #: org.apache.isis.applib.fixturescripts.FixtureScripts#runFixtureScript()
 msgid "Run Fixture Script"
-msgstr ""
+msgstr "Ejecutar Fixture Scripts"
 
 
 #: domainapp.fixture.scenarios.RecreateSimpleObjects
@@ -145,7 +285,1716 @@ msgstr ""
 msgid "With Discoverability"
 msgstr ""
 
+#: org.apache.isis.core.runtime.services.i18n.po.TranslationServicePoMenu#downloadTranslations(java.lang.String)
+msgid ".pot file name"
+msgstr "Nombre del archivo .pot"
 
+
+#: domainapp.dom.app.aceite.RepositorioAceite
+msgid "Aceites"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.Finalizado#aceptacion()
+msgid "Aceptacion"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.Mantenimiento#aceptacion()
+msgid "Aceptado"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addAction(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+msgid "Action"
+msgstr "Acción"
+
+
+#: domainapp.dom.app.empleado.Empleado#activarEmpleado()
+msgid "Activar Empleado"
+msgstr ""
+
+
+#: domainapp.fixture.DomainAppFixturesService#actualizarBaseDatos()
+msgid "Actualizar Base de Datos"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#add()
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addUser()
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancy#addChild()
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancy#addUser()
+#: org.isisaddons.module.security.dom.user.ApplicationUser#addRole()
+msgid "Add"
+msgstr "Agregar"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addAction()
+msgid "Add Action"
+msgstr "Agregar Acción"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addClass()
+msgid "Add Class"
+msgstr "Agregar Clase"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addCollection()
+msgid "Add Collection"
+msgstr "Agregar Colección"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addPackage()
+msgid "Add Package"
+msgstr "Agregar Paquete"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addProperty()
+msgid "Add Property"
+msgstr "Agregar Propiedad"
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#addResult()
+msgid "Add Result"
+msgstr "Agregar Resultado"
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo
+msgid "Alerta"
+msgstr ""
+
+
+#: org.isisaddons.module.security.app.feature.ApplicationFeatureViewModels#allActions()
+msgid "All Actions"
+msgstr "Todas las Acciones"
+
+
+#: org.isisaddons.module.security.app.feature.ApplicationFeatureViewModels#allClasses()
+msgid "All Classes"
+msgstr "Todas las Clases"
+
+
+#: org.isisaddons.module.security.app.feature.ApplicationFeatureViewModels#allCollections()
+msgid "All Collections"
+msgstr "Todas las Colecciones"
+
+
+#: org.isisaddons.module.security.app.feature.ApplicationFeatureViewModels#allPackages()
+msgid "All Packages"
+msgstr "Todos los Paquetes"
+
+
+#: org.isisaddons.module.security.dom.permission.ApplicationPermissions#allPermissions()
+msgid "All Permissions"
+msgstr "Todos los Permisos"
+
+
+#: org.isisaddons.module.security.app.feature.ApplicationFeatureViewModels#allProperties()
+msgid "All Properties"
+msgstr "Todas las Propiedades"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRoles#allRoles()
+msgid "All Roles"
+msgstr "Todos los Roles"
+
+
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancies#allTenancies()
+msgid "All Tenancies"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#allUsers()
+msgid "All Users"
+msgstr "Todos los Usuarios"
+
+
+#: org.isisaddons.module.security.dom.permission.ApplicationPermission#allow()
+msgid "Allow"
+msgstr "Permitir"
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#findByApellido(java.lang.String)
+msgid "Apellido"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.AlertaMatafuego#Aplazar()
+#: domainapp.dom.app.alerta.AlertaVehiculo#aplazar()
+msgid "Aplazar"
+msgstr ""
+
+
+#: domainapp.dom.app.estadoalerta.AlertaNaranja#aplazarAlertas()
+#: domainapp.dom.app.estadoalerta.AlertaRoja#aplazarAlertas()
+#: domainapp.dom.app.estadoalerta.Finalizada#aplazarAlertas()
+msgid "Aplazar Alertas"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.permission.ApplicationPermission#delete(java.lang.Boolean)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#delete(java.lang.Boolean)
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancy#delete(java.lang.Boolean)
+#: org.isisaddons.module.security.dom.user.ApplicationUser#delete(java.lang.Boolean)
+msgid "Are you sure?"
+msgstr "Esta seguro?"
+
+
+#: domainapp.dom.app.area.RepositorioArea
+#: domainapp.dom.app.empleado.Empleado#updateArea(domainapp.dom.app.area.Area)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Area"
+msgstr ""
+
+
+#: domainapp.dom.app.area.RepositorioArea#listAllInactivos()
+msgid "Areas"
+msgstr ""
+
+
+#: domainapp.fixture.AceiteFixture#borrarTabla()
+#: domainapp.fixture.AlertaMatafuegoFixture#borrarTabla()
+#: domainapp.fixture.AlertaVehiculoFixture#borrarTabla()
+#: domainapp.fixture.AreaFixture#borrarTabla()
+#: domainapp.fixture.CombustibleFixture#borrarTabla()
+#: domainapp.fixture.EmpleadoFixture#borrarTabla()
+#: domainapp.fixture.Fixture#borrarTabla()
+#: domainapp.fixture.GpsFixture#borrarTabla()
+#: domainapp.fixture.MatafuegoFixture#borrarTabla()
+#: domainapp.fixture.TallerFixture#borrarTabla()
+#: domainapp.fixture.TipoCombustibleFixture#borrarTabla()
+#: domainapp.fixture.VehiculoFixture#borrarTabla()
+msgid "Borrar Tabla"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#findByApellido()
+msgid "Buscar por Apellido"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#findByCodigo()
+#: domainapp.dom.app.taller.RepositorioTaller#findByCodigo()
+msgid "Buscar por Codigo"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#findByCodIdentificacion()
+msgid "Buscar por Codigo Identificacion"
+msgstr ""
+
+
+#: domainapp.dom.app.taller.RepositorioTaller#findByDireccion()
+msgid "Buscar por Direccion"
+msgstr ""
+
+
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#findByFechaCarga()
+msgid "Buscar por Fecha"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#findByFechaAlta()
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#findByFechaAlta()
+msgid "Buscar por Fecha Alta"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#findByLegajo()
+msgid "Buscar por Legajo"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#findByMarca()
+#: domainapp.dom.app.gps.RepositorioGps#findByMarca()
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#findByMarca()
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByMarca()
+msgid "Buscar por Marca"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#findByModelo()
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByModelo()
+msgid "Buscar por Modelo"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#findByNombre()
+#: domainapp.dom.app.empleado.RepositorioEmpleado#findByNombre()
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByNombre()
+msgid "Buscar por Nombre"
+msgstr ""
+
+
+#: domainapp.dom.app.taller.RepositorioTaller#findByNombreComercial()
+msgid "Buscar por Nombre Comercial"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByNumeroChasis()
+msgid "Buscar por N° Chasis"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#findByDocumento()
+msgid "Buscar por N° de Documento"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByPatente()
+msgid "Buscar por Patente"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#findByTipoCombustible()
+#: domainapp.dom.app.combustible.TipoCombustible#findByTipoCombustible()
+msgid "Buscar por Tipo Combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.area.RepositorioArea#findByCodigo()
+#: domainapp.dom.app.combustible.RepositorioCombustible#findByCodigo()
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#findByCodigo()
+msgid "Buscar por codigo"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#findByNombre()
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#findByNombre()
+#: domainapp.dom.app.area.RepositorioArea#findByNombre()
+#: domainapp.dom.app.combustible.RepositorioCombustible#findByNombre()
+msgid "Buscar por nombre"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#findByTitulo()
+msgid "Buscar por titulo"
+msgstr ""
+
+
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#findByVehiculo()
+#: domainapp.dom.app.vehiculo.Vehiculo#findByVehiculo()
+msgid "Buscar por vehiculo"
+msgstr ""
+
+
+#: domainapp.dom.app.estadoalerta.Finalizada#cambiarAlerta()
+msgid "Cambiar Alerta"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.Empleado#updateArea()
+msgid "Cambiar Area"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.Empleado#updateCodigoPostal()
+msgid "Cambiar Ciudad"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.AlertaMatafuego#updateFechaAlerta()
+msgid "Cambiar Fecha Alerta"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.Vehiculo#updateGps()
+msgid "Cambiar Gps"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.AlertaVehiculo#updateKilometrosAlarma()
+msgid "Cambiar Kilometro Alarma"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.Vehiculo#updateMatafuego()
+msgid "Cambiar Matafuego"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.Empleado#updateVehiculo()
+msgid "Cambiar Vehiculo"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.Mantenimiento#cancelarMantenimiento()
+msgid "Cancelar"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.Finalizado#cancelarMantenimiento()
+msgid "Cancelar Mantenimiento"
+msgstr ""
+
+
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#createMatafuego(java.lang.String,java.lang.String,java.lang.String,int,java.sql.Timestamp,java.sql.Timestamp)
+msgid "Capacidad"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+msgid "Capacidad Tanque de comb."
+msgstr ""
+
+
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible
+msgid "Carga Combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+msgid "Categoria"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.permission.ApplicationPermission#changing()
+msgid "Changing"
+msgstr "Cambiando"
+
+
+#: domainapp.dom.app.empleado.Empleado#updateCodigoPostal(domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Ciudad"
+msgstr ""
+
+
+#: org.isisaddons.module.security.app.user.UserPermissionViewModelContributions#filterPermissions(org.isisaddons.module.security.dom.user.ApplicationUser,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addAction(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addClass(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addCollection(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addProperty(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+msgid "Class"
+msgstr "Clase"
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#clearUserData()
+msgid "Clear User Data"
+msgstr "Limpiar Datos de Usuario"
+
+
+#: org.apache.isis.core.runtime.services.i18n.po.TranslationServicePoMenu#resetTranslationCache()
+msgid "Clear translation cache"
+msgstr "Limpiar cache de Traducción"
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#createAceite(java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.aceite.TipoAceite,int)
+#: domainapp.dom.app.aceite.RepositorioAceite#findByCodigo(java.lang.String)
+#: domainapp.dom.app.combustible.RepositorioCombustible#findByCodigo(java.lang.String)
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#findByCodigo(java.lang.String)
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#createMatafuego(java.lang.String,java.lang.String,java.lang.String,int,java.sql.Timestamp,java.sql.Timestamp)
+#: domainapp.dom.app.taller.RepositorioTaller#createTaller(java.lang.String,java.lang.String,domainapp.dom.app.taller.Rubro,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+#: domainapp.dom.app.taller.RepositorioTaller#findByCodigo(java.lang.String)
+msgid "Codigo"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#findByCodIdentificacion(java.lang.String)
+msgid "Codigo Identificacacion"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#createGps(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,java.lang.String)
+msgid "Codigo Identificacion"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.Empleado#updateCodigoPostal(domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Codigo Postal"
+msgstr ""
+
+
+#: domainapp.dom.app.area.RepositorioArea#createArea(java.lang.String,java.lang.String,java.lang.String)
+msgid "Codigo de Area"
+msgstr ""
+
+
+#: domainapp.dom.app.area.RepositorioArea#findByCodigo(java.lang.String)
+msgid "Codigo de area"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addCollection(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+msgid "Collection"
+msgstr "Collección"
+
+
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#createCargaCombustible(domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.combustible.TipoCombustible,domainapp.dom.app.combustible.Combustible,java.lang.Double)
+#: domainapp.dom.app.combustible.RepositorioCombustible
+#: domainapp.dom.app.combustible.RepositorioTipoCombustible
+msgid "Combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#listAllCombustibles()
+msgid "Combustibles"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+msgid "Costo de mano de obra"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+msgid "Costo de respuesto"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+msgid "Costo total"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#createAlertaMatafuego(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.matafuego.Matafuego,java.util.Date)
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#createAlertaVehiculo(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.vehiculo.Vehiculo,int)
+msgid "Creado Por: "
+msgstr ""
+
+
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#createCargaCombustible()
+#: domainapp.dom.app.combustible.Combustible#createCargaCombustible()
+#: domainapp.dom.app.combustible.TipoCombustible#createCargaCombustible()
+#: domainapp.dom.app.vehiculo.Vehiculo#createCargaCombustible()
+msgid "Crear Carga combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#createAlertaMatafuego()
+#: domainapp.dom.app.empleado.Empleado#createAlertaMatafuego()
+#: domainapp.dom.app.matafuego.Matafuego#createAlertaMatafuego()
+msgid "Crear Nueva Alerta Matafuego"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#createAlertaVehiculo()
+#: domainapp.dom.app.empleado.Empleado#createAlertaVehiculo()
+#: domainapp.dom.app.vehiculo.Vehiculo#createAlertaVehiculo()
+msgid "Crear Nueva Alerta Vehiculo"
+msgstr ""
+
+
+#: domainapp.dom.app.taller.RepositorioTaller#createTaller()
+#: domainapp.dom.app.taller.Rubro#createTaller()
+msgid "Crear Taller"
+msgstr ""
+
+
+#: domainapp.dom.app.area.RepositorioArea#createArea()
+msgid "Crear area"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible()
+#: domainapp.dom.app.combustible.TipoCombustible#createCombustible()
+msgid "Crear combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.Gps#createMantenimiento()
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento()
+#: domainapp.dom.app.mantenimiento.TipoElemento#createMantenimiento()
+#: domainapp.dom.app.matafuego.Matafuego#createMantenimiento()
+#: domainapp.dom.app.taller.Taller#createMantenimiento()
+#: domainapp.dom.app.vehiculo.Vehiculo#createMantenimiento()
+msgid "Crear mantenimiento"
+msgstr ""
+
+
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#createMatafuego()
+msgid "Crear matafuego"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#createAceite()
+#: domainapp.dom.app.aceite.TipoAceite#createAceite()
+msgid "Crear nuevo Aceite"
+msgstr ""
+
+
+#: domainapp.dom.app.area.Area#createEmpleado()
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado()
+#: domainapp.dom.app.persona.Ciudad#createEmpleado()
+#: domainapp.dom.app.persona.Documento#createEmpleado()
+#: domainapp.dom.app.persona.Sexo#createEmpleado()
+#: domainapp.dom.app.vehiculo.Vehiculo#createEmpleado()
+msgid "Crear nuevo Empleado"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#createGps()
+msgid "Crear nuevo Gps"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.TipoAceite#createVehiculo()
+#: domainapp.dom.app.combustible.TipoCombustible#createVehiculo()
+#: domainapp.dom.app.gps.Gps#createVehiculo()
+#: domainapp.dom.app.matafuego.Matafuego#createVehiculo()
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo()
+msgid "Crear nuevo Vehiculo"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioTipoCombustible#createTipoCombustible()
+msgid "Crear tipo combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+msgid "De rutina"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.permission.ApplicationPermission#delete()
+#: org.isisaddons.module.security.dom.role.ApplicationRole#delete()
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancy#delete()
+#: org.isisaddons.module.security.dom.user.ApplicationUser#delete()
+msgid "Delete"
+msgstr "Borrar"
+
+
+#: domainapp.dom.app.gps.Gps#desactivar()
+#: domainapp.dom.app.matafuego.Matafuego#desactivar()
+#: domainapp.dom.app.vehiculo.Vehiculo#desactivar()
+msgid "Desactivar"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.Empleado#desactivarEmpleado()
+msgid "Desactivar Empleado"
+msgstr ""
+
+
+#: domainapp.dom.app.estadoelemento.Activo#desasignarGps()
+#: domainapp.dom.app.estadoelemento.Baja#desasignarGps()
+#: domainapp.dom.app.estadoelemento.Inactivo#desasignarGps()
+#: domainapp.dom.app.estadoelemento.NecesitaReparacion#desasignarGps()
+#: domainapp.dom.app.estadoelemento.Reparacion#desasignarGps()
+msgid "Desasignar Gps"
+msgstr ""
+
+
+#: domainapp.dom.app.estadoelemento.Activo#desasignarMatafuego()
+#: domainapp.dom.app.estadoelemento.Baja#desasignarMatafuego()
+#: domainapp.dom.app.estadoelemento.Inactivo#desasignarMatafuego()
+#: domainapp.dom.app.estadoelemento.NecesitaReparacion#desasignarMatafuego()
+#: domainapp.dom.app.estadoelemento.Reparacion#desasignarMatafuego()
+msgid "Desasignar Matafuego"
+msgstr ""
+
+
+#: domainapp.dom.app.estadoelemento.Activo#desasignarVehiculo()
+#: domainapp.dom.app.estadoelemento.Baja#desasignarVehiculo()
+#: domainapp.dom.app.estadoelemento.Inactivo#desasignarVehiculo()
+#: domainapp.dom.app.estadoelemento.NecesitaReparacion#desasignarVehiculo()
+#: domainapp.dom.app.estadoelemento.Reparacion#desasignarVehiculo()
+msgid "Desasignar Vehiculo"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#createAlertaMatafuego(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.matafuego.Matafuego,java.util.Date)
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#createAlertaVehiculo(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.vehiculo.Vehiculo,int)
+#: domainapp.dom.app.area.RepositorioArea#createArea(java.lang.String,java.lang.String,java.lang.String)
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+#: domainapp.dom.app.combustible.RepositorioTipoCombustible#createTipoCombustible(java.lang.String,java.lang.String)
+#: domainapp.dom.app.gps.RepositorioGps#createGps(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,java.lang.String)
+#: domainapp.dom.app.taller.RepositorioTaller#createTaller(java.lang.String,java.lang.String,domainapp.dom.app.taller.Rubro,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+msgid "Descripcion"
+msgstr "Descripción"
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#createAceite(java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.aceite.TipoAceite,int)
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#createMatafuego(java.lang.String,java.lang.String,java.lang.String,int,java.sql.Timestamp,java.sql.Timestamp)
+msgid "Descripción"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#updateDescription(java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRoles#newRole(java.lang.String,java.lang.String)
+msgid "Description"
+msgstr "Descripción"
+
+
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadByPeriodMatafuego(java.util.Date,java.util.Date)
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadByPeriodVehiculo(java.util.Date,java.util.Date)
+msgid "Desde"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+msgid "Detalle"
+msgstr ""
+
+
+#: domainapp.dom.app.taller.RepositorioTaller#createTaller(java.lang.String,java.lang.String,domainapp.dom.app.taller.Rubro,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+#: domainapp.dom.app.taller.RepositorioTaller#findByDireccion(java.lang.String)
+msgid "Direccion"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#lock()
+msgid "Disable"
+msgstr "Desactivar"
+
+
+#: domainapp.dom.app.empleado.Empleado#updateCodigoPostal(domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Domicilio"
+msgstr ""
+
+
+#: org.apache.isis.core.runtime.services.i18n.po.TranslationServicePoMenu#downloadTranslations()
+msgid "Download Translations"
+msgstr "Descargar Archivo de Traducción"
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#createAceite(java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.aceite.TipoAceite,int)
+msgid "Duración (km)"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "E-mail"
+msgstr ""
+
+
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadByPeriodMatafuego()
+msgid "El documento se almacenara en ReporteAlertas/AlertasMatafuego"
+msgstr ""
+
+
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadByPeriodVehiculo()
+msgid "El documento se almacenara en ReporteAlertas/AlertasVehiculo"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+msgid "Elemento"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.Aceite#delete()
+msgid "Eliminar"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.AlertaMatafuego#deleteAlertaMatafuego()
+#: domainapp.dom.app.alerta.AlertaVehiculo#deleteAlertaVehiculo()
+msgid "Eliminar alerta"
+msgstr ""
+
+
+#: domainapp.dom.app.area.Area#deleteArea()
+msgid "Eliminar area"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.Combustible#deleteCombustible()
+msgid "Eliminar combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.taller.RepositorioTaller#createTaller(java.lang.String,java.lang.String,domainapp.dom.app.taller.Rubro,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateEmailAddress(java.lang.String)
+msgid "Email"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newLocalUser(java.lang.String,org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password,org.isisaddons.module.security.dom.role.ApplicationRole,java.lang.Boolean,java.lang.String)
+msgid "Email Address"
+msgstr "Dirección de E-Mail"
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado
+msgid "Empleado"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#listAllEmpleados()
+msgid "Empleados"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+msgid "Empresa"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#unlock()
+msgid "Enable"
+msgstr "Activar"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newDelegateUser(java.lang.String,org.isisaddons.module.security.dom.role.ApplicationRole,java.lang.Boolean)
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newLocalUser(java.lang.String,org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password,org.isisaddons.module.security.dom.role.ApplicationRole,java.lang.Boolean,java.lang.String)
+msgid "Enabled?"
+msgstr "Activar?"
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#executeChild()
+msgid "Execute Child"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#executeChildT()
+msgid "Execute ChildT"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#executeIfNotAlready()
+msgid "Execute If Not Already"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updatePassword(org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password)
+msgid "Existing password"
+msgstr "Contraseña Existente"
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#downloadAll()
+msgid "Exportar Aceites"
+msgstr ""
+
+
+#: domainapp.dom.app.area.RepositorioArea#downloadAll()
+msgid "Exportar Areas"
+msgstr ""
+
+
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#downloadAll()
+msgid "Exportar Cargas Combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#downloadAll()
+msgid "Exportar Combustibles"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#downloadAll()
+msgid "Exportar Empleado"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#downloadAll()
+msgid "Exportar Gps"
+msgstr ""
+
+
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#downloadAll()
+msgid "Exportar Matafuego"
+msgstr ""
+
+
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadByPeriodMatafuego()
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadByPeriodVehiculo()
+msgid "Exportar Por Periodo"
+msgstr ""
+
+
+#: domainapp.dom.app.taller.RepositorioTaller#downloadAll()
+msgid "Exportar Talleres"
+msgstr ""
+
+
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadAllMatafuego()
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadAllVehiculo()
+msgid "Exportar Todo"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#downloadAll()
+msgid "Exportar Vehiculo"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateName(java.lang.String,java.lang.String,java.lang.String)
+msgid "Family Name"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateFaxNumber(java.lang.String)
+msgid "Fax"
+msgstr ""
+
+
+#: org.isisaddons.module.security.app.feature.ApplicationFeatureViewModelContributions#feature()
+#: org.isisaddons.module.security.dom.permission.ApplicationPermission#feature()
+#: org.isisaddons.module.security.dom.role.ApplicationRole#removePermission(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.feature.ApplicationFeatureType,java.lang.String)
+msgid "Feature"
+msgstr "Caracteristica"
+
+
+#: domainapp.dom.app.alerta.AlertaMatafuego#updateFechaAlerta(java.util.Date)
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#createAlertaMatafuego(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.matafuego.Matafuego,java.util.Date)
+msgid "Fecha Alerta"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#findByFechaAlta(org.joda.time.LocalDate)
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#findByFechaAlta(org.joda.time.LocalDate)
+msgid "Fecha Alta"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#createGps(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,java.lang.String)
+msgid "Fecha Asignacion Vehiculo"
+msgstr ""
+
+
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#findByFechaCarga(org.joda.time.LocalDate)
+msgid "Fecha Carga"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+msgid "Fecha Compra"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Fecha de Nacimiento"
+msgstr ""
+
+
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#createMatafuego(java.lang.String,java.lang.String,java.lang.String,int,java.sql.Timestamp,java.sql.Timestamp)
+msgid "Fecha de caducidad"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+msgid "Fecha de realizacion"
+msgstr ""
+
+
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#createMatafuego(java.lang.String,java.lang.String,java.lang.String,int,java.sql.Timestamp,java.sql.Timestamp)
+msgid "Fecha de última Recarga"
+msgstr ""
+
+
+#: org.isisaddons.module.security.app.user.UserPermissionViewModelContributions#filterPermissions()
+#: org.isisaddons.module.security.dom.user.ApplicationUser#filterPermissions()
+msgid "Filter Permissions"
+msgstr "Filtrar Permisos"
+
+
+#: domainapp.dom.app.mantenimiento.Mantenimiento#finalizarMantenimiento()
+msgid "Finalizar"
+msgstr ""
+
+
+#: domainapp.dom.app.estadoalerta.Activa#finalizarAlertas()
+#: domainapp.dom.app.estadoalerta.AlertaAmarilla#finalizarAlertas()
+#: domainapp.dom.app.estadoalerta.AlertaNaranja#finalizarAlertas()
+#: domainapp.dom.app.estadoalerta.AlertaRoja#finalizarAlertas()
+#: domainapp.dom.app.estadoalerta.Aplazado#finalizarAlertas()
+#: domainapp.dom.app.estadoalerta.Finalizada#finalizarAlertas()
+msgid "Finalizar Alertas"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.Finalizado#finalizarMantenimiento()
+msgid "Finalizar Mantenimiento"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRoles#findRoleByName()
+msgid "Find Role By Name"
+msgstr "Buscar Rol por Nombre"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#findUserByUsername()
+msgid "Find User By Username"
+msgstr "Buscar Usuario por Nombre de Usuario"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#findUsersByName()
+msgid "Find Users By Name"
+msgstr "Buscar Usuario por Nombre"
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureResult#fixtureScriptClassName
+msgid "Fixture script"
+msgstr ""
+
+
+#: domainapp.fixture.MatafuegoFixture#getCapacidad()
+msgid "Get Capacidad"
+msgstr ""
+
+
+#: domainapp.fixture.MatafuegoFixture#getCodigo()
+msgid "Get Codigo"
+msgstr ""
+
+
+#: domainapp.fixture.MatafuegoFixture#getMarca()
+msgid "Get Marca"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameter()
+msgid "Get Parameter"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsBigDecimal()
+msgid "Get Parameter As Big Decimal"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsBigInteger()
+msgid "Get Parameter As Big Integer"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsBoolean()
+msgid "Get Parameter As Boolean"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsByte()
+msgid "Get Parameter As Byte"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsCharacter()
+msgid "Get Parameter As Character"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsDouble()
+msgid "Get Parameter As Double"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsEnum()
+msgid "Get Parameter As Enum"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsFloat()
+msgid "Get Parameter As Float"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsInteger()
+msgid "Get Parameter As Integer"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsLocalDate()
+msgid "Get Parameter As Local Date"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsLocalDateTime()
+msgid "Get Parameter As Local Date Time"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsLong()
+msgid "Get Parameter As Long"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsShort()
+msgid "Get Parameter As Short"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getParameterAsT()
+msgid "Get Parameter AsT"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#getUserData()
+msgid "Get User Data"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateName(java.lang.String,java.lang.String,java.lang.String)
+msgid "Given Name"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps
+#: domainapp.dom.app.gps.RepositorioGps#listBaja()
+#: domainapp.dom.app.gps.RepositorioGps#listGpsInactivos()
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+#: domainapp.dom.app.vehiculo.Vehiculo#updateGps(domainapp.dom.app.gps.Gps)
+msgid "Gps"
+msgstr ""
+
+
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadByPeriodMatafuego(java.util.Date,java.util.Date)
+#: domainapp.dom.app.homepage.HomePageViewModel#downloadByPeriodVehiculo(java.util.Date,java.util.Date)
+msgid "Hasta"
+msgstr ""
+
+
+#: domainapp.dom.app.homepage.HomePageService#homePage()
+msgid "Home Page"
+msgstr "Pagina de Inicio"
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+msgid "Inicial"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.Mantenimiento#iniciarProceso()
+msgid "Iniciar"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.EnProceso#iniciarProceso()
+#: domainapp.dom.app.mantenimiento.Finalizado#iniciarProceso()
+msgid "Iniciar Proceso"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newDelegateUser(java.lang.String,org.isisaddons.module.security.dom.role.ApplicationRole,java.lang.Boolean)
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newLocalUser(java.lang.String,org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password,org.isisaddons.module.security.dom.role.ApplicationRole,java.lang.Boolean,java.lang.String)
+msgid "Initial role"
+msgstr "Rol Inicial"
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+msgid "Kilometros"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.AlertaVehiculo#updateKilometrosAlarma(java.lang.Integer)
+msgid "Kilometros Alerta"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateName(java.lang.String,java.lang.String,java.lang.String)
+msgid "Known As"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioTipoCombustible#listAll()
+msgid "Lista todos"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#listAll()
+#: domainapp.dom.app.empleado.RepositorioEmpleado#listarTodos()
+#: domainapp.dom.app.gps.RepositorioGps#listarTodos()
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#listAll()
+msgid "Listar Todos"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#listTipoAceite()
+#: domainapp.dom.app.aceite.TipoAceite#listTipoAceite()
+msgid "Listar por Tipo de Aceite"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#listAll()
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#listAll()
+#: domainapp.dom.app.area.RepositorioArea#listAll()
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#listAll()
+#: domainapp.dom.app.combustible.RepositorioCombustible#listAll()
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#listAll()
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#listAll()
+#: domainapp.dom.app.taller.RepositorioTaller#listAll()
+msgid "Listar todos"
+msgstr ""
+
+
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#createCargaCombustible(domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.combustible.TipoCombustible,domainapp.dom.app.combustible.Combustible,java.lang.Double)
+msgid "Litros Cargados"
+msgstr ""
+
+
+#: org.isisaddons.module.security.app.user.MeService#me()
+msgid "Looks up ApplicationUser entity corresponding to your user account"
+msgstr ""
+
+
+#: domainapp.fixture.AceiteFixture#lookup()
+#: domainapp.fixture.AlertaMatafuegoFixture#lookup()
+#: domainapp.fixture.AlertaVehiculoFixture#lookup()
+#: domainapp.fixture.AreaFixture#lookup()
+#: domainapp.fixture.CombustibleFixture#lookup()
+#: domainapp.fixture.EmpleadoFixture#lookup()
+#: domainapp.fixture.Fixture#lookup()
+#: domainapp.fixture.GpsFixture#lookup()
+#: domainapp.fixture.MatafuegoFixture#lookup()
+#: domainapp.fixture.TallerFixture#lookup()
+#: domainapp.fixture.TipoCombustibleFixture#lookup()
+#: domainapp.fixture.VehiculoFixture#lookup()
+#: org.apache.isis.applib.fixturescripts.FixtureScript#lookup()
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#lookup()
+#: org.apache.isis.applib.services.bookmark.BookmarkHolderActionContributions#lookup()
+msgid "Lookup"
+msgstr "Buscar"
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#listBaja()
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#listInactivos()
+msgid "Mantenimiento"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#createAceite(java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.aceite.TipoAceite,int)
+#: domainapp.dom.app.aceite.RepositorioAceite#findByMarca(java.lang.String)
+#: domainapp.dom.app.gps.RepositorioGps#createGps(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,java.lang.String)
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#createMatafuego(java.lang.String,java.lang.String,java.lang.String,int,java.sql.Timestamp,java.sql.Timestamp)
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#findByMarca(java.lang.String)
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByMarca(java.lang.String)
+msgid "Marca"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#findByMarca(java.lang.String)
+msgid "Marca Gps"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#createAlertaMatafuego(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.matafuego.Matafuego,java.util.Date)
+#: domainapp.dom.app.matafuego.RepositorioMatafuego
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#listBaja()
+#: domainapp.dom.app.matafuego.RepositorioMatafuego#listInactivos()
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+#: domainapp.dom.app.vehiculo.Vehiculo#updateMatafuego(domainapp.dom.app.matafuego.Matafuego)
+msgid "Matafuego"
+msgstr ""
+
+
+#: org.isisaddons.module.security.app.user.MeService#me()
+msgid "Me"
+msgstr "Perfil"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addAction(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addClass(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addCollection(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addPackage(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addProperty(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+msgid "Mode"
+msgstr "Modo"
+
+
+#: domainapp.dom.app.gps.RepositorioGps#createGps(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,java.lang.String)
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByModelo(java.lang.Integer)
+msgid "Modelo"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#findByModelo(java.lang.String)
+msgid "Modelo Gps"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.Gps#desactivar(domainapp.dom.app.estadoelemento.Motivo)
+#: domainapp.dom.app.mantenimiento.Mantenimiento#aceptacion(java.lang.String)
+#: domainapp.dom.app.mantenimiento.Mantenimiento#cancelarMantenimiento(java.lang.String)
+#: domainapp.dom.app.mantenimiento.Mantenimiento#finalizarMantenimiento(java.lang.String)
+#: domainapp.dom.app.mantenimiento.Mantenimiento#iniciarProceso(java.lang.String)
+#: domainapp.dom.app.matafuego.Matafuego#desactivar(domainapp.dom.app.estadoelemento.Motivo)
+#: domainapp.dom.app.vehiculo.Vehiculo#desactivar(domainapp.dom.app.estadoelemento.Motivo)
+msgid "Motivo"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#updateName(java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRoles#findRoleByName(java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRoles#newRole(java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancies#newTenancy(java.lang.String,java.lang.String,org.isisaddons.module.security.dom.tenancy.ApplicationTenancy)
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancy#updateName(java.lang.String)
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#findUsersByName(java.lang.String)
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newDelegateUser(java.lang.String,org.isisaddons.module.security.dom.role.ApplicationRole,java.lang.Boolean)
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newLocalUser(java.lang.String,org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password,org.isisaddons.module.security.dom.role.ApplicationRole,java.lang.Boolean,java.lang.String)
+msgid "Name"
+msgstr "Nombre"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newDelegateUser()
+msgid "New Delegate User"
+msgstr "Nuevo Usuario Delegado"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newLocalUser()
+msgid "New Local User"
+msgstr "Nuevo Usuario Local"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRoles#newRole()
+msgid "New Role"
+msgstr "Nuevo Rol"
+
+
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancies#newTenancy()
+msgid "New Tenancy"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#resetPassword(org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password)
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updatePassword(org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password)
+msgid "New password"
+msgstr "Nueva Contraseña"
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#createAceite(java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.aceite.TipoAceite,int)
+#: domainapp.dom.app.aceite.RepositorioAceite#findByNombre(java.lang.String)
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#createAlertaMatafuego(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.matafuego.Matafuego,java.util.Date)
+#: domainapp.dom.app.alerta.RepositorioAlertaMatafuego#findByNombre(java.lang.String)
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#createAlertaVehiculo(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.vehiculo.Vehiculo,int)
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#findByNombre(java.lang.String)
+#: domainapp.dom.app.area.RepositorioArea#createArea(java.lang.String,java.lang.String,java.lang.String)
+#: domainapp.dom.app.area.RepositorioArea#findByNombre(java.lang.String)
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+#: domainapp.dom.app.combustible.RepositorioCombustible#findByNombre(java.lang.String)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#findByNombre(java.lang.String)
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByNombre(java.lang.String)
+msgid "Nombre"
+msgstr ""
+
+
+#: domainapp.dom.app.taller.RepositorioTaller#createTaller(java.lang.String,java.lang.String,domainapp.dom.app.taller.Rubro,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+#: domainapp.dom.app.taller.RepositorioTaller#findByNombreComercial(java.lang.String)
+msgid "Nombre Comercial"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Nro de Legajo"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByNumeroChasis(java.lang.String)
+msgid "Numero Chasis"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+msgid "Numero de Chasis"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#findByDocumento(int)
+msgid "N° de Documento"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#findByLegajo(java.lang.String)
+msgid "N° de Legajo"
+msgstr ""
+
+
+#: org.apache.isis.applib.services.bookmark.BookmarkHolderAssociationContributions#object()
+msgid "Object"
+msgstr "Objeto"
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+msgid "Octanaje"
+msgstr ""
+
+
+#: org.isisaddons.module.security.app.user.UserPermissionViewModelContributions#filterPermissions(org.isisaddons.module.security.dom.user.ApplicationUser,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addAction(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addClass(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addCollection(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addPackage(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addProperty(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+msgid "Package"
+msgstr "Paquete"
+
+
+#: domainapp.fixture.DomainAppFixturesService#runFixtureScript(org.apache.isis.applib.fixturescripts.FixtureScript,java.lang.String)
+#: org.apache.isis.applib.fixturescripts.FixtureScripts#runFixtureScript(org.apache.isis.applib.fixturescripts.FixtureScript,java.lang.String)
+msgid "Parameters"
+msgstr "Parametros"
+
+
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancies#newTenancy(java.lang.String,java.lang.String,org.isisaddons.module.security.dom.tenancy.ApplicationTenancy)
+msgid "Parent"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newLocalUser(java.lang.String,org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password,org.isisaddons.module.security.dom.role.ApplicationRole,java.lang.Boolean,java.lang.String)
+msgid "Password"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#findByPatente(java.lang.String)
+msgid "Patente"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancies#newTenancy(java.lang.String,java.lang.String,org.isisaddons.module.security.dom.tenancy.ApplicationTenancy)
+msgid "Path"
+msgstr ""
+
+
+#: org.isisaddons.module.security.app.user.UserPermissionViewModelContributions#permissions()
+#: org.isisaddons.module.security.dom.user.ApplicationUser#permissions()
+msgid "Permissions"
+msgstr "Permisos"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updatePhoneNumber(java.lang.String)
+msgid "Phone"
+msgstr "Telefono"
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+msgid "Poliza/Seguro"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+msgid "Porcentaje de aumento"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+msgid "Precio anterior"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+msgid "Precio/litro"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addProperty(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+msgid "Property"
+msgstr "Propiedad"
+
+
+#: domainapp.fixture.DomainAppFixturesService
+#: org.apache.isis.core.runtime.services.i18n.po.TranslationServicePoMenu
+msgid "Prototyping"
+msgstr "Prototipos"
+
+
+#: domainapp.dom.app.empleado.Empleado#updateCodigoPostal(domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Provincia"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updatePassword(org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password)
+msgid "Re-enter password"
+msgstr "Reingresar Contraseña"
+
+
+#: domainapp.dom.app.gps.Gps#reactivar()
+#: domainapp.dom.app.matafuego.Matafuego#reactivar()
+#: domainapp.dom.app.vehiculo.Vehiculo#reactivar()
+msgid "Reactivar"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#removeUser()
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancy#removeChild()
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancy#removeUser()
+#: org.isisaddons.module.security.dom.user.ApplicationUser#removeRole()
+msgid "Remove"
+msgstr "Eliminar"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#removePermission()
+msgid "Remove Permission"
+msgstr "Eliminar Permiso"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#resetPassword(org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password)
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#newLocalUser(java.lang.String,org.apache.isis.applib.value.Password,org.apache.isis.applib.value.Password,org.isisaddons.module.security.dom.role.ApplicationRole,java.lang.Boolean,java.lang.String)
+msgid "Repeat password"
+msgstr "Repetir Contraseña"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#resetPassword()
+msgid "Reset Password"
+msgstr "Reiniciar Contraseña"
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureResult#object
+msgid "Result"
+msgstr "Resultado"
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureResult#className
+msgid "Result class"
+msgstr "Clase Resultado"
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureResult#key
+msgid "Result key"
+msgstr ""
+
+
+#: domainapp.dom.app.taller.RepositorioTaller#createTaller(java.lang.String,java.lang.String,domainapp.dom.app.taller.Rubro,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+msgid "Rubro"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addAction(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addClass(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addCollection(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addPackage(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#addProperty(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.permission.ApplicationPermissionMode,java.lang.String,java.lang.String,java.lang.String)
+#: org.isisaddons.module.security.dom.role.ApplicationRole#removePermission(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.feature.ApplicationFeatureType,java.lang.String)
+msgid "Rule"
+msgstr "Regla"
+
+
+#: domainapp.fixture.DomainAppFixturesService#runFixtureScript()
+#: org.apache.isis.applib.fixturescripts.FixtureScripts#runFixtureScript()
+msgid "Run Fixture Script"
+msgstr ""
+
+
+#: domainapp.fixture.AceiteFixture
+#: domainapp.fixture.AlertaMatafuegoFixture
+#: domainapp.fixture.AlertaVehiculoFixture
+#: domainapp.fixture.AreaFixture
+#: domainapp.fixture.CombustibleFixture
+#: domainapp.fixture.EmpleadoFixture
+#: domainapp.fixture.Fixture
+#: domainapp.fixture.GpsFixture
+#: domainapp.fixture.MatafuegoFixture
+#: domainapp.fixture.TallerFixture
+#: domainapp.fixture.TipoCombustibleFixture
+#: domainapp.fixture.VehiculoFixture
+#: org.apache.isis.applib.fixturescripts.FixtureScript
+msgid "Script"
+msgstr ""
+
+
+#: domainapp.fixture.DomainAppFixturesService#runFixtureScript(org.apache.isis.applib.fixturescripts.FixtureScript,java.lang.String)
+#: org.apache.isis.applib.fixturescripts.FixtureScripts#runFixtureScript(org.apache.isis.applib.fixturescripts.FixtureScript,java.lang.String)
+msgid "Script-specific parameters (if any).  The format depends on the script implementation (eg key=value, CSV, JSON, XML etc)"
+msgstr ""
+
+
+#: org.isisaddons.module.security.app.feature.ApplicationFeatureViewModels
+#: org.isisaddons.module.security.dom.permission.ApplicationPermissions
+#: org.isisaddons.module.security.dom.role.ApplicationRoles
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancies
+#: org.isisaddons.module.security.dom.user.ApplicationUsers
+msgid "Security"
+msgstr "Seguridad"
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Sexo"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+#: domainapp.dom.app.taller.RepositorioTaller
+msgid "Taller"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Telefono"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioTipoCombustible#createTipoCombustible(java.lang.String,java.lang.String)
+msgid "Tipo"
+msgstr ""
+
+
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#createCargaCombustible(domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.combustible.TipoCombustible,domainapp.dom.app.combustible.Combustible,java.lang.Double)
+#: domainapp.dom.app.combustible.RepositorioCombustible#findByTipoCombustible(domainapp.dom.app.combustible.TipoCombustible)
+msgid "Tipo Combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.aceite.RepositorioAceite#createAceite(java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.aceite.TipoAceite,int)
+#: domainapp.dom.app.aceite.RepositorioAceite#listTipoAceite(domainapp.dom.app.aceite.TipoAceite)
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+msgid "Tipo de Aceite"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+msgid "Tipo de Combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+msgid "Tipo de Documento"
+msgstr ""
+
+
+#: domainapp.dom.app.combustible.RepositorioCombustible#createCombustible(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,int,domainapp.dom.app.combustible.TipoCombustible)
+msgid "Tipo de combustible"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+msgid "Tipo elemento"
+msgstr ""
+
+
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#createMantenimiento(java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,domainapp.dom.app.mantenimiento.TipoElemento,domainapp.dom.app.mantenimiento.ObjetoMantenible,domainapp.dom.app.taller.Taller,java.math.BigDecimal,java.math.BigDecimal,java.math.BigDecimal,java.lang.Boolean)
+#: domainapp.dom.app.mantenimiento.RepositorioMantenimiento#findByTitulo(java.lang.String)
+msgid "Titulo"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#removePermission(org.isisaddons.module.security.dom.permission.ApplicationPermissionRule,org.isisaddons.module.security.dom.feature.ApplicationFeatureType,java.lang.String)
+msgid "Type"
+msgstr "Tipo"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateAccountType()
+msgid "Update Account Type"
+msgstr "Cambiar tipo de Cuenta"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#updateDescription()
+msgid "Update Description"
+msgstr "Editar Descripción"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateEmailAddress()
+msgid "Update Email Address"
+msgstr "Cambiar Dirección de Email"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateFaxNumber()
+msgid "Update Fax Number"
+msgstr "Editar Número de Fax"
+
+
+#: org.isisaddons.module.security.dom.role.ApplicationRole#updateName()
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancy#updateName()
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateName()
+msgid "Update Name"
+msgstr "Editar Nombre"
+
+
+#: org.isisaddons.module.security.dom.tenancy.ApplicationTenancy#updateParent()
+msgid "Update Parent"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updatePassword()
+msgid "Update Password"
+msgstr "Cambiar Contraseña"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updatePhoneNumber()
+msgid "Update Phone Number"
+msgstr "Editar Número de Telefono"
+
+
+#: org.isisaddons.module.security.dom.permission.ApplicationPermission#updateRole()
+msgid "Update Role"
+msgstr "Editar Rol"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateTenancy()
+msgid "Update Tenancy"
+msgstr "Editar Tenacy"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateUsername()
+msgid "Update Username"
+msgstr "Editar Nombre de Usuario"
+
+
+#: org.isisaddons.module.security.dom.user.ApplicationUser#updateUsername(java.lang.String)
+#: org.isisaddons.module.security.dom.user.ApplicationUsers#findUserByUsername(java.lang.String)
+#: org.isisaddons.module.security.dom.user.ApplicationUser#getUsername()
+#: org.isisaddons.module.security.dom.user.ApplicationUser#setUsername(java.lang.String)
+
+msgid "Username"
+msgstr "Nombre de Usuario"
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#createAlertaVehiculo(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.vehiculo.Vehiculo,int)
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#createCargaCombustible(domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.combustible.TipoCombustible,domainapp.dom.app.combustible.Combustible,java.lang.Double)
+#: domainapp.dom.app.cargaCombustible.RepositorioCargaCombustible#findByVehiculo(domainapp.dom.app.vehiculo.Vehiculo)
+#: domainapp.dom.app.empleado.Empleado#updateVehiculo(domainapp.dom.app.vehiculo.Vehiculo)
+#: domainapp.dom.app.empleado.RepositorioEmpleado#createEmpleado(java.lang.String,java.lang.String,domainapp.dom.app.persona.Documento,int,org.joda.time.LocalDate,domainapp.dom.app.persona.Sexo,domainapp.dom.app.persona.Provincia,domainapp.dom.app.persona.Ciudad,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,domainapp.dom.app.vehiculo.Vehiculo,domainapp.dom.app.area.Area)
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#listBaja()
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#listInactivos()
+msgid "Vehiculo"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.permission.ApplicationPermission#veto()
+msgid "Veto"
+msgstr ""
+
+
+#: org.isisaddons.module.security.dom.permission.ApplicationPermission#viewing()
+msgid "Viewing"
+msgstr "Ver"
+
+
+#: domainapp.fixture.AceiteFixture#withDiscoverability()
+#: domainapp.fixture.AlertaMatafuegoFixture#withDiscoverability()
+#: domainapp.fixture.AlertaVehiculoFixture#withDiscoverability()
+#: domainapp.fixture.AreaFixture#withDiscoverability()
+#: domainapp.fixture.CombustibleFixture#withDiscoverability()
+#: domainapp.fixture.EmpleadoFixture#withDiscoverability()
+#: domainapp.fixture.Fixture#withDiscoverability()
+#: domainapp.fixture.GpsFixture#withDiscoverability()
+#: domainapp.fixture.MatafuegoFixture#withDiscoverability()
+#: domainapp.fixture.TallerFixture#withDiscoverability()
+#: domainapp.fixture.TipoCombustibleFixture#withDiscoverability()
+#: domainapp.fixture.VehiculoFixture#withDiscoverability()
+#: org.apache.isis.applib.fixturescripts.FixtureScript#withDiscoverability()
+msgid "With Discoverability"
+msgstr ""
+
+
+#: org.apache.isis.applib.fixturescripts.FixtureScript$ExecutionContext#withTracing()
+msgid "With Tracing"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+msgid "cns Combustible Ciudad"
+msgstr ""
+
+
+#: domainapp.dom.app.vehiculo.RepositorioVehiculo#createVehiculo(java.lang.String,java.lang.String,java.lang.Integer,java.sql.Timestamp,java.lang.String,java.lang.String,java.lang.Integer,domainapp.dom.app.gps.Gps,domainapp.dom.app.combustible.TipoCombustible,java.lang.Integer,domainapp.dom.app.aceite.TipoAceite,java.lang.String,java.lang.String,domainapp.dom.app.matafuego.Matafuego,java.lang.Integer)
+msgid "cns Combustible Ruta"
+msgstr ""
+
+
+#: domainapp.dom.app.alerta.RepositorioAlertaVehiculo#createAlertaVehiculo(java.lang.String,java.lang.String,domainapp.dom.app.empleado.Empleado,domainapp.dom.app.vehiculo.Vehiculo,int)
+msgid "kilometros Alarma"
+msgstr ""
+
+
+#: domainapp.dom.app.gps.RepositorioGps#createGps(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.sql.Timestamp,java.lang.String)
+msgid "observacion Estado Dispositivo "
+msgstr ""
+
+
+#: domainapp.dom.app.taller.RepositorioTaller#createTaller(java.lang.String,java.lang.String,domainapp.dom.app.taller.Rubro,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+msgid "telefono"
+msgstr ""
 
 
 

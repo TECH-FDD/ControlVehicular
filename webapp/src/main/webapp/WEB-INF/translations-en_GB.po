@@ -145,6 +145,10 @@ msgstr ""
 msgid "With Discoverability"
 msgstr ""
 
+#: org.apache.isis.viewer.wicket.ui.pages.login.WicketSignInPage
+msgid "forgotPasswordLinkLabel"
+msgstr "Olvido su Contraseña?"
+
 
 
 
