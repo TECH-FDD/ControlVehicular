@@ -43,10 +43,8 @@ import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
-import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.estadoalerta.EstadoAlerta;
 import domainapp.dom.app.estadoalerta.Finalizada;
-import domainapp.dom.app.mantenimiento.Mantenimiento;
 import domainapp.dom.app.matafuego.Matafuego;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
@@ -98,9 +96,9 @@ public class AlertaMatafuego extends Alerta {
 		super();
 	}
 
-	public AlertaMatafuego(String nombre, String descripcion, Date fechaAlta, Empleado empleado, Matafuego matafuego,
+	public AlertaMatafuego(String nombre, String descripcion, Date fechaAlta, Matafuego matafuego,
 			Date fechaAlerta, EstadoAlerta estado, String estadoAnterior) {
-		super(nombre, descripcion, fechaAlta, empleado, estado, estadoAnterior);
+		super(nombre, descripcion, fechaAlta, estado, estadoAnterior);
 		this.matafuego = matafuego;
 		this.fechaAlerta = fechaAlerta;
 	}

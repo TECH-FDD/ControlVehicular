@@ -43,10 +43,8 @@ import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 
-import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.estadoalerta.EstadoAlerta;
 import domainapp.dom.app.estadoalerta.Finalizada;
-import domainapp.dom.app.mantenimiento.Mantenimiento;
 import domainapp.dom.app.vehiculo.Vehiculo;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
@@ -94,9 +92,9 @@ public class AlertaVehiculo extends Alerta {
 		super();
 	}
 
-	public AlertaVehiculo(String nombre, String descripcion, Date fechaAlta, Empleado empleado, Vehiculo vehiculo,
+	public AlertaVehiculo(String nombre, String descripcion, Date fechaAlta, Vehiculo vehiculo,
 			Integer kilometrosAlarma, EstadoAlerta estadoAlerta, String estadoAnterior) {
-		super(nombre, descripcion, fechaAlta, empleado, estadoAlerta, estadoAnterior);
+		super(nombre, descripcion, fechaAlta, estadoAlerta, estadoAnterior);
 		this.vehiculo = vehiculo;
 		this.kilometrosAlarma = kilometrosAlarma;
 	}

@@ -49,7 +49,6 @@ import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 import org.joda.time.LocalDate;
 
-import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.estadoalerta.Activa;
 import domainapp.dom.app.estadoalerta.AlertaAmarilla;
 import domainapp.dom.app.estadoalerta.AlertaNaranja;
@@ -79,19 +78,18 @@ public class RepositorioAlertaMatafuego {
 
 	final @ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String nombre,
 			final @ParameterLayout(named = "Descripcion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String descripcion,
-			final @ParameterLayout(named = "Creado Por: ") Empleado empleado,
 			final @ParameterLayout(named = "Matafuego") Matafuego matafuego,
 			final @ParameterLayout(named = "Fecha Alerta") Date contadorAlerta) {
 
 		final AlertaMatafuego alertaMatafuego = new AlertaMatafuego(nombre, descripcion,
-				new Date(System.currentTimeMillis()), empleado, matafuego, contadorAlerta,
+				new Date(System.currentTimeMillis()), matafuego, contadorAlerta,
 				asignarAlertaEstado(contadorAlerta), null);
 		container.persistIfNotAlready(alertaMatafuego);
 		return alertaMatafuego;
 	}
 
 	// Validar contadorAlerta
-	public String validateCreateAlertaMatafuego(String nombre, String detalle, Empleado empleado, Matafuego matafuego,
+	public String validateCreateAlertaMatafuego(String nombre, String detalle, Matafuego matafuego,
 			Date contadorAlerta) {
 
 		if (contadorAlerta.before(new Date(System.currentTimeMillis())))
@@ -267,7 +265,6 @@ public class RepositorioAlertaMatafuego {
 			alerta.setAlerta(fechaAlerta);
 			alerta.setFechaAlta(fechaAlta);
 			alerta.setElemento(a.getMatafuego().toString());
-			alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
 			alerta.setsubTitulo(" ");
 			datasource.addParticipante(alerta);
 		}
@@ -300,7 +297,6 @@ public class RepositorioAlertaMatafuego {
 			alerta.setAlerta(fechaAlerta);
 			alerta.setFechaAlta(fechaAlta);
 			alerta.setElemento(a.getMatafuego().toString());
-			alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
 			alerta.setsubTitulo("Desde: " + df.format(desde) + ", Hasta: " + df.format(hasta));
 			datasource.addParticipante(alerta);
 		}

@@ -48,7 +48,6 @@ import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 import org.joda.time.LocalDate;
 
-import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.reporte.AlertaMatafuegoDataSource;
 import domainapp.dom.app.reporte.ReporteAlerta;
 import domainapp.dom.app.estadoalerta.Activa;
@@ -77,12 +76,11 @@ public class RepositorioAlertaVehiculo {
 
 	final @ParameterLayout(named = "Nombre") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS) String nombre,
 			final @ParameterLayout(named = "Descripcion") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionAlfanumerico.ADMITIDOS, optionality = Optionality.OPTIONAL) String descripcion,
-			final @ParameterLayout(named = "Creado Por: ") Empleado empleado,
 			final @ParameterLayout(named = "Vehiculo") Vehiculo vehiculo,
 			final @ParameterLayout(named = "kilometros Alarma") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int kilometrosAlarma) {
 		EstadoAlerta estado = asignarAlertaEstado(kilometrosAlarma);
 		final AlertaVehiculo alertaVehiculo = new AlertaVehiculo(nombre, descripcion,
-				new Date(System.currentTimeMillis()), empleado, vehiculo, kilometrosAlarma, estado, null);
+				new Date(System.currentTimeMillis()), vehiculo, kilometrosAlarma, estado, null);
 
 		container.persistIfNotAlready(alertaVehiculo);
 		return alertaVehiculo;
@@ -227,7 +225,6 @@ public class RepositorioAlertaVehiculo {
 			alerta.setAlerta(a.getKilometrosAlarma().toString());
 			alerta.setFechaAlta(fechaAlta);
 			alerta.setElemento(a.getVehiculo().toString());
-			alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
 			alerta.setsubTitulo(" ");
 			datasource.addParticipante(alerta);
 		}
@@ -259,7 +256,6 @@ public class RepositorioAlertaVehiculo {
 			alerta.setAlerta(a.getKilometrosAlarma().toString());
 			alerta.setFechaAlta(fechaAlta);
 			alerta.setElemento(a.getVehiculo().toString());
-			alerta.setEmpleadoInvolucrado(a.getEmpleado().getNombre() + " " + a.getEmpleado().getApellido());
 			alerta.setsubTitulo("Desde: " + df.format(desde) + ", Hasta: " + df.format(hasta));
 			datasource.addParticipante(alerta);
 		}

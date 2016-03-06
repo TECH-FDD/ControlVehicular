@@ -33,7 +33,6 @@ import org.apache.isis.applib.DomainObjectContainer;
 
 import domainapp.dom.app.alerta.AlertaMatafuego;
 import domainapp.dom.app.alerta.RepositorioAlertaMatafuego;
-import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.matafuego.Matafuego;
 
 public class AlertaMatafuegoFixture extends Fixture {
@@ -47,7 +46,6 @@ public class AlertaMatafuegoFixture extends Fixture {
 	@Override
 	protected void execute(ExecutionContext executionContext) {
 		borrarTabla(executionContext, "AlertaMatafuego");
-		List<Empleado> empleados=container.allInstances(Empleado.class);
 		List<Matafuego> matafuegos=container.allInstances(Matafuego.class);
 		List<AlertaMatafuego> alertaMatafuegos= container.allInstances(AlertaMatafuego.class);
 		if (alertaMatafuegos!=null){
@@ -58,15 +56,15 @@ public class AlertaMatafuegoFixture extends Fixture {
 			calendar.setTime(fecha);
 			for (int x = 0; x < 3; x++) {
 				calendar.add(Calendar.DAY_OF_YEAR,(100) );
-				create(nombre, descripcion, new Date(System.currentTimeMillis()),empleados.get(x+1),matafuegos.get(x+1),calendar.getTime(),null,executionContext);
+				create(nombre, descripcion, new Date(System.currentTimeMillis()),matafuegos.get(x+1),calendar.getTime(),null,executionContext);
 			}
 		
 	}
 
-	private AlertaMatafuego create(String nombre, String descripcion,Date fechaAlta, Empleado empleado, Matafuego matafuego,Date contadorAlerta,String estadoAnterior,
+	private AlertaMatafuego create(String nombre, String descripcion,Date fechaAlta, Matafuego matafuego,Date contadorAlerta,String estadoAnterior,
 			ExecutionContext executionContext) {
 		return executionContext.addResult(this,
-				repoAlerta.createAlertaMatafuego(nombre, descripcion, empleado, matafuego, contadorAlerta));
+				repoAlerta.createAlertaMatafuego(nombre, descripcion, matafuego, contadorAlerta));
 	}
 
 	@javax.inject.Inject
