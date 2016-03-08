@@ -39,8 +39,8 @@ import domainapp.dom.app.vehiculo.Vehiculo;
 
 public class VehiculoFixture extends Fixture {
 
-	private static String marca="Ford, Isuzu, Iveco, Iveco, Hyundai";
-	private static String nombre= "Cargo 815, FTR, Cursor, Trakker, HD78";
+	private static String marca="Ford,Isuzu,Iveco,Iveco,Hyundai";
+	private static String nombre= "Cargo 815,FTR,Cursor,Trakker,HD78";
 	private static int modelo=2015;
 	private static String patente="SER 123,HBD 789,HUG 675,IBM 255,KIJ 567";
 	private static String numeroChasis="JGASDYUGSUY5468FG,KSUDS327DSF44RFDE,HDJSY2653GHETDBSH78,JFUERJ463548EHDGJFU80K,JUDH6DHSYS987SHYC7";
