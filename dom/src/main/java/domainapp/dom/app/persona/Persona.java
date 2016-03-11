@@ -79,7 +79,7 @@ public abstract class Persona {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "1")
+	@MemberOrder(sequence = "1", name = "Datos Personales")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public String getNombre() {
@@ -90,7 +90,7 @@ public abstract class Persona {
 		this.nombre = nombre;
 	}
 	@Persistent
-	@MemberOrder(sequence = "2")
+	@MemberOrder(sequence = "2", name = "Datos Personales")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public String getApellido() {
@@ -101,7 +101,7 @@ public abstract class Persona {
 		this.apellido = apellido;
 	}
 	@Persistent
-	@MemberOrder(sequence = "3")
+	@MemberOrder(sequence = "3", name = "Datos Personales")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public Documento getTipoDocumento() {
@@ -111,7 +111,7 @@ public abstract class Persona {
 	public void setTipoDocumento(Documento tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
-	@MemberOrder(sequence = "5")
+	@MemberOrder(sequence = "5", name = "Datos Personales")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public LocalDate getFechaNacimiento() {
@@ -121,7 +121,7 @@ public abstract class Persona {
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	@MemberOrder(sequence = "10")
+	@MemberOrder(sequence = "10", name = "Contacto")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	public String getDomicilio() {
 		return domicilio;
@@ -130,7 +130,7 @@ public abstract class Persona {
 	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}
-	@MemberOrder(sequence = "8")
+	@MemberOrder(sequence = "8", name = "Contacto")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public Ciudad getCiudad() {
@@ -141,7 +141,7 @@ public abstract class Persona {
 		this.ciudad = ciudad;
 	}
 
-	@MemberOrder(sequence = "9")
+	@MemberOrder(sequence = "9", name = "Contacto")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public int getCodigoPostal() {
@@ -151,7 +151,7 @@ public abstract class Persona {
 	public void setCodigoPostal(int codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
-	@MemberOrder(sequence = "13")
+	@MemberOrder(sequence = "13", name = "Datos Laborales")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public Timestamp getFechaAlta() {
@@ -161,7 +161,7 @@ public abstract class Persona {
 	public void setFechaAlta(Timestamp fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
-	@MemberOrder(sequence = "4")
+	@MemberOrder(sequence = "4", name = "Datos Personales")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public int getNroDocumento() {
@@ -172,7 +172,7 @@ public abstract class Persona {
 		this.nroDocumento = nroDocumento;
 	}
 
-	@MemberOrder(sequence = "6")
+	@MemberOrder(sequence = "6", name = "Datos Personales")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public Sexo getSexo() {
@@ -182,7 +182,7 @@ public abstract class Persona {
 		this.sexo = sexo;
 	}
 	
-	@MemberOrder(sequence = "11")
+	@MemberOrder(sequence = "11", name = "Contacto")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	public String getTelefono() {
 		return telefono;
@@ -192,7 +192,7 @@ public abstract class Persona {
 		this.telefono = telefono;
 	}
 
-	@MemberOrder(sequence = "12")
+	@MemberOrder(sequence = "12", name = "Contacto")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	public String getEmail() {
 		return email;
@@ -202,7 +202,7 @@ public abstract class Persona {
 		this.email = email;
 	}
 	
-	@MemberOrder(sequence = "7")
+	@MemberOrder(sequence = "7", name = "Contacto")
 	@javax.jdo.annotations.Column(allowsNull="false")
 	@Property(editing=Editing.DISABLED)
 	public Provincia getProvincia() {
