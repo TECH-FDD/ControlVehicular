@@ -40,7 +40,6 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 
 import org.apache.isis.applib.DomainObjectContainer;
-import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.CollectionLayout;
@@ -51,13 +50,12 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.RenderType;
-import org.apache.isis.applib.annotation.SemanticsOf;
+import org.apache.isis.applib.annotation.ActionLayout.Position;
 
 import com.google.common.collect.Ordering;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Asignado;
-import domainapp.dom.app.estadoelemento.Estado;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.mantenimiento.ObjetoMantenible;
@@ -89,7 +87,6 @@ public class Gps extends ObjetoMantenible {
 	private Timestamp fechaAlta;
 	private Timestamp fechaAsigVehiculo;
 	private String obsEstadoDispositivo;
-	private Estado estado;
 
 	@Persistent
 	@Property(editing = Editing.DISABLED)
@@ -172,23 +169,13 @@ public class Gps extends ObjetoMantenible {
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
 	}
 
-	@Persistent
-	@MemberOrder(sequence = "8")
-	@Column(allowsNull = "false")
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-
 	@javax.jdo.annotations.Persistent(table = "Destino_Gps")
 	@javax.jdo.annotations.Join(column = "Gps_Id")
 	@javax.jdo.annotations.Element(column = "Destino_Id")
 	private SortedSet<Destino> destinos = new TreeSet<>();
 
 	@CollectionLayout(sortedBy = DependenciesComparator.class, render = RenderType.EAGERLY)
+	@MemberOrder(sequence = "1")
 	public SortedSet<Destino> getDestinos() {
 		return destinos;
 	}
@@ -201,6 +188,7 @@ public class Gps extends ObjetoMantenible {
 
 	@CollectionLayout(render = RenderType.EAGERLY)
 	@NotPersistent
+	@MemberOrder(sequence = "2")
 	public SortedSet<Destino> getVisitados() {
 		for (final Destino d : destinos) {
 			if (d.isVisitado())
@@ -217,6 +205,7 @@ public class Gps extends ObjetoMantenible {
 
 	@CollectionLayout(render = RenderType.EAGERLY)
 	@NotPersistent
+	@MemberOrder(sequence = "3")
 	public SortedSet<Destino> getNuevos() {
 		for (final Destino d : destinos) {
 			if (!d.isVisitado())
@@ -259,7 +248,6 @@ public class Gps extends ObjetoMantenible {
 		this.fechaAlta = fechaAlta;
 		this.fechaAsigVehiculo = fechaAsigVehiculo;
 		this.obsEstadoDispositivo = obsEstadoDispositivo;
-		this.estado= new Activo(new Timestamp(System.currentTimeMillis()),Motivo.ALTA);
 		this.publico = toString();
 	}
 
@@ -272,8 +260,10 @@ public class Gps extends ObjetoMantenible {
 	 *
 	 * @return mensaje de confirmacion.
 	 */
-	public Gps desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
-		this.getEstado().desactivarGps(this, motivo, new Timestamp(System.currentTimeMillis()));
+	@MemberOrder(sequence = "8", name = "Estado")
+	@ActionLayout(named = "Desactivar", position = Position.PANEL)
+	public Gps desactivar(@ParameterLayout(named="Motivo") Motivo motivo) {
+		this.getEstado().desactivar(this, motivo, new Timestamp(System.currentTimeMillis()));
 		return this;
 	}
 
@@ -304,8 +294,10 @@ public class Gps extends ObjetoMantenible {
 	 *
 	 * @return this
 	 */
+	@MemberOrder(sequence = "8", name = "Estado")
+	@ActionLayout(named = "Reactivar", position = Position.PANEL)
 	public Gps reactivar(){
-		this.getEstado().reactivarGps(this);
+		this.getEstado().reactivar(this);
 		return this;
 	}
 
@@ -326,8 +318,8 @@ public class Gps extends ObjetoMantenible {
 	 * @param direccion
 	 * @return
 	 */
-	@Action(semantics = SemanticsOf.SAFE)
-	@ActionLayout(named = "Agregar Destino")
+	@MemberOrder(sequence = "1", name = "Destinos")
+	@ActionLayout(named = "Agregar Destino", position = Position.PANEL)
 	public Gps addDestino(@ParameterLayout(named = "Dirección") final String direccion,
 						@ParameterLayout(named = "Descripción") final String descripcion) {
 		final Destino destino = new Destino(direccion, descripcion);
@@ -338,6 +330,8 @@ public class Gps extends ObjetoMantenible {
 		return this;
 	}
 
+	@MemberOrder(sequence = "2", name = "Visitados")
+	@ActionLayout(named = "Actualizar Visitados", position = Position.PANEL)
 	public Gps actualizarVisitados() {
 		for (Destino d : destinos) {
 			if (d.isVisitado())

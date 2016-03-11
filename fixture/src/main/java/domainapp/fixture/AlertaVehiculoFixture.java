@@ -32,7 +32,6 @@ import org.apache.isis.applib.DomainObjectContainer;
 
 import domainapp.dom.app.alerta.AlertaVehiculo;
 import domainapp.dom.app.alerta.RepositorioAlertaVehiculo;
-import domainapp.dom.app.empleado.Empleado;
 import domainapp.dom.app.vehiculo.Vehiculo;
 
 public class AlertaVehiculoFixture extends Fixture{
@@ -41,7 +40,6 @@ public class AlertaVehiculoFixture extends Fixture{
 	private static String contadorAlerta="4000,4500,3500,5000";
 	
 	public AlertaVehiculoFixture() {
-		// TODO Auto-generated constructor stub
 		withDiscoverability(Discoverability.DISCOVERABLE);
 	}
 	private static String getNombre(int x) {
@@ -52,7 +50,6 @@ public class AlertaVehiculoFixture extends Fixture{
 	}
 	@Override
 	protected void execute(ExecutionContext executionContext) {
-		List<Empleado> empleados=container.allInstances(Empleado.class);
 		List<Vehiculo> vehiculos=container.allInstances(Vehiculo.class);
 		List<AlertaVehiculo> alertavehiculos= container.allInstances(AlertaVehiculo.class);
 		if (alertavehiculos!=null){
@@ -60,15 +57,15 @@ public class AlertaVehiculoFixture extends Fixture{
 		}
 			
 			for (int x = 0; x < 4; x++) {
-				create(getNombre(x), descripcion, new Date(System.currentTimeMillis()),empleados.get(x+1),vehiculos.get(x+1),getContadorAlerta(x), executionContext);
+				create(getNombre(x), descripcion, new Date(System.currentTimeMillis()),vehiculos.get(x+1),getContadorAlerta(x), executionContext);
 			}
 		
 	}
 
-	private AlertaVehiculo create(String nombre, String descripcion,Date fechaAlta, Empleado empleado, Vehiculo vehiculo,int contadorAlerta,
+	private AlertaVehiculo create(String nombre, String descripcion,Date fechaAlta, Vehiculo vehiculo,int contadorAlerta,
 			ExecutionContext executionContext) {
 		return executionContext.addResult(this,
-				repoAlerta.createAlertaVehiculo(nombre, descripcion, empleado, vehiculo, contadorAlerta));
+				repoAlerta.createAlertaVehiculo(nombre, descripcion, vehiculo, contadorAlerta));
 	}
 
 	@javax.inject.Inject

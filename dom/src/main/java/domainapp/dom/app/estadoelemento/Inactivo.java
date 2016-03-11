@@ -36,10 +36,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 
-import domainapp.dom.app.empleado.Empleado;
-import domainapp.dom.app.gps.Gps;
-import domainapp.dom.app.matafuego.Matafuego;
-import domainapp.dom.app.vehiculo.Vehiculo;
+import domainapp.dom.app.mantenimiento.ObjetoMantenible;
 
 @javax.jdo.annotations.PersistenceCapable(identityType=IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(
@@ -77,20 +74,8 @@ public class Inactivo extends Estado {
 
 	@Override
 	@Programmatic
-	public void desactivarGps(Gps gps, Motivo motivo, Timestamp fecha){
-		container.warnUser("El Gps seleccionado, ya se encuentra en estado Inactivo.");
-	}
-
-	@Override
-	@Programmatic
-	public void desactivarMatafuego(Matafuego matafuego, Motivo motivo, Timestamp fecha){
-		container.warnUser("El Matafuego seleccionado, ya se encuentra en estado Inactivo.");
-	}
-
-	@Override
-	@Programmatic
-	public void desactivarVehiculo(Vehiculo vehiculo, Motivo motivo, Timestamp fecha){
-		container.warnUser("El Vehiculo seleccionado, ya se encuentra en estado Inactivo.");
+	public void desactivar(ObjetoMantenible objeto, Motivo motivo, Timestamp fecha){
+		container.warnUser("El Elemento seleccionado, ya se encuentra en estado Inactivo.");
 	}
 
 	/*********************************
@@ -99,26 +84,10 @@ public class Inactivo extends Estado {
 
 	@Override
 	@Programmatic
-	public void reactivarGps(Gps gps) {
+	public void reactivar(final ObjetoMantenible objeto) {
 		Estado estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.REACTIVADO);
-		actualizarGps(gps, estado);
-		container.informUser("El Gps seleccionado, ha sido reacivado exitosamente.");
-	}
-
-	@Override
-	@Programmatic
-	public void reactivarMatafuego(Matafuego matafuego) {
-		Estado estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.REACTIVADO);
-		actualizarMatafuego(matafuego, estado);
-		container.informUser("El Matafuego seleccionado, ha sido reacivado exitosamente.");
-	}
-
-	@Override
-	@Programmatic
-	public void reactivarVehiculo(Vehiculo vehiculo) {
-		Estado estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.REACTIVADO);
-		actualizarVehiculo(vehiculo, estado);
-		container.informUser("El Vehiculo seleccionado, ha sido reacivado exitosamente.");
+		actualizarElemento(objeto, estado);
+		container.informUser("El Elemento seleccionado, ha sido reacivado exitosamente.");
 	}
 
 	/*******************************
@@ -127,20 +96,8 @@ public class Inactivo extends Estado {
 
 	@Override
 	@Programmatic
-	public void asignarGps(Gps gps) {
-		container.warnUser("Para ser asignado, previamente, el Gps debe ser Reactivado");
-	}
-
-	@Override
-	@Programmatic
-	public void asignarMatafuego(Matafuego matafuego) {
-		container.warnUser("Para ser asignado, previamente, el Matafuego debe ser Reactivado");
-	}
-
-	@Override
-	@Programmatic
-	public void asignarVehiculo(Vehiculo vehiculo) {
-		container.warnUser("Para ser asignado, previamente, el Vehiculo debe ser Reactivado");
+	public void asignar(final ObjetoMantenible objeto) {
+		container.warnUser("Para ser asignado, previamente, el Elemento debe ser Reactivado");
 	}
 
 	/**********************************
@@ -148,18 +105,8 @@ public class Inactivo extends Estado {
 	 **********************************/
 
 	@Override
-	public void desasignarGps(Vehiculo vehiculo) {
-		container.warnUser("El Gps, debe encontrarse en estado Asignado para poder ser Desasignado.");
-	}
-
-	@Override
-	public void desasignarMatafuego(Vehiculo vehiculo) {
-		container.warnUser("El Matafuego, debe encontrarse en estado Asignado para poder ser Desasignado.");
-	}
-
-	@Override
-	public void desasignarVehiculo(Empleado empleado) {
-		container.warnUser("El Vehiculo, debe encontrarse en estado Asignado para poder ser Desasignado.");
+	public void desasignar(final ObjetoMantenible objeto) {
+		container.warnUser("El elemento seleccionado, debe encontrarse en estado Asignado para poder ser Desasignado.");
 	}
 
 	@javax.inject.Inject

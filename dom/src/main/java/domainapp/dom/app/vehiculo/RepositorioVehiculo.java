@@ -95,10 +95,10 @@ public class RepositorioVehiculo {
 				kilometros, matafuego);
 
 		// Pasar el Gps al estado Asignado
-		gps.getEstado().asignarGps(gps);
+		gps.getEstado().asignar(gps);
 
 		// Pasar el Matafuego al estado Asignado
-		matafuego.getEstado().asignarMatafuego(matafuego);
+		matafuego.getEstado().asignar(matafuego);
 
 		container.persistIfNotAlready(vehiculo);
 		return vehiculo;
