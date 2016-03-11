@@ -99,8 +99,8 @@ public class AlertaVehiculo extends Alerta {
 		this.kilometrosAlarma = kilometrosAlarma;
 	}
 
-	@MemberOrder(sequence = "3")
-	@ActionLayout(named = "Aplazar", position = Position.BELOW)
+	@MemberOrder(sequence = "1", name = "KilometrosAlarma")
+	@ActionLayout(named = "Aplazar", position = Position.PANEL)
 	public AlertaVehiculo aplazar() {
 		getEstadoAlerta().aplazarAlertas(this);
 		return this;
@@ -113,7 +113,8 @@ public class AlertaVehiculo extends Alerta {
 		container.persistIfNotAlready(this);
 		return this;
 	}
-	@ActionLayout(named = "Eliminar alerta")
+	@ActionLayout(named = "Eliminar alerta", position = Position.PANEL)
+	@MemberOrder(sequence = "1", name = "KilometrosAlarma")
 	public AlertaVehiculo deleteAlertaVehiculo() {
 		getEstadoAlerta().finalizarAlertas(this);
 		return this;

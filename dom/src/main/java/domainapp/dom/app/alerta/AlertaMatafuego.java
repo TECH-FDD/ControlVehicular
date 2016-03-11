@@ -102,8 +102,8 @@ public class AlertaMatafuego extends Alerta {
 		this.matafuego = matafuego;
 		this.fechaAlerta = fechaAlerta;
 	}
-	@MemberOrder(sequence = "3")
-	@ActionLayout(named = "Aplazar", position = Position.BELOW)
+	@MemberOrder(sequence = "1", name = "FechaAlerta")
+	@ActionLayout(named = "Aplazar", position = Position.PANEL)
 	public AlertaMatafuego Aplazar() {
 		getEstadoAlerta().aplazarAlertas(this);
 		return this;
@@ -115,7 +115,8 @@ public class AlertaMatafuego extends Alerta {
 		this.setEstadoAlerta(repo.asignarAlertaEstado(fechaAlerta));
 		return this;
 	}
-	@ActionLayout(named = "Eliminar alerta")
+	@MemberOrder(sequence = "1", name = "FechaAlerta")
+	@ActionLayout(named = "Eliminar alerta", position = Position.PANEL)
 	public AlertaMatafuego deleteAlertaMatafuego() {
 		getEstadoAlerta().finalizarAlertas(this);
 		return this;
