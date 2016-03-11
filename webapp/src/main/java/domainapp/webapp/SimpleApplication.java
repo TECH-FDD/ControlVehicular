@@ -81,7 +81,7 @@ public class SimpleApplication extends IsisWicketApplication {
         super.init();
 
         IBootstrapSettings settings = Bootstrap.getSettings();
-        settings.setThemeProvider(new BootswatchThemeProvider(BootswatchTheme.Flatly));
+        settings.setThemeProvider(new BootswatchThemeProvider(BootswatchTheme.Superhero));
     }
 
     @Override
@@ -127,6 +127,7 @@ public class SimpleApplication extends IsisWicketApplication {
                 bind(String.class).annotatedWith(Names.named("applicationName")).toInstance("S.I.G.A.F.V.");
                 bind(String.class).annotatedWith(Names.named("applicationCss")).toInstance("css/application.css");
                 bind(String.class).annotatedWith(Names.named("applicationJs")).toInstance("scripts/application.js");
+                bind(String.class).annotatedWith(Names.named("brandLogoSignin")).toInstance("/images/logo.png");
                 bind(String.class).annotatedWith(Names.named("welcomeMessage")).toInstance(readLines(getClass(), "welcome.html"));
                 bind(String.class).annotatedWith(Names.named("aboutMessage")).toInstance("S.I.G.A.F.V.");
                 bind(InputStream.class).annotatedWith(Names.named("metaInfManifest")).toProvider(Providers.of(getServletContext().getResourceAsStream("/META-INF/MANIFEST.MF")));
