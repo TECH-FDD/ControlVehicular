@@ -32,7 +32,6 @@ public class ReporteAlerta {
 	private String nombre;
 	private String descripcion;
 	private String estadoAlerta;
-	private String empleadoInvolucrado;
 	private String alerta;
 	private String elemento;
 	private String fechaAlta;
@@ -72,16 +71,6 @@ public class ReporteAlerta {
 	public void setEstadoAlerta(String estadoAlerta) {
 		this.estadoAlerta = estadoAlerta;
 	}
-
-	@MemberOrder(sequence = "1")
-	public String getEmpleadoInvolucrado() {
-		return empleadoInvolucrado;
-	}
-
-	public void setEmpleadoInvolucrado(String empleadoInvolucrado) {
-		this.empleadoInvolucrado = empleadoInvolucrado;
-	}
-
 	@MemberOrder(sequence = "1")
 	public String getAlerta() {
 		return alerta;

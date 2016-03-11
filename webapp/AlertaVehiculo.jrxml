@@ -6,7 +6,6 @@
 	<field name="alerta" class="java.lang.String"/>
 	<field name="descripcion" class="java.lang.String"/>
 	<field name="estadoAlerta" class="java.lang.String"/>
-	<field name="empleadoInvolucrado" class="java.lang.String"/>
 	<field name="fechaAlta" class="java.lang.String"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="elemento" class="java.lang.String"/>
@@ -14,7 +13,7 @@
 	<pageHeader>
 		<band height="203" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="209" y="0" width="592" height="111" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="94dce1a4-013a-4867-8c79-fdf9f6d0f4f6"/>
+				<reportElement uuid="94dce1a4-013a-4867-8c79-fdf9f6d0f4f6" mode="Opaque" x="209" y="0" width="592" height="111" forecolor="#B9BABD" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="2.25" lineColor="#989898"/>
 					<leftPen lineWidth="2.25" lineColor="#989898"/>
@@ -30,7 +29,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1" y="130" width="801" height="38" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="1c8e0d20-eba2-40d0-a1e5-39481a37988d"/>
+				<reportElement uuid="1c8e0d20-eba2-40d0-a1e5-39481a37988d" mode="Opaque" x="1" y="130" width="801" height="38" forecolor="#B9BABD" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="22" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="1_1_2"/>
@@ -38,7 +37,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Listado de Alertas Vehiculo]]></text>
 			</staticText>
 			<image hAlign="Left" vAlign="Top">
-				<reportElement mode="Opaque" x="0" y="0" width="209" height="111" forecolor="#000000" backcolor="#F6F4F2" uuid="afaa542c-f6c0-4e83-817a-af2e7738eb3c"/>
+				<reportElement uuid="afaa542c-f6c0-4e83-817a-af2e7738eb3c" mode="Opaque" x="0" y="0" width="209" height="111" forecolor="#000000" backcolor="#313739"/>
 				<box>
 					<topPen lineWidth="2.25" lineColor="#868181"/>
 					<leftPen lineWidth="2.25" lineColor="#868181"/>
@@ -48,7 +47,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<imageExpression><![CDATA["letra blanca1.png"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement mode="Opaque" x="338" y="168" width="463" height="24" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="0675c52a-c1f7-4e4f-88a5-acc20e5f4187"/>
+				<reportElement uuid="0675c52a-c1f7-4e4f-88a5-acc20e5f4187" mode="Opaque" x="338" y="168" width="463" height="24" forecolor="#B9BABD" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="1_1_2"/>
@@ -60,7 +59,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 	<columnHeader>
 		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Transparent" x="98" y="0" width="107" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="b28100d2-c3b2-416a-bab3-72c2f647cfae"/>
+				<reportElement uuid="b28100d2-c3b2-416a-bab3-72c2f647cfae" mode="Transparent" x="139" y="0" width="136" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -74,7 +73,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="205" y="0" width="110" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="3b7efd94-b636-4955-af4f-e116b9d47e80"/>
+				<reportElement uuid="3b7efd94-b636-4955-af4f-e116b9d47e80" mode="Transparent" x="275" y="0" width="131" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -88,7 +87,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Descripcion]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="315" y="0" width="109" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="b773fb8c-c2e0-4d5c-a363-e80114180bfd"/>
+				<reportElement uuid="b773fb8c-c2e0-4d5c-a363-e80114180bfd" mode="Transparent" x="406" y="0" width="109" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -102,7 +101,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Kilometro Alerta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="535" y="0" width="139" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="c3630858-9fd3-4573-a5ad-64a9138a609b"/>
+				<reportElement uuid="c3630858-9fd3-4573-a5ad-64a9138a609b" mode="Transparent" x="515" y="0" width="139" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -116,21 +115,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Fecha Alta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="424" y="0" width="111" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="6844ecdb-2d5f-4cef-b291-a3b74d08faaa"/>
-				<box>
-					<topPen lineWidth="1.5"/>
-					<leftPen lineWidth="1.5"/>
-					<bottomPen lineWidth="1.5"/>
-					<rightPen lineWidth="1.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[Empleado Involucrado]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="0" y="0" width="98" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="d55edb3e-d229-436c-beac-c919612f5594"/>
+				<reportElement uuid="d55edb3e-d229-436c-beac-c919612f5594" mode="Transparent" x="0" y="0" width="139" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -144,7 +129,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Vehiculo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="674" y="0" width="127" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="b3bdc560-f693-4956-94ce-d18394cafff8"/>
+				<reportElement uuid="b3bdc560-f693-4956-94ce-d18394cafff8" mode="Transparent" x="654" y="0" width="147" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -162,7 +147,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 	<detail>
 		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement mode="Transparent" x="0" y="0" width="98" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="1c0c0413-cdfa-40d0-b644-1fa0bd51eab3"/>
+				<reportElement uuid="1c0c0413-cdfa-40d0-b644-1fa0bd51eab3" mode="Transparent" x="1" y="0" width="138" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -176,7 +161,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<textFieldExpression><![CDATA[$F{elemento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="98" y="0" width="107" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="566b5839-19da-442c-b0f8-500d9d66b12a"/>
+				<reportElement uuid="566b5839-19da-442c-b0f8-500d9d66b12a" mode="Transparent" x="139" y="0" width="136" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -190,7 +175,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="205" y="0" width="110" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="da4e5801-741f-4412-a489-05990885d301"/>
+				<reportElement uuid="da4e5801-741f-4412-a489-05990885d301" mode="Transparent" x="275" y="0" width="131" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -204,7 +189,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="315" y="0" width="109" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="c9864818-6ddf-49e1-b17f-2ae9fd388ee1"/>
+				<reportElement uuid="c9864818-6ddf-49e1-b17f-2ae9fd388ee1" mode="Transparent" x="406" y="0" width="109" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -218,7 +203,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<textFieldExpression><![CDATA[$F{alerta}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="674" y="0" width="127" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="d00d625b-f6b9-4fc6-ab14-af780d851ef6"/>
+				<reportElement uuid="d00d625b-f6b9-4fc6-ab14-af780d851ef6" mode="Transparent" x="654" y="0" width="147" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -232,21 +217,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<textFieldExpression><![CDATA[$F{estadoAlerta}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="424" y="0" width="111" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="344e370d-796d-4d3b-a03b-19633707a6a9"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{empleadoInvolucrado}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement mode="Transparent" x="535" y="0" width="139" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="017ee049-78cb-4693-b1ca-df20185a7760"/>
+				<reportElement uuid="017ee049-78cb-4693-b1ca-df20185a7760" mode="Transparent" x="515" y="0" width="139" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -264,7 +235,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 	<pageFooter>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement mode="Transparent" x="1" y="0" width="800" height="20" forecolor="#808080" backcolor="#FFFFFF" uuid="2fa754c3-58ca-4242-8534-911b45fe3a4e"/>
+				<reportElement uuid="2fa754c3-58ca-4242-8534-911b45fe3a4e" mode="Transparent" x="1" y="0" width="800" height="20" forecolor="#808080" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="1_1_2"/>

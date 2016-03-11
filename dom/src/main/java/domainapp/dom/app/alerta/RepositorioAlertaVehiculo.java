@@ -136,7 +136,7 @@ public class RepositorioAlertaVehiculo {
 	@Programmatic
 	public EstadoAlerta asignarAlertaEstado(int kilometrosAlerta, int kilometrosVehiculo) {
 		EstadoAlerta estado;
-		int kmRestantes=kilometrosVehiculo-kilometrosAlerta;
+		int kmRestantes=kilometrosAlerta-kilometrosVehiculo;
 		if (kmRestantes > 2000 && kmRestantes<= 3000)
 			estado = new AlertaAmarilla(new Timestamp(System.currentTimeMillis()));
 		else if (kmRestantes> 1000 && kmRestantes <= 2000)
