@@ -43,8 +43,6 @@ public class AlertaVehiculoDataSource implements JRDataSource {
 			valor = listaAlerta.get(indiceAlertaActual).getDescripcion();
 		} else if ("estadoAlerta".equals(jrf.getName())) {
 			valor = listaAlerta.get(indiceAlertaActual).getEstadoAlerta();
-		} else if ("empleadoInvolucrado".equals(jrf.getName())) {
-			valor = listaAlerta.get(indiceAlertaActual).getEmpleadoInvolucrado();
 		} else if ("alerta".equals(jrf.getName())) {
 			valor = listaAlerta.get(indiceAlertaActual).getAlerta();
 		} else if ("elemento".equals(jrf.getName())) {

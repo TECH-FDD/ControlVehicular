@@ -37,7 +37,7 @@ import domainapp.dom.app.vehiculo.Vehiculo;
 public class AlertaVehiculoFixture extends Fixture{
 	private static String nombre= "Cambio de Aceite,Cambio de filtro de Aceite,Cambio de filtro de Aire, Cambio de Correa";
 	private static String descripcion = "";
-	private static String contadorAlerta="10000,20000,10000,20000";
+	private static String contadorAlerta="4000,4500,3500,5000";
 	
 	public AlertaVehiculoFixture() {
 		withDiscoverability(Discoverability.DISCOVERABLE);
