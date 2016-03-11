@@ -46,6 +46,7 @@ import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.Where;
 
+import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.taller.Taller;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
@@ -269,6 +270,7 @@ public class Mantenimiento {
 	@ActionLayout(named="Iniciar")
 	public Mantenimiento iniciarProceso(@ParameterLayout(named="Motivo") String motivo) {
 		this.getEstadoMantenimiento().iniciarProceso(this,new Timestamp(System.currentTimeMillis()),motivo);
+		this.getElemento().getEstado().desactivar(this.getElemento(), Motivo.ROTURA, new Timestamp(System.currentTimeMillis()));
 		return this;
 	}
 	@ActionLayout(named="Aceptado",hidden=Where.NOWHERE)
@@ -279,7 +281,8 @@ public class Mantenimiento {
 	
 	@ActionLayout(named="Finalizar",hidden=Where.NOWHERE)
 	public Mantenimiento finalizarMantenimiento(@ParameterLayout(named="Motivo")  String motivo) {
-		this.getEstadoMantenimiento().finalizarMantenimiento(this,new Timestamp(System.currentTimeMillis()),motivo);
+		this.getEstadoMantenimiento().finalizarMantenimiento(this, new Timestamp(System.currentTimeMillis()),motivo);
+		this.getElemento().getEstado().reactivar(this.getElemento());
 		return this;
 	}
 	

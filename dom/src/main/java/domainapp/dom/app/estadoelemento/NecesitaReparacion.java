@@ -36,6 +36,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 
+import domainapp.dom.app.mantenimiento.Mantenimiento;
 import domainapp.dom.app.mantenimiento.ObjetoMantenible;
 
 @javax.jdo.annotations.PersistenceCapable(identityType=IdentityType.DATASTORE)
@@ -85,7 +86,20 @@ public class NecesitaReparacion extends Estado {
 	@Override
 	@Programmatic
 	public void reactivar(final ObjetoMantenible objeto) {
-		container.warnUser("Para ser reactivado, se necesita confirmación de que el Elemento fue reparado.");
+		boolean activar = true;
+		for (Mantenimiento m : container.allInstances(Mantenimiento.class)) {
+			if (m.getElemento().equals(objeto))
+				if (m.getEstadoMantenimiento().toString() != "Finalizado") {
+					activar = false;
+					break;
+				}
+		}
+		if (activar)
+			actualizarElemento(objeto,
+					new Activo(new Timestamp(System.currentTimeMillis()),
+							Motivo.REPARADO));
+		else
+			container.warnUser("Para ser reactivado, se necesita confirmación de que el Elemento fue reparado.");
 	}
 
 	/*******************************
