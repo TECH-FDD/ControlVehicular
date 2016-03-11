@@ -39,6 +39,7 @@ import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
+import org.apache.isis.applib.annotation.MemberGroupLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
@@ -77,6 +78,10 @@ import domainapp.dom.app.vehiculo.Vehiculo;
 				+ "WHERE legajo.indexOf(:legajo) >= 0 ") })
 @DomainObject(objectType = "EMPLEADO", bounded = true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
+@MemberGroupLayout(columnSpans = { 4, 4, 4 },
+					left = { "Datos Personales" },
+					middle = { "Datos Laborales" },
+					right = { "Contacto" })
 public class Empleado extends Persona {
 	private String legajo;
 	private Area area;
@@ -101,7 +106,7 @@ public class Empleado extends Persona {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "20")
+	@MemberOrder(sequence = "20", name = "Datos Laborales")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	@Property(editing = Editing.DISABLED)
 	public String getLegajo() {
@@ -113,7 +118,7 @@ public class Empleado extends Persona {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "21")
+	@MemberOrder(sequence = "21", name = "Datos Laborales")
 	@javax.jdo.annotations.Column(allowsNull = "false")
 	public Area getArea() {
 		return area;
@@ -133,7 +138,7 @@ public class Empleado extends Persona {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "22")
+	@MemberOrder(sequence = "22", name = "Datos Laborales")
 	@javax.jdo.annotations.Column(allowsNull = "true")
 	public Vehiculo getVehiculo() {
 		return vehiculo;
@@ -149,6 +154,8 @@ public class Empleado extends Persona {
 	 *
 	 * @return mensaje de confirmacion.
 	 */
+	@MemberOrder(sequence = "1", name = "Nombre")
+	@ActionLayout(named = "Desactivar", position = Position.PANEL)
 	public Empleado desactivarEmpleado() {
 		this.setActivo(false);
 		container
@@ -198,7 +205,8 @@ public class Empleado extends Persona {
 	 *
 	 * @return mensaje de confirmacion.
 	 */
-
+	@MemberOrder(sequence = "1", name = "Nombre")
+	@ActionLayout(named = "Reactivar Empleado", position = Position.PANEL)
 	public Empleado activarEmpleado() {
 		if (getArea().isActivo() == true) {
 			this.setActivo(true);
@@ -241,7 +249,6 @@ public class Empleado extends Persona {
 	/**
 	 * Se desactiva el UpdateArea, cuando no sea necesario su actualización
 	 */
-
 	@Programmatic
 	public boolean hideUpdateArea() {
 		if (getArea().isActivo() == false)
@@ -274,9 +281,9 @@ public class Empleado extends Persona {
 	public Empleado updateVehiculo(@ParameterLayout(named = "Vehiculo") Vehiculo vehiculo){
 		//Desasigno el Vehiculo anterior.
 		if(this.getVehiculo() != null)
-			this.getVehiculo().getEstado().desasignarVehiculo(this);
+			this.getVehiculo().getEstado().desasignar(this.getVehiculo());
 		//Cambio el estado del nuevo Vehiculo a Asginado
-		vehiculo.getEstado().asignarVehiculo(vehiculo);
+		vehiculo.getEstado().asignar(vehiculo);
 		//Actualizo el empleado con el nuevo Vehiculo
 		this.setVehiculo(vehiculo);
 		container.persistIfNotAlready(this);

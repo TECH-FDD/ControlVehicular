@@ -36,10 +36,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 
-import domainapp.dom.app.empleado.Empleado;
-import domainapp.dom.app.gps.Gps;
-import domainapp.dom.app.matafuego.Matafuego;
-import domainapp.dom.app.vehiculo.Vehiculo;
+import domainapp.dom.app.mantenimiento.ObjetoMantenible;
 
 @javax.jdo.annotations.PersistenceCapable(identityType=IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(
@@ -77,22 +74,8 @@ public class Baja extends Estado {
 
 	@Override
 	@Programmatic
-	public void desactivarGps(Gps gps, Motivo motivo, Timestamp fecha) {
-		container.warnUser("El Gps seleccionado, se encuentra en estado de Baja,"
-				+ " por lo tanto no puede ser desactivado");
-	}
-
-	@Override
-	@Programmatic
-	public void desactivarMatafuego(Matafuego matafuego, Motivo motivo, Timestamp fecha) {
-		container.warnUser("El Matafuego seleccionado, se encuentra en estado de Baja,"
-				+ " por lo tanto no puede ser desactivado");
-	}
-
-	@Override
-	@Programmatic
-	public void desactivarVehiculo(Vehiculo ehiculo, Motivo motivo, Timestamp fecha) {
-		container.warnUser("El Vehiculo seleccionado, se encuentra en estado de Baja,"
+	public void desactivar(final ObjetoMantenible objeto, final Motivo motivo, final Timestamp fecha) {
+		container.warnUser("El Elemento seleccionado, se encuentra en estado de Baja,"
 				+ " por lo tanto no puede ser desactivado");
 	}
 
@@ -102,22 +85,8 @@ public class Baja extends Estado {
 
 	@Override
 	@Programmatic
-	public void reactivarGps(Gps gps) {
-		container.warnUser("El Gps seleccionado, ha sido dado de Baja, "
-				+ "por lo que no puede ser reactivado.");
-	}
-
-	@Override
-	@Programmatic
-	public void reactivarMatafuego(Matafuego matafuego) {
-		container.warnUser("El Matafuego seleccionado, ha sido dado de Baja, "
-				+ "por lo que no puede ser reactivado.");
-	}
-
-	@Override
-	@Programmatic
-	public void reactivarVehiculo(Vehiculo vehiculo) {
-		container.warnUser("El Vehiculo seleccionado, ha sido dado de Baja, "
+	public void reactivar(final ObjetoMantenible objeto) {
+		container.warnUser("El Elemento seleccionado, ha sido dado de Baja, "
 				+ "por lo que no puede ser reactivado.");
 	}
 
@@ -127,20 +96,8 @@ public class Baja extends Estado {
 
 	@Override
 	@Programmatic
-	public void asignarGps(Gps gps) {
-		container.warnUser("El Gps fue dado de Baja, por lo que no puede ser asignado.");
-	}
-
-	@Override
-	@Programmatic
-	public void asignarMatafuego(Matafuego matafuego) {
-		container.warnUser("El Matafuego fue dado de Baja, por lo que no puede ser asignado.");
-	}
-
-	@Override
-	@Programmatic
-	public void asignarVehiculo(Vehiculo vehiculo) {
-		container.warnUser("El Vehiculo fue dado de Baja, por lo que no puede ser asignado.");
+	public void asignar(final ObjetoMantenible objeto) {
+		container.warnUser("El Elemento seleccionado fue dado de Baja, por lo que no puede ser asignado.");
 	}
 
 	/**********************************
@@ -148,18 +105,8 @@ public class Baja extends Estado {
 	 **********************************/
 
 	@Override
-	public void desasignarGps(Vehiculo vehiculo) {
-		container.warnUser("El Gps, debe encontrarse en estado Asignado para poder ser Desasignado.");
-	}
-
-	@Override
-	public void desasignarMatafuego(Vehiculo vehiculo) {
-		container.warnUser("El Matafuego, debe encontrarse en estado Asignado para poder ser Desasignado.");
-	}
-
-	@Override
-	public void desasignarVehiculo(Empleado empleado) {
-		container.warnUser("El Vehiculo, debe encontrarse en estado Asignado para poder ser Desasignado.");
+	public void desasignar(final ObjetoMantenible objeto) {
+		container.warnUser("El Elemento seleccionado, debe encontrarse en estado Asignado para poder ser Desasignado.");
 	}
 
 	@javax.inject.Inject

@@ -108,7 +108,7 @@ public class RepositorioEmpleado {
 
 		//Cambio el estado del vehiculo seleccionado a Asignado.
 		if(vehiculo != null){
-			vehiculo.getEstado().asignarVehiculo(vehiculo);
+			vehiculo.getEstado().asignar(vehiculo);
 		}
 
 		return empleado;

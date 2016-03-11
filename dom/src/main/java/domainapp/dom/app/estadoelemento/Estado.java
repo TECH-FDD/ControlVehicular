@@ -37,10 +37,7 @@ import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Property;
 
-import domainapp.dom.app.empleado.Empleado;
-import domainapp.dom.app.gps.Gps;
-import domainapp.dom.app.matafuego.Matafuego;
-import domainapp.dom.app.vehiculo.Vehiculo;
+import domainapp.dom.app.mantenimiento.ObjetoMantenible;
 
 @PersistenceCapable
 @Discriminator(strategy=DiscriminatorStrategy.CLASS_NAME)
@@ -87,42 +84,25 @@ public abstract class Estado {
 	 * Desactivacion de los elementos.*
 	 **********************************/
 
-	public abstract void desactivarGps(Gps gps, Motivo motivo, Timestamp fecha);
-
-	public abstract void desactivarMatafuego(Matafuego matafuego, Motivo motivo, Timestamp fecha);
-
-	public abstract void desactivarVehiculo(Vehiculo vehiculo, Motivo motivo, Timestamp fecha);
+	public abstract void desactivar(final ObjetoMantenible objeto, final Motivo motivo, final Timestamp fecha);
 
 	/*********************************
 	 * Reactivacion de los elementos.*
 	 *********************************/
 
-	public abstract void reactivarGps(Gps gps);
-
-	public abstract void reactivarMatafuego(Matafuego matafuego);
-
-	public abstract void reactivarVehiculo(Vehiculo vehiculo);
+	public abstract void reactivar(final ObjetoMantenible objeto);
 
 	/*******************************
 	 * Asignacion de los elementos.*
 	 *******************************/
 
-	public abstract void asignarGps(Gps gps);
-
-	public abstract void asignarMatafuego(Matafuego matafuego);
-
-	public abstract void asignarVehiculo(Vehiculo vehiculo);
+	public abstract void asignar(final ObjetoMantenible objeto);
 
 	/**********************************
 	 * Desasignacion de los elementos.*
 	 **********************************/
 
-	public abstract void desasignarGps(Vehiculo vehiculo);
-
-	public abstract void desasignarMatafuego(Vehiculo vehiculo);
-
-	public abstract void desasignarVehiculo(Empleado empleado);
-
+	public abstract void desasignar(final ObjetoMantenible objeto);
 
 	/***************************************
 	 * Operaciones privadas de los estados.*
@@ -152,44 +132,16 @@ public abstract class Estado {
 	}
 
 	/**
-	 * Actualizar el Gps con el nuevo estado y eliminar el estado anterior de la BD.
-	 * @param gps
+	 * Actualizar el ObjetoMantenible con el nuevo estado y eliminar el estado anterior de la BD.
+	 * @param objeto
 	 * @param estado
 	 */
-	protected void actualizarGps(Gps gps, Estado estado){
-		//Obtengo el estado anterior del Gps
-		Estado old= gps.getEstado();
+	protected void actualizarElemento(final ObjetoMantenible objeto, final Estado estado) {
+		//Obtengo el estado anterior del Elemento
+		Estado old= objeto.getEstado();
 		//Seteo el nuevo estado.
-		gps.setEstado(estado);
-		container.persistIfNotAlready(gps);
-		container.removeIfNotAlready(old);
-	}
-
-	/**
-	 * Actualizar el Matafuego con el nuevo estado y eliminar el estado anterior de la BD.
-	 * @param matafuego
-	 * @param estado
-	 */
-	protected void actualizarMatafuego(Matafuego matafuego, Estado estado){
-		//Obtengo el estado anterior del Matafuego
-		Estado old= matafuego.getEstado();
-		//Seteo el nuevo estado.
-		matafuego.setEstado(estado);
-		container.persistIfNotAlready(matafuego);
-		container.removeIfNotAlready(old);
-	}
-
-	/**
-	 * Actualizar el Vehiculo con el nuevo estado y eliminar el estado anterior de la BD.
-	 * @param vehiculo
-	 * @param estado
-	 */
-	protected void actualizarVehiculo(Vehiculo vehiculo, Estado estado){
-		//Obtengo el estado anterior del Vehiculo
-		Estado old= vehiculo.getEstado();
-		//Seteo el nuevo estado.
-		vehiculo.setEstado(estado);
-		container.persistIfNotAlready(vehiculo);
+		objeto.setEstado(estado);
+		container.persistIfNotAlready(objeto);
 		container.removeIfNotAlready(old);
 	}
 

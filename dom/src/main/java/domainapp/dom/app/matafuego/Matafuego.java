@@ -46,7 +46,7 @@ import org.apache.isis.applib.annotation.Property;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Asignado;
-import domainapp.dom.app.estadoelemento.Estado;
+//import domainapp.dom.app.estadoelemento.Estado;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.mantenimiento.ObjetoMantenible;
@@ -70,7 +70,6 @@ public class Matafuego extends ObjetoMantenible {
 	private Timestamp fechaAlta;
 	private Timestamp fechaRecarga;
 	private Timestamp fechaCadRecarga;
-	private Estado estado;
 
 	public Matafuego(String marca, String codigo, String descripcion,
 			int capacidad, Timestamp fechaAlta, Timestamp fechaRecarga,
@@ -83,7 +82,6 @@ public class Matafuego extends ObjetoMantenible {
 		this.fechaAlta = fechaAlta;
 		this.fechaRecarga = fechaRecarga;
 		this.fechaCadRecarga = fechaCadRecarga;
-		this.estado=new Activo(new Timestamp(System.currentTimeMillis()), Motivo.ALTA);
 	}
 
 	public Matafuego() {
@@ -172,17 +170,6 @@ public class Matafuego extends ObjetoMantenible {
 		this.fechaCadRecarga = fechaCadRecarga;
 	}
 
-	@Persistent
-	@MemberOrder(sequence = "90")
-	@Column(allowsNull = "false")
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-
 	@Override
 	public String toString() {
 		return "Matafuego " + marca;
@@ -194,7 +181,7 @@ public class Matafuego extends ObjetoMantenible {
 	 * @return Matafuego con estado Actualizado.
 	 */
 	public Matafuego desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
-		this.getEstado().desactivarMatafuego(this, motivo, new Timestamp(System.currentTimeMillis()));
+		this.getEstado().desactivar(this, motivo, new Timestamp(System.currentTimeMillis()));
 		return this;
 	}
 
@@ -226,7 +213,7 @@ public class Matafuego extends ObjetoMantenible {
 	 * @return this
 	 */
 	public Matafuego reactivar(){
-		this.getEstado().reactivarMatafuego(this);
+		this.getEstado().reactivar(this);
 		return this;
 	}
 

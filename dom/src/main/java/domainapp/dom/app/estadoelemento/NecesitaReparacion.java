@@ -36,10 +36,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 
-import domainapp.dom.app.empleado.Empleado;
-import domainapp.dom.app.gps.Gps;
-import domainapp.dom.app.matafuego.Matafuego;
-import domainapp.dom.app.vehiculo.Vehiculo;
+import domainapp.dom.app.mantenimiento.ObjetoMantenible;
 
 @javax.jdo.annotations.PersistenceCapable(identityType=IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(
@@ -77,20 +74,8 @@ public class NecesitaReparacion extends Estado {
 
 	@Override
 	@Programmatic
-	public void desactivarGps(Gps gps, Motivo motivo, Timestamp fecha) {
-		container.warnUser("El Gps seleccionado, ya se encuentra en estado Inactivo.");
-	}
-
-	@Override
-	@Programmatic
-	public void desactivarMatafuego(Matafuego matafuego, Motivo motivo, Timestamp fecha) {
-		container.warnUser("El Matafuego seleccionado, ya se encuentra en estado Inactivo.");
-	}
-
-	@Override
-	@Programmatic
-	public void desactivarVehiculo(Vehiculo vehiculo, Motivo motivo, Timestamp fecha) {
-		container.warnUser("El Matafuego seleccionado, ya se encuentra en estado Inactivo.");
+	public void desactivar(final ObjetoMantenible objeto, final Motivo motivo, final Timestamp fecha) {
+		container.warnUser("El Elemento seleccionado, ya se encuentra en estado Inactivo.");
 	}
 
 	/*********************************
@@ -99,20 +84,8 @@ public class NecesitaReparacion extends Estado {
 
 	@Override
 	@Programmatic
-	public void reactivarGps(Gps gps) {
-		container.warnUser("Para ser reactivado, se necesita confirmación de que el Gps fue reparado.");
-	}
-
-	@Override
-	@Programmatic
-	public void reactivarMatafuego(Matafuego matafuego) {
-		container.warnUser("Para ser reactivado, se necesita confirmación de que el Matafuego fue reparado.");
-	}
-
-	@Override
-	@Programmatic
-	public void reactivarVehiculo(Vehiculo vehiculo) {
-		container.warnUser("Para ser reactivado, se necesita confirmación de que el Vehiculo fue reparado.");
+	public void reactivar(final ObjetoMantenible objeto) {
+		container.warnUser("Para ser reactivado, se necesita confirmación de que el Elemento fue reparado.");
 	}
 
 	/*******************************
@@ -121,20 +94,8 @@ public class NecesitaReparacion extends Estado {
 
 	@Override
 	@Programmatic
-	public void asignarGps(Gps gps) {
-		container.warnUser("El Gps no puede ser asignado al vehiculo, porque necesita reparación.");
-	}
-
-	@Override
-	@Programmatic
-	public void asignarMatafuego(Matafuego matafuego) {
-		container.warnUser("El Matafuego no puede ser asignado al vehiculo, porque necesita reparación.");
-	}
-
-	@Override
-	@Programmatic
-	public void asignarVehiculo(Vehiculo vehiculo) {
-		container.warnUser("El Vehiculo no puede ser asignado, porque necesita reparación.");
+	public void asignar(final ObjetoMantenible objeto) {
+		container.warnUser("No puede asignar el elemeto seleccionado, porque el mismo necesita reparación.");
 	}
 
 	/**********************************
@@ -142,18 +103,8 @@ public class NecesitaReparacion extends Estado {
 	 **********************************/
 
 	@Override
-	public void desasignarGps(Vehiculo vehiculo) {
-		container.warnUser("El Gps, debe encontrarse en estado Asignado para poder ser Desasignado.");
-	}
-
-	@Override
-	public void desasignarMatafuego(Vehiculo vehiculo) {
-		container.warnUser("El Matafuego, debe encontrarse en estado Asignado para poder ser Desasignado.");
-	}
-
-	@Override
-	public void desasignarVehiculo(Empleado empleado) {
-		container.warnUser("El Vehiculo, debe encontrarse en estado Asignado para poder ser Desasignado.");
+	public void desasignar(final ObjetoMantenible objeto) {
+		container.warnUser("El Elemento, debe encontrarse en estado Asignado para poder ser Desasignado.");
 	}
 
 	@javax.inject.Inject

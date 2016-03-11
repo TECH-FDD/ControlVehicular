@@ -41,6 +41,7 @@ import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Editing;
+import org.apache.isis.applib.annotation.MemberGroupLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;
@@ -48,7 +49,6 @@ import org.apache.isis.applib.annotation.ActionLayout.Position;
 
 import domainapp.dom.app.estadoelemento.Activo;
 import domainapp.dom.app.estadoelemento.Asignado;
-import domainapp.dom.app.estadoelemento.Estado;
 import domainapp.dom.app.estadoelemento.Inactivo;
 import domainapp.dom.app.estadoelemento.Motivo;
 import domainapp.dom.app.gps.Gps;
@@ -82,6 +82,10 @@ import domainapp.dom.app.combustible.TipoCombustible;
 @DomainObject(objectType = "VEHICULO", bounded = true)
 @DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
 @Inheritance(strategy= InheritanceStrategy.NEW_TABLE)
+@MemberGroupLayout(columnSpans = { 4, 4, 4 },
+					left = { "General" },
+					middle = { "Equipamiento", "Estado" },
+					right = { "Detalles Tecnicos" })
 public class Vehiculo extends ObjetoMantenible {
 	private String marca;
 	private String nombre;
@@ -98,7 +102,6 @@ public class Vehiculo extends ObjetoMantenible {
 	private String cnsCombustibleRuta;
 	private String cnsCombuestibleCiudad;
 	private Integer kilometros;
-	private Estado estado;
 
 	@Persistent
 	@MemberOrder(sequence = "1")
@@ -184,7 +187,7 @@ public class Vehiculo extends ObjetoMantenible {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "8")
+	@MemberOrder(sequence = "8", name = "Equipamiento")
 	@Column(allowsNull = "true")
 	public Gps getGps() {
 		return gps;
@@ -195,7 +198,7 @@ public class Vehiculo extends ObjetoMantenible {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "9")
+	@MemberOrder(sequence = "9", name = "Detalles Tecnicos")
 	@Column(allowsNull = "Tipo Combustible")
 	public TipoCombustible getTipoCombustible() {
 		return TipoCombustible;
@@ -206,7 +209,7 @@ public class Vehiculo extends ObjetoMantenible {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "10")
+	@MemberOrder(sequence = "10", name = "Detalles Tecnicos")
 	@Property(editing = Editing.DISABLED)
 	@Column(allowsNull = "true")
 	public Integer getCapacTanqueCombustible() {
@@ -218,7 +221,7 @@ public class Vehiculo extends ObjetoMantenible {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "11")
+	@MemberOrder(sequence = "11", name = "Detalles Tecnicos")
 	@Column(allowsNull = "Aceite")
 	public TipoAceite getTipoAceite() {
 		return tipoAceite;
@@ -229,7 +232,7 @@ public class Vehiculo extends ObjetoMantenible {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "12")
+	@MemberOrder(sequence = "12", name = "Detalles Tecnicos")
 	@Property(editing = Editing.DISABLED)
 	@Column(allowsNull = "true")
 	public String getCnsCombustibleRuta() {
@@ -241,7 +244,7 @@ public class Vehiculo extends ObjetoMantenible {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "13")
+	@MemberOrder(sequence = "13", name = "Detalles Tecnicos")
 	@Property(editing = Editing.DISABLED)
 	@Column(allowsNull = "true")
 	public String getCnsCombuestibleCiudad() {
@@ -253,7 +256,7 @@ public class Vehiculo extends ObjetoMantenible {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "14")
+	@MemberOrder(sequence = "14", name = "Estado")
 	@Property(editing = Editing.DISABLED)
 	@Column(allowsNull = "true")
 	public Integer getKilometros() {
@@ -265,7 +268,7 @@ public class Vehiculo extends ObjetoMantenible {
 	}
 
 	@Persistent
-	@MemberOrder(sequence = "15")
+	@MemberOrder(sequence = "15", name = "Equipamiento")
 	@Column(allowsNull = "true")
 	public Matafuego getMatafuego() {
 		return matafuego;
@@ -273,17 +276,6 @@ public class Vehiculo extends ObjetoMantenible {
 
 	public void setMatafuego(Matafuego matafuego) {
 		this.matafuego = matafuego;
-	}
-
-	@Persistent
-	@MemberOrder(sequence = "16")
-	@Column(allowsNull = "false")
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
 	}
 
 	@Override
@@ -312,7 +304,6 @@ public class Vehiculo extends ObjetoMantenible {
 		this.cnsCombustibleRuta = cnsCombustibleRuta;
 		this.cnsCombuestibleCiudad = cnsCombuestibleCiudad;
 		this.kilometros = kilometros;
-		this.estado=new Activo(new Timestamp(System.currentTimeMillis()),Motivo.ALTA);
 		this.matafuego = matafuego;
 	}
 
@@ -325,8 +316,10 @@ public class Vehiculo extends ObjetoMantenible {
 	 *
 	 * @return Matafuego con estado Actualizado.
 	 */
+	@MemberOrder(sequence = "16", name = "Estado")
+	@ActionLayout(named = "Deseactivar", position = Position.PANEL)
 	public Vehiculo desactivar(@ParameterLayout(named="Motivo") Motivo motivo){
-		this.getEstado().desactivarVehiculo(this, motivo, new Timestamp(System.currentTimeMillis()));
+		this.getEstado().desactivar(this, motivo, new Timestamp(System.currentTimeMillis()));
 		return this;
 	}
 
@@ -357,8 +350,10 @@ public class Vehiculo extends ObjetoMantenible {
 	 *
 	 * @return this
 	 */
+	@MemberOrder(sequence = "16", name = "Estado")
+	@ActionLayout(named = "Reactivar", position = Position.PANEL)
 	public Vehiculo reactivar(){
-		this.getEstado().reactivarVehiculo(this);
+		this.getEstado().reactivar(this);
 		return this;
 	}
 
@@ -380,13 +375,13 @@ public class Vehiculo extends ObjetoMantenible {
 	 * @return Vehiculo seleccionado.
 	 */
 	@MemberOrder(sequence = "1", name = "Gps")
-	@ActionLayout(named = "Cambiar Gps", position = Position.BELOW)
+	@ActionLayout(named = "Cambiar Gps", position = Position.PANEL)
 	public Vehiculo updateGps(@ParameterLayout(named = "Gps") Gps gps){
 		//Desasigno el Gps anterior.
 		if(this.getGps() != null)
-			this.getGps().getEstado().desasignarGps(this);
+			this.getGps().getEstado().desasignar(this.getGps());
 		//Cambio el estado del nuevo Gps a Asginado
-		gps.getEstado().asignarGps(gps);
+		gps.getEstado().asignar(gps);
 		//Actualizo el vehiculo con el nuevo Gps
 		this.setGps(gps);
 		container.persistIfNotAlready(this);
@@ -407,11 +402,11 @@ public class Vehiculo extends ObjetoMantenible {
 	 * @return Vehiculo seleccionado.
 	 */
 	@MemberOrder(sequence = "1", name = "Matafuego")
-	@ActionLayout(named = "Cambiar Matafuego", position = Position.BELOW)
+	@ActionLayout(named = "Cambiar Matafuego", position = Position.PANEL)
 	public Vehiculo updateMatafuego(@ParameterLayout(named = "Matafuego") Matafuego matafuego){
 		if (this.getMatafuego() != null)
-			this.getMatafuego().getEstado().desasignarMatafuego(this);
-		matafuego.getEstado().asignarMatafuego(matafuego);
+			this.getMatafuego().getEstado().desasignar(this.getMatafuego());
+		matafuego.getEstado().asignar(matafuego);
 		this.setMatafuego(matafuego);
 		container.persistIfNotAlready(this);
 		return this;

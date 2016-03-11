@@ -25,11 +25,20 @@
     
 package domainapp.dom.app.mantenimiento;
 
+import java.sql.Timestamp;
+
+import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 import org.apache.isis.applib.annotation.DomainObject;
+import org.apache.isis.applib.annotation.MemberOrder;
+
+import domainapp.dom.app.estadoelemento.Activo;
+import domainapp.dom.app.estadoelemento.Estado;
+import domainapp.dom.app.estadoelemento.Motivo;
 
 @PersistenceCapable
 @DomainObject(objectType = "OBJETOMANTENIBLE", bounded = true)
@@ -39,9 +48,22 @@ public abstract class ObjetoMantenible {
 
 	public ObjetoMantenible() {
 		super();
+		this.estado = new Activo(new Timestamp(System.currentTimeMillis()), Motivo.ALTA);
 	}
 
+	protected Estado estado;
 	protected String publico;
+
+	@Persistent
+	@MemberOrder(sequence = "100")
+	@Column(allowsNull = "false")
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 
 	@Override
 	public String toString() {
