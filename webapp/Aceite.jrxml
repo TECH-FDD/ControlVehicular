@@ -38,7 +38,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Listado de Aceites]]></text>
 			</staticText>
 			<image scaleImage="RetainShape" hAlign="Left" vAlign="Top">
-				<reportElement uuid="b7ee10d9-4354-43f0-b2c9-d865308e1fbe" mode="Opaque" x="0" y="0" width="210" height="111" forecolor="#000000" backcolor="#F6F4F2"/>
+				<reportElement uuid="b7ee10d9-4354-43f0-b2c9-d865308e1fbe" mode="Opaque" x="0" y="0" width="210" height="111" forecolor="#000000" backcolor="#313739"/>
 				<graphicElement fill="Solid"/>
 				<imageExpression><![CDATA["letra blanca1.png"]]></imageExpression>
 			</image>

@@ -80,7 +80,8 @@ public class RepositorioAlertaVehiculo {
 			final @ParameterLayout(named = "Creado Por: ") Empleado empleado,
 			final @ParameterLayout(named = "Vehiculo") Vehiculo vehiculo,
 			final @ParameterLayout(named = "kilometros Alarma") @Parameter(regexPattern = domainapp.dom.regex.validador.Validador.ValidacionNumerica.ADMITIDOS) int kilometrosAlarma) {
-		EstadoAlerta estado = asignarAlertaEstado(kilometrosAlarma);
+		int kilometrosVehiculo= vehiculo.getKilometros();
+		EstadoAlerta estado = asignarAlertaEstado(kilometrosAlarma, kilometrosVehiculo);
 		final AlertaVehiculo alertaVehiculo = new AlertaVehiculo(nombre, descripcion,
 				new Date(System.currentTimeMillis()), empleado, vehiculo, kilometrosAlarma, estado, null);
 
@@ -135,13 +136,14 @@ public class RepositorioAlertaVehiculo {
 	}
 
 	@Programmatic
-	public EstadoAlerta asignarAlertaEstado(int kilometros) {
+	public EstadoAlerta asignarAlertaEstado(int kilometrosAlerta, int kilometrosVehiculo) {
 		EstadoAlerta estado;
-		if (kilometros > 40000 && kilometros <= 80000)
+		int kmRestantes=kilometrosVehiculo-kilometrosAlerta;
+		if (kmRestantes > 2000 && kmRestantes<= 3000)
 			estado = new AlertaAmarilla(new Timestamp(System.currentTimeMillis()));
-		else if (kilometros > 20000 && kilometros <= 40000)
+		else if (kmRestantes> 1000 && kmRestantes <= 2000)
 			estado = new AlertaNaranja(new Timestamp(System.currentTimeMillis()));
-		else if (kilometros > 0 && kilometros <= 20000)
+		else if (kmRestantes > 0 && kmRestantes <= 1000)
 			estado = new AlertaRoja(new Timestamp(System.currentTimeMillis()));
 		else {
 			estado = new Activa(new Timestamp(System.currentTimeMillis()));

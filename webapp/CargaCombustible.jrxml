@@ -11,7 +11,7 @@
 	<pageHeader>
 		<band height="183" splitType="Stretch">
 			<image hAlign="Left" vAlign="Top">
-				<reportElement mode="Opaque" x="0" y="0" width="209" height="111" forecolor="#000000" backcolor="#F6F4F2" uuid="01f6354c-4b03-46bc-b623-e3cfe60877d2"/>
+				<reportElement uuid="01f6354c-4b03-46bc-b623-e3cfe60877d2" mode="Opaque" x="0" y="0" width="209" height="111" forecolor="#000000" backcolor="#313739"/>
 				<box>
 					<topPen lineWidth="2.25" lineColor="#868181"/>
 					<leftPen lineWidth="2.25" lineColor="#868181"/>
@@ -21,7 +21,7 @@
 				<imageExpression><![CDATA["letra blanca1.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement mode="Opaque" x="209" y="0" width="592" height="111" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="93837c47-0e4f-42cd-9c26-38113696d8e8"/>
+				<reportElement uuid="93837c47-0e4f-42cd-9c26-38113696d8e8" mode="Opaque" x="209" y="0" width="592" height="111" forecolor="#B9BABD" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="2.25" lineColor="#989898"/>
 					<leftPen lineWidth="2.25" lineColor="#989898"/>
@@ -37,7 +37,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1" y="130" width="801" height="38" forecolor="#B9BABD" backcolor="#FFFFFF" uuid="059c8e42-83ba-41aa-a804-469db5323c28"/>
+				<reportElement uuid="059c8e42-83ba-41aa-a804-469db5323c28" mode="Opaque" x="1" y="130" width="801" height="38" forecolor="#B9BABD" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="22" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="1_1_2"/>
@@ -49,7 +49,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 	<columnHeader>
 		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Transparent" x="1" y="0" width="172" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="beb17f80-6d71-4acf-b23a-aef27fd6ac95"/>
+				<reportElement uuid="beb17f80-6d71-4acf-b23a-aef27fd6ac95" mode="Transparent" x="1" y="0" width="172" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -63,7 +63,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Vehiculo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="329" y="0" width="157" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="5ec42749-2857-4490-83a5-d7e16d911fa0"/>
+				<reportElement uuid="5ec42749-2857-4490-83a5-d7e16d911fa0" mode="Transparent" x="329" y="0" width="157" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -77,7 +77,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Fecha Carga]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="486" y="0" width="152" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="f5140fba-33fc-4243-8bf5-355cd6f32ea4"/>
+				<reportElement uuid="f5140fba-33fc-4243-8bf5-355cd6f32ea4" mode="Transparent" x="486" y="0" width="152" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -91,7 +91,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Litros Cargados]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="638" y="0" width="163" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="a978464f-4984-4f62-9147-dc013dd47848"/>
+				<reportElement uuid="a978464f-4984-4f62-9147-dc013dd47848" mode="Transparent" x="638" y="0" width="163" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -105,7 +105,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<text><![CDATA[Costo Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="173" y="0" width="156" height="32" forecolor="#808080" backcolor="#FFFFFF" uuid="5bb236f5-968a-4716-b8e7-c73b7a3d36d0"/>
+				<reportElement uuid="5bb236f5-968a-4716-b8e7-c73b7a3d36d0" mode="Transparent" x="173" y="0" width="156" height="32" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.5"/>
 					<leftPen lineWidth="1.5"/>
@@ -123,7 +123,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 	<detail>
 		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement mode="Transparent" x="173" y="0" width="156" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="f957aa93-d96f-4ec4-8bf1-7c715f659ef7"/>
+				<reportElement uuid="f957aa93-d96f-4ec4-8bf1-7c715f659ef7" mode="Transparent" x="173" y="0" width="156" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -137,7 +137,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<textFieldExpression><![CDATA[$F{combustible}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="1" y="0" width="172" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="be886f18-e2c3-4a3c-b898-97b8882123d2"/>
+				<reportElement uuid="be886f18-e2c3-4a3c-b898-97b8882123d2" mode="Transparent" x="1" y="0" width="172" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -151,7 +151,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<textFieldExpression><![CDATA[$F{vehiculo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="486" y="0" width="152" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="4482ea06-81ab-47a5-ac6e-a4930be5dadc"/>
+				<reportElement uuid="4482ea06-81ab-47a5-ac6e-a4930be5dadc" mode="Transparent" x="486" y="0" width="152" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -165,7 +165,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<textFieldExpression><![CDATA[$F{litrosCargados}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="638" y="0" width="164" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="a03ec236-35b4-495b-8edd-54eea2a90b93"/>
+				<reportElement uuid="a03ec236-35b4-495b-8edd-54eea2a90b93" mode="Transparent" x="638" y="0" width="164" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -179,7 +179,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 				<textFieldExpression><![CDATA[$F{costoTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="329" y="0" width="157" height="28" forecolor="#808080" backcolor="#FFFFFF" uuid="8c8a4a7f-078c-4ce4-bbdd-b46a88c91c8d"/>
+				<reportElement uuid="8c8a4a7f-078c-4ce4-bbdd-b46a88c91c8d" mode="Transparent" x="329" y="0" width="157" height="28" forecolor="#808080" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -197,7 +197,7 @@ SISTEMA INTEGRAL DE GESTION Y ADMINISTRACION DE FLOTA VEHICULAR
 	<pageFooter>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement mode="Transparent" x="0" y="0" width="800" height="20" forecolor="#808080" backcolor="#FFFFFF" uuid="6c38b4a3-dc59-414c-89aa-b1fef75f9883"/>
+				<reportElement uuid="6c38b4a3-dc59-414c-89aa-b1fef75f9883" mode="Transparent" x="0" y="0" width="800" height="20" forecolor="#808080" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="1_1_2"/>
